@@ -1,0 +1,305 @@
+:root {
+  --cv-green: #007a4d;
+  --cv-green-dark: #005f3c;
+  --cv-blue: #073f67;
+  --cv-blue-deep: #052f4f;
+  --cv-turquoise: #19b8b2;
+  --cv-sand: #fbf8f1;
+  --cv-white: #ffffff;
+  --cv-text: #263a35;
+  --cv-line: rgba(5, 95, 60, 0.14);
+  --cv-shadow: 0 18px 48px rgba(7, 63, 103, 0.12);
+}
+
+/* Acessibilidade */
+.cv-skip-link {
+  position: fixed;
+  z-index: 10000;
+  top: 10px;
+  left: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--cv-blue-deep);
+  font-weight: 800;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform .2s ease;
+}
+.cv-skip-link:focus { transform: translateY(0); }
+.cv-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ================================================================
+   CABEÇALHO PADRÃO DO CONECTA VERA CRUZ
+   ================================================================ */
+.cv-header {
+  position: sticky;
+  z-index: 9990;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--cv-line);
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 7px 24px rgba(7, 63, 103, .06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.cv-header.is-scrolled { box-shadow: 0 13px 35px rgba(7, 63, 103, .13); }
+.cv-header__inner {
+  width: min(1220px, calc(100% - 36px));
+  min-height: 78px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 205px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+}
+.cv-brand {
+  display: inline-flex;
+  align-items: center;
+  width: 192px;
+  text-decoration: none;
+}
+.cv-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.cv-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.cv-nav__link {
+  display: inline-flex;
+  min-height: 42px;
+  padding: 9px 11px;
+  border-radius: 999px;
+  align-items: center;
+  color: #35443f;
+  font-size: .84rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+  transition: color .2s ease, background .2s ease, transform .2s ease;
+}
+.cv-nav__link:hover {
+  color: var(--cv-green-dark);
+  background: #edf8f2;
+  transform: translateY(-1px);
+}
+.cv-nav__link.is-active {
+  color: var(--cv-green-dark);
+  background: #ddf2e7;
+}
+.cv-header__cta {
+  display: inline-flex;
+  min-height: 46px;
+  padding: 11px 17px;
+  border-radius: 13px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--cv-green), var(--cv-green-dark));
+  box-shadow: 0 12px 26px rgba(0, 122, 77, .2);
+  font-size: .84rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.cv-header__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(0, 122, 77, .27);
+}
+.cv-menu-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  padding: 11px;
+  border: 1px solid var(--cv-line);
+  border-radius: 13px;
+  background: #fff;
+  cursor: pointer;
+}
+.cv-menu-toggle span:not(.cv-sr-only) {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 5px 0;
+  border-radius: 999px;
+  background: var(--cv-blue-deep);
+  transition: transform .2s ease, opacity .2s ease;
+}
+.cv-menu-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.cv-menu-toggle.is-open span:nth-child(2) { opacity: 0; }
+.cv-menu-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ================================================================
+   RODAPÉ PADRÃO DO CONECTA VERA CRUZ
+   ================================================================ */
+.cv-footer {
+  position: relative;
+  overflow: hidden;
+  padding: 66px 0 0;
+  color: rgba(255,255,255,.78);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(25,184,178,.18), transparent 26%),
+    radial-gradient(circle at 92% 100%, rgba(255,191,40,.09), transparent 25%),
+    linear-gradient(145deg, #052f4f 0%, #063e48 52%, #06462f 100%);
+}
+.cv-footer::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 50%;
+  box-shadow: 0 0 0 42px rgba(255,255,255,.025), 0 0 0 86px rgba(255,255,255,.018);
+}
+.cv-footer__inner {
+  position: relative;
+  width: min(1220px, calc(100% - 36px));
+  margin-inline: auto;
+}
+.cv-footer__grid {
+  display: grid;
+  grid-template-columns: 1.25fr .8fr 1.15fr .95fr;
+  gap: 48px;
+  align-items: start;
+}
+.cv-footer__brand img {
+  display: block;
+  width: min(285px, 100%);
+  height: auto;
+}
+.cv-footer__brand p {
+  max-width: 390px;
+  margin: 18px 0 0;
+  color: rgba(255,255,255,.7);
+  font-size: .91rem;
+  line-height: 1.7;
+}
+.cv-footer__tagline {
+  display: inline-flex;
+  margin-top: 20px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  color: #a9ede7;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+.cv-footer__column {
+  display: grid;
+  gap: 9px;
+}
+.cv-footer__column h2 {
+  margin: 0 0 8px;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+}
+.cv-footer__column a {
+  width: fit-content;
+  color: rgba(255,255,255,.76);
+  font-size: .84rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+.cv-footer__column a:hover { color: #fff; text-decoration: underline; }
+.cv-footer__column p {
+  margin: 0;
+  color: rgba(255,255,255,.68);
+  font-size: .85rem;
+  line-height: 1.65;
+}
+.cv-footer__button {
+  display: inline-flex;
+  min-height: 43px;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  color: #073f3c !important;
+  background: #f5d36f;
+  font-weight: 900;
+  text-decoration: none !important;
+}
+.cv-footer__bottom {
+  display: flex;
+  margin-top: 48px;
+  padding: 21px 0 25px;
+  border-top: 1px solid rgba(255,255,255,.13);
+  justify-content: space-between;
+  gap: 20px;
+  color: rgba(255,255,255,.57);
+  font-size: .76rem;
+}
+
+@media (max-width: 1120px) {
+  .cv-header__inner { grid-template-columns: 180px minmax(0, 1fr) auto; gap: 12px; }
+  .cv-brand { width: 172px; }
+  .cv-nav__link { padding-inline: 8px; font-size: .78rem; }
+  .cv-footer__grid { grid-template-columns: 1.25fr .8fr 1fr; }
+  .cv-footer__column:last-child { grid-column: 2 / -1; }
+}
+
+@media (max-width: 900px) {
+  .cv-header__inner {
+    min-height: 70px;
+    grid-template-columns: 1fr auto;
+  }
+  .cv-brand { width: 168px; }
+  .cv-menu-toggle { display: block; }
+  .cv-header__cta { display: none; }
+  .cv-nav {
+    position: fixed;
+    z-index: 9989;
+    top: 78px;
+    right: 18px;
+    left: 18px;
+    display: none;
+    max-height: calc(100vh - 100px);
+    padding: 14px;
+    border: 1px solid var(--cv-line);
+    border-radius: 20px;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    background: #fff;
+    box-shadow: var(--cv-shadow);
+  }
+  .cv-nav.is-open { display: flex; }
+  .cv-nav__link { width: 100%; min-height: 47px; padding: 12px 14px; border-radius: 13px; }
+  .cv-footer__grid { grid-template-columns: 1fr 1fr; }
+  .cv-footer__brand { grid-column: 1 / -1; }
+  .cv-footer__column:last-child { grid-column: auto; }
+}
+
+@media (max-width: 620px) {
+  .cv-header__inner,
+  .cv-footer__inner { width: min(100% - 24px, 1220px); }
+  .cv-brand { width: 150px; }
+  .cv-nav { top: 72px; right: 12px; left: 12px; }
+  .cv-footer { padding-top: 52px; }
+  .cv-footer__grid { grid-template-columns: 1fr; gap: 34px; }
+  .cv-footer__brand,
+  .cv-footer__column:last-child { grid-column: auto; }
+  .cv-footer__bottom { align-items: flex-start; flex-direction: column; gap: 5px; }
+}

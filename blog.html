@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#007a4d" name="theme-color"/>
+<meta content="Notícias, reportagens, personalidades, cultura, educação e memória da Ilha de Itaparica e de Vera Cruz." name="description"/>
+<title>Blog | Conecta Vera Cruz</title>
+<link href="assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="assets/css/global.css" rel="stylesheet"/>
+<link href="assets/css/layout.css" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css" rel="stylesheet"/>
+<script defer="" src="assets/js/main.js"></script>
+<script defer="" src="assets/js/layout.js"></script>
+<script defer="" src="assets/data/blog-posts.js"></script>
+<style>
+    /* Seção de utilidade pública: calendário do defeso 2026 */
+    .defeso-awareness {
+      padding: clamp(42px, 7vw, 84px) 0;
+      background:
+        radial-gradient(circle at 8% 15%, rgba(8, 119, 189, .12), transparent 28%),
+        radial-gradient(circle at 92% 85%, rgba(0, 122, 77, .13), transparent 30%),
+        #f4faf7;
+    }
+
+    .defeso-panel {
+      overflow: hidden;
+      border: 1px solid #cfe3da;
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: 0 24px 70px rgba(0, 65, 47, .10);
+    }
+
+    .defeso-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(260px, .65fr);
+      gap: 32px;
+      align-items: center;
+      padding: clamp(28px, 5vw, 58px);
+      color: #fff;
+      background:
+        linear-gradient(115deg, rgba(0, 74, 55, .98), rgba(0, 122, 77, .94) 58%, rgba(8, 119, 189, .88)),
+        #006847;
+    }
+
+    .defeso-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 16px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .defeso-kicker::before {
+      width: 30px;
+      height: 2px;
+      content: "";
+      background: #ffd166;
+    }
+
+    .defeso-hero h2 {
+      max-width: 760px;
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4.7vw, 4.2rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+      color: #fff;
+    }
+
+    .defeso-hero p {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, .9);
+    }
+
+    .defeso-hero__seal {
+      display: grid;
+      min-height: 210px;
+      place-items: center;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: 24px;
+      background: rgba(255,255,255,.10);
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .defeso-hero__seal svg {
+      width: 82px;
+      height: 82px;
+      margin-bottom: 12px;
+      stroke: #ffd166;
+      fill: none;
+      stroke-width: 1.7;
+    }
+
+    .defeso-hero__seal strong,
+    .defeso-hero__seal span {
+      display: block;
+    }
+
+    .defeso-hero__seal strong {
+      font-size: 1.15rem;
+    }
+
+    .defeso-hero__seal span {
+      margin-top: 5px;
+      font-size: .92rem;
+      color: rgba(255,255,255,.8);
+    }
+
+    .defeso-content {
+      padding: clamp(26px, 5vw, 54px);
+    }
+
+    .defeso-intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      gap: 30px;
+      align-items: start;
+      margin-bottom: 38px;
+    }
+
+    .defeso-copy h3,
+    .defeso-calendar-heading h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.45rem, 2.4vw, 2rem);
+      color: #064f3b;
+    }
+
+    .defeso-copy p {
+      margin: 0;
+      line-height: 1.75;
+      color: #42544e;
+    }
+
+    .defeso-rules {
+      margin: 0;
+      padding: 24px 24px 24px 46px;
+      border-left: 5px solid #f4b942;
+      border-radius: 0 18px 18px 0;
+      background: #fff8e7;
+      color: #4c4638;
+    }
+
+    .defeso-rules li + li {
+      margin-top: 9px;
+    }
+
+    .defeso-calendar-heading {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    .defeso-calendar-heading p {
+      max-width: 600px;
+      margin: 0;
+      line-height: 1.55;
+      color: #63716c;
+    }
+
+    .defeso-calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .defeso-card {
+      position: relative;
+      min-height: 205px;
+      padding: 23px;
+      border: 1px solid #d9e7e1;
+      border-radius: 20px;
+      background: #fbfdfc;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .defeso-card:hover {
+      transform: translateY(-3px);
+      border-color: #96c7b3;
+      box-shadow: 0 16px 34px rgba(0, 83, 58, .09);
+    }
+
+    .defeso-card.is-active {
+      border-color: #e3a52b;
+      background: linear-gradient(180deg, #fffaf0, #fff);
+      box-shadow: 0 0 0 3px rgba(244, 185, 66, .18);
+    }
+
+    .defeso-status {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ffe8af;
+      color: #76510a;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .defeso-card__species {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.18rem;
+      line-height: 1.25;
+      color: #07513d;
+    }
+
+    .defeso-card__detail {
+      display: block;
+      min-height: 38px;
+      margin-bottom: 16px;
+      font-size: .88rem;
+      line-height: 1.45;
+      color: #64736d;
+    }
+
+    .defeso-periods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .defeso-periods time,
+    .defeso-periods span {
+      display: inline-flex;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: #e7f4ef;
+      color: #07513d;
+      font-size: .86rem;
+      font-weight: 800;
+    }
+
+    .defeso-card--wide {
+      grid-column: span 2;
+    }
+
+    .defeso-card--wide .defeso-periods {
+      max-width: 720px;
+    }
+
+    .defeso-note {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-top: 26px;
+      padding: 24px;
+      border-radius: 18px;
+      background: #eaf6fc;
+    }
+
+    .defeso-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #075a86;
+    }
+
+    .defeso-note p {
+      margin: 0;
+      line-height: 1.55;
+      color: #3d6173;
+    }
+
+    .defeso-note a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px 17px;
+      border-radius: 999px;
+      background: #0877bd;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .defeso-note a:hover,
+    .defeso-note a:focus-visible {
+      background: #075f96;
+    }
+
+    .defeso-alert {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      padding: 18px 22px;
+      border-radius: 16px;
+      background: #fff1ef;
+      color: #742c25;
+    }
+
+    .defeso-alert strong {
+      color: #8b2e25;
+    }
+
+    .defeso-alert a {
+      color: #742c25;
+      font-weight: 800;
+    }
+
+    @media (max-width: 960px) {
+      .defeso-hero,
+      .defeso-intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .defeso-hero__seal {
+        min-height: auto;
+      }
+
+      .defeso-calendar-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .defeso-awareness {
+        padding: 30px 0;
+      }
+
+      .defeso-panel {
+        border-radius: 20px;
+      }
+
+      .defeso-hero,
+      .defeso-content {
+        padding: 24px 20px;
+      }
+
+      .defeso-calendar-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .defeso-card,
+      .defeso-card--wide {
+        grid-column: auto;
+      }
+
+      .defeso-note {
+        grid-template-columns: 1fr;
+      }
+
+      .defeso-note a {
+        width: 100%;
+      }
+    }
+
+
+    /* ==========================================================
+       BLOG COMPACTO: cards resumidos e leitor sob demanda
+       ========================================================== */
+    .blog-masthead {
+      padding-top: clamp(38px, 5vw, 64px);
+      padding-bottom: clamp(42px, 5vw, 68px);
+    }
+
+    .blog-masthead h1 {
+      font-size: clamp(3rem, 6.5vw, 5.8rem);
+    }
+
+    .blog-featured-container {
+      min-height: 0;
+    }
+
+    .blog-featured-container[hidden],
+    .blog-reader-section[hidden] {
+      display: none;
+    }
+
+    .blog-featured-label {
+      margin-bottom: 14px;
+    }
+
+    .blog-post-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .blog-compact-card {
+      display: flex;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #dce8e2;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(12, 73, 53, .08);
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .blog-compact-card:hover {
+      transform: translateY(-4px);
+      border-color: #a9cdbd;
+      box-shadow: 0 20px 42px rgba(12, 73, 53, .13);
+    }
+
+    .blog-compact-card--featured {
+      display: grid;
+      grid-template-columns: minmax(280px, .92fr) minmax(0, 1.08fr);
+      min-height: 330px;
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(5, 78, 52, .14);
+    }
+
+    .blog-compact-card__media {
+      position: relative;
+      min-height: 210px;
+      margin: 0;
+      overflow: hidden;
+      background: #e6f1eb;
+    }
+
+    .blog-compact-card--featured .blog-compact-card__media {
+      min-height: 330px;
+    }
+
+    .blog-compact-card__media img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+
+    .blog-compact-card:hover .blog-compact-card__media img {
+      transform: scale(1.035);
+    }
+
+    .blog-compact-card__content {
+      display: flex;
+      min-width: 0;
+      flex: 1;
+      flex-direction: column;
+      padding: 22px;
+    }
+
+    .blog-compact-card--featured .blog-compact-card__content {
+      justify-content: center;
+      padding: clamp(28px, 4vw, 48px);
+    }
+
+    .blog-compact-card__top,
+    .blog-compact-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 7px 14px;
+      color: #74837e;
+      font-size: .74rem;
+      font-weight: 750;
+    }
+
+    .blog-compact-card__category {
+      color: #007a4d;
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .blog-compact-card h3 {
+      margin: 13px 0 10px;
+      color: #073b62;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.38rem, 2.1vw, 1.95rem);
+      line-height: 1.08;
+      letter-spacing: -.025em;
+      overflow-wrap: anywhere;
+    }
+
+    .blog-compact-card--featured h3 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+    }
+
+    .blog-compact-card__summary {
+      display: -webkit-box;
+      overflow: hidden;
+      margin: 0;
+      color: #61736e;
+      line-height: 1.62;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+
+    .blog-compact-card--featured .blog-compact-card__summary {
+      -webkit-line-clamp: 4;
+    }
+
+    .blog-compact-card__meta {
+      justify-content: flex-start;
+      margin-top: 18px;
+      color: #88948f;
+    }
+
+    .blog-card-open,
+    .blog-reader-close,
+    .blog-reader-share {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 44px;
+      border: 0;
+      border-radius: 999px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 900;
+    }
+
+    .blog-card-open {
+      margin-top: 17px;
+      padding: 10px 17px;
+      background: #007a4d;
+      color: #fff;
+    }
+
+    .blog-card-open:hover,
+    .blog-card-open:focus-visible {
+      background: #005a39;
+    }
+
+    .blog-load-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .blog-load-more {
+      min-height: 48px;
+      padding: 10px 22px;
+      border: 1px solid #007a4d;
+      border-radius: 999px;
+      background: #fff;
+      color: #007a4d;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 900;
+    }
+
+    .blog-load-more:hover,
+    .blog-load-more:focus-visible {
+      background: #007a4d;
+      color: #fff;
+    }
+
+    .blog-load-more[hidden] {
+      display: none;
+    }
+
+    .blog-reader-section {
+      padding: clamp(34px, 6vw, 72px) 0;
+      background: #f4faf7;
+      scroll-margin-top: 90px;
+    }
+
+    .blog-reader-shell {
+      overflow: hidden;
+      border: 1px solid #dce8e2;
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: 0 24px 65px rgba(5, 78, 52, .13);
+    }
+
+    .blog-reader-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px clamp(18px, 4vw, 34px);
+      border-bottom: 1px solid #e4ede8;
+      background: #fbfdfc;
+    }
+
+    .blog-reader-close,
+    .blog-reader-share {
+      padding: 9px 15px;
+      background: #eaf5ef;
+      color: #006847;
+    }
+
+    .blog-reader-close:hover,
+    .blog-reader-share:hover {
+      background: #d9eee3;
+    }
+
+    .blog-reader-header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(30px, 5vw, 56px) clamp(22px, 6vw, 70px) clamp(24px, 4vw, 38px);
+      text-align: center;
+    }
+
+    .blog-reader-header h2 {
+      margin: 15px 0;
+      color: #073b62;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+    }
+
+    .blog-reader-header p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #61736e;
+      font-size: clamp(1rem, 1.5vw, 1.16rem);
+      line-height: 1.7;
+    }
+
+    .blog-reader-cover {
+      margin: 0 clamp(12px, 3vw, 32px);
+      overflow: hidden;
+      border-radius: 20px;
+      background: #e4f0ea;
+    }
+
+    .blog-reader-cover img {
+      display: block;
+      width: 100%;
+      max-height: 560px;
+      aspect-ratio: 16 / 8.5;
+      object-fit: cover;
+    }
+
+    .blog-reader-section .blog-article__body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: clamp(34px, 6vw, 62px);
+    }
+
+    /* O quadro do defeso continua completo, mas ocupa menos altura. */
+    .defeso-awareness {
+      padding: clamp(32px, 5vw, 58px) 0;
+    }
+
+    .defeso-hero {
+      padding: clamp(25px, 4vw, 42px);
+    }
+
+    .defeso-hero h2 {
+      font-size: clamp(1.9rem, 4vw, 3.5rem);
+    }
+
+    .defeso-hero__seal {
+      min-height: 170px;
+    }
+
+    .defeso-content {
+      padding: clamp(24px, 4vw, 40px);
+    }
+
+    .defeso-card {
+      min-height: 170px;
+      padding: 20px;
+    }
+
+    @media (max-width: 1100px) {
+      .blog-post-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .blog-compact-card--featured {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-compact-card--featured .blog-compact-card__media {
+        min-height: 260px;
+      }
+
+      .blog-reader-header {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .blog-masthead h1 {
+        font-size: clamp(2.8rem, 14vw, 4.5rem);
+      }
+
+      .blog-compact-card {
+        border-radius: 18px;
+        flex-direction: column;
+      }
+
+      .blog-compact-card__media,
+      .blog-compact-card--featured .blog-compact-card__media {
+        min-height: 230px;
+      }
+
+      .blog-reader-shell {
+        border-radius: 20px;
+      }
+
+      .blog-reader-cover {
+        margin-inline: 10px;
+        border-radius: 15px;
+      }
+
+      .blog-reader-cover img {
+        min-height: 260px;
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+  </style>
+<style id="cv-blog-layout-fix">
+
+/* ==========================================================
+   CORREÇÃO FINAL DO LAYOUT DOS CARDS
+   Um card por linha no conteúdo principal. A imagem não invade
+   o texto e os títulos deixam de quebrar letra por letra.
+   ========================================================== */
+.blog-main-column {
+  min-width: 0;
+}
+
+.blog-layout {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+
+.blog-post-grid {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 20px;
+}
+
+.blog-compact-card:not(.blog-compact-card--featured) {
+  display: grid !important;
+  grid-template-columns: clamp(220px, 34%, 280px) minmax(0, 1fr);
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.blog-compact-card:not(.blog-compact-card--featured) .blog-compact-card__media {
+  width: 100%;
+  min-width: 0;
+  min-height: 220px;
+  height: 100%;
+  margin: 0;
+}
+
+.blog-compact-card:not(.blog-compact-card--featured) .blog-compact-card__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+}
+
+.blog-compact-card:not(.blog-compact-card--featured) .blog-compact-card__content {
+  min-width: 0;
+  justify-content: center;
+  padding: 24px 26px;
+}
+
+.blog-compact-card h3 {
+  max-width: 100%;
+  font-size: clamp(1.35rem, 2.15vw, 1.9rem);
+  line-height: 1.12;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.blog-compact-card__summary {
+  -webkit-line-clamp: 3;
+}
+
+.blog-compact-card__top,
+.blog-compact-card__meta {
+  min-width: 0;
+}
+
+.blog-compact-card:has(.blog-compact-card__media[hidden]) {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+@media (max-width: 920px) {
+  .blog-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .blog-sidebar {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sidebar-card--about,
+  .sidebar-card--contribute {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .blog-compact-card:not(.blog-compact-card--featured) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .blog-compact-card:not(.blog-compact-card--featured) .blog-compact-card__media,
+  .blog-compact-card:not(.blog-compact-card--featured) .blog-compact-card__media img {
+    min-height: 230px;
+    height: 230px;
+  }
+
+  .blog-compact-card:not(.blog-compact-card--featured) .blog-compact-card__content {
+    padding: 22px 20px 24px;
+  }
+
+  .blog-sidebar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar-card--about,
+  .sidebar-card--contribute {
+    grid-column: auto;
+  }
+}
+
+  </style>
+
+<style id="cv-island-personalities-style">
+  .blog-personalities-link {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    border: 1px solid rgba(255,255,255,.26);
+    border-radius: 999px;
+    background: #075f79;
+    color: #fff;
+    font-size: .84rem;
+    font-weight: 850;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform .2s ease, background .2s ease;
+  }
+
+  .blog-personalities-link:hover,
+  .blog-personalities-link:focus-visible {
+    transform: translateY(-2px);
+    background: #064b62;
+  }
+
+  .island-personalities {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(54px, 8vw, 104px) 0;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(242, 193, 93, .18), transparent 28%),
+      radial-gradient(circle at 92% 85%, rgba(23, 183, 176, .14), transparent 31%),
+      linear-gradient(180deg, #f8f3e8 0%, #fff 72%);
+  }
+
+  .island-personalities::before {
+    position: absolute;
+    top: 34px;
+    right: -110px;
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(7, 93, 120, .12);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .island-personalities__heading {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr);
+    gap: 34px;
+    align-items: end;
+    margin-bottom: 34px;
+  }
+
+  .island-personalities__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 13px;
+    color: #087b58;
+    font-size: .75rem;
+    font-weight: 900;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .island-personalities__kicker::before {
+    width: 34px;
+    height: 2px;
+    content: "";
+    background: #e1a62e;
+  }
+
+  .island-personalities__heading h2 {
+    max-width: 780px;
+    margin: 0;
+    color: #073c5a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    line-height: .98;
+    letter-spacing: -.045em;
+  }
+
+  .island-personalities__heading > p {
+    margin: 0;
+    color: #526c6a;
+    font-size: 1.03rem;
+    line-height: 1.75;
+  }
+
+  .silvano-profile {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(300px, .76fr) minmax(0, 1.24fr);
+    overflow: hidden;
+    border: 1px solid rgba(7, 93, 120, .15);
+    border-radius: 32px;
+    background: #fff;
+    box-shadow: 0 28px 80px rgba(5, 61, 82, .15);
+  }
+
+  .silvano-profile__visual {
+    position: relative;
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    padding: clamp(24px, 4vw, 40px);
+    background:
+      linear-gradient(180deg, rgba(5, 61, 82, .05), rgba(5, 61, 82, .2)),
+      #073c5a;
+  }
+
+  .silvano-profile__visual::after {
+    position: absolute;
+    inset: auto 20px 18px auto;
+    color: rgba(255,255,255,.1);
+    content: "≈";
+    font-family: Georgia, serif;
+    font-size: 9rem;
+    line-height: 1;
+  }
+
+  .silvano-profile__cover {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 24px 55px rgba(0,0,0,.25);
+  }
+
+  .silvano-profile__cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .silvano-profile__badge {
+    position: relative;
+    z-index: 1;
+    margin-top: 24px;
+    color: #fff;
+  }
+
+  .silvano-profile__badge span,
+  .silvano-profile__badge strong,
+  .silvano-profile__badge small {
+    display: block;
+  }
+
+  .silvano-profile__badge span {
+    margin-bottom: 8px;
+    color: #f2c15d;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .silvano-profile__badge strong {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.65rem, 3vw, 2.45rem);
+    line-height: 1.03;
+  }
+
+  .silvano-profile__badge small {
+    margin-top: 10px;
+    color: rgba(255,255,255,.76);
+    font-size: .92rem;
+    line-height: 1.5;
+  }
+
+  .silvano-profile__content {
+    min-width: 0;
+    padding: clamp(30px, 5vw, 58px);
+  }
+
+  .silvano-profile__location {
+    display: inline-flex;
+    margin-bottom: 13px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #e7f4ef;
+    color: #087b58;
+    font-size: .73rem;
+    font-weight: 900;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .silvano-profile__content h3 {
+    margin: 0 0 16px;
+    color: #073c5a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3.7rem);
+    line-height: 1.02;
+    letter-spacing: -.04em;
+  }
+
+  .silvano-profile__lead {
+    margin: 0;
+    color: #486260;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.78;
+  }
+
+  .silvano-profile__facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin: 28px 0;
+  }
+
+  .silvano-profile__facts article {
+    min-width: 0;
+    padding: 17px;
+    border: 1px solid #dce8e2;
+    border-radius: 16px;
+    background: #fbfdfc;
+  }
+
+  .silvano-profile__facts strong,
+  .silvano-profile__facts span {
+    display: block;
+  }
+
+  .silvano-profile__facts strong {
+    margin-bottom: 5px;
+    color: #0b8da0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.45rem;
+  }
+
+  .silvano-profile__facts span {
+    color: #61736e;
+    font-size: .82rem;
+    line-height: 1.45;
+  }
+
+  .silvano-profile__themes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+
+  .silvano-profile__themes span {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #fff5d9;
+    color: #73530f;
+    font-size: .75rem;
+    font-weight: 800;
+  }
+
+  .silvano-profile__details {
+    border-top: 1px solid #e2ebe7;
+  }
+
+  .silvano-profile__details details {
+    border-bottom: 1px solid #e2ebe7;
+  }
+
+  .silvano-profile__details summary {
+    position: relative;
+    padding: 18px 38px 18px 0;
+    color: #075d78;
+    cursor: pointer;
+    font-weight: 900;
+    list-style: none;
+  }
+
+  .silvano-profile__details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .silvano-profile__details summary::after {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #e8f5f3;
+    color: #087b58;
+    content: "+";
+    display: grid;
+    place-items: center;
+    transform: translateY(-50%);
+  }
+
+  .silvano-profile__details details[open] summary::after {
+    content: "−";
+  }
+
+  .silvano-profile__details div {
+    padding: 0 0 20px;
+  }
+
+  .silvano-profile__details p {
+    margin: 0;
+    color: #526966;
+    line-height: 1.75;
+  }
+
+  .silvano-profile__details p + p {
+    margin-top: 12px;
+  }
+
+  .silvano-profile__timeline {
+    display: grid;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .silvano-profile__timeline article {
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr);
+    gap: 13px;
+    align-items: start;
+  }
+
+  .silvano-profile__timeline strong {
+    color: #087b58;
+    font-size: .86rem;
+  }
+
+  .silvano-profile__timeline span {
+    color: #526966;
+    font-size: .9rem;
+    line-height: 1.55;
+  }
+
+  .silvano-profile__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin-top: 27px;
+  }
+
+  .silvano-profile__actions a {
+    display: inline-flex;
+    min-height: 45px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 17px;
+    border-radius: 999px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .silvano-profile__actions a:first-child {
+    background: #087b58;
+    color: #fff;
+  }
+
+  .silvano-profile__actions a:first-child:hover,
+  .silvano-profile__actions a:first-child:focus-visible {
+    background: #066546;
+  }
+
+  .silvano-profile__actions a:last-child {
+    border: 1px solid #0b8da0;
+    color: #075d78;
+  }
+
+  .silvano-profile__source {
+    margin: 18px 0 0;
+    padding: 14px 16px;
+    border-left: 4px solid #f2c15d;
+    border-radius: 0 12px 12px 0;
+    background: #fff9ea;
+    color: #695a35;
+    font-size: .82rem;
+    line-height: 1.55;
+  }
+
+  .personalities-next {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr);
+    gap: 25px;
+    align-items: center;
+    margin-top: 24px;
+    padding: 25px;
+    border: 1px dashed rgba(7, 93, 120, .28);
+    border-radius: 22px;
+    background: rgba(255,255,255,.74);
+  }
+
+  .personalities-next span {
+    display: block;
+    margin-bottom: 7px;
+    color: #087b58;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .personalities-next h3 {
+    margin: 0;
+    color: #073c5a;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.7rem;
+  }
+
+  .personalities-next p {
+    margin: 0;
+    color: #586f6c;
+    line-height: 1.65;
+  }
+
+  .sidebar-card--personalities {
+    background:
+      linear-gradient(145deg, rgba(7, 93, 120, .97), rgba(8, 123, 88, .95)),
+      #075d78;
+    color: #fff;
+  }
+
+  .sidebar-card--personalities .blog-eyebrow,
+  .sidebar-card--personalities h2,
+  .sidebar-card--personalities p,
+  .sidebar-card--personalities a {
+    color: #fff;
+  }
+
+  .sidebar-card--personalities a {
+    font-weight: 900;
+  }
+
+  @media (max-width: 980px) {
+    .island-personalities__heading,
+    .silvano-profile,
+    .personalities-next {
+      grid-template-columns: 1fr;
+    }
+
+    .silvano-profile__visual {
+      display: grid;
+      grid-template-columns: minmax(220px, .55fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .silvano-profile__badge {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .island-personalities {
+      padding: 46px 0;
+    }
+
+    .silvano-profile {
+      border-radius: 22px;
+    }
+
+    .silvano-profile__visual {
+      display: flex;
+    }
+
+    .silvano-profile__facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .silvano-profile__actions a {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .silvano-profile__facts {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body class="page-blog">
+<!-- Menu padrão inserido por assets/js/layout.js -->
+<div data-cv-header=""></div>
+<main id="conteudo">
+<section class="blog-masthead">
+<div class="container blog-masthead__top">
+<div>
+<span class="blog-eyebrow">Notícias, memória e território</span>
+<h1>Blog Conecta<br/>Vera Cruz</h1>
+</div>
+<p>Um espaço vivo para acompanhar acontecimentos, valorizar as comunidades e guardar as histórias que estão sendo construídas hoje.</p>
+</div>
+<div aria-live="polite" class="container blog-featured-container" data-blog-featured=""></div>
+</section>
+<section aria-label="Pesquisa e categorias do blog" class="blog-navigation">
+<div class="container blog-navigation__inner">
+<label class="blog-search">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"></path></svg>
+<span class="sr-only">Pesquisar no blog</span>
+<input data-blog-search="" placeholder="Pesquisar notícia, bairro ou tema..." type="search"/>
+</label>
+<div aria-label="Categorias" class="blog-categories" data-blog-categories=""></div>
+<a class="blog-personalities-link" href="#personalidades">Personalidades da Ilha</a></div>
+</section>
+<section aria-live="polite" class="blog-reader-section" data-blog-reader="" hidden=""></section>
+<section aria-labelledby="personalidades-title" class="island-personalities" id="personalidades">
+<div class="container">
+<header class="island-personalities__heading">
+<div>
+<span class="island-personalities__kicker">Gente que ajuda a contar a ilha</span>
+<h2 id="personalidades-title">Personalidades da Ilha de Itaparica</h2>
+</div>
+<p>
+        Trajetórias de moradores, educadores, pesquisadores, artistas e lideranças
+        que transformaram experiências vividas na ilha em conhecimento, memória e
+        contribuição coletiva. A série começa com Silvano Sulzart Oliveira Costa.
+      </p>
+</header>
+<article aria-labelledby="silvano-title" class="silvano-profile">
+<div class="silvano-profile__visual">
+<figure class="silvano-profile__cover">
+<img alt="Capa da dissertação Docência nas Águas, com uma embarcação sobre o mar" height="1272" loading="lazy" src="assets/img/blog/Silvano.png" width="900"/>
+</figure>
+<div class="silvano-profile__badge">
+<span>Perfil em destaque</span>
+<strong>Silvano Sulzart Oliveira Costa</strong>
+<small>É o Secretário de Educação do Município de Vera Cruz. Ele é professor, pedagogo e pesquisador das relações entre educação, memória, diversidade cultural e cultura das águas.</small>
+</div>
+</div>
+<div class="silvano-profile__content">
+<span class="silvano-profile__location">Vera Cruz · Ilha de Itaparica · Bahia</span>
+<h3 id="silvano-title">Uma vida de educação atravessada pelo mar</h3>
+<p class="silvano-profile__lead">
+          Nascido e criado em Vera Cruz, Silvano transformou lembranças da infância,
+          experiências escolares e anos de trabalho na educação em uma pesquisa
+          dedicada à Ilha de Itaparica. Sua trajetória aproxima sala de aula, mar,
+          travessias, pesca, religiosidades, cultura popular e os saberes construídos
+          pelas comunidades.
+        </p>
+<div aria-label="Marcos da trajetória de Silvano Sulzart" class="silvano-profile__facts">
+<article><strong>1979</strong><span>Nascimento em Vera Cruz, na Ilha de Itaparica.</span></article>
+<article><strong>2000</strong><span>Ingresso no magistério público municipal de Vera Cruz.</span></article>
+<article><strong>2003</strong><span>Conclusão da graduação em Pedagogia.</span></article>
+<article><strong>2015</strong><span>Dissertação de mestrado defendida na UNEB.</span></article>
+</div>
+<div aria-label="Temas ligados à obra de Silvano Sulzart" class="silvano-profile__themes">
+<span>Docência nas águas</span>
+<span>Maritimidade</span>
+<span>Memória autobiográfica</span>
+<span>Diversidade cultural</span>
+<span>Travessias</span>
+<span>Educação em Vera Cruz</span>
+</div>
+<div class="silvano-profile__details">
+<details open="">
+<summary>Infância, família e formação na ilha</summary>
+<div>
+<p>
+                Silvano nasceu em 27 de junho de 1979, no antigo Hospital Maria
+                Amélia Santos, em Vera Cruz. Filho de Joana Alves de Antão e Antônio
+                de Oliveira Costa, cresceu em uma família ligada ao trabalho, à
+                agricultura e ao mar. Viveu parte da infância em Mar Grande e também
+                na comunidade rural da Juerana.
+              </p>
+<p>
+                Estudou em escolas públicas e descreve uma formação marcada por
+                caminhadas longas, transporte difícil, classes multisseriadas, leitura
+                de jornais, revistas, histórias em quadrinhos e da Bíblia. Ainda jovem,
+                ajudava professores em turmas infantis e de Educação de Jovens e
+                Adultos, apoiando moradores na leitura, na escrita de cartas e nas
+                atividades escolares.
+              </p>
+<p>
+                No curso de Magistério, encontrou professores que estimularam a
+                leitura, as visitas a museus, o estudo da realidade local e aulas nos
+                manguezais. Essas experiências fortaleceram sua decisão de seguir a
+                profissão docente.
+              </p>
+</div>
+</details>
+<details>
+<summary>Da sala de aula à gestão e à formação de professores</summary>
+<div>
+<p>
+                Aos 18 anos, iniciou uma experiência de estágio em uma turma da antiga
+                4ª série. Em janeiro de 2000, foi aprovado em sexto lugar no concurso
+                público de Vera Cruz e, em abril, começou a atuar na Escola Nossa
+                Senhora de Guadalupe. No mesmo ano, ingressou no curso de Pedagogia,
+                conciliando trabalho e estudo.
+              </p>
+<p>
+                Depois da graduação, concluída em 2003, exerceu funções de professor,
+                diretor escolar e coordenador pedagógico. Buscou formação em gestão e
+                psicopedagogia, participou da formação de educadores e, a partir de
+                2006, também viveu a experiência de lecionar em curso superior de
+                Pedagogia.
+              </p>
+<p>
+                Em 2009, foi convidado a atuar no departamento de avaliação
+                educacional e formação continuada da Secretaria Municipal de Educação
+                de Vera Cruz e também assumiu a Diretoria de Ensino, trabalhando com
+                jornadas pedagógicas, diretores, coordenadores e práticas de ensino.
+              </p>
+</div>
+</details>
+<details>
+<summary>A pesquisa “Docência nas Águas”</summary>
+<div>
+<p>
+                Após diferentes tentativas de ingresso no mestrado, Silvano foi
+                aprovado no Programa de Pós-Graduação em Educação e
+                Contemporaneidade da UNEB. A dissertação
+                <em>Docência nas Águas: diversidade cultural, maritimidade e
+                travessias na Ilha de Itaparica</em> foi defendida em 2015.
+              </p>
+<p>
+                A investigação reuniu pesquisa autobiográfica e entrevistas narrativas
+                com oito professores da Educação Básica. O trabalho acompanhou
+                docentes que viviam o cotidiano da travessia entre Salvador e a Ilha
+                de Itaparica, analisando o deslocamento pelo mar, as condições de
+                trabalho, a diversidade cultural e os vínculos com as comunidades.
+              </p>
+<p>
+                Na pesquisa, a travessia aparece como experiência física e também
+                simbólica. O mar não é apenas caminho: ele organiza horários, afetos,
+                medos, aprendizagens, planejamentos, relações profissionais e modos de
+                compreender a escola.
+              </p>
+</div>
+</details>
+<details>
+<summary>Cultura das águas e contribuição para a memória local</summary>
+<div>
+<p>
+                A obra apresenta a ideia de “cultura das águas” para reunir práticas,
+                conhecimentos e símbolos ligados à pesca, à mariscagem, às marés, às
+                embarcações, às religiosidades, às festas comunitárias e à vida
+                cotidiana próxima ao mar.
+              </p>
+<p>
+                Ao registrar memórias de Mar Grande, Jaburu, Juerana, Tairu e de
+                outras comunidades, Silvano preserva experiências que frequentemente
+                ficam fora dos documentos oficiais. Sua escrita mostra que a história
+                da ilha também está nas trajetórias escolares, nos caminhos até a
+                escola, nas travessias de lancha e nos saberes transmitidos por
+                pescadores, famílias e educadores.
+              </p>
+<p>
+                A dissertação também chama atenção para a necessidade de práticas
+                pedagógicas e políticas públicas capazes de reconhecer a diversidade
+                cultural da Ilha de Itaparica e valorizar os professores que trabalham
+                em territórios costeiros e insulares.
+              </p>
+<div aria-label="Linha do tempo da trajetória" class="silvano-profile__timeline">
+<article><strong>1979</strong><span>Nasce em Vera Cruz e cresce entre Mar Grande, Jaburu, áreas rurais e o cotidiano das águas.</span></article>
+<article><strong>2000</strong><span>É aprovado em concurso público e inicia a carreira efetiva na educação municipal.</span></article>
+<article><strong>2003</strong><span>Conclui Pedagogia e amplia a atuação em gestão, coordenação e formação docente.</span></article>
+<article><strong>2009</strong><span>Atua com avaliação educacional, formação continuada e Diretoria de Ensino em Vera Cruz.</span></article>
+<article><strong>2012</strong><span>Ingressa no mestrado da UNEB e direciona a pesquisa para a docência na Ilha de Itaparica.</span></article>
+<article><strong>2015</strong><span>Defende a dissertação que reúne autobiografia, educação, maritimidade e diversidade cultural.</span></article>
+</div>
+</div>
+</details>
+</div>
+<div class="silvano-profile__actions">
+<a href="assets/docs/silvano-sulzart-docencia-nas-aguas.pdf" rel="noopener" target="_blank">
+            Ler a dissertação completa
+          </a>
+<a href="#ultimas-noticias">Continuar no blog</a>
+</div>
+<p class="silvano-profile__source">
+          Perfil elaborado a partir da autobiografia e dos dados apresentados na
+          dissertação defendida em 2015. A seção descreve a trajetória registrada
+          nessa fonte e não presume acontecimentos profissionais posteriores.
+        </p>
+</div>
+</article>
+<aside class="personalities-next">
+<div>
+<span>Série em construção</span>
+<h3>Outras trajetórias chegarão a esta seção</h3>
+</div>
+<p>
+        O espaço está preparado para receber novos perfis de mulheres e homens
+        ligados à história, à cultura, à educação, às artes, à pesca, à política e
+        às lutas comunitárias da Ilha de Itaparica.
+      </p>
+</aside>
+</div>
+</section><section aria-labelledby="defeso-title" class="defeso-awareness" id="defeso-2026">
+<div class="container">
+<article class="defeso-panel">
+<header class="defeso-hero">
+<div>
+<span class="defeso-kicker">Utilidade pública · calendário 2026</span>
+<h2 id="defeso-title">Defeso: o tempo de o mar respirar</h2>
+<p>Respeitar o período de defeso protege a reprodução das espécies, fortalece a pesca artesanal e ajuda a garantir alimento e renda para as próximas gerações de Vera Cruz.</p>
+</div>
+<div aria-label="Mensagem de conscientização" class="defeso-hero__seal">
+<div>
+<svg aria-hidden="true" viewbox="0 0 64 64">
+<path d="M7 33c9-13 20-19 33-17 7 1 13 5 17 10-4 5-10 9-17 10-13 2-24-4-33-17Z"></path>
+<path d="M48 18c4-5 8-8 12-9-1 5-1 10 2 15-3 4-7 7-12 9"></path>
+<circle cx="41" cy="25" fill="#ffd166" r="1.8" stroke="none"></circle>
+<path d="M18 46c8 5 18 7 29 4M15 53c7 4 15 5 24 4"></path>
+</svg>
+<strong>Não é pausa sem motivo.</strong>
+<span>É reprodução, renovação e futuro.</span>
+</div>
+</div>
+</header>
+<div class="defeso-content">
+<div class="defeso-intro-grid">
+<div class="defeso-copy">
+<h3>O que é o defeso?</h3>
+<p>É o período em que a pesca ou a mariscagem de determinadas espécies fica proibida ou controlada para proteger fases importantes do ciclo de vida, como reprodução, crescimento e recrutamento dos animais. Cada espécie possui datas e regras próprias.</p>
+</div>
+<ul class="defeso-rules">
+<li>Não capture nem retire do ambiente as espécies protegidas.</li>
+<li>Não compre pescado sem origem regular durante o período.</li>
+<li>Comércio e estoque só podem ocorrer nas situações autorizadas e devidamente declaradas.</li>
+<li>Compartilhe o calendário com pescadores, marisqueiras, comerciantes e consumidores.</li>
+</ul>
+</div>
+<div class="defeso-calendar-heading">
+<div>
+<span class="defeso-kicker" style="color:#0877bd">Datas oficiais</span>
+<h3>Calendário do defeso em Vera Cruz</h3>
+</div>
+<p>Os cartões são destacados automaticamente quando a data atual estiver dentro de um dos períodos de 2026.</p>
+</div>
+<div class="defeso-calendar-grid">
+<section class="defeso-card" data-defeso-periods="2026-04-01/2026-05-15,2026-09-15/2026-10-31">
+<span class="defeso-status" hidden="">Defeso em vigor</span>
+<strong class="defeso-card__species">Camarões</strong>
+<span class="defeso-card__detail">Rosa, sete-barbas e branco. Calendário correspondente ao trecho do litoral onde está Vera Cruz.</span>
+<div class="defeso-periods">
+<time datetime="2026-04-01/2026-05-15">1º abr a 15 mai</time>
+<time datetime="2026-09-15/2026-10-31">15 set a 31 out</time>
+</div>
+</section>
+<section class="defeso-card" data-defeso-periods="2026-01-01/2026-04-30,2026-11-01/2026-12-31">
+<span class="defeso-status" hidden="">Defeso em vigor</span>
+<strong class="defeso-card__species">Lagostas</strong>
+<span class="defeso-card__detail">Lagosta-vermelha, lagosta-verde e lagosta-pintada.</span>
+<div class="defeso-periods">
+<span>1º nov a 30 abr</span>
+</div>
+</section>
+<section class="defeso-card" data-defeso-periods="2026-05-15/2026-07-31">
+<span class="defeso-status" hidden="">Defeso em vigor</span>
+<strong class="defeso-card__species">Robalo</strong>
+<span class="defeso-card__detail">Proteção nas águas interiores e no litoral abrangido pela norma.</span>
+<div class="defeso-periods">
+<time datetime="2026-05-15/2026-07-31">15 mai a 31 jul</time>
+</div>
+</section>
+<section class="defeso-card" data-defeso-periods="2026-01-01/2026-02-28,2026-11-01/2026-12-31">
+<span class="defeso-status" hidden="">Defeso em vigor</span>
+<strong class="defeso-card__species">Garoupa-verdadeira</strong>
+<span class="defeso-card__detail">Espécie protegida em águas jurisdicionais brasileiras.</span>
+<div class="defeso-periods">
+<span>1º nov a 28 fev</span>
+</div>
+</section>
+<section class="defeso-card" data-defeso-periods="2026-08-01/2026-09-30">
+<span class="defeso-status" hidden="">Defeso em vigor</span>
+<strong class="defeso-card__species">Peixes recifais</strong>
+<span class="defeso-card__detail">Caranha, sirigado, garoupa-de-são-tomé e badejo-amarelo.</span>
+<div class="defeso-periods">
+<time datetime="2026-08-01/2026-09-30">1º ago a 30 set</time>
+</div>
+</section>
+<section class="defeso-card defeso-card--wide" data-defeso-periods="2026-01-18/2026-01-23,2026-02-01/2026-02-06,2026-02-17/2026-02-22,2026-03-03/2026-03-08,2026-03-18/2026-03-23,2026-04-17/2026-04-22">
+<span class="defeso-status" hidden="">Defeso em vigor</span>
+<strong class="defeso-card__species">Caranguejo-uçá: andadas de 2026</strong>
+<span class="defeso-card__detail">Durante as andadas reprodutivas ficam proibidos captura, transporte, beneficiamento, industrialização e comercialização.</span>
+<div class="defeso-periods">
+<time datetime="2026-01-18/2026-01-23">18 a 23 jan</time>
+<time datetime="2026-02-01/2026-02-06">1º a 6 fev</time>
+<time datetime="2026-02-17/2026-02-22">17 a 22 fev</time>
+<time datetime="2026-03-03/2026-03-08">3 a 8 mar</time>
+<time datetime="2026-03-18/2026-03-23">18 a 23 mar</time>
+<time datetime="2026-04-17/2026-04-22">17 a 22 abr</time>
+</div>
+</section>
+</div>
+<div class="defeso-note">
+<div>
+<strong>Consumidor também protege o mar</strong>
+<p>Antes de comprar, pergunte a origem do pescado. Durante o defeso, prefira outras espécies liberadas e nunca estimule a venda clandestina.</p>
+</div>
+<a href="https://www.ba.gov.br/meioambiente/sites/site-sema/files/2026-05/CALENDARIO_PAREDE_DO_DEFESO_2026_Digital.pdf" rel="noopener noreferrer" target="_blank">Ver calendário oficial 2026</a>
+</div>
+<div class="defeso-alert">
+<span><strong>Encontrou pesca ou comércio irregular?</strong> Denuncie ao INEMA.</span>
+<span><a href="tel:08000711400">0800 071 1400</a> · <a href="mailto:denuncia@inema.ba.gov.br">denuncia@inema.ba.gov.br</a></span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="blog-feed-section" id="ultimas-noticias">
+<div class="container blog-layout">
+<div class="blog-main-column">
+<header class="blog-section-title">
+<div>
+<span class="blog-eyebrow">Publicações recentes</span>
+<h2>Últimas notícias</h2>
+</div>
+<span class="blog-results" data-blog-results=""></span>
+</header>
+<div aria-live="polite" class="blog-post-grid" data-blog-grid=""></div>
+<div class="blog-empty" data-blog-empty="" hidden="">
+<strong>Nenhuma publicação encontrada.</strong>
+<span>Experimente outro termo ou selecione “Todas”.</span>
+</div>
+<div class="blog-load-wrap">
+<button class="blog-load-more" data-blog-load-more="" type="button">Mostrar mais publicações</button>
+</div>
+</div>
+<aside aria-label="Informações do blog" class="blog-sidebar">
+<section class="sidebar-card sidebar-card--about">
+<span class="blog-eyebrow">Sobre o blog</span>
+<h2>Vera Cruz contada por quem vive nela</h2>
+<p>As notícias aparecem em cards leves. O texto completo é aberto apenas quando o leitor escolhe uma publicação.</p>
+<a href="nossa-historia.html">Conheça o projeto <span>→</span></a>
+</section>
+<section class="sidebar-card">
+<div class="sidebar-card__heading">
+<h2>Categorias</h2>
+<span data-category-total=""></span>
+</div>
+<div class="sidebar-category-list" data-sidebar-categories=""></div>
+</section>
+<section class="sidebar-card">
+<span class="blog-eyebrow">Arquivo</span>
+<h2>Publicações por ano</h2>
+<div class="sidebar-archive-list" data-blog-archive=""></div>
+</section>
+<section class="sidebar-card sidebar-card--personalities">
+<span class="blog-eyebrow">Personalidades da Ilha</span>
+<h2>Silvano Sulzart</h2>
+<p>Conheça a trajetória do professor e pesquisador que transformou experiências da ilha em memória e investigação educacional.</p>
+<a href="#personalidades">Abrir o perfil completo <span>→</span></a>
+</section><section class="sidebar-card sidebar-card--contribute">
+<span class="blog-eyebrow">Participe</span>
+<h2>Tem uma pauta ou fotografia?</h2>
+<p>Envie acontecimentos, memórias e sugestões para a equipe do projeto.</p>
+<a href="mailto:contato@conectaveracruz.com.br?subject=Pauta%20para%20o%20Blog">Enviar uma pauta</a>
+</section>
+</aside>
+</div>
+</section>
+</main>
+<!-- Rodapé padrão inserido por assets/js/layout.js -->
+<div data-cv-footer=""></div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    "use strict";
+
+    /* Destaque automático dos períodos de defeso em vigor. */
+    const today = new Date();
+    today.setHours(12, 0, 0, 0);
+
+    document.querySelectorAll('[data-defeso-periods]').forEach(function (card) {
+      const periods = (card.dataset.defesoPeriods || '').split(',');
+      const isActive = periods.some(function (period) {
+        const parts = period.split('/');
+        if (parts.length !== 2) return false;
+        const start = new Date(parts[0] + 'T12:00:00');
+        const end = new Date(parts[1] + 'T12:00:00');
+        return today >= start && today <= end;
+      });
+
+      if (isActive) {
+        card.classList.add('is-active');
+        const status = card.querySelector('.defeso-status');
+        if (status) status.hidden = false;
+      }
+    });
+
+    /* Blog compacto: usa os mesmos dados de assets/data/blog-posts.js. */
+    const posts = Array.isArray(window.CONECTA_BLOG_POSTS)
+      ? [...window.CONECTA_BLOG_POSTS]
+      : [];
+
+    const elements = {
+      featured: document.querySelector('[data-blog-featured]'),
+      grid: document.querySelector('[data-blog-grid]'),
+      categories: document.querySelector('[data-blog-categories]'),
+      sidebarCategories: document.querySelector('[data-sidebar-categories]'),
+      archive: document.querySelector('[data-blog-archive]'),
+      search: document.querySelector('[data-blog-search]'),
+      results: document.querySelector('[data-blog-results]'),
+      empty: document.querySelector('[data-blog-empty]'),
+      categoryTotal: document.querySelector('[data-category-total]'),
+      loadMore: document.querySelector('[data-blog-load-more]'),
+      reader: document.querySelector('[data-blog-reader]')
+    };
+
+    let activeCategory = 'todas';
+    let activeYear = 'todos';
+    let visibleLimit = 6;
+
+    const sortedPosts = posts.sort(function (a, b) {
+      return new Date(b.data).getTime() - new Date(a.data).getTime();
+    });
+
+    const featuredPost = sortedPosts.find(function (post) {
+      return post.destaque;
+    }) || sortedPosts[0] || null;
+
+    function normalize(value) {
+      return String(value || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLocaleLowerCase('pt-BR');
+    }
+
+    function make(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function searchText(post) {
+      const blocks = (post.conteudo || []).flatMap(function (block) {
+        return [block.texto || '', ...((block.itens || []))];
+      }).join(' ');
+
+      return normalize([
+        post.titulo,
+        post.subtitulo,
+        post.resumo,
+        post.categoria,
+        blocks,
+        ...((post.tags || []))
+      ].join(' '));
+    }
+
+    function filteredPosts() {
+      const query = normalize(elements.search && elements.search.value.trim());
+      return sortedPosts.filter(function (post) {
+        const categoryMatch = activeCategory === 'todas' || post.categoriaSlug === activeCategory;
+        const yearMatch = activeYear === 'todos' || String(post.data || '').startsWith(activeYear);
+        const searchMatch = !query || searchText(post).includes(query);
+        return categoryMatch && yearMatch && searchMatch;
+      });
+    }
+
+    function createImage(post, featured) {
+      const media = make('figure', 'blog-compact-card__media');
+      const image = document.createElement('img');
+      image.src = post.imagem || '';
+      image.alt = post.imagemAlt || '';
+      image.loading = featured ? 'eager' : 'lazy';
+      if (featured) image.fetchPriority = 'high';
+      image.addEventListener('error', function () {
+        media.hidden = true;
+      });
+      media.appendChild(image);
+      return media;
+    }
+
+    function createCard(post, featured) {
+      const article = make('article', featured
+        ? 'blog-compact-card blog-compact-card--featured'
+        : 'blog-compact-card');
+
+      const content = make('div', 'blog-compact-card__content');
+      const top = make('div', 'blog-compact-card__top');
+      const category = make('span', 'blog-compact-card__category', post.categoria || 'Notícia');
+      const date = make('time', '', post.dataTexto || '');
+      if (post.data) date.dateTime = post.data;
+      top.append(category, date);
+
+      const title = make('h3', '', post.titulo || 'Publicação');
+      const summary = make('p', 'blog-compact-card__summary', post.resumo || post.subtitulo || '');
+      const meta = make('div', 'blog-compact-card__meta');
+      meta.append(
+        make('span', '', post.autor || 'Equipe Conecta Vera Cruz'),
+        make('span', '', post.tempoLeitura || '')
+      );
+
+      const button = make('button', 'blog-card-open', 'Ler notícia →');
+      button.type = 'button';
+      button.addEventListener('click', function () {
+        openPost(post, true);
+      });
+
+      content.append(top, title, summary, meta, button);
+      article.append(createImage(post, featured), content);
+      return article;
+    }
+
+    function renderBlock(block) {
+      switch (block.tipo) {
+        case 'titulo':
+          return make('h3', 'blog-article__section-title', block.texto || '');
+        case 'citacao': {
+          const quote = make('blockquote', 'blog-article__quote');
+          quote.appendChild(make('p', '', block.texto || ''));
+          return quote;
+        }
+        case 'lista': {
+          const list = make('ul', 'blog-article__list');
+          (block.itens || []).forEach(function (item) {
+            list.appendChild(make('li', '', item));
+          });
+          return list;
+        }
+        case 'nota':
+          return make('aside', 'blog-article__note', block.texto || '');
+        case 'imagem': {
+          const figure = make('figure', 'blog-article__figure');
+          const image = document.createElement('img');
+          image.src = block.src || '';
+          image.alt = block.alt || '';
+          image.loading = 'lazy';
+          figure.appendChild(image);
+          if (block.legenda) figure.appendChild(make('figcaption', '', block.legenda));
+          return figure;
+        }
+        case 'galeria': {
+          const gallery = make('div', 'blog-article__gallery');
+          (block.imagens || []).forEach(function (item) {
+            const figure = document.createElement('figure');
+            const image = document.createElement('img');
+            image.src = item.src || '';
+            image.alt = item.alt || '';
+            image.loading = 'lazy';
+            figure.appendChild(image);
+            if (item.legenda) figure.appendChild(make('figcaption', '', item.legenda));
+            gallery.appendChild(figure);
+          });
+          return gallery;
+        }
+        case 'paragrafo':
+        default:
+          return make('p', 'blog-article__paragraph', block.texto || '');
+      }
+    }
+
+    function openPost(post, updateHistory) {
+      if (!elements.reader) return;
+
+      const shell = make('article', 'container blog-reader-shell');
+      const toolbar = make('div', 'blog-reader-toolbar');
+      const close = make('button', 'blog-reader-close', '← Voltar às notícias');
+      close.type = 'button';
+      close.addEventListener('click', function () {
+        closePost(true);
+      });
+
+      const share = make('button', 'blog-reader-share', 'Compartilhar');
+      share.type = 'button';
+      share.addEventListener('click', async function () {
+        const url = window.location.href.split('#')[0] + '#noticia=' + encodeURIComponent(post.slug);
+        try {
+          if (navigator.share) {
+            await navigator.share({ title: post.titulo, text: post.resumo || '', url: url });
+          } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(url);
+            share.textContent = 'Link copiado!';
+            window.setTimeout(function () { share.textContent = 'Compartilhar'; }, 1800);
+          }
+        } catch (error) {
+          /* O visitante pode cancelar o compartilhamento sem gerar erro visual. */
+        }
+      });
+      toolbar.append(close, share);
+
+      const header = make('header', 'blog-reader-header');
+      const eyebrow = make('div', 'blog-full-post__eyebrow');
+      eyebrow.append(
+        make('span', 'blog-full-post__category', post.categoria || 'Notícia'),
+        make('time', '', post.dataTexto || '')
+      );
+      const title = make('h2', '', post.titulo || 'Publicação');
+      const subtitle = make('p', '', post.subtitulo || post.resumo || '');
+      const meta = make('div', 'blog-full-post__meta');
+      meta.append(
+        make('span', '', post.autor || 'Equipe Conecta Vera Cruz'),
+        make('span', '', post.tempoLeitura || '')
+      );
+      header.append(eyebrow, title, subtitle, meta);
+
+      const cover = make('figure', 'blog-reader-cover');
+      const image = document.createElement('img');
+      image.src = post.imagem || '';
+      image.alt = post.imagemAlt || '';
+      image.loading = 'eager';
+      image.addEventListener('error', function () { cover.hidden = true; });
+      cover.appendChild(image);
+
+      const body = make('div', 'blog-article__body');
+      (post.conteudo || []).forEach(function (block) {
+        body.appendChild(renderBlock(block));
+      });
+
+      if (post.tags && post.tags.length) {
+        const tags = make('div', 'blog-article__tags');
+        post.tags.forEach(function (tag) {
+          tags.appendChild(make('span', '', tag));
+        });
+        body.appendChild(tags);
+      }
+
+      shell.append(toolbar, header, cover, body);
+      elements.reader.replaceChildren(shell);
+      elements.reader.hidden = false;
+
+      if (updateHistory) {
+        history.pushState({ post: post.slug }, '', '#noticia=' + encodeURIComponent(post.slug));
+      }
+
+      elements.reader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closePost(updateHistory) {
+      if (!elements.reader) return;
+      elements.reader.hidden = true;
+      elements.reader.replaceChildren();
+      if (updateHistory) {
+        history.pushState({}, '', window.location.pathname + window.location.search);
+      }
+      const feed = document.getElementById('ultimas-noticias');
+      if (feed) feed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderFeatured() {
+      if (!elements.featured) return;
+      const filtersActive = (elements.search && elements.search.value.trim()) || activeCategory !== 'todas' || activeYear !== 'todos';
+      if (!featuredPost || filtersActive) {
+        elements.featured.hidden = true;
+        elements.featured.replaceChildren();
+        return;
+      }
+
+      const label = make('div', 'blog-featured-label');
+      label.append(
+        make('span', 'blog-eyebrow', 'Destaque do blog'),
+        make('strong', '', 'Leitura recomendada')
+      );
+      elements.featured.replaceChildren(label, createCard(featuredPost, true));
+      elements.featured.hidden = false;
+    }
+
+    function renderPosts() {
+      if (!elements.grid) return;
+      const matches = filteredPosts();
+      const list = matches.filter(function (post) {
+        return !featuredPost || post.slug !== featuredPost.slug || activeCategory !== 'todas' || activeYear !== 'todos' || (elements.search && elements.search.value.trim());
+      });
+      const shown = list.slice(0, visibleLimit);
+      elements.grid.replaceChildren(...shown.map(function (post) {
+        return createCard(post, false);
+      }));
+
+      if (elements.results) {
+        const suffix = matches.length === 1 ? 'publicação' : 'publicações';
+        elements.results.textContent = matches.length + ' ' + suffix;
+      }
+      if (elements.empty) elements.empty.hidden = matches.length !== 0;
+      if (elements.loadMore) elements.loadMore.hidden = shown.length >= list.length;
+      renderFeatured();
+    }
+
+    function renderCategories() {
+      const counts = new Map();
+      sortedPosts.forEach(function (post) {
+        const key = post.categoriaSlug || normalize(post.categoria);
+        const current = counts.get(key) || { label: post.categoria || 'Outros', total: 0 };
+        current.total += 1;
+        counts.set(key, current);
+      });
+
+      const categories = [{ key: 'todas', label: 'Todas', total: sortedPosts.length }]
+        .concat([...counts.entries()].map(function (entry) {
+          return { key: entry[0], label: entry[1].label, total: entry[1].total };
+        }));
+
+      function choose(key) {
+        activeCategory = key;
+        visibleLimit = 6;
+        document.querySelectorAll('[data-category-key]').forEach(function (button) {
+          button.classList.toggle('is-active', button.dataset.categoryKey === key);
+        });
+        renderPosts();
+      }
+
+      if (elements.categories) {
+        elements.categories.replaceChildren(...categories.map(function (item) {
+          const button = make('button', 'blog-category-chip' + (item.key === activeCategory ? ' is-active' : ''));
+          button.type = 'button';
+          button.dataset.categoryKey = item.key;
+          button.append(make('span', '', item.label), make('small', '', String(item.total)));
+          button.addEventListener('click', function () { choose(item.key); });
+          return button;
+        }));
+      }
+
+      if (elements.sidebarCategories) {
+        elements.sidebarCategories.replaceChildren(...categories.map(function (item) {
+          const button = make('button', 'sidebar-category' + (item.key === activeCategory ? ' is-active' : ''));
+          button.type = 'button';
+          button.dataset.categoryKey = item.key;
+          button.append(make('span', '', item.label), make('small', '', String(item.total)));
+          button.addEventListener('click', function () { choose(item.key); });
+          return button;
+        }));
+      }
+
+      if (elements.categoryTotal) {
+        elements.categoryTotal.textContent = counts.size + (counts.size === 1 ? ' categoria' : ' categorias');
+      }
+    }
+
+    function renderArchive() {
+      if (!elements.archive) return;
+      const years = [...new Set(sortedPosts.map(function (post) {
+        return String(post.data || '').slice(0, 4);
+      }).filter(Boolean))];
+
+      const items = [{ key: 'todos', label: 'Todos os anos', total: sortedPosts.length }]
+        .concat(years.map(function (year) {
+          return {
+            key: year,
+            label: year,
+            total: sortedPosts.filter(function (post) {
+              return String(post.data || '').startsWith(year);
+            }).length
+          };
+        }));
+
+      elements.archive.replaceChildren(...items.map(function (item) {
+        const button = make('button', 'sidebar-archive' + (item.key === activeYear ? ' is-active' : ''));
+        button.type = 'button';
+        button.append(make('span', '', item.label), make('small', '', String(item.total)));
+        button.addEventListener('click', function () {
+          activeYear = item.key;
+          visibleLimit = 6;
+          elements.archive.querySelectorAll('.sidebar-archive').forEach(function (node) {
+            node.classList.toggle('is-active', node === button);
+          });
+          renderPosts();
+        });
+        return button;
+      }));
+    }
+
+    if (elements.search) {
+      elements.search.addEventListener('input', function () {
+        visibleLimit = 6;
+        renderPosts();
+      });
+    }
+
+    if (elements.loadMore) {
+      elements.loadMore.addEventListener('click', function () {
+        visibleLimit += 6;
+        renderPosts();
+      });
+    }
+
+    window.addEventListener('popstate', function () {
+      const match = window.location.hash.match(/^#noticia=(.+)$/);
+      if (!match) {
+        closePost(false);
+        return;
+      }
+      const slug = decodeURIComponent(match[1]);
+      const post = sortedPosts.find(function (item) { return item.slug === slug; });
+      if (post) openPost(post, false);
+    });
+
+    renderCategories();
+    renderArchive();
+    renderPosts();
+
+    const initial = window.location.hash.match(/^#noticia=(.+)$/);
+    if (initial) {
+      const slug = decodeURIComponent(initial[1]);
+      const post = sortedPosts.find(function (item) { return item.slug === slug; });
+      if (post) window.requestAnimationFrame(function () { openPost(post, false); });
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "Conecta Vera Cruz",
+  "short_name": "Conecta VC",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fffdf7",
+  "theme_color": "#007a4d",
+  "icons": []
+}

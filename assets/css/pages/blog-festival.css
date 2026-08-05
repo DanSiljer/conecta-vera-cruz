@@ -1,0 +1,4 @@
+@import url("blog-artigo-base.css");
+.page-blog-article { --article-accent:#097a53; --article-accent-dark:#053f34; --article-soft:#edf8e7; }
+.article-hero { background:radial-gradient(circle at 15% 20%,rgba(255,201,40,.28),transparent 24%),linear-gradient(145deg,#ecf9ec,#fff8dd); }
+.article-hero__image img { object-position:center top; }

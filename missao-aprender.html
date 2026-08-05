@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Missão Aprender: página educativa do Conecta Vera Cruz com jogos, atividades e uma área especial sobre a história de Vera Cruz e da Ilha de Itaparica." name="description"/>
+<title>Missão Aprender | Conecta Vera Cruz</title>
+
+<link href="assets/img/favicon.svg" rel="icon" type="image/svg+xml"/><link href="manifest.webmanifest" rel="manifest"/><link href="assets/css/global.css" rel="stylesheet"/><link href="assets/css/layout.css" rel="stylesheet"/><link href="assets/css/pages/missao-aprender.css" rel="stylesheet"/><script defer src="assets/js/main.js"></script><script defer src="assets/js/layout.js"></script><script defer src="assets/js/missao-aprender.js"></script></head>
+<body class="page-missao-aprender">
+
+<!-- Menu padrão inserido por assets/js/layout.js -->
+<div data-cv-header></div>
+
+<main id="conteudo"><div class="missao-aprender-app"><nav aria-label="Navegação da página Missão Aprender" class="missao-aprender-subnav">
+<div class="missao-aprender-subnav__inner">
+<a class="missao-aprender-subnav__brand" href="#inicio">
+<span aria-hidden="true">✦</span>
+<strong>Missão Aprender</strong>
+</a>
+<div class="missao-aprender-subnav__links">
+<a href="#historia-local">História local</a>
+<a href="#mapa-jogo">Mapa-jogo</a>
+<a href="#disciplinas">Jogos</a>
+<a href="#professor">Área do professor</a>
+<a href="#resultados">Resultados</a>
+</div>
+</div>
+</nav>
+<section class="hero" id="inicio">
+<div class="hero__content">
+<span class="eyebrow">MISSÃO APRENDER · PLATAFORMA EDUCATIVA INTERATIVA</span>
+<h1>
+          Cada matéria vira uma
+          <span>aventura jogável.</span>
+</h1>
+<p>
+          História, Matemática, Geografia, Português e Ciências em desafios
+          rápidos, com uma missão especial sobre Vera Cruz e a Ilha de Itaparica.
+        </p>
+<div class="hero__actions">
+<a class="button button--primary" href="#disciplinas">
+            Começar a jogar
+          </a>
+<a class="button button--ghost" href="#professor">
+            Criar atividade
+          </a>
+</div>
+<div aria-label="Recursos da plataforma" class="hero__stats">
+<article>
+<strong>7</strong>
+<span>missões de aprendizagem</span>
+</article>
+<article>
+<strong>3</strong>
+<span>níveis</span>
+</article>
+<article>
+<strong>100%</strong>
+<span>gratuito</span>
+</article>
+</div>
+</div>
+<div aria-hidden="true" class="hero__visual">
+<div class="orbit orbit--one"></div>
+<div class="orbit orbit--two"></div>
+<div class="floating-card floating-card--history">
+<span>🏺</span>
+<strong>História</strong>
+<small>Viaje no tempo</small>
+</div>
+<div class="floating-card floating-card--math">
+<span>➗</span>
+<strong>Matemática</strong>
+<small>Resolva desafios</small>
+</div>
+<div class="floating-card floating-card--science">
+<span>🔬</span>
+<strong>Ciências</strong>
+<small>Descubra o mundo</small>
+</div>
+<div class="hero__mascot">
+<span class="hero__mascot-face">◉‿◉</span>
+<strong>Pronto para a missão?</strong>
+</div>
+</div>
+</section>
+<section aria-labelledby="studentTitle" class="student-panel section-shell">
+<div>
+<span class="section-kicker">IDENTIFICAÇÃO DO ESTUDANTE</span>
+<h2 id="studentTitle">Antes de começar</h2>
+<p>
+          Preencha os dados para registrar a pontuação no relatório desta página.
+        </p>
+</div>
+<div class="student-form">
+<label>
+          Nome do estudante
+          <input autocomplete="name" id="studentName" maxlength="60" placeholder="Digite o nome" type="text"/>
+</label>
+<label>
+          Turma
+          <input id="studentClass" maxlength="30" placeholder="Ex.: 6º ano A" type="text"/>
+</label>
+<button class="button button--dark" id="saveStudentButton" type="button">
+          Salvar dados
+        </button>
+</div>
+<p aria-live="polite" class="form-message" id="studentMessage"></p>
+</section>
+
+<section class="local-history section-shell" id="historia-local" aria-labelledby="localHistoryTitle">
+  <div class="local-history__hero">
+    <div class="local-history__copy">
+      <span class="section-kicker">HISTÓRIA DA NOSSA TERRA</span>
+      <h2 id="localHistoryTitle">Vera Cruz e a Ilha de Itaparica</h2>
+      <p class="local-history__lead">
+        Antes de aparecer nos mapas como município, Vera Cruz já fazia parte de uma
+        história marcada pelos povos Tupinambás, pelo mar, pela formação de antigos
+        povoados, pela religiosidade e pela luta por autonomia política.
+      </p>
+
+      <div class="local-history__actions">
+        <button class="button button--island subject-button" data-subject="vera-cruz" type="button">
+          Jogar a Missão da Ilha
+        </button>
+        <a class="button button--history-link" href="historia.html">
+          Ler a história completa
+        </a>
+      </div>
+    </div>
+
+    <aside class="local-history__name-card" aria-label="Origem do nome Vera Cruz">
+      <span class="local-history__name-label">De onde vem o nome?</span>
+      <strong>Vera Crux</strong>
+      <small>A verdadeira cruz</small>
+      <p>
+        O nome possui origem latina e está ligado à tradição religiosa portuguesa.
+        Em 1500, o Brasil chegou a ser chamado de Ilha de Vera Cruz.
+      </p>
+    </aside>
+  </div>
+
+  <div class="local-history__timeline" aria-label="Linha do tempo resumida de Vera Cruz">
+    <article>
+      <span class="local-history__year">Antes da colonização</span>
+      <h3>Povos Tupinambás</h3>
+      <p>A Ilha de Itaparica já era habitada e possuía histórias, conhecimentos e formas próprias de viver.</p>
+    </article>
+
+    <article>
+      <span class="local-history__year">1509</span>
+      <h3>Presença portuguesa</h3>
+      <p>A ocupação portuguesa se fortaleceu na ilha, transformando o território e a vida de seus habitantes.</p>
+    </article>
+
+    <article>
+      <span class="local-history__year">1560</span>
+      <h3>Povoado do Senhor da Vera Cruz</h3>
+      <p>Foi fundado um povoado com a invocação do Senhor da Vera Cruz, origem histórica do nome municipal.</p>
+    </article>
+
+    <article>
+      <span class="local-history__year">1561</span>
+      <h3>Igreja do Nosso Senhor da Vera Cruz</h3>
+      <p>A fundação da igreja reforçou a importância religiosa e comunitária do antigo povoado.</p>
+    </article>
+
+    <article>
+      <span class="local-history__year">1563</span>
+      <h3>Primeira freguesia da ilha</h3>
+      <p>A freguesia reunia igreja, moradias, ruas, comércio e serviços, funcionando como uma antiga centralidade.</p>
+    </article>
+
+    <article>
+      <span class="local-history__year">1962</span>
+      <h3>Emancipação de Vera Cruz</h3>
+      <p>Vera Cruz tornou-se município, com Mar Grande como sede e uma administração própria.</p>
+    </article>
+  </div>
+
+  <div class="local-history__facts">
+    <article>
+      <span aria-hidden="true">🌊</span>
+      <div>
+        <strong>Uma história cercada pelas águas</strong>
+        <p>O mar participa da paisagem, do trabalho, das travessias e da memória das comunidades da ilha.</p>
+      </div>
+    </article>
+
+    <article>
+      <span aria-hidden="true">⛪</span>
+      <div>
+        <strong>Fé, patrimônio e memória</strong>
+        <p>Igrejas, ruínas e antigos povoados ajudam a contar diferentes períodos da formação de Vera Cruz.</p>
+      </div>
+    </article>
+
+    <article>
+      <span aria-hidden="true">🗳️</span>
+      <div>
+        <strong>Uma conquista política</strong>
+        <p>A emancipação foi resultado de mobilização, articulação política e desejo de administrar as necessidades locais.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="local-history__mission">
+    <div>
+      <span class="local-history__mission-label">ATIVIDADE ESPECIAL</span>
+      <h3>Missão da Ilha: você conhece a nossa história?</h3>
+      <p>
+        Escolha o nível, responda aos desafios e descubra quanto já sabe sobre
+        Vera Cruz e a Ilha de Itaparica.
+      </p>
+    </div>
+    <button class="button button--primary subject-button" data-subject="vera-cruz" type="button">
+      Iniciar desafio
+    </button>
+  </div>
+</section>
+
+
+<section class="island-map-game section-shell" id="mapa-jogo" aria-labelledby="islandMapTitle">
+  <header class="island-map-game__heading">
+    <div>
+      <span class="section-kicker">GEOGRAFIA + HISTÓRIA LOCAL</span>
+      <h2 id="islandMapTitle">Mapa-jogo da Ilha de Itaparica</h2>
+      <p>
+        Explore as comunidades, observe a posição de cada lugar e depois enfrente
+        o desafio de localização. O resultado entra no relatório da Missão Aprender.
+      </p>
+    </div>
+
+    <div class="island-map-game__mode" role="group" aria-label="Modo do mapa">
+      <button class="is-active" type="button" data-map-mode="explore" aria-pressed="true">
+        Explorar
+      </button>
+      <button type="button" data-map-mode="challenge" aria-pressed="false">
+        Jogar
+      </button>
+    </div>
+  </header>
+
+  <div class="island-map-game__layout">
+    <div class="island-map-game__board">
+      <div class="island-map-game__toolbar">
+        <div class="map-status-chip">
+          <span>Modo</span>
+          <strong id="mapModeLabel">Exploração livre</strong>
+        </div>
+
+        <div class="map-status-chip">
+          <span>Pontuação</span>
+          <strong id="mapScoreLabel">0 pontos</strong>
+        </div>
+
+        <div class="map-status-chip">
+          <span>Rodada</span>
+          <strong id="mapRoundLabel">Livre</strong>
+        </div>
+      </div>
+
+      <div class="island-map-game__map" id="islandMapBoard">
+        <img
+          id="islandMapImage"
+          src="assets/img/jogos/mapa-ilha-referencia.png"
+          alt="Mapa da Ilha de Itaparica com localidades e comunidades"
+          width="1266"
+          height="1266"
+          loading="lazy"
+        >
+
+        <div class="island-map-game__hotspots" id="islandMapHotspots" aria-label="Localidades da Ilha de Itaparica"></div>
+
+        <div class="island-map-game__target" id="mapTargetCard" hidden>
+          <span>ENCONTRE NO MAPA</span>
+          <strong id="mapTargetName">Mar Grande</strong>
+          <small id="mapTargetClue">Observe o lado leste da ilha.</small>
+        </div>
+      </div>
+
+      <p class="island-map-game__source">
+        Mapa adaptado das referências enviadas para a atividade. Os marcadores são
+        aproximações educativas e não substituem uma carta cartográfica oficial.
+      </p>
+    </div>
+
+    <aside class="island-map-game__panel">
+      <div class="map-place-card" id="mapPlaceCard">
+        <span class="map-place-card__eyebrow">COMECE EXPLORANDO</span>
+        <h3 id="mapPlaceName">Clique em um marcador</h3>
+        <p id="mapPlaceDescription">
+          Cada ponto apresenta uma comunidade ou localidade indicada no mapa da ilha.
+        </p>
+        <dl>
+          <div>
+            <dt>Município</dt>
+            <dd id="mapPlaceMunicipality">Itaparica ou Vera Cruz</dd>
+          </div>
+          <div>
+            <dt>Posição</dt>
+            <dd id="mapPlacePosition">Norte, centro ou sul da ilha</dd>
+          </div>
+        </dl>
+      </div>
+
+      <form class="map-challenge-settings" id="mapChallengeSettings">
+        <span class="map-challenge-settings__label">CONFIGURAR DESAFIO</span>
+
+        <label>
+          Nível
+          <select id="mapDifficulty">
+            <option value="facil">Fácil · nomes visíveis</option>
+            <option selected value="medio">Médio · com pista</option>
+            <option value="dificil">Difícil · sem pista</option>
+          </select>
+        </label>
+
+        <label>
+          Número de rodadas
+          <select id="mapRounds">
+            <option value="6">6 rodadas</option>
+            <option selected value="10">10 rodadas</option>
+            <option value="15">15 rodadas</option>
+          </select>
+        </label>
+
+        <button class="button button--primary" id="startMapChallenge" type="submit">
+          Iniciar jogo
+        </button>
+      </form>
+
+      <div class="map-feedback" id="mapFeedback" role="status" aria-live="polite">
+        <strong>Modo exploração ativado.</strong>
+        <p>Toque nos marcadores para conhecer a ilha antes de jogar.</p>
+      </div>
+
+      <button class="button button--ghost-dark" id="resetMapGame" type="button">
+        Voltar ao modo exploração
+      </button>
+    </aside>
+  </div>
+
+  <div class="island-map-game__how">
+    <article>
+      <span>01</span>
+      <div>
+        <h3>Explore</h3>
+        <p>Observe os nomes, clique nos pontos e conheça a posição das localidades.</p>
+      </div>
+    </article>
+    <article>
+      <span>02</span>
+      <div>
+        <h3>Localize</h3>
+        <p>O jogo apresenta um lugar e você precisa encontrá-lo no mapa.</p>
+      </div>
+    </article>
+    <article>
+      <span>03</span>
+      <div>
+        <h3>Registre</h3>
+        <p>A pontuação é salva junto aos demais resultados da página.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="subjects section-shell" id="disciplinas">
+<div class="section-heading">
+<div>
+<span class="section-kicker">ESCOLHA SUA MISSÃO</span>
+<h2>Qual disciplina você quer explorar?</h2>
+</div>
+<p>
+          Cada partida seleciona perguntas diferentes. Errar não encerra o jogo:
+          mostra a resposta correta e transforma o tropeço em pista.
+        </p>
+</div>
+<div class="subject-grid">
+<article class="subject-card subject-card--history">
+<div aria-hidden="true" class="subject-card__icon">🏺</div>
+<span class="subject-card__tag">Linha do tempo</span>
+<h3>História</h3>
+<p>
+            Povos antigos, Brasil, cultura, fontes históricas e história local.
+          </p>
+<button class="subject-button" data-subject="historia" type="button">
+            Jogar História
+          </button>
+</article>
+<article class="subject-card subject-card--math">
+<div aria-hidden="true" class="subject-card__icon">➗</div>
+<span class="subject-card__tag">Raciocínio</span>
+<h3>Matemática</h3>
+<p>
+            Operações, problemas, frações, porcentagem e lógica.
+          </p>
+<button class="subject-button" data-subject="matematica" type="button">
+            Jogar Matemática
+          </button>
+</article>
+<article class="subject-card subject-card--geography">
+<div aria-hidden="true" class="subject-card__icon">🌎</div>
+<span class="subject-card__tag">Território</span>
+<h3>Geografia</h3>
+<p>
+            Mapas, paisagens, clima, população e orientação espacial.
+          </p>
+<button class="subject-button" data-subject="geografia" type="button">
+            Jogar Geografia
+          </button>
+</article>
+<article class="subject-card subject-card--portuguese">
+<div aria-hidden="true" class="subject-card__icon">📚</div>
+<span class="subject-card__tag">Palavras</span>
+<h3>Português</h3>
+<p>
+            Interpretação, ortografia, classes de palavras e sentidos do texto.
+          </p>
+<button class="subject-button" data-subject="portugues" type="button">
+            Jogar Português
+          </button>
+</article>
+<article class="subject-card subject-card--science">
+<div aria-hidden="true" class="subject-card__icon">🔬</div>
+<span class="subject-card__tag">Investigação</span>
+<h3>Ciências</h3>
+<p>
+            Corpo humano, ambiente, seres vivos, matéria e universo.
+          </p>
+<button class="subject-button" data-subject="ciencias" type="button">
+            Jogar Ciências
+          </button>
+</article>
+</div>
+</section>
+<section class="game-launcher section-shell" hidden="" id="gameLauncher">
+<div class="section-heading section-heading--compact">
+<div>
+<span class="section-kicker">CONFIGURAR PARTIDA</span>
+<h2 id="selectedSubjectTitle">Sua missão</h2>
+</div>
+<button class="icon-button" id="closeLauncherButton" type="button">
+          Fechar
+        </button>
+</div>
+<div class="launcher-grid">
+<label>
+          Nível
+          <select id="gameDifficulty">
+<option value="facil">Fácil</option>
+<option selected="" value="medio">Médio</option>
+<option value="dificil">Difícil</option>
+</select>
+</label>
+<label>
+          Quantidade de perguntas
+          <select id="gameQuestionCount">
+<option value="5">5 perguntas</option>
+<option selected="" value="8">8 perguntas</option>
+<option value="10">10 perguntas</option>
+</select>
+</label>
+<label>
+          Tipo de desafio
+          <select id="gameMode">
+<option value="quiz">Quiz de alternativas</option>
+<option value="verdadeiro-falso">Verdadeiro ou falso</option>
+</select>
+</label>
+<button class="button button--primary" id="startGameButton" type="button">
+          Iniciar missão
+        </button>
+</div>
+</section>
+<section class="game-area section-shell" hidden="" id="gameArea">
+<div class="game-topline">
+<div>
+<span class="game-subject" id="gameSubjectLabel">Disciplina</span>
+<h2 id="gameActivityTitle">Missão do conhecimento</h2>
+</div>
+<button class="icon-button" id="quitGameButton" type="button">
+          Encerrar
+        </button>
+</div>
+<div class="game-status">
+<div aria-label="Progresso da atividade" class="progress-track">
+<span id="progressBar"></span>
+</div>
+<div class="game-status__numbers">
+<span id="questionCounter">Pergunta 1 de 5</span>
+<span id="scoreCounter">0 pontos</span>
+<span hidden="" id="timerCounter">00:00</span>
+</div>
+</div>
+<article class="question-card">
+<span class="question-card__badge" id="difficultyBadge">Nível médio</span>
+<h3 id="questionText">Pergunta</h3>
+<div class="answer-grid" id="answerGrid"></div>
+<div aria-live="polite" class="feedback" hidden="" id="feedbackBox">
+<strong id="feedbackTitle"></strong>
+<p id="feedbackText"></p>
+</div>
+<button class="button button--dark" hidden="" id="nextQuestionButton" type="button">
+          Próxima pergunta
+        </button>
+</article>
+</section>
+<section class="teacher section-shell" id="professor">
+<div class="section-heading">
+<div>
+<span class="section-kicker">ÁREA DO PROFESSOR</span>
+<h2>Transforme o conteúdo em atividade</h2>
+</div>
+<p>
+          Configure uma rodada para projetar em sala, usar no laboratório ou
+          enviar aos estudantes no mesmo computador.
+        </p>
+</div>
+<div class="teacher-layout">
+<form class="teacher-form" id="teacherForm">
+<label>
+            Título da atividade
+            <input id="activityTitleInput" maxlength="70" type="text" value="Desafio de revisão"/>
+</label>
+<div class="form-row">
+<label>
+              Disciplina
+              <select id="teacherSubject">
+<option value="historia">História geral</option>
+<option value="vera-cruz">História de Vera Cruz e da Ilha</option>
+<option value="matematica">Matemática</option>
+<option value="geografia">Geografia</option>
+<option value="portugues">Português</option>
+<option value="ciencias">Ciências</option>
+<option value="todas">Misturar disciplinas</option>
+</select>
+</label>
+<label>
+              Dificuldade
+              <select id="teacherDifficulty">
+<option value="facil">Fácil</option>
+<option selected="" value="medio">Médio</option>
+<option value="dificil">Difícil</option>
+<option value="mista">Mista</option>
+</select>
+</label>
+</div>
+<div class="form-row">
+<label>
+              Número de questões
+              <select id="teacherQuestionCount">
+<option value="5">5 questões</option>
+<option value="8">8 questões</option>
+<option selected="" value="10">10 questões</option>
+<option value="15">15 questões</option>
+</select>
+</label>
+<label>
+              Tempo
+              <select id="teacherTimer">
+<option value="0">Sem cronômetro</option>
+<option value="300">5 minutos</option>
+<option selected="" value="600">10 minutos</option>
+<option value="900">15 minutos</option>
+<option value="1200">20 minutos</option>
+</select>
+</label>
+</div>
+<label>
+            Modo
+            <select id="teacherMode">
+<option value="quiz">Quiz de alternativas</option>
+<option value="verdadeiro-falso">Verdadeiro ou falso</option>
+</select>
+</label>
+<div class="teacher-actions">
+<button class="button button--primary" type="submit">
+              Aplicar atividade
+            </button>
+<button class="button button--ghost-dark" id="printPlanButton" type="button">
+              Imprimir configuração
+            </button>
+</div>
+</form>
+<aside class="teacher-preview">
+<span class="teacher-preview__label">PRÉVIA DA ATIVIDADE</span>
+<h3 id="previewTitle">Desafio de revisão</h3>
+<dl>
+<div>
+<dt>Disciplina</dt>
+<dd id="previewSubject">História</dd>
+</div>
+<div>
+<dt>Dificuldade</dt>
+<dd id="previewDifficulty">Médio</dd>
+</div>
+<div>
+<dt>Questões</dt>
+<dd id="previewQuestions">10</dd>
+</div>
+<div>
+<dt>Tempo</dt>
+<dd id="previewTimer">10 minutos</dd>
+</div>
+</dl>
+<p>
+            Ao finalizar, o resultado fica salvo neste navegador e pode ser
+            impresso ou exportado em CSV.
+          </p>
+</aside>
+</div>
+</section>
+<section class="results section-shell" id="resultados">
+<div class="section-heading">
+<div>
+<span class="section-kicker">ACOMPANHAMENTO</span>
+<h2>Resultados das atividades</h2>
+</div>
+<div class="results-actions">
+<button class="button button--ghost-dark" id="exportResultsButton" type="button">
+            Exportar CSV
+          </button>
+<button class="button button--danger" id="clearResultsButton" type="button">
+            Limpar resultados
+          </button>
+</div>
+</div>
+<div class="results-summary">
+<article>
+<span>Atividades realizadas</span>
+<strong id="totalActivities">0</strong>
+</article>
+<article>
+<span>Média geral</span>
+<strong id="averageScore">0%</strong>
+</article>
+<article>
+<span>Melhor resultado</span>
+<strong id="bestScore">0%</strong>
+</article>
+</div>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Estudante</th>
+<th>Turma</th>
+<th>Atividade</th>
+<th>Disciplina</th>
+<th>Acertos</th>
+<th>Nota</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody id="resultsTableBody">
+<tr class="empty-row">
+<td colspan="7">Nenhuma atividade realizada ainda.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<div class="result-modal" hidden="" id="resultModal">
+<div class="result-modal__backdrop" data-close-modal=""></div>
+<section aria-labelledby="resultModalTitle" aria-modal="true" class="result-modal__content" role="dialog">
+<span class="result-modal__icon" id="resultModalIcon">🏆</span>
+<p class="section-kicker">MISSÃO CONCLUÍDA</p>
+<h2 id="resultModalTitle">Resultado</h2>
+<p id="resultModalText"></p>
+<div class="result-modal__score">
+<strong id="resultModalScore">0%</strong>
+<span id="resultModalDetails">0 de 0 acertos</span>
+</div>
+<div class="result-modal__actions">
+<button class="button button--primary" id="playAgainButton" type="button">
+          Jogar novamente
+        </button>
+<button class="button button--ghost-dark" id="closeResultModalButton" type="button">
+          Ver resultados
+        </button>
+</div>
+</section>
+</div></div></main>
+
+<!-- Rodapé padrão inserido por assets/js/layout.js -->
+<div data-cv-footer></div>
+
+
+
+</body>
+</html>
