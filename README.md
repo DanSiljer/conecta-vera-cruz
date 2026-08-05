@@ -227,8 +227,11 @@ assets/css/pages/erro-404.css
 Cada comunidade também possui um arquivo independente dentro de `assets/css/comunidades/`. Os arquivos podem alterar cores, posição da imagem de capa e detalhes visuais sem modificar as demais comunidades.
 
 As reportagens do blog possuem arquivos próprios dentro de `assets/css/artigos/`.
+<<<<<<< HEAD
 # Welcome to GitHub Desktop!
 
 This is your README. READMEs are where you can communicate what your project is and how to use it.
 
 Write your name on line 6, save it, and then head back to GitHub Desktop.
+=======
+>>>>>>> 3533b8acbca9e3b1cc0774d37e5ea147e7cd0774
