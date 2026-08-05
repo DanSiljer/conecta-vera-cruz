@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#007a4d">
+  <meta name="description" content="Encontre pousadas e hospedagens em Vera Cruz, na Ilha de Itaparica, e solicite o cadastro do seu estabelecimento no Conecta Vera Cruz.">
+  <title>Pousadas e hospedagens | Conecta Vera Cruz</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages/pousadas.css">
+  <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/layout.js"></script>
+  <script defer src="assets/data/pousadas-data.js"></script>
+  <script defer src="assets/js/pousadas.js"></script>
+</head>
+<body class="page-pousadas">
+  <div data-cv-header></div>
+
+  <main id="conteudo">
+    <section class="lodging-hero" aria-labelledby="lodging-title">
+      <div class="lodging-hero__glow lodging-hero__glow--one" aria-hidden="true"></div>
+      <div class="lodging-hero__glow lodging-hero__glow--two" aria-hidden="true"></div>
+      <div class="container lodging-hero__grid">
+        <div class="lodging-hero__content">
+          <span class="lodging-kicker">Hospedagem, acolhimento e turismo local</span>
+          <h1 id="lodging-title">Onde ficar em <span>Vera Cruz</span></h1>
+          <p>Encontre pousadas, hotéis, apart-hotéis e hospedagens em diferentes comunidades da ilha. As informações devem ser confirmadas diretamente com cada estabelecimento antes da reserva.</p>
+          <div class="lodging-hero__actions">
+            <a class="lodging-button lodging-button--primary" href="#hospedagens">Ver hospedagens</a>
+            <a class="lodging-button lodging-button--secondary" href="#cadastro">Cadastrar hospedagem</a>
+          </div>
+          <div class="lodging-hero__facts" aria-label="Recursos desta página">
+            <article><strong>Busca rápida</strong><span>por nome ou comunidade</span></article>
+            <article><strong>Filtros</strong><span>por tipo e comodidades</span></article>
+            <article><strong>Cadastro</strong><span>com envio para a equipe</span></article>
+          </div>
+        </div>
+        <div class="lodging-hero__visual" aria-hidden="true">
+          <div class="lodging-island">
+            <span class="lodging-island__sun"></span>
+            <span class="lodging-island__sea lodging-island__sea--one"></span>
+            <span class="lodging-island__sea lodging-island__sea--two"></span>
+            <span class="lodging-island__palm lodging-island__palm--one">♧</span>
+            <span class="lodging-island__palm lodging-island__palm--two">♧</span>
+            <div class="lodging-island__house"><span></span><b>Hospede-se<br>na ilha</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lodging-notice">
+      <div class="container lodging-notice__inner">
+        <span aria-hidden="true">i</span>
+        <p>Esta página funciona como catálogo informativo, não como plataforma de reservas. Preços, disponibilidade, acessibilidade e serviços podem mudar.</p>
+      </div>
+    </section>
+
+    <section class="lodging-directory" id="hospedagens" aria-labelledby="directory-title">
+      <div class="container">
+        <header class="lodging-heading">
+          <div>
+            <span class="lodging-kicker">Explore as opções</span>
+            <h2 id="directory-title">Pousadas e hospedagens cadastradas</h2>
+          </div>
+          <p>A lista inicial reúne estabelecimentos encontrados em páginas públicas. A equipe do projeto poderá atualizar, corrigir ou remover informações a pedido dos responsáveis.</p>
+        </header>
+
+        <div class="lodging-tools" aria-label="Filtros de hospedagens">
+          <label class="lodging-search">
+            <span class="sr-only">Pesquisar hospedagem</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"></path></svg>
+            <input type="search" id="lodgingSearch" placeholder="Pesquisar por nome ou localidade">
+          </label>
+          <label><span class="sr-only">Filtrar por comunidade</span><select id="lodgingPlaceFilter"><option value="todas">Todas as comunidades</option></select></label>
+          <label><span class="sr-only">Filtrar por tipo</span><select id="lodgingTypeFilter"><option value="todos">Todos os tipos</option><option value="Pousada">Pousada</option><option value="Resort">Resort</option><option value="Apart-hotel">Apart-hotel</option><option value="Hospedagem">Hospedagem</option></select></label>
+          <button class="lodging-clear" id="lodgingClearFilters" type="button">Limpar filtros</button>
+        </div>
+
+        <div class="lodging-results-row">
+          <span id="lodgingResults" aria-live="polite">Carregando hospedagens...</span>
+          <span class="lodging-update-note">Dados consultados em agosto de 2026</span>
+        </div>
+        <div class="lodging-grid" id="lodgingGrid" aria-live="polite"></div>
+        <div class="lodging-empty" id="lodgingEmpty" hidden><strong>Nenhuma hospedagem encontrada.</strong><p>Tente outro nome, localidade ou tipo.</p></div>
+      </div>
+    </section>
+
+    <section class="lodging-how">
+      <div class="container">
+        <header class="lodging-heading lodging-heading--center">
+          <div><span class="lodging-kicker">Antes de reservar</span><h2>Três cuidados para uma viagem mais tranquila</h2></div>
+        </header>
+        <div class="lodging-how__grid">
+          <article><b>01</b><h3>Confirme diretamente</h3><p>Verifique datas, valores, formas de pagamento, regras e política de cancelamento.</p></article>
+          <article><b>02</b><h3>Pergunte sobre acessibilidade</h3><p>Confirme rampas, banheiros adaptados, circulação e apoio para pessoas com mobilidade reduzida.</p></article>
+          <article><b>03</b><h3>Proteja seus dados</h3><p>Evite pagamentos por links desconhecidos e confira se o contato pertence ao estabelecimento.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lodging-register" id="cadastro" aria-labelledby="register-title">
+      <div class="container lodging-register__grid">
+        <div class="lodging-register__intro">
+          <span class="lodging-kicker lodging-kicker--light">Participe do catálogo</span>
+          <h2 id="register-title">Cadastre sua pousada ou hospedagem</h2>
+          <p>O responsável pode enviar os dados para análise da equipe do Conecta Vera Cruz. O cadastro não é publicado automaticamente.</p>
+          <div class="lodging-register__checklist">
+            <article><span>✓</span><div><strong>Cadastro gratuito</strong><small>Sem cobrança para aparecer no catálogo.</small></div></article>
+            <article><span>✓</span><div><strong>Informações revisadas</strong><small>A equipe poderá confirmar dados e solicitar correções.</small></div></article>
+            <article><span>✓</span><div><strong>Fotos autorizadas</strong><small>Envie somente imagens próprias ou com autorização.</small></div></article>
+          </div>
+        </div>
+
+        <form class="lodging-form" id="lodgingRegistrationForm" novalidate>
+          <div class="lodging-form__heading">
+            <span>Ficha de cadastro</span>
+            <h3>Dados da hospedagem</h3>
+            <p>Os campos marcados com * são obrigatórios.</p>
+          </div>
+
+          <div class="lodging-form__row">
+            <label>Nome da hospedagem *<input type="text" name="nome" maxlength="90" required placeholder="Ex.: Pousada Mar Azul"></label>
+            <label>Tipo *<select name="tipo" required><option value="">Selecione</option><option>Pousada</option><option>Hotel</option><option>Resort</option><option>Apart-hotel</option><option>Hospedagem familiar</option><option>Casa de temporada</option><option>Outro</option></select></label>
+          </div>
+
+          <div class="lodging-form__row">
+            <label>Comunidade ou bairro *<input type="text" name="localidade" maxlength="60" required placeholder="Ex.: Mar Grande"></label>
+            <label>Endereço aproximado<input type="text" name="endereco" maxlength="140" placeholder="Rua, avenida ou ponto de referência"></label>
+          </div>
+
+          <div class="lodging-form__row">
+            <label>Telefone ou WhatsApp *<input type="tel" name="telefone" maxlength="30" required placeholder="(71) 99999-9999"></label>
+            <label>E-mail<input type="email" name="email" maxlength="100" placeholder="contato@pousada.com.br"></label>
+          </div>
+
+          <div class="lodging-form__row">
+            <label>Instagram<input type="text" name="instagram" maxlength="100" placeholder="@nomedapousada"></label>
+            <label>Site ou página de reserva<input type="url" name="site" maxlength="180" placeholder="https://"></label>
+          </div>
+
+          <fieldset class="lodging-form__amenities">
+            <legend>Comodidades</legend>
+            <label><input type="checkbox" name="comodidades" value="Café da manhã"> Café da manhã</label>
+            <label><input type="checkbox" name="comodidades" value="Piscina"> Piscina</label>
+            <label><input type="checkbox" name="comodidades" value="Estacionamento"> Estacionamento</label>
+            <label><input type="checkbox" name="comodidades" value="Wi-Fi"> Wi-Fi</label>
+            <label><input type="checkbox" name="comodidades" value="Restaurante"> Restaurante</label>
+            <label><input type="checkbox" name="comodidades" value="Acessibilidade"> Acessibilidade</label>
+            <label><input type="checkbox" name="comodidades" value="Aceita animais"> Aceita animais</label>
+            <label><input type="checkbox" name="comodidades" value="Próxima à praia"> Próxima à praia</label>
+          </fieldset>
+
+          <label>Descrição da hospedagem *<textarea name="descricao" rows="5" maxlength="700" required placeholder="Conte onde fica, como é a hospedagem e quais serviços oferece."></textarea><span class="lodging-form__counter" data-description-counter>0 de 700</span></label>
+
+          <label class="lodging-form__consent"><input type="checkbox" name="consentimento" required><span>Confirmo que sou responsável ou tenho autorização para enviar estas informações e imagens.</span></label>
+
+          <div class="lodging-form__actions">
+            <button class="lodging-button lodging-button--primary" type="submit">Preparar solicitação</button>
+            <button class="lodging-button lodging-button--outline" id="saveLodgingDraft" type="button">Salvar rascunho</button>
+          </div>
+
+          <p class="lodging-form__status" id="lodgingFormStatus" role="status" aria-live="polite"></p>
+          <p class="lodging-form__note">Ao enviar, o programa de e-mail do aparelho será aberto com a ficha preenchida. Troque o e-mail de destino no arquivo JavaScript caso o contato oficial seja diferente.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="lodging-correction">
+      <div class="container lodging-correction__inner">
+        <div><span class="lodging-kicker">Atualização de cadastro</span><h2>Encontrou uma informação incorreta?</h2><p>O responsável pode solicitar correção, atualização ou remoção do estabelecimento.</p></div>
+        <a class="lodging-button lodging-button--dark" href="mailto:contato@conectaveracruz.com.br?subject=Atualização%20de%20hospedagem">Solicitar atualização</a>
+      </div>
+    </section>
+
+    <section class="lodging-sources">
+      <div class="container">
+        <details>
+          <summary>Fontes usadas para montar a lista inicial</summary>
+          <p>A lista foi preparada a partir de páginas públicas de estabelecimentos e plataformas de hospedagem consultadas em agosto de 2026. A presença nesta página não representa classificação, recomendação comercial ou garantia de disponibilidade.</p>
+          <ul id="lodgingSourcesList"></ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <div data-cv-footer></div>
+</body>
+</html>

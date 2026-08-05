@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#007a4d">
+  <meta name="description" content="Conheça bairros e comunidades de Vera Cruz, suas paisagens, patrimônios, tradições e modos de vida.">
+  <title>Bairros e comunidades | Conecta Vera Cruz</title>
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/pages/bairros.css">
+
+  <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/layout.js"></script>
+  <script defer src="assets/js/bairros.js"></script>
+  <script type="module" src="assets/js/memorias.js"></script>
+</head>
+
+<body class="page-bairros">
+  <!-- Menu padrão inserido por assets/js/layout.js -->
+  <div data-cv-header></div>
+
+<main id="conteudo">
+    <section class="bairros-hero" data-bairros-carousel aria-roledescription="carrossel" aria-label="Patrimônios históricos de Vera Cruz">
+      <div class="bairros-hero__slides">
+        <article class="bairros-hero__slide is-active" data-bairros-slide aria-hidden="false">
+          <img src="assets/img/hero-forno-penha.webp" alt="Ruínas do Forno da Penha junto ao mar" width="1600" height="900" fetchpriority="high">
+          <div class="bairros-hero__overlay"></div>
+          <div class="container bairros-hero__content">
+            <span class="bairros-hero__tag">Penha · patrimônio e memória</span>
+            <h1>Ruínas do <strong>Forno da Penha</strong></h1>
+            <p>Um monumento ligado à produção de cal, às conchas da região e à história das construções antigas da ilha.</p>
+            <a class="bairros-hero__button" href="blog/forno-da-penha/">Conheça essa história <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="bairros-hero__slide" data-bairros-slide aria-hidden="true">
+          <img src="assets/img/hero-moinho-merces.webp" alt="Moinho de Vento das Mercês em uma colina" width="1600" height="900">
+          <div class="bairros-hero__overlay"></div>
+          <div class="container bairros-hero__content">
+            <span class="bairros-hero__tag">Mercês · trabalho e engenho</span>
+            <h2>Moinho de Vento <strong>das Mercês</strong></h2>
+            <p>Uma construção histórica erguida em posição elevada, onde o vento ajudava a transformar grãos produzidos na ilha.</p>
+            <a class="bairros-hero__button" href="bairros/conceicao/">Visite a página de Conceição <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="bairros-hero__slide" data-bairros-slide aria-hidden="true">
+          <img src="assets/img/igreja restaurada.png" alt="Ruínas da Igreja de Nosso Senhor da Vera Cruz em Baiacu" width="1600" height="900">
+          <div class="bairros-hero__overlay"></div>
+          <div class="container bairros-hero__content">
+            <span class="bairros-hero__tag">Baiacu · fé e resistência</span>
+            <h2>Igreja de Nosso Senhor <strong>da Vera Cruz</strong></h2>
+            <p>Ruínas, raízes e memória se encontram em um dos lugares mais simbólicos da formação histórica do município.</p>
+            <a class="bairros-hero__button" href="bairros/baiacu/">Visite a página de Baiacu <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="bairros-hero__slide" data-bairros-slide aria-hidden="true">
+          <img src="assets/img/hero-igreja-conceicao.webp" alt="Ruínas da Igreja de Nossa Senhora da Conceição" width="1600" height="900">
+          <div class="bairros-hero__overlay"></div>
+          <div class="container bairros-hero__content">
+            <span class="bairros-hero__tag">Conceição · arquitetura colonial</span>
+            <h2>Igreja de Nossa Senhora <strong>da Conceição</strong></h2>
+            <p>A fachada e as paredes que permanecem de pé ainda revelam marcas da religiosidade e da arquitetura de outros tempos.</p>
+            <a class="bairros-hero__button" href="bairros/jaburu/">Visite a página de Jaburu <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="bairros-hero__slide" data-bairros-slide aria-hidden="true">
+          <img src="assets/img/hero-capela-jaburu.webp" alt="Capela de Santo Antônio dos Velásquez na Ponta do Jaburu" width="1600" height="900">
+          <div class="bairros-hero__overlay"></div>
+          <div class="container bairros-hero__content">
+            <span class="bairros-hero__tag">Ponta do Jaburu · mar e patrimônio</span>
+            <h2>Capela de Santo Antônio <strong>dos Velásquez</strong></h2>
+            <p>Uma paisagem onde a arquitetura histórica, as águas da Baía de Todos-os-Santos e a memória local dividem o mesmo horizonte.</p>
+            <a class="bairros-hero__button" href="historia.html#comecar">Conheça essa história <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="bairros-hero__label">Patrimônios que atravessam o tempo</div>
+
+      <button class="bairros-hero__arrow bairros-hero__arrow--prev" type="button" aria-label="Mostrar slide anterior" data-bairros-prev>‹</button>
+      <button class="bairros-hero__arrow bairros-hero__arrow--next" type="button" aria-label="Mostrar próximo slide" data-bairros-next>›</button>
+
+      <div class="bairros-hero__controls">
+        <div class="bairros-hero__dots" aria-label="Escolher patrimônio">
+          <button class="is-active" type="button" aria-label="Mostrar Forno da Penha" aria-current="true" data-bairros-dot></button>
+          <button type="button" aria-label="Mostrar Moinho das Mercês" aria-current="false" data-bairros-dot></button>
+          <button type="button" aria-label="Mostrar Igreja de Nosso Senhor da Vera Cruz" aria-current="false" data-bairros-dot></button>
+          <button type="button" aria-label="Mostrar Igreja de Nossa Senhora da Conceição" aria-current="false" data-bairros-dot></button>
+          <button type="button" aria-label="Mostrar Capela de Santo Antônio dos Velásquez" aria-current="false" data-bairros-dot></button>
+        </div>
+
+        <button class="bairros-hero__pause" type="button" aria-pressed="false" data-bairros-pause>
+          <span aria-hidden="true" data-pause-icon>Ⅱ</span>
+          <span data-pause-text>Pausar</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="bairros-intro" id="comunidades">
+      <div class="container bairros-intro__grid">
+        <div class="bairros-intro__text">
+          <span class="eyebrow">Um município, muitos jeitos de viver</span>
+          <h1>Bairros e comunidades de Vera Cruz</h1>
+          <p>Vera Cruz é formada por lugares que vivem entre o mar, o manguezal, a pesca, a religiosidade, o turismo e a memória. Cada comunidade possui sua própria paisagem e seu próprio modo de contar a ilha.</p>
+        </div>
+
+        <div class="bairros-intro__note">
+          <strong>Escolha uma comunidade</strong>
+          <p>Os atalhos levam diretamente às páginas com histórias, curiosidades, imagens e tradições locais.</p>
+          <span>10 páginas para explorar</span>
+        </div>
+      </div>
+
+      <div class="container">
+        <nav class="bairros-shortcuts" aria-label="Acesso rápido às comunidades">
+          <a href="bairros/jiribatuba/"><span>01</span><strong>Jiribatuba</strong><small>Manguezais e águas tranquilas</small><b>→</b></a>
+          <a href="bairros/cacha-pregos/"><span>02</span><strong>Cacha-Pregos</strong><small>Praia, pesca e tradição</small><b>→</b></a>
+          <a href="bairros/gamboa/"><span>03</span><strong>Gamboa</strong><small>Cultura, mar e memória</small><b>→</b></a>
+          <a href="bairros/baiacu/"><span>04</span><strong>Baiacu</strong><small>História, fé e patrimônio</small><b>→</b></a>
+          <a href="bairros/mar-grande/"><span>05</span><strong>Mar Grande</strong><small>Porta de entrada do município</small><b>→</b></a>
+          <a href="bairros/matarandiba/"><span>06</span><strong>Matarandiba</strong><small>Território e identidade</small><b>→</b></a>
+          <a href="bairros/catu/"><span>07</span><strong>Catu</strong><small>Natureza e vida comunitária</small><b>→</b></a>
+          <a href="bairros/penha/"><span>08</span><strong>Penha</strong><small>Praia, história e patrimônio</small><b>→</b></a>
+          <a href="bairros/conceicao/"><span>09</span><strong>Conceição</strong><small>Ruínas, fé e memória colonial</small><b>→</b></a>
+          <a href="bairros/jaburu/"><span>10</span><strong>Jaburu</strong><small>Capela, moinho e paisagem histórica</small><b>→</b></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="bairros-directory" aria-labelledby="diretorio-titulo">
+      <div class="container">
+        <div class="bairros-section-heading">
+          <div>
+            <span class="eyebrow">Conheça de perto</span>
+            <h2 id="diretorio-titulo">Cada comunidade guarda um pedaço da ilha</h2>
+          </div>
+          <p>Fotografias, histórias e caminhos para começar a descobrir Vera Cruz para além dos cartões-postais.</p>
+        </div>
+
+        <div class="bairros-cards">
+          <article class="bairro-card bairro-card--wide">
+            <a class="bairro-card__media" href="bairros/jiribatuba/">
+              <img src="assets/img/bairro-jiribatuba.webp" alt="Faixa de areia entre o mar e a vegetação em Jiribatuba" width="1600" height="900">
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">01</span>
+              <small>Entre mangues e águas tranquilas</small>
+              <h3>Jiribatuba</h3>
+              <p>Praias calmas, manguezais, pesca artesanal e paisagens que convidam a observar a maré com mais calma.</p>
+              <a class="bairro-card__link" href="bairros/jiribatuba/">Conheça Jiribatuba <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card">
+            <a class="bairro-card__media" href="bairros/gamboa/">
+              <img src="assets/img/bairro-gamboa.webp" alt="Piscinas naturais e recifes na Gamboa" width="1600" height="900">
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">03</span>
+              <small>Mariscagem, cultura e tradição</small>
+              <h3>Gamboa</h3>
+              <p>A maré revela piscinas naturais, memórias da pesca e tradições que passam de geração em geração.</p>
+              <a class="bairro-card__link" href="bairros/gamboa/">Conheça a Gamboa <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card">
+            <a class="bairro-card__media" href="bairros/penha/">
+              <img src="assets/img/bairro-penha.webp" alt="Igreja da Penha diante do mar" width="1024" height="686">
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">08</span>
+              <small>Fé, praia e patrimônio</small>
+              <h3>Penha</h3>
+              <p>Uma comunidade onde a paisagem litorânea divide espaço com igrejas, ruínas e histórias antigas.</p>
+              <a class="bairro-card__link" href="bairros/penha/">Conheça a Penha <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card bairro-card--dark">
+            <a class="bairro-card__media" href="bairros/baiacu/">
+              <img src="assets/img/bairro-baiacu.webp" alt="Ruínas da igreja de Baiacu envolvidas por uma grande árvore" width="515" height="388">
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">04</span>
+              <small>Raízes que abraçam a história</small>
+              <h3>Baiacu</h3>
+              <p>Religiosidade, patrimônio e a presença marcante da gameleira fazem da comunidade um arquivo vivo.</p>
+              <a class="bairro-card__link" href="bairros/baiacu/">Conheça Baiacu <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card bairro-card--wide bairro-card--reverse">
+            <a class="bairro-card__media" href="bairros/mar-grande/">
+              <img src="assets/img/bairro-mar-grande.webp" alt="Praia movimentada e comunidade de Mar Grande vista do alto" width="1600" height="900">
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">05</span>
+              <small>Chegadas, encontros e movimento</small>
+              <h3>Mar Grande</h3>
+              <p>A principal porta de entrada de Vera Cruz reúne praia, comércio, transporte, serviços e muita circulação.</p>
+              <a class="bairro-card__link" href="bairros/mar-grande/">Conheça Mar Grande <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card">
+            <a class="bairro-card__media" href="bairros/catu/">
+              <img src="assets/img/bairro-catu.webp" alt="Barcos em águas tranquilas na comunidade de Catu" width="1600" height="900">
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">07</span>
+              <small>Águas calmas e vida comunitária</small>
+              <h3>Catu</h3>
+              <p>Barcos, vegetação e um cotidiano ligado ao mar formam a identidade visual e afetiva da comunidade.</p>
+              <a class="bairro-card__link" href="bairros/catu/">Conheça Catu <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card">
+            <a class="bairro-card__media" href="bairros/cacha-pregos/">
+              <img
+                src="assets/img/bairro-cacha-pregos.webp"
+                alt="Vista aérea da comunidade de Cacha-Pregos, com praia, píer, casas e manguezal"
+                width="1400"
+                height="788"
+                loading="lazy"
+              >
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">02</span>
+              <small>No extremo sul da ilha</small>
+              <h3>Cacha-Pregos</h3>
+              <p>Pesca, marés, embarcações e paisagens que aproximam moradores e visitantes da vida costeira.</p>
+              <a class="bairro-card__link" href="bairros/cacha-pregos/">Conheça Cacha-Pregos <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card">
+            <a class="bairro-card__media" href="bairros/matarandiba/">
+              <img
+                src="assets/img/bairro-matarandiba.webp"
+                alt="Vista aérea da comunidade de Matarandiba cercada por mar, vegetação e embarcações"
+                width="1400"
+                height="788"
+                loading="lazy"
+              >
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">06</span>
+              <small>Território, natureza e pertencimento</small>
+              <h3>Matarandiba</h3>
+              <p>Uma comunidade marcada por vínculos coletivos, saberes locais e uma relação profunda com seu território.</p>
+              <a class="bairro-card__link" href="bairros/matarandiba/">Conheça Matarandiba <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card bairro-card--wide">
+            <a class="bairro-card__media" href="bairros/conceicao/">
+              <img
+                src="assets/img/hero-igreja-conceicao.webp"
+                alt="Ruínas da Igreja de Nossa Senhora da Conceição diante do mar"
+                width="1600"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">09</span>
+              <small>Ruínas, fé e patrimônio colonial</small>
+              <h3>Conceição</h3>
+              <p>A antiga Igreja de Nossa Senhora da Conceição, a praia e as memórias locais formam uma das paisagens históricas mais marcantes de Vera Cruz.</p>
+              <a class="bairro-card__link" href="bairros/conceicao/">Conheça Conceição <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="bairro-card bairro-card--dark">
+            <a class="bairro-card__media" href="bairros/jaburu/">
+              <img
+                src="assets/img/hero-capela-jaburu.webp"
+                alt="Capela de Santo Antônio dos Velásquez na Ponta do Jaburu"
+                width="1600"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+            <div class="bairro-card__content">
+              <span class="bairro-card__number">10</span>
+              <small>Capela, moinho e memória da paisagem</small>
+              <h3>Jaburu</h3>
+              <p>A Ponta do Jaburu reúne a Capela de Santo Antônio dos Velásquez, o Moinho das Mercês e histórias ligadas ao mar e às antigas rotas da ilha.</p>
+              <a class="bairro-card__link" href="bairros/jaburu/">Conheça Jaburu <span>→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bairros-routes" aria-labelledby="rotas-titulo">
+      <div class="container">
+        <div class="bairros-section-heading bairros-section-heading--light">
+          <div>
+            <span class="eyebrow">Escolha seu caminho</span>
+            <h2 id="rotas-titulo">Três maneiras de descobrir Vera Cruz</h2>
+          </div>
+          <p>Não existe uma única rota para conhecer o município. Comece pela história, pelas águas ou pelas vozes das comunidades.</p>
+        </div>
+
+        <div class="route-grid">
+          <article class="route-card">
+            <span class="route-card__icon" aria-hidden="true">✦</span>
+            <h3>Rota da memória</h3>
+            <p>Igrejas, ruínas, antigos caminhos e lugares onde o passado continua visível.</p>
+            <div><a href="bairros/baiacu/">Baiacu</a><a href="bairros/penha/">Penha</a><a href="bairros/conceicao/">Conceição</a><a href="bairros/jaburu/">Jaburu</a><a href="historia.html">História de Vera Cruz</a></div>
+          </article>
+
+          <article class="route-card">
+            <span class="route-card__icon" aria-hidden="true">≈</span>
+            <h3>Rota das águas</h3>
+            <p>Praias, manguezais, recifes, barcos e modos de vida guiados pela maré.</p>
+            <div><a href="bairros/jiribatuba/">Jiribatuba</a><a href="bairros/gamboa/">Gamboa</a><a href="bairros/catu/">Catu</a></div>
+          </article>
+
+          <article class="route-card">
+            <span class="route-card__icon" aria-hidden="true">⌂</span>
+            <h3>Rota das comunidades</h3>
+            <p>Comércio, festas, trabalho, cotidiano e histórias contadas por quem vive o território.</p>
+            <div><a href="bairros/mar-grande/">Mar Grande</a><a href="bairros/cacha-pregos/">Cacha-Pregos</a><a href="bairros/matarandiba/">Matarandiba</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bairros-memory" id="memorias" aria-labelledby="memorias-titulo">
+      <div class="container">
+        <header class="bairros-memory__heading">
+          <span class="bairros-memory__label">Conecta Vera Cruz · memória coletiva</span>
+          <h2 id="memorias-titulo">Que história da sua comunidade merece ser lembrada?</h2>
+          <p>Conte uma lembrança, tradição, lenda ou curiosidade. A mensagem será registrada no mural público das comunidades de Vera Cruz.</p>
+        </header>
+
+        <div class="bairros-memory__layout">
+          <form class="memory-form" id="vc-memory-form" novalidate>
+            <div class="memory-card__header">
+              <span class="memory-card__icon" aria-hidden="true">✎</span>
+              <div>
+                <small>Envie sua contribuição</small>
+                <h3>Compartilhe uma memória</h3>
+              </div>
+            </div>
+
+            <p class="memory-form__intro">Escreva algo que você viveu, ouviu de moradores antigos ou acredita que merece ser preservado.</p>
+
+            <div class="memory-field">
+              <label for="vc-memory-name">Seu nome <span>opcional</span></label>
+              <input id="vc-memory-name" name="nome" type="text" maxlength="40" autocomplete="name" placeholder="Como podemos identificar você?">
+            </div>
+
+            <div class="memory-field">
+              <label for="vc-memory-place">Comunidade</label>
+              <select id="vc-memory-place" name="localidade" required>
+                <option value="">Escolha uma comunidade</option>
+                <option value="Baiacu">Baiacu</option>
+                <option value="Cacha-Pregos">Cacha-Pregos</option>
+                <option value="Catu">Catu</option>
+                <option value="Conceição">Conceição</option>
+                <option value="Gamboa">Gamboa</option>
+                <option value="Jaburu">Jaburu</option>
+                <option value="Jiribatuba">Jiribatuba</option>
+                <option value="Mar Grande">Mar Grande</option>
+                <option value="Matarandiba">Matarandiba</option>
+                <option value="Penha">Penha</option>
+                <option value="Outra comunidade">Outra comunidade</option>
+              </select>
+            </div>
+
+            <div class="memory-field memory-field--other" id="vc-memory-other-wrap" hidden>
+              <label for="vc-memory-other">Nome da comunidade</label>
+              <input id="vc-memory-other" name="outraLocalidade" type="text" maxlength="50" placeholder="Digite o nome da comunidade">
+            </div>
+
+            <div class="memory-field">
+              <label for="vc-memory-text">Sua história ou curiosidade</label>
+              <textarea id="vc-memory-text" name="texto" rows="6" minlength="10" maxlength="500" placeholder="Exemplo: meus avós contavam que..."></textarea>
+              <div class="memory-field__footer">
+                <span id="vc-memory-warning" class="memory-warning" aria-live="polite"></span>
+                <span id="vc-memory-counter">0 de 500</span>
+              </div>
+            </div>
+
+            <button class="memory-submit" id="vc-memory-submit" type="submit" disabled>
+              <span aria-hidden="true">✦</span>
+              <span id="vc-memory-submit-label">Publicar memória</span>
+            </button>
+
+            <p class="memory-privacy">Evite publicar telefone, endereço, documentos ou outras informações pessoais.</p>
+            <div class="memory-status" id="vc-memory-status" role="status" aria-live="polite"></div>
+          </form>
+
+          <section class="memory-feed" aria-labelledby="memory-feed-title">
+            <div class="memory-feed__header">
+              <div>
+                <small>Mural das comunidades</small>
+                <h3 id="memory-feed-title">Memórias compartilhadas</h3>
+              </div>
+              <span class="memory-count" id="vc-memory-count">0 memórias</span>
+            </div>
+
+            <div class="memory-feed__tools">
+              <label for="vc-memory-filter">Mostrar histórias de</label>
+              <select id="vc-memory-filter">
+                <option value="todas">Todas as comunidades</option>
+                <option value="Baiacu">Baiacu</option>
+                <option value="Cacha-Pregos">Cacha-Pregos</option>
+                <option value="Catu">Catu</option>
+                <option value="Conceição">Conceição</option>
+                <option value="Gamboa">Gamboa</option>
+                <option value="Jaburu">Jaburu</option>
+                <option value="Jiribatuba">Jiribatuba</option>
+                <option value="Mar Grande">Mar Grande</option>
+                <option value="Matarandiba">Matarandiba</option>
+                <option value="Penha">Penha</option>
+              </select>
+            </div>
+
+            <div class="memory-list" id="vc-memory-list" aria-live="polite">
+              <div class="memory-empty">Conectando ao mural do Conecta Vera Cruz...</div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Rodapé padrão inserido por assets/js/layout.js -->
+  <div data-cv-footer></div>
+</body>
+</html>
