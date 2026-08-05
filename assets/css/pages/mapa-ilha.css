@@ -1,0 +1,545 @@
+/* ==========================================================
+   MAPA-JOGO DA ILHA DE ITAPARICA
+   Arquivo: assets/css/pages/mapa-ilha.css
+   ========================================================== */
+
+.missao-aprender-app .island-map-game {
+  position: relative;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 0 0, rgba(19, 121, 91, .10), transparent 26rem),
+    radial-gradient(circle at 100% 100%, rgba(34, 100, 229, .09), transparent 24rem),
+    #ffffff;
+}
+
+.missao-aprender-app .island-map-game__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.missao-aprender-app .island-map-game__heading h2 {
+  margin: 8px 0 10px;
+  color: var(--ink, #182033);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+
+.missao-aprender-app .island-map-game__heading p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted, #667085);
+  line-height: 1.7;
+}
+
+.missao-aprender-app .island-map-game__mode {
+  display: inline-flex;
+  padding: 5px;
+  border: 1px solid var(--line, #e6e9ef);
+  border-radius: 16px;
+  background: #f4f6fa;
+}
+
+.missao-aprender-app .island-map-game__mode button {
+  min-width: 104px;
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 12px;
+  color: #596273;
+  background: transparent;
+  font-weight: 900;
+}
+
+.missao-aprender-app .island-map-game__mode button.is-active {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--green, #13795b), var(--blue, #2264e5));
+  box-shadow: 0 10px 22px rgba(34, 100, 229, .18);
+}
+
+.missao-aprender-app .island-map-game__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.48fr) minmax(300px, .52fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.missao-aprender-app .island-map-game__board,
+.missao-aprender-app .island-map-game__panel {
+  min-width: 0;
+  border: 1px solid var(--line, #e6e9ef);
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(24, 32, 51, .08);
+}
+
+.missao-aprender-app .island-map-game__board {
+  padding: 16px;
+}
+
+.missao-aprender-app .island-map-game__toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.missao-aprender-app .map-status-chip {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #e3e8ef;
+  border-radius: 15px;
+  background: #f8fafc;
+}
+
+.missao-aprender-app .map-status-chip span,
+.missao-aprender-app .map-status-chip strong {
+  display: block;
+}
+
+.missao-aprender-app .map-status-chip span {
+  color: #7a8392;
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.missao-aprender-app .map-status-chip strong {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--ink, #182033);
+  font-size: .88rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.missao-aprender-app .island-map-game__map {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 530px;
+  overflow: hidden;
+  border: 1px solid #dfe6ed;
+  border-radius: 20px;
+  place-items: center;
+  background:
+    linear-gradient(rgba(255,255,255,.74), rgba(255,255,255,.74)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(34, 100, 229, .06) 0,
+      rgba(34, 100, 229, .06) 1px,
+      transparent 1px,
+      transparent 36px
+    ),
+    #eaf7fb;
+}
+
+.missao-aprender-app .island-map-game__map > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 720px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.missao-aprender-app .island-map-game__hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.missao-aprender-app .map-hotspot {
+  position: absolute;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--orange, #f08a35), #d94d5c);
+  box-shadow:
+    0 0 0 3px rgba(24, 32, 51, .16),
+    0 8px 20px rgba(24, 32, 51, .26);
+  font-size: 0;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+.missao-aprender-app .map-hotspot::before {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.missao-aprender-app .map-hotspot::after {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 8px);
+  min-width: max-content;
+  max-width: 180px;
+  padding: 6px 9px;
+  border: 1px solid rgba(24, 32, 51, .11);
+  border-radius: 10px;
+  color: #182033;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 8px 22px rgba(24, 32, 51, .14);
+  content: attr(data-label);
+  font-size: .68rem;
+  font-weight: 900;
+  line-height: 1.2;
+  opacity: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+.missao-aprender-app .map-hotspot:hover,
+.missao-aprender-app .map-hotspot:focus-visible {
+  z-index: 6;
+  background: linear-gradient(135deg, var(--blue, #2264e5), var(--purple, #7755d9));
+  box-shadow:
+    0 0 0 5px rgba(34, 100, 229, .20),
+    0 11px 25px rgba(24, 32, 51, .28);
+  transform: translate(-50%, -50%) scale(1.13);
+}
+
+.missao-aprender-app .map-hotspot.is-selected {
+  z-index: 7;
+  background: linear-gradient(135deg, var(--green, #13795b), #0c513f);
+  box-shadow:
+    0 0 0 6px rgba(19, 121, 91, .20),
+    0 12px 26px rgba(24, 32, 51, .28);
+}
+
+.missao-aprender-app .map-hotspot.is-correct {
+  z-index: 8;
+  background: #14955f;
+  animation: mapCorrect .55s ease;
+}
+
+.missao-aprender-app .map-hotspot.is-wrong {
+  z-index: 8;
+  background: #d94d5c;
+  animation: mapWrong .42s ease;
+}
+
+.missao-aprender-app .island-map-game[data-difficulty="medio"] .map-hotspot::after,
+.missao-aprender-app .island-map-game[data-difficulty="dificil"] .map-hotspot::after {
+  opacity: 0;
+}
+
+.missao-aprender-app .island-map-game[data-mode="explore"] .map-hotspot::after,
+.missao-aprender-app .island-map-game[data-difficulty="facil"] .map-hotspot::after,
+.missao-aprender-app .map-hotspot:hover::after,
+.missao-aprender-app .map-hotspot:focus-visible::after,
+.missao-aprender-app .map-hotspot.is-selected::after {
+  opacity: 1;
+}
+
+@keyframes mapCorrect {
+  50% { transform: translate(-50%, -50%) scale(1.35); }
+}
+
+@keyframes mapWrong {
+  25%, 75% { transform: translate(-57%, -50%); }
+  50% { transform: translate(-43%, -50%); }
+}
+
+.missao-aprender-app .island-map-game__target {
+  position: absolute;
+  z-index: 10;
+  top: 16px;
+  right: 16px;
+  max-width: min(300px, calc(100% - 32px));
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 16px;
+  color: #ffffff;
+  background: rgba(24, 32, 51, .88);
+  box-shadow: 0 16px 35px rgba(24, 32, 51, .24);
+  backdrop-filter: blur(12px);
+}
+
+.missao-aprender-app .island-map-game__target span,
+.missao-aprender-app .island-map-game__target strong,
+.missao-aprender-app .island-map-game__target small {
+  display: block;
+}
+
+.missao-aprender-app .island-map-game__target span {
+  color: #f8c94c;
+  font-size: .64rem;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+.missao-aprender-app .island-map-game__target strong {
+  margin: 3px 0;
+  font-size: 1.15rem;
+}
+
+.missao-aprender-app .island-map-game__target small {
+  color: rgba(255,255,255,.78);
+  line-height: 1.45;
+}
+
+.missao-aprender-app .island-map-game__source {
+  margin: 12px 4px 0;
+  color: #7a8392;
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.missao-aprender-app .island-map-game__panel {
+  position: sticky;
+  top: calc(var(--cv-header-height, 72px) + 76px);
+  display: grid;
+  gap: 14px;
+  padding: 17px;
+}
+
+.missao-aprender-app .map-place-card,
+.missao-aprender-app .map-challenge-settings,
+.missao-aprender-app .map-feedback {
+  padding: 18px;
+  border: 1px solid #e0e6ed;
+  border-radius: 18px;
+  background: #f9fbfd;
+}
+
+.missao-aprender-app .map-place-card__eyebrow,
+.missao-aprender-app .map-challenge-settings__label {
+  color: var(--green, #13795b);
+  font-size: .67rem;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+.missao-aprender-app .map-place-card h3 {
+  margin: 7px 0 8px;
+  color: var(--ink, #182033);
+  font-size: 1.42rem;
+  line-height: 1.1;
+}
+
+.missao-aprender-app .map-place-card > p {
+  margin: 0;
+  color: var(--muted, #667085);
+  line-height: 1.6;
+}
+
+.missao-aprender-app .map-place-card dl {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+.missao-aprender-app .map-place-card dl div {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.missao-aprender-app .map-place-card dt {
+  color: #7a8392;
+  font-size: .66rem;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.missao-aprender-app .map-place-card dd {
+  margin: 2px 0 0;
+  color: #263247;
+  font-size: .84rem;
+  font-weight: 850;
+}
+
+.missao-aprender-app .map-challenge-settings {
+  display: grid;
+  gap: 12px;
+}
+
+.missao-aprender-app .map-challenge-settings label {
+  display: grid;
+  gap: 6px;
+}
+
+.missao-aprender-app .map-challenge-settings .button,
+.missao-aprender-app #resetMapGame {
+  width: 100%;
+}
+
+.missao-aprender-app .map-feedback strong,
+.missao-aprender-app .map-feedback p {
+  display: block;
+}
+
+.missao-aprender-app .map-feedback strong {
+  color: var(--ink, #182033);
+}
+
+.missao-aprender-app .map-feedback p {
+  margin: 4px 0 0;
+  color: var(--muted, #667085);
+  line-height: 1.55;
+}
+
+.missao-aprender-app .map-feedback.is-success {
+  border-color: #9ed8bd;
+  background: #edf9f3;
+}
+
+.missao-aprender-app .map-feedback.is-error {
+  border-color: #f0b3ba;
+  background: #fff1f3;
+}
+
+.missao-aprender-app .island-map-game__how {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.missao-aprender-app .island-map-game__how article {
+  display: flex;
+  gap: 13px;
+  padding: 17px;
+  border: 1px solid #e2e7ee;
+  border-radius: 17px;
+  background: #f9fbfd;
+}
+
+.missao-aprender-app .island-map-game__how article > span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 12px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--green, #13795b), var(--blue, #2264e5));
+  font-weight: 950;
+}
+
+.missao-aprender-app .island-map-game__how h3 {
+  margin: 0;
+  color: var(--ink, #182033);
+  font-size: 1rem;
+}
+
+.missao-aprender-app .island-map-game__how p {
+  margin: 3px 0 0;
+  color: var(--muted, #667085);
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1040px) {
+  .missao-aprender-app .island-map-game__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .island-map-game__panel {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .missao-aprender-app #resetMapGame {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .missao-aprender-app .island-map-game__heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .missao-aprender-app .island-map-game__mode {
+    width: 100%;
+  }
+
+  .missao-aprender-app .island-map-game__mode button {
+    flex: 1;
+  }
+
+  .missao-aprender-app .island-map-game__toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .island-map-game__map {
+    min-height: 420px;
+  }
+
+  .missao-aprender-app .island-map-game__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .island-map-game__how {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .map-hotspot {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+
+  .missao-aprender-app .map-hotspot::after {
+    font-size: .62rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .missao-aprender-app .island-map-game__board,
+  .missao-aprender-app .island-map-game__panel {
+    border-radius: 18px;
+  }
+
+  .missao-aprender-app .island-map-game__board {
+    padding: 10px;
+  }
+
+  .missao-aprender-app .island-map-game__map {
+    min-height: 360px;
+    border-radius: 15px;
+  }
+
+  .missao-aprender-app .map-hotspot::after {
+    display: none;
+  }
+}
+
+@media print {
+  .missao-aprender-app .island-map-game__mode,
+  .missao-aprender-app .island-map-game__panel,
+  .missao-aprender-app .island-map-game__hotspots,
+  .missao-aprender-app .island-map-game__target {
+    display: none !important;
+  }
+
+  .missao-aprender-app .island-map-game__layout {
+    display: block;
+  }
+
+  .missao-aprender-app .island-map-game__map {
+    min-height: 0;
+  }
+}
