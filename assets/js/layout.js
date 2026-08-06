@@ -149,4 +149,10 @@ const links = [
   };
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
+
+  if (currentSection === "blog") {
+    import(url("assets/js/blog-comments-loader.js?v=20260806-1")).catch((error) => {
+      console.error("Não foi possível iniciar as mensagens do blog:", error);
+    });
+  }
 })();
