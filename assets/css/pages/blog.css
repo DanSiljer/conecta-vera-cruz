@@ -2896,3 +2896,90 @@ button {
 .page-blog .cv-header__cta:focus-visible {
   color: #ffffff !important;
 }
+
+/* ==========================================================
+   CURTIDAS NA MATÉRIA EM DESTAQUE
+   A curtida fica salva neste navegador, uma vez por matéria.
+   ========================================================== */
+.blog-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.blog-card-actions .blog-card-open {
+  margin-top: 0;
+}
+
+.blog-like-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border: 1px solid #d5e5dd;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #006847;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.blog-like-button:hover,
+.blog-like-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: #e05c72;
+  background: #fff4f6;
+  color: #b42d49;
+}
+
+.blog-like-button.is-liked {
+  border-color: #dc4964;
+  background: #dc4964;
+  color: #ffffff;
+  box-shadow: 0 9px 24px rgba(180, 45, 73, 0.2);
+}
+
+.blog-like-button__icon {
+  font-size: 1.22rem;
+  line-height: 1;
+}
+
+.blog-like-button__count {
+  display: grid;
+  min-width: 24px;
+  height: 24px;
+  place-items: center;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #edf6f1;
+  color: #006847;
+  font-size: 0.72rem;
+}
+
+.blog-like-button.is-liked .blog-like-button__count {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+@media (max-width: 520px) {
+  .blog-card-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .blog-card-actions .blog-card-open,
+  .blog-like-button {
+    width: 100%;
+  }
+}
+

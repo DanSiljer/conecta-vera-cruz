@@ -14,7 +14,7 @@
     <link href="manifest.webmanifest" rel="manifest" />
     <link href="assets/css/global.css" rel="stylesheet" />
     <link href="assets/css/layout.css" rel="stylesheet" />
-    <link href="assets/css/pages/blog.css?v=20260806-4" rel="stylesheet" />
+    <link href="assets/css/pages/blog.css?v=20260806-5" rel="stylesheet" />
 
     <script defer="" src="assets/js/main.js"></script>
     <script defer="" src="assets/js/layout.js"></script>
@@ -681,6 +681,66 @@
           return media;
         }
 
+        const LIKE_STORAGE_PREFIX = "conecta-blog-like:";
+
+        function likeStorageKey(post) {
+          return LIKE_STORAGE_PREFIX + String(post.slug || "publicacao");
+        }
+
+        function isPostLiked(post) {
+          try {
+            return localStorage.getItem(likeStorageKey(post)) === "1";
+          } catch (error) {
+            return false;
+          }
+        }
+
+        function savePostLike(post, liked) {
+          try {
+            if (liked) {
+              localStorage.setItem(likeStorageKey(post), "1");
+            } else {
+              localStorage.removeItem(likeStorageKey(post));
+            }
+          } catch (error) {
+            /* O botão continua funcionando visualmente mesmo sem localStorage. */
+          }
+        }
+
+        function createLikeButton(post) {
+          const button = make("button", "blog-like-button");
+          button.type = "button";
+
+          const icon = make("span", "blog-like-button__icon");
+          icon.setAttribute("aria-hidden", "true");
+
+          const label = make("span", "blog-like-button__label");
+          const count = make("span", "blog-like-button__count");
+
+          function update(liked) {
+            button.classList.toggle("is-liked", liked);
+            button.setAttribute("aria-pressed", String(liked));
+            button.setAttribute(
+              "aria-label",
+              liked ? "Remover curtida desta matéria" : "Curtir esta matéria",
+            );
+            icon.textContent = liked ? "♥" : "♡";
+            label.textContent = liked ? "Curtido" : "Curtir";
+            count.textContent = liked ? "1" : "0";
+          }
+
+          update(isPostLiked(post));
+          button.append(icon, label, count);
+
+          button.addEventListener("click", function () {
+            const liked = button.getAttribute("aria-pressed") !== "true";
+            savePostLike(post, liked);
+            update(liked);
+          });
+
+          return button;
+        }
+
         function createCard(post, featured) {
           const article = make(
             "article",
@@ -718,7 +778,11 @@
             openPost(post, true);
           });
 
-          content.append(top, title, summary, meta, button);
+          const actions = make("div", "blog-card-actions");
+          actions.appendChild(button);
+          if (featured) actions.appendChild(createLikeButton(post));
+
+          content.append(top, title, summary, meta, actions);
           article.append(createImage(post, featured), content);
           return article;
         }
