@@ -863,267 +863,194 @@
   }
 
   .island-personalities {
-    position: relative;
-    overflow: hidden;
-    padding: clamp(54px, 8vw, 104px) 0;
+    padding: clamp(44px, 6vw, 76px) 0;
     background:
-      radial-gradient(circle at 8% 12%, rgba(242, 193, 93, .18), transparent 28%),
-      radial-gradient(circle at 92% 85%, rgba(23, 183, 176, .14), transparent 31%),
-      linear-gradient(180deg, #f8f3e8 0%, #fff 72%);
-  }
-
-  .island-personalities::before {
-    position: absolute;
-    top: 34px;
-    right: -110px;
-    width: 320px;
-    height: 320px;
-    border: 1px solid rgba(7, 93, 120, .12);
-    border-radius: 50%;
-    content: "";
+      radial-gradient(circle at 10% 12%, rgba(242, 193, 93, .16), transparent 28%),
+      radial-gradient(circle at 92% 86%, rgba(8, 123, 88, .10), transparent 30%),
+      linear-gradient(180deg, #f8f4ea 0%, #ffffff 78%);
   }
 
   .island-personalities__heading {
-    position: relative;
-    z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr);
-    gap: 34px;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, .78fr);
+    gap: 26px;
     align-items: end;
-    margin-bottom: 34px;
+    margin-bottom: 28px;
   }
 
   .island-personalities__kicker {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 13px;
+    gap: 9px;
+    margin-bottom: 10px;
     color: #087b58;
     font-size: .75rem;
     font-weight: 900;
-    letter-spacing: .13em;
+    letter-spacing: .14em;
     text-transform: uppercase;
   }
 
   .island-personalities__kicker::before {
-    width: 34px;
+    width: 30px;
     height: 2px;
     content: "";
     background: #e1a62e;
   }
 
   .island-personalities__heading h2 {
-    max-width: 780px;
     margin: 0;
     color: #073c5a;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    font-size: clamp(2.2rem, 4.2vw, 4rem);
     line-height: .98;
-    letter-spacing: -.045em;
+    letter-spacing: -.04em;
   }
 
-  .island-personalities__heading > p {
+  .island-personalities__heading p {
     margin: 0;
-    color: #526c6a;
-    font-size: 1.03rem;
-    line-height: 1.75;
+    color: #59706b;
+    line-height: 1.68;
   }
 
-  .silvano-profile {
-    position: relative;
-    z-index: 1;
+  .personalities-shell {
     display: grid;
-    grid-template-columns: minmax(300px, .76fr) minmax(0, 1.24fr);
-    overflow: hidden;
-    border: 1px solid rgba(7, 93, 120, .15);
-    border-radius: 32px;
+    gap: 18px;
+  }
+
+  .personality-row {
+    display: grid;
+    grid-template-columns: 168px minmax(0, 1fr);
+    gap: 22px;
+    align-items: stretch;
+    padding: 18px;
+    border: 1px solid #dbe7e2;
+    border-radius: 24px;
     background: #fff;
-    box-shadow: 0 28px 80px rgba(5, 61, 82, .15);
+    box-shadow: 0 16px 40px rgba(6, 60, 90, .08);
   }
 
-  .silvano-profile__visual {
+  .personality-row__media {
     position: relative;
-    display: flex;
-    min-height: 100%;
-    flex-direction: column;
-    padding: clamp(24px, 4vw, 40px);
-    background:
-      linear-gradient(180deg, rgba(5, 61, 82, .05), rgba(5, 61, 82, .2)),
-      #073c5a;
+    min-width: 0;
   }
 
-  .silvano-profile__visual::after {
+  .personality-row__portrait {
+    width: 100%;
+    height: 100%;
+    min-height: 190px;
+    border-radius: 18px;
+    object-fit: cover;
+    display: block;
+    background: #eef3f1;
+  }
+
+  .personality-row__book {
     position: absolute;
-    inset: auto 20px 18px auto;
-    color: rgba(255,255,255,.1);
-    content: "≈";
-    font-family: Georgia, serif;
-    font-size: 9rem;
-    line-height: 1;
-  }
-
-  .silvano-profile__cover {
-    position: relative;
-    z-index: 1;
+    right: -10px;
+    bottom: 12px;
+    width: 72px;
+    border-radius: 10px;
     overflow: hidden;
-    margin: 0;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 22px;
+    box-shadow: 0 12px 26px rgba(0,0,0,.22);
+    border: 3px solid #fff;
     background: #fff;
-    box-shadow: 0 24px 55px rgba(0,0,0,.25);
   }
 
-  .silvano-profile__cover img {
+  .personality-row__book img {
     display: block;
     width: 100%;
     height: auto;
   }
 
-  .silvano-profile__badge {
-    position: relative;
-    z-index: 1;
-    margin-top: 24px;
-    color: #fff;
+  .personality-row__body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  .silvano-profile__badge span,
-  .silvano-profile__badge strong,
-  .silvano-profile__badge small {
-    display: block;
+  .personality-row__top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    align-items: center;
+    margin-bottom: 10px;
   }
 
-  .silvano-profile__badge span {
-    margin-bottom: 8px;
-    color: #f2c15d;
+  .personality-row__label {
+    display: inline-flex;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #e8f4ef;
+    color: #087b58;
     font-size: .72rem;
     font-weight: 900;
-    letter-spacing: .13em;
+    letter-spacing: .08em;
     text-transform: uppercase;
   }
 
-  .silvano-profile__badge strong {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(1.65rem, 3vw, 2.45rem);
-    line-height: 1.03;
-  }
-
-  .silvano-profile__badge small {
-    margin-top: 10px;
-    color: rgba(255,255,255,.76);
-    font-size: .92rem;
-    line-height: 1.5;
-  }
-
-  .silvano-profile__content {
-    min-width: 0;
-    padding: clamp(30px, 5vw, 58px);
-  }
-
-  .silvano-profile__location {
-    display: inline-flex;
-    margin-bottom: 13px;
-    padding: 7px 11px;
-    border-radius: 999px;
-    background: #e7f4ef;
-    color: #087b58;
-    font-size: .73rem;
-    font-weight: 900;
+  .personality-row__role {
+    color: #5f746e;
+    font-size: .82rem;
+    font-weight: 800;
     letter-spacing: .06em;
     text-transform: uppercase;
   }
 
-  .silvano-profile__content h3 {
-    margin: 0 0 16px;
+  .personality-row h3 {
+    margin: 0 0 10px;
     color: #073c5a;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2rem, 4vw, 3.7rem);
-    line-height: 1.02;
-    letter-spacing: -.04em;
+    font-size: clamp(1.55rem, 2vw, 2.15rem);
+    line-height: 1.05;
   }
 
-  .silvano-profile__lead {
+  .personality-row__summary {
     margin: 0;
-    color: #486260;
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    line-height: 1.78;
+    color: #566b66;
+    line-height: 1.68;
   }
 
-  .silvano-profile__facts {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-    margin: 28px 0;
-  }
-
-  .silvano-profile__facts article {
-    min-width: 0;
-    padding: 17px;
-    border: 1px solid #dce8e2;
-    border-radius: 16px;
-    background: #fbfdfc;
-  }
-
-  .silvano-profile__facts strong,
-  .silvano-profile__facts span {
-    display: block;
-  }
-
-  .silvano-profile__facts strong {
-    margin-bottom: 5px;
-    color: #0b8da0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.45rem;
-  }
-
-  .silvano-profile__facts span {
-    color: #61736e;
-    font-size: .82rem;
-    line-height: 1.45;
-  }
-
-  .silvano-profile__themes {
+  .personality-row__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 25px;
+    gap: 7px;
+    margin: 14px 0 0;
   }
 
-  .silvano-profile__themes span {
-    padding: 7px 10px;
+  .personality-row__tags span {
+    padding: 6px 9px;
     border-radius: 999px;
-    background: #fff5d9;
-    color: #73530f;
-    font-size: .75rem;
+    background: #f2f8f5;
+    color: #087b58;
+    font-size: .72rem;
     font-weight: 800;
   }
 
-  .silvano-profile__details {
+  .personality-row details {
+    margin-top: 16px;
     border-top: 1px solid #e2ebe7;
+    padding-top: 14px;
   }
 
-  .silvano-profile__details details {
-    border-bottom: 1px solid #e2ebe7;
-  }
-
-  .silvano-profile__details summary {
+  .personality-row summary {
     position: relative;
-    padding: 18px 38px 18px 0;
-    color: #075d78;
+    padding-right: 36px;
     cursor: pointer;
+    color: #075d78;
     font-weight: 900;
     list-style: none;
   }
 
-  .silvano-profile__details summary::-webkit-details-marker {
+  .personality-row summary::-webkit-details-marker {
     display: none;
   }
 
-  .silvano-profile__details summary::after {
+  .personality-row summary::after {
     position: absolute;
     top: 50%;
-    right: 3px;
-    width: 26px;
-    height: 26px;
+    right: 0;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: #e8f5f3;
     color: #087b58;
@@ -1131,196 +1058,135 @@
     display: grid;
     place-items: center;
     transform: translateY(-50%);
+    font-size: 1rem;
   }
 
-  .silvano-profile__details details[open] summary::after {
+  .personality-row details[open] summary::after {
     content: "−";
   }
 
-  .silvano-profile__details div {
-    padding: 0 0 20px;
+  .personality-row__expanded {
+    padding-top: 14px;
+    color: #566b66;
+    line-height: 1.7;
   }
 
-  .silvano-profile__details p {
+  .personality-row__expanded p {
     margin: 0;
-    color: #526966;
-    line-height: 1.75;
   }
 
-  .silvano-profile__details p + p {
+  .personality-row__expanded p + p {
     margin-top: 12px;
   }
 
-  .silvano-profile__timeline {
+  .personality-row__work {
     display: grid;
-    gap: 10px;
-    margin-top: 15px;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    margin: 16px 0;
+    padding: 14px;
+    border-radius: 16px;
+    background: #f7faf8;
   }
 
-  .silvano-profile__timeline article {
-    display: grid;
-    grid-template-columns: 68px minmax(0, 1fr);
-    gap: 13px;
-    align-items: start;
+  .personality-row__work img {
+    width: 90px;
+    height: 122px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 10px 24px rgba(0,0,0,.14);
   }
 
-  .silvano-profile__timeline strong {
-    color: #087b58;
-    font-size: .86rem;
+  .personality-row__work strong,
+  .personality-row__work span {
+    display: block;
   }
 
-  .silvano-profile__timeline span {
-    color: #526966;
-    font-size: .9rem;
+  .personality-row__work strong {
+    margin-bottom: 6px;
+    color: #073c5a;
+    line-height: 1.3;
+  }
+
+  .personality-row__work span {
+    color: #647772;
+    font-size: .92rem;
     line-height: 1.55;
   }
 
-  .silvano-profile__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 11px;
-    margin-top: 27px;
-  }
-
-  .silvano-profile__actions a {
+  .personality-row__action {
     display: inline-flex;
-    min-height: 45px;
+    min-height: 42px;
     align-items: center;
     justify-content: center;
-    padding: 10px 17px;
+    width: fit-content;
+    margin-top: 16px;
+    padding: 9px 15px;
     border-radius: 999px;
-    font-weight: 900;
-    text-decoration: none;
-  }
-
-  .silvano-profile__actions a:first-child {
     background: #087b58;
     color: #fff;
+    text-decoration: none;
+    font-weight: 900;
   }
 
-  .silvano-profile__actions a:first-child:hover,
-  .silvano-profile__actions a:first-child:focus-visible {
+  .personality-row__action:hover,
+  .personality-row__action:focus-visible {
     background: #066546;
   }
 
-  .silvano-profile__actions a:last-child {
-    border: 1px solid #0b8da0;
-    color: #075d78;
-  }
-
-  .silvano-profile__source {
-    margin: 18px 0 0;
-    padding: 14px 16px;
-    border-left: 4px solid #f2c15d;
-    border-radius: 0 12px 12px 0;
-    background: #fff9ea;
-    color: #695a35;
-    font-size: .82rem;
-    line-height: 1.55;
-  }
-
-  .personalities-next {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr);
-    gap: 25px;
-    align-items: center;
-    margin-top: 24px;
-    padding: 25px;
-    border: 1px dashed rgba(7, 93, 120, .28);
-    border-radius: 22px;
-    background: rgba(255,255,255,.74);
-  }
-
-  .personalities-next span {
-    display: block;
-    margin-bottom: 7px;
-    color: #087b58;
-    font-size: .72rem;
-    font-weight: 900;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-  }
-
-  .personalities-next h3 {
-    margin: 0;
-    color: #073c5a;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.7rem;
-  }
-
-  .personalities-next p {
-    margin: 0;
-    color: #586f6c;
+  .personalities-note {
+    margin: 6px 0 0;
+    padding: 16px 18px;
+    border-left: 4px solid #e1a62e;
+    border-radius: 0 14px 14px 0;
+    background: rgba(255,255,255,.75);
+    color: #5b6f69;
     line-height: 1.65;
   }
 
-  .sidebar-card--personalities {
-    background:
-      linear-gradient(145deg, rgba(7, 93, 120, .97), rgba(8, 123, 88, .95)),
-      #075d78;
-    color: #fff;
-  }
-
-  .sidebar-card--personalities .blog-eyebrow,
-  .sidebar-card--personalities h2,
-  .sidebar-card--personalities p,
-  .sidebar-card--personalities a {
-    color: #fff;
-  }
-
-  .sidebar-card--personalities a {
-    font-weight: 900;
-  }
-
   @media (max-width: 980px) {
-    .island-personalities__heading,
-    .silvano-profile,
-    .personalities-next {
+    .island-personalities__heading {
       grid-template-columns: 1fr;
-    }
-
-    .silvano-profile__visual {
-      display: grid;
-      grid-template-columns: minmax(220px, .55fr) minmax(0, 1fr);
-      gap: 24px;
-      align-items: center;
-    }
-
-    .silvano-profile__badge {
-      margin-top: 0;
     }
   }
 
   @media (max-width: 720px) {
-    .island-personalities {
-      padding: 46px 0;
+    .personality-row {
+      grid-template-columns: 1fr;
     }
 
-    .silvano-profile {
-      border-radius: 22px;
-    }
-
-    .silvano-profile__visual {
-      display: flex;
-    }
-
-    .silvano-profile__facts {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .silvano-profile__actions a {
-      width: 100%;
+    .personality-row__media {
+      max-width: 240px;
     }
   }
 
-  @media (max-width: 440px) {
-    .silvano-profile__facts {
+  @media (max-width: 520px) {
+    .island-personalities {
+      padding: 40px 0;
+    }
+
+    .personality-row {
+      padding: 16px;
+      border-radius: 20px;
+      gap: 16px;
+    }
+
+    .personality-row__media {
+      max-width: none;
+    }
+
+    .personality-row__portrait {
+      min-height: 220px;
+    }
+
+    .personality-row__work {
       grid-template-columns: 1fr;
     }
   }
 </style>
+
+
 </head>
 <body class="page-blog">
 <!-- Menu padrão inserido por assets/js/layout.js -->
@@ -1354,182 +1220,144 @@
 <span class="island-personalities__kicker">Gente que ajuda a contar a ilha</span>
 <h2 id="personalidades-title">Personalidades da Ilha de Itaparica</h2>
 </div>
-<p>
-        Trajetórias de moradores, educadores, pesquisadores, artistas e lideranças
-        que transformaram experiências vividas na ilha em conhecimento, memória e
-        contribuição coletiva. A série começa com Silvano Sulzart Oliveira Costa.
-      </p>
+
 </header>
-<article aria-labelledby="silvano-title" class="silvano-profile">
-<div class="silvano-profile__visual">
-<figure class="silvano-profile__cover">
-<img alt="Capa da dissertação Docência nas Águas, com uma embarcação sobre o mar" height="1272" loading="lazy" src="assets/img/blog/Silvano.png" width="900"/>
-</figure>
-<div class="silvano-profile__badge">
-<span>Perfil em destaque</span>
-<strong>Silvano Sulzart Oliveira Costa</strong>
-<small>É o Secretário de Educação do Município de Vera Cruz. Ele é professor, pedagogo e pesquisador das relações entre educação, memória, diversidade cultural e cultura das águas.</small>
-</div>
-</div>
-<div class="silvano-profile__content">
-<span class="silvano-profile__location">Vera Cruz · Ilha de Itaparica · Bahia</span>
-<h3 id="silvano-title">Uma vida de educação atravessada pelo mar</h3>
-<p class="silvano-profile__lead">
-          Nascido e criado em Vera Cruz, Silvano transformou lembranças da infância,
-          experiências escolares e anos de trabalho na educação em uma pesquisa
-          dedicada à Ilha de Itaparica. Sua trajetória aproxima sala de aula, mar,
-          travessias, pesca, religiosidades, cultura popular e os saberes construídos
-          pelas comunidades.
+
+<div class="personalities-shell">
+
+<article aria-labelledby="silvano-title" class="personality-row">
+  <div class="personality-row__media">
+    <img
+      alt="Capa da dissertação Docência nas Águas, de Silvano Sulzart Oliveira Costa"
+      class="personality-row__portrait"
+      height="1272"
+      loading="lazy"
+      src="assets/img/blog/Silvano.png"
+      width="900"
+    />
+  </div>
+
+  <div class="personality-row__body">
+    <div class="personality-row__top">
+      <span class="personality-row__label">Educação e pesquisa</span>
+      <span class="personality-row__role">Professor · Pedagogo · Pesquisador</span>
+    </div>
+
+    <h3 id="silvano-title">Secretário de Educação Silvano Sulzart</h3>
+    <p class="personality-row__summary">
+      Nascido e criado em Vera Cruz, Silvano transformou a experiência vivida na ilha
+      em pesquisa sobre educação, memória, maritimidade e saberes comunitários,
+      ajudando a valorizar a cultura das águas da Ilha de Itaparica.
+    </p>
+
+    <div aria-label="Temas ligados a Silvano Sulzart" class="personality-row__tags">
+      <span>Docência nas águas</span>
+      <span>Maritimidade</span>
+      <span>Memória</span>
+      <span>Educação</span>
+    </div>
+
+    <details>
+      <summary>Ler perfil</summary>
+      <div class="personality-row__expanded">
+        <p>
+          Sua trajetória reúne sala de aula, travessias, vida escolar e relação com o mar.
+          Na dissertação <em>Docência nas Águas</em>, a travessia aparece como experiência física
+          e simbólica que influencia o trabalho docente e a vida nas comunidades da ilha.
         </p>
-<div aria-label="Marcos da trajetória de Silvano Sulzart" class="silvano-profile__facts">
-<article><strong>1979</strong><span>Nascimento em Vera Cruz, na Ilha de Itaparica.</span></article>
-<article><strong>2000</strong><span>Ingresso no magistério público municipal de Vera Cruz.</span></article>
-<article><strong>2003</strong><span>Conclusão da graduação em Pedagogia.</span></article>
-<article><strong>2015</strong><span>Dissertação de mestrado defendida na UNEB.</span></article>
-</div>
-<div aria-label="Temas ligados à obra de Silvano Sulzart" class="silvano-profile__themes">
-<span>Docência nas águas</span>
-<span>Maritimidade</span>
-<span>Memória autobiográfica</span>
-<span>Diversidade cultural</span>
-<span>Travessias</span>
-<span>Educação em Vera Cruz</span>
-</div>
-<div class="silvano-profile__details">
-<details open="">
-<summary>Infância, família e formação na ilha</summary>
-<div>
-<p>
-                Silvano nasceu em 27 de junho de 1979, no antigo Hospital Maria
-                Amélia Santos, em Vera Cruz. Filho de Joana Alves de Antão e Antônio
-                de Oliveira Costa, cresceu em uma família ligada ao trabalho, à
-                agricultura e ao mar. Viveu parte da infância em Mar Grande e também
-                na comunidade rural da Juerana.
-              </p>
-<p>
-                Estudou em escolas públicas e descreve uma formação marcada por
-                caminhadas longas, transporte difícil, classes multisseriadas, leitura
-                de jornais, revistas, histórias em quadrinhos e da Bíblia. Ainda jovem,
-                ajudava professores em turmas infantis e de Educação de Jovens e
-                Adultos, apoiando moradores na leitura, na escrita de cartas e nas
-                atividades escolares.
-              </p>
-<p>
-                No curso de Magistério, encontrou professores que estimularam a
-                leitura, as visitas a museus, o estudo da realidade local e aulas nos
-                manguezais. Essas experiências fortaleceram sua decisão de seguir a
-                profissão docente.
-              </p>
-</div>
-</details>
-<details>
-<summary>Da sala de aula à gestão e à formação de professores</summary>
-<div>
-<p>
-                Aos 18 anos, iniciou uma experiência de estágio em uma turma da antiga
-                4ª série. Em janeiro de 2000, foi aprovado em sexto lugar no concurso
-                público de Vera Cruz e, em abril, começou a atuar na Escola Nossa
-                Senhora de Guadalupe. No mesmo ano, ingressou no curso de Pedagogia,
-                conciliando trabalho e estudo.
-              </p>
-<p>
-                Depois da graduação, concluída em 2003, exerceu funções de professor,
-                diretor escolar e coordenador pedagógico. Buscou formação em gestão e
-                psicopedagogia, participou da formação de educadores e, a partir de
-                2006, também viveu a experiência de lecionar em curso superior de
-                Pedagogia.
-              </p>
-<p>
-                Em 2009, foi convidado a atuar no departamento de avaliação
-                educacional e formação continuada da Secretaria Municipal de Educação
-                de Vera Cruz e também assumiu a Diretoria de Ensino, trabalhando com
-                jornadas pedagógicas, diretores, coordenadores e práticas de ensino.
-              </p>
-</div>
-</details>
-<details>
-<summary>A pesquisa “Docência nas Águas”</summary>
-<div>
-<p>
-                Após diferentes tentativas de ingresso no mestrado, Silvano foi
-                aprovado no Programa de Pós-Graduação em Educação e
-                Contemporaneidade da UNEB. A dissertação
-                <em>Docência nas Águas: diversidade cultural, maritimidade e
-                travessias na Ilha de Itaparica</em> foi defendida em 2015.
-              </p>
-<p>
-                A investigação reuniu pesquisa autobiográfica e entrevistas narrativas
-                com oito professores da Educação Básica. O trabalho acompanhou
-                docentes que viviam o cotidiano da travessia entre Salvador e a Ilha
-                de Itaparica, analisando o deslocamento pelo mar, as condições de
-                trabalho, a diversidade cultural e os vínculos com as comunidades.
-              </p>
-<p>
-                Na pesquisa, a travessia aparece como experiência física e também
-                simbólica. O mar não é apenas caminho: ele organiza horários, afetos,
-                medos, aprendizagens, planejamentos, relações profissionais e modos de
-                compreender a escola.
-              </p>
-</div>
-</details>
-<details>
-<summary>Cultura das águas e contribuição para a memória local</summary>
-<div>
-<p>
-                A obra apresenta a ideia de “cultura das águas” para reunir práticas,
-                conhecimentos e símbolos ligados à pesca, à mariscagem, às marés, às
-                embarcações, às religiosidades, às festas comunitárias e à vida
-                cotidiana próxima ao mar.
-              </p>
-<p>
-                Ao registrar memórias de Mar Grande, Jaburu, Juerana, Tairu e de
-                outras comunidades, Silvano preserva experiências que frequentemente
-                ficam fora dos documentos oficiais. Sua escrita mostra que a história
-                da ilha também está nas trajetórias escolares, nos caminhos até a
-                escola, nas travessias de lancha e nos saberes transmitidos por
-                pescadores, famílias e educadores.
-              </p>
-<p>
-                A dissertação também chama atenção para a necessidade de práticas
-                pedagógicas e políticas públicas capazes de reconhecer a diversidade
-                cultural da Ilha de Itaparica e valorizar os professores que trabalham
-                em territórios costeiros e insulares.
-              </p>
-<div aria-label="Linha do tempo da trajetória" class="silvano-profile__timeline">
-<article><strong>1979</strong><span>Nasce em Vera Cruz e cresce entre Mar Grande, Jaburu, áreas rurais e o cotidiano das águas.</span></article>
-<article><strong>2000</strong><span>É aprovado em concurso público e inicia a carreira efetiva na educação municipal.</span></article>
-<article><strong>2003</strong><span>Conclui Pedagogia e amplia a atuação em gestão, coordenação e formação docente.</span></article>
-<article><strong>2009</strong><span>Atua com avaliação educacional, formação continuada e Diretoria de Ensino em Vera Cruz.</span></article>
-<article><strong>2012</strong><span>Ingressa no mestrado da UNEB e direciona a pesquisa para a docência na Ilha de Itaparica.</span></article>
-<article><strong>2015</strong><span>Defende a dissertação que reúne autobiografia, educação, maritimidade e diversidade cultural.</span></article>
-</div>
-</div>
-</details>
-</div>
-<div class="silvano-profile__actions">
-<a href="assets/docs/silvano-sulzart-docencia-nas-aguas.pdf" rel="noopener" target="_blank">
-            Ler a dissertação completa
-          </a>
-<a href="#ultimas-noticias">Continuar no blog</a>
-</div>
-<p class="silvano-profile__source">
-          Perfil elaborado a partir da autobiografia e dos dados apresentados na
-          dissertação defendida em 2015. A seção descreve a trajetória registrada
-          nessa fonte e não presume acontecimentos profissionais posteriores.
+        <p>
+          O estudo valoriza práticas ligadas à pesca, à mariscagem, às embarcações, às festas,
+          às religiosidades e aos conhecimentos construídos no cotidiano, preservando memórias
+          que muitas vezes não aparecem nos registros oficiais.
         </p>
-</div>
+        <a class="personality-row__action" href="assets/docs/silvano-sulzart-docencia-nas-aguas.pdf" rel="noopener" target="_blank">
+          Ler a dissertação
+        </a>
+      </div>
+    </details>
+  </div>
 </article>
-<aside class="personalities-next">
-<div>
-<span>Série em construção</span>
-<h3>Outras trajetórias chegarão a esta seção</h3>
+
+<article aria-labelledby="fernando-title" class="personality-row">
+  <div class="personality-row__media">
+    <img
+      alt="Fernando Bernardes Souza em uma exposição de arte"
+      class="personality-row__portrait"
+      height="1672"
+      loading="lazy"
+      src="assets/img/blog/fernando-bernardes-souza.webp"
+      width="941"
+    />
+    <div class="personality-row__book" aria-hidden="true">
+      <img
+        alt=""
+        height="544"
+        loading="lazy"
+        src="assets/img/blog/agnaldo-manuel-dos-santos-livro.webp"
+        width="367"
+      />
+    </div>
+  </div>
+
+  <div class="personality-row__body">
+    <div class="personality-row__top">
+      <span class="personality-row__label">Literatura e artes visuais</span>
+      <span class="personality-row__role">Escritor · Artista plástico</span>
+    </div>
+
+    <h3 id="fernando-title">Fernando Bernardes Souza</h3>
+    <p class="personality-row__summary">
+      Escritor e artista plástico, Fernando Bernardes Souza contribui para valorizar
+      a arte, a memória e as trajetórias ligadas à Ilha de Itaparica por meio da
+      pesquisa, da escrita e da produção artística.
+    </p>
+
+    <div aria-label="Temas ligados a Fernando Bernardes Souza" class="personality-row__tags">
+      <span>Artes visuais</span>
+      <span>Literatura</span>
+      <span>Memória da ilha</span>
+      <span>Pesquisa</span>
+    </div>
+
+    <details>
+      <summary>Conhecer o escritor e o livro</summary>
+      <div class="personality-row__expanded">
+        <p>
+          Em sua atuação como escritor e artista plástico, Fernando Bernardes Souza
+          aproxima linguagem visual, pesquisa e memória. Seu trabalho ajuda a colocar
+          artistas e histórias da ilha em circulação, fortalecendo o reconhecimento da
+          produção cultural ligada ao território.
+        </p>
+
+        <div class="personality-row__work">
+          <img
+            alt="Capa do livro Agnaldo Manuel dos Santos: Uma ilha que ganhou o mundo"
+            height="544"
+            loading="lazy"
+            src="assets/img/blog/agnaldo-manuel-dos-santos-livro.webp"
+            width="367"
+          />
+          <div>
+            <strong><em>Agnaldo Manuel dos Santos: Uma ilha que ganhou o mundo</em></strong>
+            <span>
+              O livro destaca a trajetória de Agnaldo Manuel dos Santos e ajuda a projetar
+              a presença de um artista ligado à ilha para além de suas fronteiras.
+            </span>
+          </div>
+        </div>
+
+        <p>
+          A publicação também funciona como ponte entre arte, identidade e pertencimento,
+          convidando o leitor a conhecer uma história importante da memória cultural da
+          Ilha de Itaparica.
+        </p>
+      </div>
+    </details>
+  </div>
+</article>
+
 </div>
-<p>
-        O espaço está preparado para receber novos perfis de mulheres e homens
-        ligados à história, à cultura, à educação, às artes, à pesca, à política e
-        às lutas comunitárias da Ilha de Itaparica.
-      </p>
-</aside>
+
 </div>
 </section><section aria-labelledby="defeso-title" class="defeso-awareness" id="defeso-2026">
 <div class="container">
@@ -1571,7 +1399,7 @@
 <span class="defeso-kicker" style="color:#0877bd">Datas oficiais</span>
 <h3>Calendário do defeso em Vera Cruz</h3>
 </div>
-<p>Os cartões são destacados automaticamente quando a data atual estiver dentro de um dos períodos de 2026.</p>
+
 </div>
 <div class="defeso-calendar-grid">
 <section class="defeso-card" data-defeso-periods="2026-04-01/2026-05-15,2026-09-15/2026-10-31">
@@ -1684,9 +1512,9 @@
 </section>
 <section class="sidebar-card sidebar-card--personalities">
 <span class="blog-eyebrow">Personalidades da Ilha</span>
-<h2>Silvano Sulzart</h2>
-<p>Conheça a trajetória do professor e pesquisador que transformou experiências da ilha em memória e investigação educacional.</p>
-<a href="#personalidades">Abrir o perfil completo <span>→</span></a>
+<h2>Gente que transforma memória em legado</h2>
+<p>Conheça os perfis de Silvano Sulzart e Fernando Bernardes Souza em uma seção compacta e fácil de ampliar.</p>
+<a href="#personalidades">Ver personalidades <span>→</span></a>
 </section><section class="sidebar-card sidebar-card--contribute">
 <span class="blog-eyebrow">Participe</span>
 <h2>Tem uma pauta ou fotografia?</h2>

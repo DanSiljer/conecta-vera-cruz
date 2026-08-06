@@ -1,0 +1,147 @@
+/* ==========================================================
+   QUEBRA-CABEÇA DOS ESTADOS POR REGIÃO
+   ========================================================== */
+.states-regions { margin-top: 52px; }
+.states-kicker {
+  display: inline-flex; align-items: center; gap: 10px; color: #12664f;
+  font-size: .72rem; font-weight: 950; letter-spacing: .12em; text-transform: uppercase;
+}
+.states-kicker::before { width: 32px; height: 3px; border-radius: 999px; background: #f0b84d; content: ""; }
+.states-heading {
+  display: grid; grid-template-columns: minmax(0,1.1fr) minmax(280px,.9fr); gap: 35px; align-items: end; margin-bottom: 22px;
+}
+.states-heading h2, .states-result h2 {
+  margin: 10px 0 0; color: #073d55; font-size: clamp(2.2rem, 5vw, 4.5rem); line-height: .98; letter-spacing: -.045em;
+}
+.states-heading > p { margin: 0; color: #667085; line-height: 1.7; }
+.states-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.states-tab {
+  min-height: 46px; padding: 0 16px; border: 1px solid #d7e3e8; border-radius: 999px; background: #fff; color: #073d55;
+  font: inherit; font-weight: 900; cursor: pointer; transition: transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.states-tab:hover, .states-tab:focus-visible { transform: translateY(-2px); }
+.states-tab.is-active { background: linear-gradient(135deg, #12664f, #2264e5); color: #fff; box-shadow: 0 12px 25px rgba(34,100,229,.18); border-color: transparent; }
+.states-game {
+  overflow: hidden; border: 1px solid #dfe5eb; border-radius: 28px; background: #fff; box-shadow: 0 24px 60px rgba(24,32,51,.09);
+}
+.states-topbar {
+  display: grid; grid-template-columns: repeat(4, minmax(105px,.62fr)) minmax(300px,1.8fr); gap: 10px; padding: 14px;
+  border-bottom: 1px solid #dfe5eb; background: #f7faf9;
+}
+.states-stat { padding: 12px 14px; border: 1px solid #e1e7ec; border-radius: 15px; background: #fff; }
+.states-stat span, .states-stat strong { display: block; }
+.states-stat span { color: #7a8392; font-size: .65rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.states-stat strong { margin-top: 4px; color: #073d55; font-size: 1.1rem; }
+.states-actions { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
+.states-button {
+  display: inline-flex; min-height: 44px; align-items: center; justify-content: center; padding: 9px 15px; border: 0;
+  border-radius: 13px; cursor: pointer; font: inherit; font-size: .78rem; font-weight: 900;
+  transition: transform .18s ease, opacity .18s ease, box-shadow .18s ease;
+}
+.states-button:hover:not(:disabled), .states-button:focus-visible:not(:disabled) { transform: translateY(-2px); }
+.states-button:disabled { cursor: not-allowed; opacity: .45; }
+.states-button--primary { color: #fff; background: linear-gradient(135deg, #12664f, #2264e5); box-shadow: 0 12px 24px rgba(34,100,229,.17); }
+.states-button--soft { border: 1px solid #cbd9d3; color: #155e49; background: #fff; }
+.states-button--dark { color: #fff; background: #073d55; }
+.states-layout { display: grid; grid-template-columns: minmax(250px,.72fr) minmax(460px,1.55fr) minmax(240px,.73fr); min-height: 690px; }
+.states-tray, .states-info { padding: 20px; background: #f8fafb; }
+.states-tray { border-right: 1px solid #dfe5eb; }
+.states-info { border-left: 1px solid #dfe5eb; }
+.states-tray__heading span, .states-info__eyebrow { color: #12664f; font-size: .66rem; font-weight: 950; letter-spacing: .09em; text-transform: uppercase; }
+.states-tray__heading h3, .states-info h3 { margin: 7px 0 6px; color: #073d55; font-size: 1.26rem; }
+.states-tray__heading p, .states-info > p { margin: 0; color: #667085; font-size: .84rem; line-height: 1.55; }
+.states-pieces { display: grid; gap: 12px; margin-top: 20px; }
+.states-game[data-phase="preview"] .states-pieces::before {
+  display: grid; min-height: 340px; padding: 28px; border: 2px dashed #c9d5d0; border-radius: 18px; place-items: center; color: #718078;
+  background: rgba(255,255,255,.7); content: "As peças aparecerão aqui quando o jogo começar."; font-size: .86rem; font-weight: 800;
+  line-height: 1.6; text-align: center;
+}
+.state-piece-card {
+  position: relative; display: grid; grid-template-columns: 84px minmax(0,1fr); gap: 12px; align-items: center; min-height: 95px; padding: 11px;
+  border: 2px solid transparent; border-radius: 17px; color: #263247; background: #fff; box-shadow: 0 8px 21px rgba(24,32,51,.07);
+  cursor: grab; user-select: none; transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.state-piece-card:hover, .state-piece-card:focus-visible { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(24,32,51,.12); }
+.state-piece-card.is-selected { border-color: #2264e5; box-shadow: 0 0 0 4px rgba(34,100,229,.13); }
+.state-piece-card.is-placed { display: none; }
+.state-piece-card img { display:block; width:100%; height:72px; object-fit:contain; pointer-events:none; }
+.state-piece-card strong, .state-piece-card small { display:block; }
+.state-piece-card strong { color:#073d55; font-size:.95rem; }
+.state-piece-card small { margin-top:4px; color:#76808f; font-size:.72rem; line-height:1.4; }
+.states-board-column { min-width:0; padding:20px; background: radial-gradient(circle at 50% 0, rgba(31,95,174,.07), transparent 24rem), #fff; }
+.states-board {
+  position: relative; width: 100%; aspect-ratio: var(--board-ratio, 1 / 1); overflow: hidden; border: 2px dashed #b7c8c0; border-radius: 24px;
+  background: radial-gradient(circle at 50% 42%, rgba(34,100,229,.07), transparent 42%), #f6fafb; isolation: isolate;
+}
+.states-board.is-ready { border-color:#2264e5; box-shadow:0 0 0 5px rgba(34,100,229,.10); }
+.states-board.is-wrong { animation: stateBoardWrong .4s ease; }
+.states-board__base, .states-board__placed, .states-board__hint { position:absolute; inset:0; }
+.states-board__base { z-index:1; display:block; width:100%; height:100%; object-fit:contain; user-select:none; -webkit-user-drag:none; }
+.states-board__placed, .states-board__hint { pointer-events:none; }
+.states-board__placed { z-index:3; }
+.states-board__hint { z-index:4; }
+.state-piece-preview, .state-piece-placed, .state-piece-hint {
+  position:absolute; display:block; object-fit:contain; pointer-events:none;
+}
+.state-piece-preview { filter: drop-shadow(0 5px 6px rgba(24,32,51,.11)); }
+.state-piece-placed { animation: statePieceSnap .42s cubic-bezier(.22,.9,.26,1.2); }
+.state-piece-hint { opacity:.42; filter: drop-shadow(0 0 8px #2264e5); animation: stateHintPulse .8s ease-in-out infinite alternate; }
+.states-board__message {
+  position:absolute; z-index:7; right:16px; bottom:16px; left:16px; padding:12px 15px; border:1px solid rgba(255,255,255,.7); border-radius:14px;
+  color:#fff; background:rgba(7,61,85,.88); box-shadow:0 12px 25px rgba(24,32,51,.18); font-size:.78rem; font-weight:850; text-align:center; backdrop-filter: blur(8px);
+}
+.states-board__instruction { margin:11px 0 0; color:#77818e; font-size:.75rem; line-height:1.5; text-align:center; }
+.states-feedback { margin-top:20px; padding:16px; border:1px solid #dce4e9; border-radius:16px; background:#fff; }
+.states-feedback strong, .states-feedback p { display:block; }
+.states-feedback strong { color:#073d55; }
+.states-feedback p { margin:5px 0 0; color:#667085; font-size:.82rem; line-height:1.55; }
+.states-feedback.is-success { border-color:#9bd4b7; background:#edf9f3; }
+.states-feedback.is-error { border-color:#efb0b5; background:#fff1f2; }
+.states-legend { display:grid; gap:10px; margin-top:18px; color:#67717f; font-size:.74rem; }
+.states-legend span { display:flex; gap:8px; align-items:center; }
+.states-legend__dot { width:13px; height:13px; border-radius:50%; }
+.states-legend__dot--selected { background:#2264e5; }
+.states-legend__dot--correct { background:#14955f; }
+.states-legend__dot--wrong { background:#d94d5c; }
+.states-note { margin-top:16px; padding:14px; border-radius:14px; background:#fff6dd; color:#735218; font-size:.8rem; line-height:1.55; border:1px solid #f3df99; }
+.states-result {
+  display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:30px; align-items:center; margin-top:28px; padding:clamp(25px,4vw,42px); border-radius:25px;
+  color:#fff; background: radial-gradient(circle at 100% 0, rgba(255,211,116,.18), transparent 18rem), linear-gradient(135deg, #073d55, #12664f);
+}
+.states-result h2 { color:#fff; }
+.states-result p { margin:14px 0 0; color:rgba(255,255,255,.8); line-height:1.65; }
+.states-result__score { min-width:150px; padding:20px; border:1px solid rgba(255,255,255,.18); border-radius:20px; background:rgba(255,255,255,.08); text-align:center; }
+.states-result__score span, .states-result__score strong, .states-result__score small { display:block; }
+.states-result__score strong { color:#ffd474; font-size:3.4rem; line-height:1; }
+.states-result__actions { display:grid; gap:9px; }
+.states-teacher-inline { margin-top:28px; padding:25px; border:1px solid #dfe5eb; border-radius:22px; background:#f8fafb; }
+.states-teacher-inline__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:18px; }
+.states-teacher-inline article { padding:18px; border:1px solid #e0e6eb; border-radius:16px; background:#fff; }
+.states-teacher-inline strong { color:#073d55; }
+.states-teacher-inline p { margin:7px 0 0; color:#667085; font-size:.82rem; line-height:1.55; }
+@keyframes stateHintPulse { to { opacity: .7; } }
+@keyframes statePieceSnap { from { opacity:.25; transform:scale(1.16);} to { opacity:1; transform:scale(1);} }
+@keyframes stateBoardWrong { 25%,75% { transform: translateX(-5px);} 50% { transform: translateX(5px);} }
+@media (max-width: 1220px) {
+  .states-topbar { grid-template-columns: repeat(4, minmax(100px,1fr)); }
+  .states-actions { grid-column:1 / -1; justify-content:flex-start; }
+  .states-layout { grid-template-columns: minmax(220px,.72fr) minmax(420px,1.4fr); }
+  .states-info { grid-column:1 / -1; border-top:1px solid #dfe5eb; border-left:0; }
+}
+@media (max-width: 900px) {
+  .states-heading, .states-result { grid-template-columns:1fr; }
+  .states-layout { grid-template-columns:1fr; }
+  .states-tray { border-right:0; border-bottom:1px solid #dfe5eb; }
+  .states-pieces { grid-template-columns: repeat(3, minmax(130px, 1fr)); overflow-x:auto; padding-bottom:8px; }
+  .state-piece-card { grid-template-columns:1fr; min-width:130px; text-align:center; }
+  .states-info { border-top:1px solid #dfe5eb; }
+  .states-result__actions { display:flex; flex-wrap:wrap; }
+}
+@media (max-width: 700px) {
+  .states-game { border-radius:20px; }
+  .states-topbar { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .states-actions { grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr 1fr; }
+  .states-pieces { grid-template-columns: repeat(3, 125px); }
+  .states-board-column { padding:12px; }
+  .states-teacher-inline__grid { grid-template-columns:1fr; }
+}

@@ -6,7 +6,7 @@
 <meta content="Missão Aprender: página educativa do Conecta Vera Cruz com jogos, atividades e uma área especial sobre a história de Vera Cruz e da Ilha de Itaparica." name="description"/>
 <title>Missão Aprender | Conecta Vera Cruz</title>
 
-<link href="assets/img/favicon.ico" rel="icon" type="image/x-icon"/><link href="manifest.webmanifest" rel="manifest"/><link href="assets/css/global.css" rel="stylesheet"/><link href="assets/css/layout.css" rel="stylesheet"/><link href="assets/css/pages/missao-aprender.css" rel="stylesheet"/><link href="assets/css/pages/mapa-ilha.css?v=2" rel="stylesheet"/><script defer src="assets/js/main.js"></script><script defer src="assets/js/layout.js"></script><script defer src="assets/js/missao-aprender.js"></script><script defer src="assets/js/mapa-ilha.js?v=2"></script>
+<link href="assets/img/favicon.ico" rel="icon" type="image/x-icon"/><link href="manifest.webmanifest" rel="manifest"/><link href="assets/css/global.css" rel="stylesheet"/><link href="assets/css/layout.css" rel="stylesheet"/><link href="assets/css/pages/missao-aprender.css" rel="stylesheet"/><link href="assets/css/pages/mapa-ilha.css?v=2" rel="stylesheet"/><link href="assets/css/pages/jogo-regioes-brasil.css?v=3" rel="stylesheet"/><link href="assets/css/pages/jogo-estados-regioes.css?v=1" rel="stylesheet"/><script defer src="assets/js/main.js"></script><script defer src="assets/js/layout.js"></script><script defer src="assets/js/missao-aprender.js"></script><script defer src="assets/js/mapa-ilha.js?v=2"></script><script defer src="assets/js/jogo-regioes-brasil.js?v=3"></script><script defer src="assets/js/jogo-estados-regioes.js?v=1"></script>
 </head>
 <body class="page-missao-aprender">
 
@@ -22,6 +22,7 @@
 <div class="missao-aprender-subnav__links">
 <a href="#historia-local">História local</a>
 <a href="#mapa-jogo">Mapa-jogo</a>
+<a href="#quebra-cabeca-regioes">Regiões do Brasil</a>
 <a href="#disciplinas">Jogos</a>
 <a href="#professor">Área do professor</a>
 <a href="#resultados">Resultados</a>
@@ -49,7 +50,7 @@
 </div>
 <div aria-label="Recursos da plataforma" class="hero__stats">
 <article>
-<strong>7</strong>
+<strong>8</strong>
 <span>missões de aprendizagem</span>
 </article>
 <article>
@@ -88,7 +89,7 @@
 </section>
 <section aria-labelledby="studentTitle" class="student-panel section-shell">
 <div>
-<span class="section-kicker">IDENTIFICAÇÃO DO ESTUDANTE</span>
+<span class="section-kicker">IDENTIFICAÇÃO</span>
 <h2 id="studentTitle">Antes de começar</h2>
 <p>
           Preencha os dados para registrar a pontuação no relatório desta página.
@@ -99,10 +100,7 @@
           Nome do estudante
           <input autocomplete="name" id="studentName" maxlength="60" placeholder="Digite o nome" type="text"/>
 </label>
-<label>
-          Turma
-          <input id="studentClass" maxlength="30" placeholder="Ex.: 6º ano A" type="text"/>
-</label>
+
 <button class="button button--dark" id="saveStudentButton" type="button">
           Salvar dados
         </button>
@@ -365,6 +363,305 @@
         <p>A pontuação é salva junto aos demais resultados da página.</p>
       </div>
     </article>
+  </div>
+</section>
+
+
+
+<section class="regions-game-section section-shell" id="quebra-cabeca-regioes" aria-labelledby="regionsGameTitle">
+  <header class="regions-heading">
+    <div>
+      <span class="regions-kicker">GEOGRAFIA · REGIÕES BRASILEIRAS</span>
+      <h2 id="regionsGameTitle">Quebra-cabeça das Regiões do Brasil</h2>
+    </div>
+
+    <p>
+      Antes da partida, observe o mapa completo. Ao clicar em <strong>Iniciar jogo</strong>,
+      as cinco peças sairão do mapa. Ficará apenas a silhueta do Brasil, sem linhas
+      internas. Leve cada região ao lugar correto para que ela se encaixe.
+    </p>
+  </header>
+
+  <div class="regions-game" data-regions-game data-difficulty="medio" data-phase="preview">
+    <div class="regions-game__topbar">
+      <div class="regions-stat">
+        <span>Peças colocadas</span>
+        <strong><b id="regionsPlacedCount">5</b>/5</strong>
+      </div>
+
+      <div class="regions-stat">
+        <span>Tentativas</span>
+        <strong id="regionsAttempts">0</strong>
+      </div>
+
+      <div class="regions-stat">
+        <span>Tempo</span>
+        <strong id="regionsTimer">00:00</strong>
+      </div>
+
+      <div class="regions-stat">
+        <span>Pontuação</span>
+        <strong id="regionsScore">100</strong>
+      </div>
+
+      <div class="regions-game__actions">
+        <label class="regions-difficulty-control">
+          <span>Nível</span>
+          <select id="regionsDifficulty">
+            <option value="facil">Fácil · nomes visíveis</option>
+            <option value="medio" selected>Médio · nome ao selecionar</option>
+            <option value="desafio">Desafio · sem nomes</option>
+          </select>
+        </label>
+
+        <button id="regionsStartButton" class="regions-button regions-button--primary" type="button">
+          Iniciar jogo
+        </button>
+
+        <button id="regionsHintButton" class="regions-button regions-button--soft" type="button" disabled>
+          Mostrar dica
+        </button>
+
+        <button id="regionsResetButton" class="regions-button regions-button--dark" type="button">
+          Voltar ao início
+        </button>
+      </div>
+    </div>
+
+    <div class="regions-game__layout">
+      <aside class="regions-tray" aria-labelledby="regionsTrayTitle">
+        <div class="regions-tray__heading">
+          <span>PEÇAS DO JOGO</span>
+          <h3 id="regionsTrayTitle">Aguardando o início</h3>
+          <p id="regionsTrayText">
+            Clique em “Iniciar jogo” para retirar as regiões do mapa.
+          </p>
+        </div>
+
+        <div id="regionsPieces" class="regions-pieces"></div>
+      </aside>
+
+      <div class="regions-board-column">
+        <div
+          id="regionsBoard"
+          class="regions-board"
+          role="application"
+          aria-label="Mapa do Brasil para montar o quebra-cabeça"
+        >
+          <img
+            class="regions-board__base"
+            src="assets/img/jogos/regioes-brasil/mapa-brasil-silhueta.png"
+            alt="Silhueta do mapa do Brasil sem divisões internas"
+            width="2000"
+            height="2000"
+            draggable="false"
+          >
+
+          <div id="regionsPlacedLayer" class="regions-board__placed"></div>
+          <div id="regionsHintLayer" class="regions-board__hint" aria-hidden="true"></div>
+
+          <div id="regionsBoardMessage" class="regions-board__message">
+            Observe o mapa completo e clique em “Iniciar jogo”
+          </div>
+        </div>
+
+        <p class="regions-board__instruction">
+          Computador: arraste a peça. Celular: toque na peça e depois toque no mapa.
+        </p>
+      </div>
+
+      <aside class="regions-info">
+        <span class="regions-info__eyebrow">COMO FUNCIONA</span>
+        <h3 id="regionsInfoTitle">Observe antes de jogar</h3>
+        <p id="regionsInfoText">
+          As peças estão encaixadas no mapa. Quando a partida começar, elas irão
+          para a bandeja e o mapa ficará apenas com o contorno do Brasil.
+        </p>
+
+        <div id="regionsFeedback" class="regions-feedback" role="status" aria-live="polite">
+          <strong>Mapa completo</strong>
+          <p>Memorize a posição das cinco regiões e depois inicie a atividade.</p>
+        </div>
+
+        <div class="regions-legend">
+          <span><i class="regions-legend__dot regions-legend__dot--selected"></i> Peça selecionada</span>
+          <span><i class="regions-legend__dot regions-legend__dot--correct"></i> Posição correta</span>
+          <span><i class="regions-legend__dot regions-legend__dot--wrong"></i> Tente novamente</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section id="regionsResult" class="regions-result" hidden>
+    <div>
+      <span class="regions-kicker">MISSÃO CONCLUÍDA</span>
+      <h2>Brasil montado!</h2>
+      <p id="regionsResultText"></p>
+    </div>
+
+    <div class="regions-result__score">
+      <span>Resultado final</span>
+      <strong id="regionsFinalScore">100</strong>
+      <small>pontos</small>
+    </div>
+
+    <div class="regions-result__actions">
+      <button id="regionsPlayAgain" class="regions-button regions-button--primary" type="button">
+        Jogar novamente
+      </button>
+      <button id="regionsPrintResult" class="regions-button regions-button--soft" type="button">
+        Imprimir resultado
+      </button>
+    </div>
+  </section>
+
+  <div class="regions-teacher-inline">
+    <span class="regions-kicker">DEPOIS DO JOGO</span>
+    <div class="regions-teacher-inline__grid">
+      <article>
+        <strong>Estados e capitais</strong>
+        <p>Escolha uma região e liste seus estados e capitais.</p>
+      </article>
+      <article>
+        <strong>Comparação regional</strong>
+        <p>Compare clima, vegetação, cultura, população e atividades econômicas.</p>
+      </article>
+      <article>
+        <strong>Bahia no mapa</strong>
+        <p>Localize a Bahia, identifique o Nordeste e relacione o conteúdo a Vera Cruz.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<canvas id="regionsColorCanvas" width="2000" height="2000" hidden></canvas>
+<img
+  id="regionsOriginalMap"
+  src="assets/img/jogos/regioes-brasil/mapa-regioes-brasil-original.png"
+  alt=""
+  width="2000"
+  height="2000"
+  hidden
+>
+
+
+<section class="states-regions section-shell" id="quebra-cabeca-estados-regioes" aria-labelledby="statesRegionTitleMain">
+  <header class="states-heading">
+    <div>
+      <span class="states-kicker">GEOGRAFIA · ESTADOS DE CADA REGIÃO</span>
+      <h2 id="statesRegionTitleMain">Quebra-cabeça das regiões, uma por uma</h2>
+    </div>
+    <p>
+      Além do desafio de montar o Brasil por regiões, agora também é possível jogar separadamente em
+      cada região. Escolha uma aba, observe os estados encaixados e depois clique em <strong>Iniciar jogo</strong>
+      para montar a região novamente.
+    </p>
+  </header>
+
+  <div class="states-tabs" role="tablist" aria-label="Escolher região do quebra-cabeça">
+    <button class="states-tab is-active" type="button" role="tab" aria-selected="true" data-region-tab="norte">Norte</button>
+    <button class="states-tab" type="button" role="tab" aria-selected="false" data-region-tab="nordeste">Nordeste</button>
+    <button class="states-tab" type="button" role="tab" aria-selected="false" data-region-tab="centro-oeste">Centro-Oeste</button>
+    <button class="states-tab" type="button" role="tab" aria-selected="false" data-region-tab="sudeste">Sudeste</button>
+    <button class="states-tab" type="button" role="tab" aria-selected="false" data-region-tab="sul">Sul</button>
+  </div>
+
+  <div class="states-game" data-states-region-game data-current-region="norte" data-phase="preview">
+    <div class="states-topbar">
+      <div class="states-stat">
+        <span>Peças colocadas</span>
+        <strong><b id="statePlacedCount">0</b>/<span id="stateTotalCount">0</span></strong>
+      </div>
+      <div class="states-stat">
+        <span>Tentativas</span>
+        <strong id="stateAttempts">0</strong>
+      </div>
+      <div class="states-stat">
+        <span>Tempo</span>
+        <strong id="stateTimer">00:00</strong>
+      </div>
+      <div class="states-stat">
+        <span>Pontuação</span>
+        <strong id="stateScore">100</strong>
+      </div>
+      <div class="states-actions">
+        <button id="stateStartButton" class="states-button states-button--primary" type="button">Iniciar jogo</button>
+        <button id="stateHintButton" class="states-button states-button--soft" type="button" disabled>Mostrar dica</button>
+        <button id="stateResetButton" class="states-button states-button--dark" type="button">Voltar ao início</button>
+      </div>
+    </div>
+
+    <div class="states-layout">
+      <aside class="states-tray">
+        <div class="states-tray__heading">
+          <span>PEÇAS</span>
+          <h3 id="stateTrayTitle">Observe antes de jogar</h3>
+          <p id="stateTrayText">Ao clicar em iniciar, os estados sairão do mapa e aparecerão aqui.</p>
+        </div>
+        <div id="statePieces" class="states-pieces"></div>
+      </aside>
+
+      <div class="states-board-column">
+        <div id="stateBoard" class="states-board" role="application" aria-label="Quebra-cabeça dos estados da região">
+          <img id="stateBoardBase" class="states-board__base" src="" alt="Silhueta da região selecionada" draggable="false">
+          <div id="statePlacedLayer" class="states-board__placed"></div>
+          <div id="stateHintLayer" class="states-board__hint" aria-hidden="true"></div>
+          <div id="stateBoardMessage" class="states-board__message">Observe a região completa antes de iniciar.</div>
+        </div>
+        <p class="states-board__instruction">Computador: arraste a peça. Celular: toque na peça e depois toque no lugar em que ela deve encaixar.</p>
+      </div>
+
+      <aside class="states-info">
+        <span class="states-info__eyebrow">REGIÃO SELECIONADA</span>
+        <h3 id="stateRegionName">Região Norte</h3>
+        <p id="stateRegionFact">Carregando informações da região...</p>
+        <div id="stateFeedback" class="states-feedback" role="status" aria-live="polite">
+          <strong>Mapa completo</strong>
+          <p>Observe a posição dos estados e depois inicie a atividade.</p>
+        </div>
+        <div class="states-legend">
+          <span><i class="states-legend__dot states-legend__dot--selected"></i> Peça selecionada</span>
+          <span><i class="states-legend__dot states-legend__dot--correct"></i> Posição correta</span>
+          <span><i class="states-legend__dot states-legend__dot--wrong"></i> Tente novamente</span>
+        </div>
+        <div id="stateRegionNote" class="states-note" hidden></div>
+      </aside>
+    </div>
+  </div>
+
+  <section id="stateResult" class="states-result" hidden>
+    <div>
+      <span class="states-kicker">MISSÃO CONCLUÍDA</span>
+      <h2>Região montada!</h2>
+      <p id="stateResultText"></p>
+    </div>
+    <div class="states-result__score">
+      <span>Resultado final</span>
+      <strong id="stateFinalScore">100</strong>
+      <small>pontos</small>
+    </div>
+    <div class="states-result__actions">
+      <button id="statePlayAgain" class="states-button states-button--primary" type="button">Jogar novamente</button>
+      <button id="statePrintResult" class="states-button states-button--soft" type="button">Imprimir resultado</button>
+    </div>
+  </section>
+
+  <div class="states-teacher-inline">
+    <span class="states-kicker">IDEIAS DE USO</span>
+    <div class="states-teacher-inline__grid">
+      <article>
+        <strong>Estados e capitais</strong>
+        <p>Depois de montar a região, liste os estados, capitais e siglas.</p>
+      </article>
+      <article>
+        <strong>Comparação</strong>
+        <p>Compare relevo, clima, vegetação, cultura e atividades econômicas entre as regiões.</p>
+      </article>
+      <article>
+        <strong>Pesquisa orientada</strong>
+        <p>Escolha um estado para pesquisar curiosidades, bandeira, população e manifestações culturais.</p>
+      </article>
+    </div>
   </div>
 </section>
 
