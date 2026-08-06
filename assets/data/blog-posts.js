@@ -8,17 +8,75 @@
   2. Cole a cópia logo abaixo desta explicação, dentro da lista.
   3. Preencha título, data, resumo, imagem e conteúdo.
   4. Salve o arquivo. O blog se reorganiza sozinho pela data.
-  5. O texto completo aparece dentro de blog.html, sem abrir outra página.
 
   IMPORTANTE:
   - Use uma slug sem espaços, acentos ou letras maiúsculas.
   - Coloque a imagem dentro de assets/img/blog/.
   - Informe o caminho como: assets/img/blog/nome-da-imagem.webp
   - A data deve seguir o formato AAAA-MM-DD.
-  - Não crie uma página HTML para a notícia: título, imagem e conteúdo ficam neste arquivo.
 */
 
 window.CONECTA_BLOG_POSTS = [
+  {
+    slug: "ideb-2025-luiz-eduardo-magalhaes",
+    titulo: "Colégio Luiz Eduardo Magalhães conquista 1º lugar no IDEB de Vera Cruz",
+    subtitulo: "Com nota 5,2 nos anos finais, o colégio celebra a evolução da aprendizagem e o melhor resultado do município.",
+    resumo: "O Colégio Luiz Eduardo Magalhães alcançou nota 5,2 no IDEB 2025 e ficou em 1º lugar no município. O resultado representa um salto em relação à média 3,1 registrada em 2023.",
+    data: "2026-08-06",
+    dataTexto: "6 de agosto de 2026",
+    categoria: "Educação",
+    categoriaSlug: "educacao",
+    tags: ["IDEB 2025", "Educação", "Gamboa", "Colégio Luiz Eduardo Magalhães", "Anos finais"],
+    autor: "Equipe Conecta Vera Cruz",
+    tempoLeitura: "2 min",
+    imagem: "assets/img/blog/card-ideb.png",
+    imagemAlt: "Card do Colégio Luiz Eduardo Magalhães mostrando a evolução do IDEB dos anos finais de 3,1 em 2023 para 5,2 em 2025",
+    destaque: true,
+    conteudo: [
+      {
+        tipo: "paragrafo",
+        texto: "O Colégio Luiz Eduardo Magalhães, localizado na Gamboa, alcançou a nota 5,2 no IDEB 2025 nos anos finais e conquistou o 1º lugar entre os colégios do município de Vera Cruz."
+      },
+      {
+        tipo: "titulo",
+        texto: "Um avanço que merece destaque"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "O resultado mostra uma evolução importante. Em 2023, a escola havia registrado média 3,1. Em 2025, chegou a 5,2, representando um crescimento de 2,1 pontos."
+      },
+      {
+        tipo: "lista",
+        itens: [
+          "IDEB dos anos finais em 2023: 3,1.",
+          "IDEB dos anos finais em 2025: 5,2.",
+          "Crescimento registrado: 2,1 pontos.",
+          "Posição no município: 1º lugar."
+        ]
+      },
+      {
+        tipo: "citacao",
+        texto: "O sucesso de qualquer projeto depende do esforço coletivo."
+      },
+      {
+        tipo: "titulo",
+        texto: "Uma conquista construída por muitas mãos"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "A conquista é resultado da dedicação dos estudantes, do compromisso dos professores, do trabalho da gestão e dos demais profissionais da escola, além da parceria das famílias."
+      },
+      {
+        tipo: "paragrafo",
+        texto: "Mais do que um número, a nota representa aprendizagem, planejamento, acompanhamento pedagógico e confiança no potencial dos alunos. A comunidade escolar comemora o resultado e segue trabalhando para alcançar novos avanços."
+      },
+      {
+        tipo: "nota",
+        texto: "Informações e médias apresentadas conforme o material de divulgação fornecido pela Escola Luiz Eduardo Magalhães."
+      }
+    ]
+  },
+
   {
     slug: "festival-64-anos",
     titulo: "Festival de Aniversário movimenta a Orla de Mar Grande",
@@ -33,7 +91,7 @@ window.CONECTA_BLOG_POSTS = [
     tempoLeitura: "4 min",
     imagem: "assets/img/blog/64-anos/festival-programacao.webp",
     imagemAlt: "Cartaz do Festival de Aniversário de 64 anos de Vera Cruz",
-    destaque: true,
+    destaque: false,
     conteudo: [
       {
         tipo: "paragrafo",
@@ -97,7 +155,7 @@ window.CONECTA_BLOG_POSTS = [
     tempoLeitura: "4 min",
     imagem: "assets/img/blog/64-anos/ato-civico-cultura.webp",
     imagemAlt: "Estudante erguendo a mensagem Nossa origem, nossa cultura",
-    destaque: true,
+    destaque: false,
     conteudo: [
       {
         tipo: "paragrafo",
