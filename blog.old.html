@@ -779,20 +779,8 @@
           heading.append(title, total);
 
           const form = make("form", "blog-comment-form");
-          const avatar = make("span", "blog-comment-form__avatar", "N");
+          const avatar = make("span", "blog-comment-form__avatar", "V");
           avatar.setAttribute("aria-hidden", "true");
-
-          const fields = make("div", "blog-comment-form__fields");
-
-          const nameInput = document.createElement("input");
-          nameInput.className = "blog-comment-form__name";
-          nameInput.type = "text";
-          nameInput.name = "nome";
-          nameInput.maxLength = 50;
-          nameInput.autocomplete = "name";
-          nameInput.placeholder = "Seu nome";
-          nameInput.required = true;
-          nameInput.setAttribute("aria-label", "Seu nome");
 
           const input = document.createElement("input");
           input.className = "blog-comment-form__input";
@@ -801,15 +789,12 @@
           input.maxLength = 220;
           input.autocomplete = "off";
           input.placeholder = "Escreva uma mensagem...";
-          input.required = true;
           input.setAttribute("aria-label", "Escreva uma mensagem");
-
-          fields.append(nameInput, input);
 
           const send = make("button", "blog-comment-form__send", "Publicar");
           send.type = "submit";
           send.disabled = true;
-          form.append(avatar, fields, send);
+          form.append(avatar, input, send);
 
           const status = make("p", "blog-comment-status");
           status.setAttribute("aria-live", "polite");
@@ -817,193 +802,11 @@
           const list = make("div", "blog-comment-list");
           list.setAttribute("aria-live", "polite");
 
-          function initials(name) {
-            const parts = String(name || "")
-              .trim()
-              .split(/\s+/)
-              .filter(Boolean);
-            if (!parts.length) return "?";
-            if (parts.length === 1) return parts[0].slice(0, 1).toUpperCase();
-            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-          }
-
-          function normalizedComments() {
-            return readPostComments(post).map(function (comment) {
-              return {
-                ...comment,
-                nome: String(comment.nome || "Autor não identificado").trim(),
-                respostas: Array.isArray(comment.respostas)
-                  ? comment.respostas
-                  : [],
-              };
-            });
-          }
-
-          function messageCount(comments) {
-            return comments.reduce(function (sum, comment) {
-              return sum + 1 + (comment.respostas || []).length;
-            }, 0);
-          }
-
-          function formattedDate() {
-            return new Intl.DateTimeFormat("pt-BR", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            }).format(new Date());
-          }
-
-          function updateMainForm() {
-            const name = nameInput.value.trim();
-            const text = input.value.trim();
-            send.disabled = name.length < 2 || text.length < 2;
-            avatar.textContent = initials(name || "N");
-          }
-
-          function createReplyForm(comment, host) {
-            const replyForm = make("form", "blog-comment-reply-form");
-            replyForm.setAttribute(
-              "aria-label",
-              "Responder a " + comment.nome,
-            );
-
-            const replyNotice = make(
-              "span",
-              "blog-comment-reply-form__notice",
-              "Respondendo a " + comment.nome,
-            );
-
-            const replyFields = make("div", "blog-comment-reply-form__fields");
-
-            const replyName = document.createElement("input");
-            replyName.type = "text";
-            replyName.name = "nomeResposta";
-            replyName.maxLength = 50;
-            replyName.autocomplete = "name";
-            replyName.placeholder = "Seu nome";
-            replyName.required = true;
-            replyName.setAttribute("aria-label", "Seu nome para responder");
-
-            const replyText = document.createElement("input");
-            replyText.type = "text";
-            replyText.name = "textoResposta";
-            replyText.maxLength = 220;
-            replyText.autocomplete = "off";
-            replyText.placeholder = "Escreva sua resposta...";
-            replyText.required = true;
-            replyText.setAttribute(
-              "aria-label",
-              "Resposta para " + comment.nome,
-            );
-
-            replyFields.append(replyName, replyText);
-
-            const replyActions = make("div", "blog-comment-reply-form__actions");
-            const cancel = make("button", "blog-comment-reply-form__cancel", "Cancelar");
-            cancel.type = "button";
-            const publish = make("button", "blog-comment-reply-form__publish", "Responder");
-            publish.type = "submit";
-            publish.disabled = true;
-            replyActions.append(cancel, publish);
-
-            function updateReplyForm() {
-              publish.disabled =
-                replyName.value.trim().length < 2 ||
-                replyText.value.trim().length < 2;
-            }
-
-            replyName.addEventListener("input", updateReplyForm);
-            replyText.addEventListener("input", updateReplyForm);
-
-            cancel.addEventListener("click", function () {
-              replyForm.remove();
-            });
-
-            replyForm.addEventListener("submit", function (event) {
-              event.preventDefault();
-              const responder = replyName.value.trim();
-              const text = replyText.value.trim();
-              if (responder.length < 2 || text.length < 2) return;
-
-              const comments = normalizedComments().map(function (item) {
-                if (item.id !== comment.id) return item;
-                const replies = Array.isArray(item.respostas)
-                  ? [...item.respostas]
-                  : [];
-                replies.push({
-                  id:
-                    Date.now().toString(36) +
-                    Math.random().toString(36).slice(2, 7),
-                  nome: responder,
-                  texto: text,
-                  dataTexto: formattedDate(),
-                });
-                return { ...item, respostas: replies };
-              });
-
-              savePostComments(post, comments);
-              status.textContent = "Resposta publicada neste navegador.";
-              renderComments();
-            });
-
-            replyForm.append(replyNotice, replyFields, replyActions);
-            host.appendChild(replyForm);
-            replyName.focus();
-          }
-
-          function renderReply(reply, comment) {
-            const article = make("article", "blog-comment-reply");
-            const replyAvatar = make(
-              "span",
-              "blog-comment__avatar blog-comment__avatar--reply",
-              initials(reply.nome),
-            );
-            replyAvatar.setAttribute("aria-hidden", "true");
-
-            const body = make("div", "blog-comment__body");
-            const line = make("p", "blog-comment__text");
-            const author = make("strong", "", reply.nome || "Autor não identificado");
-            const destination = make(
-              "span",
-              "blog-comment__destination",
-              " respondeu a " + comment.nome,
-            );
-            const message = document.createTextNode(" " + reply.texto);
-            line.append(author, destination, message);
-
-            const meta = make("div", "blog-comment__meta");
-            const date = make("time", "", reply.dataTexto || "Agora");
-            const remove = make("button", "blog-comment__remove", "Excluir");
-            remove.type = "button";
-            remove.addEventListener("click", function () {
-              const next = normalizedComments().map(function (item) {
-                if (item.id !== comment.id) return item;
-                return {
-                  ...item,
-                  respostas: (item.respostas || []).filter(function (itemReply) {
-                    return itemReply.id !== reply.id;
-                  }),
-                };
-              });
-              savePostComments(post, next);
-              renderComments();
-              status.textContent = "Resposta excluída.";
-            });
-
-            meta.append(date, remove);
-            body.append(line, meta);
-            article.append(replyAvatar, body);
-            return article;
-          }
-
           function renderComments() {
-            const comments = normalizedComments();
-            const totalMessages = messageCount(comments);
-            total.textContent = totalMessages === 1
+            const comments = readPostComments(post);
+            total.textContent = comments.length === 1
               ? "1 mensagem"
-              : totalMessages + " mensagens";
+              : comments.length + " mensagens";
 
             if (!comments.length) {
               const empty = make(
@@ -1023,57 +826,30 @@
                 const commentAvatar = make(
                   "span",
                   "blog-comment__avatar",
-                  initials(comment.nome),
+                  "V",
                 );
                 commentAvatar.setAttribute("aria-hidden", "true");
 
                 const body = make("div", "blog-comment__body");
                 const line = make("p", "blog-comment__text");
-                const author = make(
-                  "strong",
-                  "",
-                  comment.nome || "Autor não identificado",
-                );
+                const author = make("strong", "", "Visitante");
                 const message = document.createTextNode(" " + comment.texto);
                 line.append(author, message);
 
                 const meta = make("div", "blog-comment__meta");
                 const date = make("time", "", comment.dataTexto || "Agora");
-                const reply = make("button", "blog-comment__reply", "Responder");
-                reply.type = "button";
                 const remove = make("button", "blog-comment__remove", "Excluir");
                 remove.type = "button";
-
-                reply.addEventListener("click", function () {
-                  const existing = body.querySelector(".blog-comment-reply-form");
-                  document
-                    .querySelectorAll(".blog-comment-reply-form")
-                    .forEach(function (formNode) {
-                      formNode.remove();
-                    });
-                  if (!existing) createReplyForm(comment, body);
-                });
-
                 remove.addEventListener("click", function () {
-                  const next = normalizedComments().filter(function (item) {
+                  const next = readPostComments(post).filter(function (item) {
                     return item.id !== comment.id;
                   });
                   savePostComments(post, next);
                   renderComments();
                   status.textContent = "Mensagem excluída.";
                 });
-
-                meta.append(date, reply, remove);
+                meta.append(date, remove);
                 body.append(line, meta);
-
-                if (comment.respostas.length) {
-                  const replies = make("div", "blog-comment-replies");
-                  comment.respostas.forEach(function (itemReply) {
-                    replies.appendChild(renderReply(itemReply, comment));
-                  });
-                  body.appendChild(replies);
-                }
-
                 article.append(commentAvatar, body);
                 return article;
               });
@@ -1081,27 +857,26 @@
             list.replaceChildren(...items);
           }
 
-          nameInput.addEventListener("input", updateMainForm);
-          input.addEventListener("input", updateMainForm);
+          input.addEventListener("input", function () {
+            send.disabled = input.value.trim().length < 2;
+          });
 
           form.addEventListener("submit", function (event) {
             event.preventDefault();
-            const name = nameInput.value.trim();
             const text = input.value.trim();
-            if (name.length < 2 || text.length < 2) {
-              status.textContent = "Informe seu nome e escreva a mensagem.";
-              return;
-            }
+            if (text.length < 2) return;
 
-            const comments = normalizedComments();
+            const comments = readPostComments(post);
             comments.push({
-              id:
-                Date.now().toString(36) +
-                Math.random().toString(36).slice(2, 7),
-              nome: name,
+              id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
               texto: text,
-              dataTexto: formattedDate(),
-              respostas: [],
+              dataTexto: new Intl.DateTimeFormat("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              }).format(new Date()),
             });
             savePostComments(post, comments);
             input.value = "";

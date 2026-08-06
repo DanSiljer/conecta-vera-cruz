@@ -2983,3 +2983,331 @@ button {
   }
 }
 
+
+
+/* ==========================================================
+   MENSAGENS E RESPOSTAS NO DESTAQUE DO BLOG
+   Nome obrigatório para publicar ou responder.
+   ========================================================== */
+.blog-featured-comments {
+  width: 100%;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #e3ece7;
+}
+
+.blog-featured-comments__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #18332d;
+  font-size: 0.88rem;
+}
+
+.blog-featured-comments__total {
+  color: #82908b;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.blog-comment-form {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 7px 8px;
+  border: 1px solid #dbe7e1;
+  border-radius: 22px;
+  background: #f8fbf9;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-comment-form:focus-within {
+  border-color: #8abda7;
+  box-shadow: 0 0 0 4px rgba(0, 122, 77, 0.08);
+}
+
+.blog-comment-form__avatar,
+.blog-comment__avatar {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #007a4d, #0aa273);
+  color: #fff;
+  font-weight: 900;
+}
+
+.blog-comment-form__avatar {
+  width: 38px;
+  height: 38px;
+  font-size: 0.82rem;
+}
+
+.blog-comment-form__fields {
+  display: grid;
+  grid-template-columns: minmax(105px, 0.36fr) minmax(160px, 1fr);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e1eae5;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.blog-comment-form__name,
+.blog-comment-form__input {
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  padding: 10px 11px;
+  background: transparent;
+  color: #18332d;
+}
+
+.blog-comment-form__name {
+  border-right: 1px solid #e7eeea;
+  font-weight: 800;
+}
+
+.blog-comment-form__name::placeholder,
+.blog-comment-form__input::placeholder {
+  color: #8a9692;
+  font-weight: 500;
+}
+
+.blog-comment-form__send {
+  min-height: 38px;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #007a4d;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.blog-comment-form__send:disabled,
+.blog-comment-reply-form__publish:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.blog-comment-status {
+  min-height: 18px;
+  margin: 7px 4px 0;
+  color: #64756f;
+  font-size: 0.72rem;
+}
+
+.blog-comment-list {
+  display: grid;
+  gap: 13px;
+  max-height: 360px;
+  margin-top: 6px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.blog-comment-empty {
+  margin: 0;
+  padding: 9px 4px;
+  color: #87938f;
+  font-size: 0.8rem;
+}
+
+.blog-comment {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+}
+
+.blog-comment__avatar {
+  width: 34px;
+  height: 34px;
+  font-size: 0.68rem;
+}
+
+.blog-comment__avatar--reply {
+  width: 29px;
+  height: 29px;
+  font-size: 0.61rem;
+  background: linear-gradient(145deg, #075f79, #0b8da0);
+}
+
+.blog-comment__body {
+  min-width: 0;
+}
+
+.blog-comment__text {
+  margin: 0;
+  color: #40554e;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.blog-comment__text strong {
+  color: #173b31;
+}
+
+.blog-comment__destination {
+  color: #7f8d88;
+  font-size: 0.76rem;
+}
+
+.blog-comment__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  color: #919b97;
+  font-size: 0.66rem;
+}
+
+.blog-comment__reply,
+.blog-comment__remove {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 850;
+}
+
+.blog-comment__reply {
+  color: #087b58;
+}
+
+.blog-comment__remove {
+  color: #a54757;
+}
+
+.blog-comment__reply:hover,
+.blog-comment__reply:focus-visible,
+.blog-comment__remove:hover,
+.blog-comment__remove:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-comment-replies {
+  display: grid;
+  gap: 9px;
+  margin-top: 10px;
+  padding: 10px 0 0 13px;
+  border-left: 2px solid #e1ebe6;
+}
+
+.blog-comment-reply {
+  display: grid;
+  grid-template-columns: 29px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.blog-comment-reply-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 11px;
+  padding: 11px;
+  border: 1px solid #d9e7e1;
+  border-radius: 14px;
+  background: #f7fbf9;
+}
+
+.blog-comment-reply-form__notice {
+  color: #526966;
+  font-size: 0.7rem;
+  font-weight: 850;
+}
+
+.blog-comment-reply-form__fields {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.34fr) minmax(150px, 1fr);
+  gap: 7px;
+}
+
+.blog-comment-reply-form__fields input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #dbe7e1;
+  border-radius: 10px;
+  outline: 0;
+  padding: 9px 10px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.blog-comment-reply-form__fields input:focus {
+  border-color: #78af98;
+  box-shadow: 0 0 0 3px rgba(0, 122, 77, 0.08);
+}
+
+.blog-comment-reply-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.blog-comment-reply-form__cancel,
+.blog-comment-reply-form__publish {
+  min-height: 32px;
+  border-radius: 999px;
+  padding: 6px 11px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.blog-comment-reply-form__cancel {
+  border: 1px solid #cfded7;
+  background: #fff;
+  color: #64756f;
+}
+
+.blog-comment-reply-form__publish {
+  border: 0;
+  background: #007a4d;
+  color: #fff;
+}
+
+@media (max-width: 620px) {
+  .blog-comment-form {
+    grid-template-columns: 34px minmax(0, 1fr);
+    border-radius: 18px;
+  }
+
+  .blog-comment-form__avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .blog-comment-form__fields,
+  .blog-comment-reply-form__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-comment-form__name {
+    border-right: 0;
+    border-bottom: 1px solid #e7eeea;
+  }
+
+  .blog-comment-form__send {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .blog-comment-list {
+    max-height: 430px;
+  }
+}
+
