@@ -539,13 +539,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getStudent() {
+    if (window.MissaoAprenderAluno && typeof window.MissaoAprenderAluno.get === "function") {
+      const registered = window.MissaoAprenderAluno.get();
+      return {
+        name: registered.name || "Visitante",
+        className: registered.className || "Não informada"
+      };
+    }
+
     const name = document.querySelector("#studentName");
     const className = document.querySelector("#studentClass");
 
     return {
       name: name && name.value.trim()
         ? name.value.trim()
-        : "Estudante sem nome",
+        : "Visitante",
       className: className && className.value.trim()
         ? className.value.trim()
         : "Não informada"
@@ -599,7 +607,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!results.length) {
       tableBody.innerHTML =
-        '<tr class="empty-row"><td colspan="7">Nenhuma atividade realizada ainda.</td></tr>';
+        '<tr class="empty-row"><td colspan="7">Nenhum jogo concluído ainda.</td></tr>';
       totalActivities.textContent = "0";
       averageScore.textContent = "0%";
       bestScore.textContent = "0%";
@@ -653,7 +661,7 @@ document.addEventListener("DOMContentLoaded", function () {
     elements.placeName.textContent = result.percentage + "% de aproveitamento";
     elements.placeDescription.textContent =
       "Você acertou " + state.correct + " de " + state.order.length +
-      " localidades. O resultado foi salvo no relatório.";
+      " localidades. O resultado foi salvo em Meu progresso.";
     elements.placeMunicipality.textContent = result.subject;
     elements.placePosition.textContent = result.date;
 

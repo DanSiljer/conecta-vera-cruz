@@ -536,3 +536,54 @@
     display: block;
   }
 }
+
+
+/* ==========================================================
+   CORREÇÃO V4: ALVO DO DESAFIO FORA DO MAPA
+   ========================================================== */
+.missao-aprender-app .map-target-panel {
+  position: static;
+  display: grid;
+  gap: 5px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 18px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 100% 0, rgba(248, 201, 76, .20), transparent 10rem),
+    linear-gradient(135deg, #182033, #073d55);
+  box-shadow: 0 16px 32px rgba(24, 32, 51, .16);
+}
+
+.missao-aprender-app .map-target-panel[hidden] {
+  display: none !important;
+}
+
+.missao-aprender-app .map-target-panel span,
+.missao-aprender-app .map-target-panel strong,
+.missao-aprender-app .map-target-panel small {
+  display: block;
+}
+
+.missao-aprender-app .map-target-panel span {
+  color: #f8c94c;
+  font-size: .66rem;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+.missao-aprender-app .map-target-panel strong {
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.missao-aprender-app .map-target-panel small {
+  color: rgba(255, 255, 255, .80);
+  line-height: 1.5;
+}
+
+@media print {
+  .missao-aprender-app .map-target-panel {
+    display: none !important;
+  }
+}

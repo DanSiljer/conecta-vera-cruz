@@ -272,10 +272,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function saveResult(finalScore) {
+    const registered = window.MissaoAprenderAluno && typeof window.MissaoAprenderAluno.get === 'function'
+      ? window.MissaoAprenderAluno.get()
+      : { name: '', className: '' };
+    const inputName = document.querySelector('#studentName');
+    const inputClass = document.querySelector('#studentClass');
+    const studentName = registered.name || (inputName && inputName.value.trim()) || 'Visitante';
+    const studentClass = registered.className || (inputClass && inputClass.value.trim()) || 'Não informada';
+
     const result = {
       id: Date.now(),
-      student: 'Atividade interativa',
-      className: regionData().name,
+      student: studentName,
+      className: studentClass,
       activity: 'Quebra-cabeça da ' + regionData().name,
       subject: 'Geografia',
       correct: regionData().count,
@@ -296,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const results = loadResults();
     if (!tableBody || !totalActivities || !averageScore || !bestScore) return;
     if (!results.length) {
-      tableBody.innerHTML = '<tr class="empty-row"><td colspan="7">Nenhuma atividade realizada ainda.</td></tr>';
+      tableBody.innerHTML = '<tr class="empty-row"><td colspan="7">Nenhum jogo concluído ainda.</td></tr>';
       totalActivities.textContent = '0'; averageScore.textContent = '0%'; bestScore.textContent = '0%'; return;
     }
     const average = Math.round(results.reduce(function (sum, item) { return sum + Number(item.percentage || 0); }, 0) / results.length);

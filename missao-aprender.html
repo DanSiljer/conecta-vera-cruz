@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="Missão Aprender: página educativa do Conecta Vera Cruz com jogos, atividades e uma área especial sobre a história de Vera Cruz e da Ilha de Itaparica." name="description"/>
+<meta content="Missão Aprender: jogos educativos e experiências interativas para conhecer História, Matemática, Geografia, Português, Ciências, Vera Cruz e a Ilha de Itaparica." name="description"/>
 <title>Missão Aprender | Conecta Vera Cruz</title>
 
-<link href="assets/img/favicon.ico" rel="icon" type="image/x-icon"/><link href="manifest.webmanifest" rel="manifest"/><link href="assets/css/global.css" rel="stylesheet"/><link href="assets/css/layout.css" rel="stylesheet"/><link href="assets/css/pages/missao-aprender.css" rel="stylesheet"/><link href="assets/css/pages/mapa-ilha.css?v=2" rel="stylesheet"/><link href="assets/css/pages/jogo-regioes-brasil.css?v=3" rel="stylesheet"/><link href="assets/css/pages/jogo-estados-regioes.css?v=1" rel="stylesheet"/><script defer src="assets/js/main.js"></script><script defer src="assets/js/layout.js"></script><script defer src="assets/js/missao-aprender.js"></script><script defer src="assets/js/mapa-ilha.js?v=2"></script><script defer src="assets/js/jogo-regioes-brasil.js?v=3"></script><script defer src="assets/js/jogo-estados-regioes.js?v=1"></script>
+<link href="assets/img/favicon.ico" rel="icon" type="image/x-icon"/><link href="manifest.webmanifest" rel="manifest"/><link href="assets/css/global.css" rel="stylesheet"/><link href="assets/css/layout.css" rel="stylesheet"/><link href="assets/css/pages/missao-aprender.css" rel="stylesheet"/><link href="assets/css/pages/mapa-ilha.css?v=4" rel="stylesheet"/><link href="assets/css/pages/jogo-regioes-brasil.css?v=3" rel="stylesheet"/><link href="assets/css/pages/jogo-estados-regioes.css?v=1" rel="stylesheet"/><script defer src="assets/js/main.js"></script><script defer src="assets/js/layout.js"></script><script defer src="assets/js/missao-aprender.js"></script><script defer src="assets/js/mapa-ilha.js?v=4"></script><script defer src="assets/js/jogo-regioes-brasil.js?v=4"></script><script defer src="assets/js/jogo-estados-regioes.js?v=4"></script><script defer src="assets/js/identificacao-aluno.js?v=2"></script>
 </head>
 <body class="page-missao-aprender">
 
-<!-- Menu padrão inserido por assets/js/layout.js -->
+
 <div data-cv-header></div>
 
 <main id="conteudo"><div class="missao-aprender-app"><nav aria-label="Navegação da página Missão Aprender" class="missao-aprender-subnav">
@@ -24,8 +24,7 @@
 <a href="#mapa-jogo">Mapa-jogo</a>
 <a href="#quebra-cabeca-regioes">Regiões do Brasil</a>
 <a href="#disciplinas">Jogos</a>
-<a href="#professor">Área do professor</a>
-<a href="#resultados">Resultados</a>
+<a href="#resultados">Meu progresso</a>
 </div>
 </div>
 </nav>
@@ -44,9 +43,7 @@
 <a class="button button--primary" href="#disciplinas">
             Começar a jogar
           </a>
-<a class="button button--ghost" href="#professor">
-            Criar atividade
-          </a>
+<a class="button button--ghost" href="#mapa-jogo">Explorar a Ilha</a>
 </div>
 <div aria-label="Recursos da plataforma" class="hero__stats">
 <article>
@@ -89,23 +86,23 @@
 </section>
 <section aria-labelledby="studentTitle" class="student-panel section-shell">
 <div>
-<span class="section-kicker">IDENTIFICAÇÃO</span>
-<h2 id="studentTitle">Antes de começar</h2>
+<span class="section-kicker">SEU PERFIL</span>
+<h2 id="studentTitle">Como você quer aparecer?</h2>
 <p>
-          Preencha os dados para registrar a pontuação no relatório desta página.
+          Digite seu nome para acompanhar as pontuações dos jogos neste navegador.
         </p>
 </div>
 <div class="student-form">
 <label>
-          Nome do estudante
-          <input autocomplete="name" id="studentName" maxlength="60" placeholder="Digite o nome" type="text"/>
+          Seu nome
+          <input autocomplete="name" id="studentName" maxlength="60" placeholder="Digite seu nome" type="text"/>
 </label>
 
 <button class="button button--dark" id="saveStudentButton" type="button">
-          Salvar dados
+          Salvar nome
         </button>
 </div>
-<p aria-live="polite" class="form-message" id="studentMessage"></p>
+<p aria-live="polite" class="form-message" id="studentMessage">O nome será usado nos resultados dos jogos.</p>
 </section>
 
 <section class="local-history section-shell" id="historia-local" aria-labelledby="localHistoryTitle">
@@ -206,7 +203,7 @@
 
   <div class="local-history__mission">
     <div>
-      <span class="local-history__mission-label">ATIVIDADE ESPECIAL</span>
+      <span class="local-history__mission-label">DESAFIO ESPECIAL</span>
       <h3>Missão da Ilha: você conhece a nossa história?</h3>
       <p>
         Escolha o nível, responda aos desafios e descubra quanto já sabe sobre
@@ -227,7 +224,7 @@
       <h2 id="islandMapTitle">Mapa-jogo da Ilha de Itaparica</h2>
       <p>
         Explore as comunidades, observe a posição de cada lugar e depois enfrente
-        o desafio de localização. O resultado entra no relatório da Missão Aprender.
+        o desafio de localização. Sua pontuação fica registrada na seção Meu progresso.
       </p>
     </div>
 
@@ -271,17 +268,11 @@
         >
 
         <div class="island-map-game__hotspots" id="islandMapHotspots" aria-label="Localidades da Ilha de Itaparica"></div>
-
-        <div class="island-map-game__target" id="mapTargetCard" hidden>
-          <span>ENCONTRE NO MAPA</span>
-          <strong id="mapTargetName">Mar Grande</strong>
-          <small id="mapTargetClue">Observe o lado leste da ilha.</small>
-        </div>
       </div>
 
       <p class="island-map-game__source">
-        Mapa adaptado das referências enviadas para a atividade. Os marcadores são
-        aproximações educativas e não substituem uma carta cartográfica oficial.
+        Mapa ilustrativo para exploração educativa da Ilha de Itaparica. Os marcadores
+        representam posições aproximadas das localidades.
       </p>
     </div>
 
@@ -302,6 +293,13 @@
             <dd id="mapPlacePosition">Norte, centro ou sul da ilha</dd>
           </div>
         </dl>
+      </div>
+
+
+      <div class="map-target-panel" id="mapTargetCard" hidden>
+        <span>ENCONTRE NO MAPA</span>
+        <strong id="mapTargetName">Mar Grande</strong>
+        <small id="mapTargetClue">Observe o lado leste da ilha.</small>
       </div>
 
       <form class="map-challenge-settings" id="mapChallengeSettings">
@@ -480,7 +478,7 @@
 
         <div id="regionsFeedback" class="regions-feedback" role="status" aria-live="polite">
           <strong>Mapa completo</strong>
-          <p>Memorize a posição das cinco regiões e depois inicie a atividade.</p>
+          <p>Memorize a posição das cinco regiões e depois inicie o jogo.</p>
         </div>
 
         <div class="regions-legend">
@@ -516,7 +514,7 @@
   </section>
 
   <div class="regions-teacher-inline">
-    <span class="regions-kicker">DEPOIS DO JOGO</span>
+    <span class="regions-kicker">CONTINUE APRENDENDO</span>
     <div class="regions-teacher-inline__grid">
       <article>
         <strong>Estados e capitais</strong>
@@ -617,7 +615,7 @@
         <p id="stateRegionFact">Carregando informações da região...</p>
         <div id="stateFeedback" class="states-feedback" role="status" aria-live="polite">
           <strong>Mapa completo</strong>
-          <p>Observe a posição dos estados e depois inicie a atividade.</p>
+          <p>Observe a posição dos estados e depois inicie o jogo.</p>
         </div>
         <div class="states-legend">
           <span><i class="states-legend__dot states-legend__dot--selected"></i> Peça selecionada</span>
@@ -647,7 +645,7 @@
   </section>
 
   <div class="states-teacher-inline">
-    <span class="states-kicker">IDEIAS DE USO</span>
+    <span class="states-kicker">CONTINUE EXPLORANDO</span>
     <div class="states-teacher-inline__grid">
       <article>
         <strong>Estados e capitais</strong>
@@ -669,11 +667,11 @@
 <div class="section-heading">
 <div>
 <span class="section-kicker">ESCOLHA SUA MISSÃO</span>
-<h2>Qual disciplina você quer explorar?</h2>
+<h2>Qual jogo você quer explorar?</h2>
 </div>
 <p>
-          Cada partida seleciona perguntas diferentes. Errar não encerra o jogo:
-          mostra a resposta correta e transforma o tropeço em pista.
+          Cada partida apresenta desafios variados. Errar não encerra o jogo:
+          a resposta correta aparece e o erro se transforma em pista.
         </p>
 </div>
 <div class="subject-grid">
@@ -784,7 +782,7 @@
         </button>
 </div>
 <div class="game-status">
-<div aria-label="Progresso da atividade" class="progress-track">
+<div aria-label="Progresso do jogo" class="progress-track">
 <span id="progressBar"></span>
 </div>
 <div class="game-status__numbers">
@@ -806,7 +804,7 @@
         </button>
 </article>
 </section>
-<section class="teacher section-shell" id="professor">
+<section class="teacher section-shell" id="professor" hidden aria-hidden="true" style="display:none!important">
 <div class="section-heading">
 <div>
 <span class="section-kicker">ÁREA DO PROFESSOR</span>
@@ -915,20 +913,20 @@
 <div class="section-heading">
 <div>
 <span class="section-kicker">ACOMPANHAMENTO</span>
-<h2>Resultados das atividades</h2>
+<h2>Meu progresso nos jogos</h2>
 </div>
 <div class="results-actions">
 <button class="button button--ghost-dark" id="exportResultsButton" type="button">
-            Exportar CSV
+            Baixar progresso
           </button>
 <button class="button button--danger" id="clearResultsButton" type="button">
-            Limpar resultados
+            Limpar progresso
           </button>
 </div>
 </div>
 <div class="results-summary">
 <article>
-<span>Atividades realizadas</span>
+<span>Jogos concluídos</span>
 <strong id="totalActivities">0</strong>
 </article>
 <article>
@@ -944,18 +942,18 @@
 <table>
 <thead>
 <tr>
-<th>Estudante</th>
-<th>Turma</th>
-<th>Atividade</th>
-<th>Disciplina</th>
+<th>Participante</th>
+<th>Categoria</th>
+<th>Jogo</th>
+<th>Tema</th>
 <th>Acertos</th>
-<th>Nota</th>
+<th>Pontuação</th>
 <th>Data</th>
 </tr>
 </thead>
 <tbody id="resultsTableBody">
 <tr class="empty-row">
-<td colspan="7">Nenhuma atividade realizada ainda.</td>
+<td colspan="7">Nenhum jogo concluído ainda.</td>
 </tr>
 </tbody>
 </table>
@@ -983,7 +981,7 @@
 </section>
 </div></div></main>
 
-<!-- Rodapé padrão inserido por assets/js/layout.js -->
+
 <div data-cv-footer></div>
 
 

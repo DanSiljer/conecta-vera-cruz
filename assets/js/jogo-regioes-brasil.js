@@ -585,11 +585,11 @@ document.addEventListener("DOMContentLoaded", function () {
       name:
         elements.studentName && elements.studentName.value.trim()
           ? elements.studentName.value.trim()
-          : "Estudante sem nome",
+          : "Visitante",
       className:
         elements.studentClass && elements.studentClass.value.trim()
           ? elements.studentClass.value.trim()
-          : "Turma não informada"
+          : "Sem categoria"
     };
   }
 
@@ -632,7 +632,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!results.length) {
       tableBody.innerHTML =
-        '<tr class="empty-row"><td colspan="7">Nenhuma atividade realizada ainda.</td></tr>';
+        '<tr class="empty-row"><td colspan="7">Nenhum jogo concluído ainda.</td></tr>';
       totalActivities.textContent = "0";
       averageScore.textContent = "0%";
       bestScore.textContent = "0%";
