@@ -23,7 +23,7 @@
       href="assets/css/pages/jogo-estados-regioes.css?v=1"
       rel="stylesheet"
     />
-    <link href="assets/css/pages/missao-aprender-hub.css?v=7" rel="stylesheet" />
+    <link href="assets/css/pages/missao-aprender-hub.css?v=1" rel="stylesheet" />
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/layout.js"></script>
     <script defer src="assets/js/missao-aprender.js"></script>
@@ -32,7 +32,7 @@
     <script defer src="assets/js/jogo-estados-regioes.js?v=4"></script>
     <script defer src="assets/js/identificacao-aluno.js?v=2"></script>
     <script defer src="assets/js/livro-karl-marx.js?v=1"></script>
-    <script defer src="assets/js/missao-aprender-hub.js?v=7"></script>
+    <script defer src="assets/js/missao-aprender-hub.js?v=1"></script>
   </head>
   <body class="page-missao-aprender">
     <div data-cv-header></div>
@@ -50,7 +50,7 @@
             </a>
             <div class="missao-aprender-subnav__links">
               <a href="#central-jogos">Jogos</a>
-              <a href="#livro-karl-marx" data-hub-open="livro-karl-marx">Livro</a>
+              <a href="#biblioteca">Biblioteca</a>
               <a href="#perfil-aluno">Meu nome</a>
               <a href="#resultados" data-hub-open="resultados">Progresso</a>
             </div>
@@ -126,20 +126,19 @@
           </header>
 
           <div class="game-hub__quick" aria-label="Atalhos da Missão Aprender">
-            <button class="hub-chip" type="button" data-subject-target="vera-cruz">★ Missão Vera Cruz</button>
+            <button class="hub-chip" type="button" data-subject-target="vera-cruz">★ História de Vera Cruz</button>
             <button class="hub-chip" type="button" data-module-target="mapa-jogo">⌖ Mapa da Ilha</button>
             <button class="hub-chip" type="button" data-module-target="quebra-cabeca-regioes">▦ Regiões do Brasil</button>
             <button class="hub-chip" type="button" data-module-target="livro-karl-marx">📖 Livro interativo</button>
-            <button class="hub-chip" type="button" data-module-target="historia-local">🌊 História de Vera Cruz</button>
             <button class="hub-chip" type="button" data-module-target="resultados">✓ Meu progresso</button>
           </div>
 
           <div class="game-hub__grid">
             <button class="game-card game-card--island" type="button" data-subject-target="vera-cruz">
-              <span class="game-card__top"><span class="game-card__icon" aria-hidden="true">🏝️</span><span class="game-card__type">História local</span></span>
+              <span class="game-card__top"><span class="game-card__icon" aria-hidden="true">🏝️</span><span class="game-card__type">Quiz local</span></span>
               <h3>Missão Vera Cruz</h3>
-              <p>Teste seus conhecimentos sobre a história de Vera Cruz, povos originários, emancipação e memória da ilha.</p>
-              <span class="game-card__action">Iniciar missão →</span>
+              <p>História da ilha, povos originários, emancipação e memória local.</p>
+              <span class="game-card__action">Jogar agora →</span>
             </button>
 
             <button class="game-card game-card--map" type="button" data-module-target="mapa-jogo">
@@ -170,10 +169,10 @@
               <span class="game-card__action">Abrir livro →</span>
             </button>
 
-            <button class="game-card game-card--local-history" type="button" data-module-target="historia-local">
+            <button class="game-card game-card--localhistory" type="button" data-module-target="historia-local">
               <span class="game-card__top"><span class="game-card__icon" aria-hidden="true">🌊</span><span class="game-card__type">História local</span></span>
               <h3>História de Vera Cruz</h3>
-              <p>Conheça a formação do município, os povos originários, a memória local e a emancipação de Vera Cruz.</p>
+              <p>Linha do tempo, povos originários, formação do município e memória da ilha.</p>
               <span class="game-card__action">Conhecer história →</span>
             </button>
 
