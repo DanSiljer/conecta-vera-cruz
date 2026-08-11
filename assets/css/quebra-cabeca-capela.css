@@ -1,0 +1,208 @@
+/* ==========================================================
+   MISSÃO APRENDER · QUEBRA-CABEÇA DA CAPELA DO JABURU
+   ========================================================== */
+.game-card--puzzle {
+  background: linear-gradient(145deg, #7a4a2b 0%, #174e78 100%) !important;
+  color: #fff !important;
+}
+
+.capela-puzzle {
+  width: min(100% - 24px, 1180px);
+  scroll-margin-top: calc(var(--cv-header-height, 72px) + 70px);
+}
+
+.capela-puzzle[hidden] { display: none !important; }
+
+.capela-puzzle__header { margin-bottom: 20px; }
+.capela-puzzle__header h2 {
+  margin: 6px 0 8px;
+  color: #16334a;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.04;
+}
+.capela-puzzle__header p {
+  max-width: 760px;
+  margin: 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.capela-puzzle__layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.capela-puzzle__side { display: flex; flex-direction: column; gap: 14px; }
+.capela-puzzle__reference {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #dbe4ea;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(24,32,51,.08);
+}
+.capela-puzzle__reference img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1650 / 928;
+  object-fit: cover;
+}
+.capela-puzzle__reference figcaption {
+  padding: 10px 14px;
+  color: #4a5565;
+  font-size: .8rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+.capela-puzzle__controls,
+.capela-puzzle__stats,
+.capela-puzzle__message {
+  padding: 15px;
+  border: 1px solid #dbe4ea;
+  border-radius: 18px;
+  background: #f9fbfc;
+}
+.capela-puzzle__controls label {
+  display: grid;
+  gap: 8px;
+  color: #243b53;
+  font-weight: 850;
+}
+.capela-puzzle__controls select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #cfd8e3;
+  border-radius: 14px;
+  background: #fff;
+  color: #203247;
+  font: inherit;
+}
+.capela-puzzle__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-top: 13px;
+}
+.capela-puzzle__buttons .button { min-height: 48px; padding-inline: 10px; }
+.capela-puzzle__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 10px;
+}
+.capela-puzzle__stats article {
+  padding: 12px;
+  border-radius: 14px;
+  background: #fff;
+  text-align: center;
+}
+.capela-puzzle__stats span {
+  display: block;
+  margin-bottom: 5px;
+  color: #6b7280;
+  font-size: .76rem;
+  font-weight: 750;
+}
+.capela-puzzle__stats strong { color: #17344b; font-size: 1.4rem; }
+.capela-puzzle__message {
+  margin: 0;
+  color: #29465a;
+  font-weight: 750;
+  line-height: 1.45;
+}
+.capela-puzzle__board-wrap { min-width: 0; }
+.capela-puzzle__board {
+  position: relative;
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  gap: 3px;
+  padding: 7px;
+  border: 1px solid #dbe4ea;
+  border-radius: 22px;
+  background: #dfe8ed;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7), 0 12px 32px rgba(24,32,51,.08);
+}
+.capela-puzzle__tile {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background-color: #cbd8df;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.capela-puzzle__tile:hover,
+.capela-puzzle__tile:focus-visible {
+  z-index: 2;
+  transform: scale(1.025);
+  outline: 2px solid rgba(34,100,229,.5);
+  box-shadow: 0 8px 18px rgba(24,32,51,.16);
+}
+.capela-puzzle__tile.is-selected {
+  z-index: 3;
+  outline: 4px solid #f5a623;
+  box-shadow: 0 10px 20px rgba(245,166,35,.28);
+}
+.capela-puzzle__tile.is-correct::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 2px rgba(19,121,91,.34);
+  content: "";
+  pointer-events: none;
+}
+.capela-puzzle__board.is-previewing::before {
+  position: absolute;
+  inset: 7px;
+  z-index: 20;
+  border-radius: 15px;
+  background: url("../../img/jogos/capela-velasquez-jaburu.jpg") center / 100% 100% no-repeat;
+  box-shadow: 0 0 0 999px rgba(255,255,255,.1);
+  content: "";
+  pointer-events: none;
+}
+.capela-puzzle__board.is-previewing::after {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 21;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(15,52,75,.9);
+  color: #fff;
+  content: "DICA · MEMORIZE A POSIÇÃO";
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .05em;
+}
+.capela-puzzle__instruction {
+  margin: 10px 4px 0;
+  color: #667085;
+  font-size: .78rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .capela-puzzle__layout { grid-template-columns: 1fr; }
+  .capela-puzzle__side {
+    display: grid;
+    grid-template-columns: minmax(200px,.8fr) minmax(0,1.2fr);
+    align-items: start;
+  }
+  .capela-puzzle__stats,
+  .capela-puzzle__message { grid-column: 2; }
+}
+@media (max-width: 680px) {
+  .capela-puzzle { width: calc(100% - 10px); padding: 12px 8px 18px; }
+  .capela-puzzle__side { display: flex; }
+  .capela-puzzle__buttons { grid-template-columns: 1fr; }
+  .capela-puzzle__stats { grid-template-columns: 1fr 1fr; }
+  .capela-puzzle__board { gap: 2px; padding: 4px; border-radius: 15px; }
+  .capela-puzzle__board.is-previewing::before { inset: 4px; border-radius: 11px; }
+}
