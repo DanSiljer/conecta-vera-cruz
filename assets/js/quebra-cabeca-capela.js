@@ -111,7 +111,7 @@
   function pieceGeometry() {
     const width = 100;
     const height = 100 / state.ratio;
-    const depth = height * 0.18;
+    const depth = Math.min(width, height) * 0.16;
     const pad = depth * 1.55;
     return { width: width, height: height, depth: depth, pad: pad };
   }
@@ -219,6 +219,15 @@
     ].join(" "));
     svg.setAttribute("aria-hidden", "true");
     svg.classList.add("capela-puzzle__piece-svg");
+
+    /* O SVG precisa crescer exatamente o mesmo valor do padding geométrico.
+       O tamanho fixo antigo (154%) criava frestas entre as peças, sobretudo
+       em imagens verticais. */
+    svg.style.left = (-(g.pad / g.width) * 100).toFixed(4) + "%";
+    svg.style.top = (-(g.pad / g.height) * 100).toFixed(4) + "%";
+    svg.style.width = (((g.width + g.pad * 2) / g.width) * 100).toFixed(4) + "%";
+    svg.style.height = (((g.height + g.pad * 2) / g.height) * 100).toFixed(4) + "%";
+
 
     if (!ghost) {
       const defs = document.createElementNS(SVG_NS, "defs");
@@ -377,11 +386,11 @@
     drag.piece.style.zIndex = "";
 
     if (drag.moved) {
-      const slotIndex = slotFromPoint(event.clientX, event.clientY);
+      const slotIndex = slotFromPiece(drag.piece);
       if (slotIndex !== null) {
         attemptPlacement(drag.piece, slotIndex, false);
       } else {
-        returnPiece(drag.piece, "Leve a peça até o tabuleiro para encaixá-la.");
+        returnPiece(drag.piece, "Leve a maior parte da peça para dentro do espaço correto do tabuleiro.");
       }
     }
 
@@ -401,6 +410,32 @@
     const col = Math.min(state.size - 1, Math.max(0, Math.floor(((clientX - rect.left) / rect.width) * state.size)));
     const row = Math.min(state.size - 1, Math.max(0, Math.floor(((clientY - rect.top) / rect.height) * state.size)));
     return row * state.size + col;
+  }
+
+  function slotFromPiece(piece) {
+    const pieceRect = piece.getBoundingClientRect();
+    const slots = board.querySelectorAll("[data-slot]");
+    let bestIndex = null;
+    let bestOverlap = 0;
+
+    slots.forEach(function (slot) {
+      if (slot.classList.contains("is-filled")) return;
+      const slotRect = slot.getBoundingClientRect();
+      const overlapWidth = Math.max(0, Math.min(pieceRect.right, slotRect.right) - Math.max(pieceRect.left, slotRect.left));
+      const overlapHeight = Math.max(0, Math.min(pieceRect.bottom, slotRect.bottom) - Math.max(pieceRect.top, slotRect.top));
+      const overlapArea = overlapWidth * overlapHeight;
+      const pieceArea = Math.max(1, pieceRect.width * pieceRect.height);
+      const ratio = overlapArea / pieceArea;
+
+      if (ratio > bestOverlap) {
+        bestOverlap = ratio;
+        bestIndex = Number(slot.dataset.slot);
+      }
+    });
+
+    /* 28% já é suficiente para o jogo entender a intenção do aluno e
+       "puxar" a peça para o encaixe correto. */
+    return bestOverlap >= 0.28 ? bestIndex : null;
   }
 
   function returnPiece(piece, message) {

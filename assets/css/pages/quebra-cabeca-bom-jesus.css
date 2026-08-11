@@ -192,9 +192,9 @@
 }
 .bomjesus-puzzle__piece-svg {
   position: absolute;
-  inset: -27%;
-  width: 154%;
-  height: 154%;
+  inset: auto;
+  /* left/top/width/height são calculados pelo JS conforme a proporção
+     de cada imagem. Isso elimina as frestas entre peças. */
   overflow: visible;
   pointer-events: none;
   filter: drop-shadow(0 3px 3px rgba(15, 35, 48, .22));
