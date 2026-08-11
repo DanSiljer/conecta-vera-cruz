@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const moduleIds = [
     "historia-local",
     "livro-karl-marx",
+    "livro-maria-felipa",
     "mapa-jogo",
     "quebra-cabeca-regioes",
     "quebra-cabeca-estados-regioes",
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const labels = {
     "historia-local": "História de Vera Cruz e da Ilha de Itaparica",
     "livro-karl-marx": "Livro interativo · Quem sou eu? Karl Marx",
+    "livro-maria-felipa": "Livro interativo · Quem sou eu? Maria Felipa",
     "mapa-jogo": "Mapa-jogo da Ilha de Itaparica",
     "quebra-cabeca-regioes": "Quebra-cabeça das Regiões do Brasil",
     "quebra-cabeca-estados-regioes": "Quebra-cabeça dos Estados por Região",

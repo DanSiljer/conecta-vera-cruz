@@ -14,7 +14,7 @@
     <link href="assets/css/global.css" rel="stylesheet" />
     <link href="assets/css/layout.css" rel="stylesheet" />
     <link href="assets/css/pages/missao-aprender.css" rel="stylesheet" />
-    <link href="assets/css/pages/mapa-ilha.css?v=4" rel="stylesheet" />
+    <link href="assets/css/pages/mapa-ilha.css?v=9" rel="stylesheet" />
     <link
       href="assets/css/pages/jogo-regioes-brasil.css?v=3"
       rel="stylesheet"
@@ -27,12 +27,128 @@
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/layout.js"></script>
     <script defer src="assets/js/missao-aprender.js"></script>
-    <script defer src="assets/js/mapa-ilha.js?v=4"></script>
+    <script defer src="assets/js/mapa-ilha.js?v=9"></script>
     <script defer src="assets/js/jogo-regioes-brasil.js?v=4"></script>
     <script defer src="assets/js/jogo-estados-regioes.js?v=4"></script>
     <script defer src="assets/js/identificacao-aluno.js?v=2"></script>
     <script defer src="assets/js/livro-karl-marx.js?v=1"></script>
-    <script defer src="assets/js/missao-aprender-hub.js?v=7"></script>
+    <script defer src="assets/js/livro-maria-felipa.js?v=1"></script>
+    <script defer src="assets/js/missao-aprender-hub.js?v=8"></script>
+  
+    <style>
+      .game-card[href] {
+        text-decoration: none;
+        color: inherit;
+      }
+      .game-card[href]:hover,
+      .game-card[href]:focus-visible {
+        text-decoration: none;
+      }
+    </style>
+  
+    <style>
+      .game-card[href],
+      .book-library-card {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .books-library__heading {
+        margin-bottom: 22px;
+      }
+
+      .books-library__heading h2 {
+        margin: 4px 0 8px;
+      }
+
+      .books-library__grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .book-library-card {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-height: 190px;
+        padding: 22px;
+        border: 1px solid rgba(17, 45, 67, .12);
+        border-radius: 26px;
+        background: #fff;
+        box-shadow: 0 18px 45px rgba(20, 43, 63, .09);
+        text-align: left;
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      }
+
+      .book-library-card:hover,
+      .book-library-card:focus-visible {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 55px rgba(20, 43, 63, .14);
+        border-color: rgba(17, 97, 115, .26);
+        outline: none;
+      }
+
+      .book-library-card__cover {
+        flex: 0 0 92px;
+        width: 92px;
+        height: 122px;
+        display: grid;
+        place-items: center;
+        border-radius: 20px;
+        font-size: 44px;
+        background: linear-gradient(145deg, #f5ead0, #fff8e8);
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+      }
+
+      .book-library-card__content {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        min-width: 0;
+      }
+
+      .book-library-card__content small {
+        font-weight: 800;
+        letter-spacing: .08em;
+        color: #6b7280;
+      }
+
+      .book-library-card__content strong {
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+        color: #17344b;
+      }
+
+      .book-library-card__content span {
+        line-height: 1.55;
+        color: #667085;
+      }
+
+      .book-library-card__content b {
+        margin-top: 5px;
+        color: #0f6f67;
+      }
+
+      @media (max-width: 760px) {
+        .books-library__grid {
+          grid-template-columns: 1fr;
+        }
+
+        .book-library-card {
+          min-height: 0;
+          padding: 18px;
+          border-radius: 22px;
+        }
+
+        .book-library-card__cover {
+          flex-basis: 74px;
+          width: 74px;
+          height: 98px;
+          font-size: 34px;
+        }
+      }
+    </style>
   </head>
   <body class="page-missao-aprender">
     <div data-cv-header></div>
@@ -50,7 +166,7 @@
             </a>
             <div class="missao-aprender-subnav__links">
               <a href="#central-jogos">Jogos</a>
-              <a href="#livro-karl-marx" data-hub-open="livro-karl-marx">Livro</a>
+              <a href="#biblioteca-livros" data-hub-open="biblioteca-livros">Livros</a>
               <a href="#perfil-aluno">Meu nome</a>
               <a href="#resultados" data-hub-open="resultados">Progresso</a>
             </div>
@@ -129,7 +245,7 @@
             <button class="hub-chip" type="button" data-subject-target="vera-cruz">★ Missão Vera Cruz</button>
             <button class="hub-chip" type="button" data-module-target="mapa-jogo">⌖ Mapa da Ilha</button>
             <button class="hub-chip" type="button" data-module-target="quebra-cabeca-regioes">▦ Regiões do Brasil</button>
-            <button class="hub-chip" type="button" data-module-target="livro-karl-marx">📖 Livro interativo</button>
+            <button class="hub-chip" type="button" data-module-target="biblioteca-livros">📚 Livros · Quem sou eu?</button>
             <button class="hub-chip" type="button" data-module-target="historia-local">🌊 História de Vera Cruz</button>
             <button class="hub-chip" type="button" data-module-target="resultados">✓ Meu progresso</button>
           </div>
@@ -163,11 +279,15 @@
               <span class="game-card__action">Escolher região →</span>
             </button>
 
-            <button class="game-card game-card--book" type="button" data-module-target="livro-karl-marx">
-              <span class="game-card__top"><span class="game-card__icon" aria-hidden="true">📖</span><span class="game-card__type">Livro interativo</span></span>
-              <h3>Quem sou eu? Karl Marx</h3>
-              <p>Folheie o livro infantil em formato flipbook e aprenda de forma visual.</p>
-              <span class="game-card__action">Abrir livro →</span>
+
+
+
+
+            <button class="game-card game-card--book game-card--library" type="button" data-module-target="biblioteca-livros">
+              <span class="game-card__top"><span class="game-card__icon" aria-hidden="true">📚</span><span class="game-card__type">Livros · Biografias</span></span>
+              <h3>Quem sou eu?</h3>
+              <p>Abra a biblioteca de biografias infantis e escolha qual personagem histórico você quer conhecer.</p>
+              <span class="game-card__action">Ver livros →</span>
             </button>
 
             <button class="game-card game-card--local-history" type="button" data-module-target="historia-local">
@@ -422,6 +542,52 @@
         </section>
 
         <section
+          class="books-library section-shell"
+          id="biblioteca-livros"
+          hidden
+          aria-labelledby="booksLibraryTitle"
+        >
+          <header class="books-library__heading">
+            <div>
+              <span class="section-kicker">LIVROS · BIOGRAFIAS INTERATIVAS</span>
+              <h2 id="booksLibraryTitle">Quem sou eu?</h2>
+              <p>Escolha um personagem e abra o livro infantil interativo.</p>
+            </div>
+          </header>
+
+          <div class="books-library__grid">
+            <button
+              class="book-library-card book-library-card--marx"
+              type="button"
+              data-module-target="livro-karl-marx"
+            >
+              <span class="book-library-card__cover" aria-hidden="true">📘</span>
+              <span class="book-library-card__content">
+                <small>FILOSOFIA · HISTÓRIA</small>
+                <strong>Quem sou eu? Karl Marx</strong>
+                <span>Conheça sua trajetória e algumas de suas ideias em linguagem infantil.</span>
+                <b>Abrir flipbook →</b>
+              </span>
+            </button>
+
+            <button
+              class="book-library-card book-library-card--maria"
+              type="button"
+              data-module-target="livro-maria-felipa"
+              aria-label="Abrir livro interativo Quem sou eu? Maria Felipa"
+            >
+              <span class="book-library-card__cover" aria-hidden="true">📕</span>
+              <span class="book-library-card__content">
+                <small>BAHIA · ILHA DE ITAPARICA</small>
+                <strong>Quem sou eu? Maria Felipa</strong>
+                <span>Memória, resistência e participação popular na Independência da Bahia.</span>
+                <b>Abrir flipbook →</b>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <section
           class="book-flip-section section-shell"
           id="livro-karl-marx"
           hidden
@@ -545,6 +711,129 @@
         </section>
 
         <section
+          class="book-flip-section section-shell"
+          id="livro-maria-felipa"
+          hidden
+          aria-labelledby="mariaBookTitle"
+        >
+          <header class="book-flip-heading">
+            <div>
+              <span class="section-kicker">HISTÓRIA · LIVRO INTERATIVO</span>
+              <h2 id="mariaBookTitle">Quem sou eu? Maria Felipa</h2>
+              <p>
+                Folheie o livro diretamente na página. Use as setas, arraste no
+                celular ou escolha uma página no marcador abaixo.
+              </p>
+            </div>
+            <div class="book-flip-badge" aria-label="Recurso interativo">
+              <span>📖</span>
+              <strong>Flipbook</strong>
+              <small>20 telas</small>
+            </div>
+          </header>
+
+          <div
+            class="book-flip-shell"
+            id="mariaBookFlipbook"
+            data-book-current="0"
+          >
+            <div class="book-flip-topbar">
+              <div>
+                <span class="book-flip-topbar__label">LEITURA INTERATIVA</span>
+                <strong id="mariaBookPageTitle">Capa</strong>
+              </div>
+              <div class="book-flip-topbar__actions">
+                <button
+                  class="book-icon-button"
+                  id="mariaBookFullscreen"
+                  type="button"
+                  aria-label="Abrir livro em tela cheia"
+                  title="Tela cheia"
+                >
+                  ⛶
+                </button>
+              </div>
+            </div>
+
+            <div class="book-flip-stage-wrap">
+              <button
+                class="book-flip-arrow book-flip-arrow--prev"
+                id="mariaBookPrev"
+                type="button"
+                aria-label="Página anterior"
+              >
+                ‹
+              </button>
+
+              <div
+                class="book-flip-stage"
+                id="mariaBookStage"
+                tabindex="0"
+                aria-live="polite"
+              >
+                <div class="book-flip-paper" id="mariaBookPaper">
+                  <img
+                    id="mariaBookImage"
+                    src="assets/img/livros/maria-felipa/pagina-01.webp"
+                    alt="Capa do livro infantil Quem sou eu? Maria Felipa"
+                    width="1448"
+                    height="1086"
+                    draggable="false"
+                  />
+                  <span
+                    class="book-flip-paper__shine"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+              </div>
+
+              <button
+                class="book-flip-arrow book-flip-arrow--next"
+                id="mariaBookNext"
+                type="button"
+                aria-label="Próxima página"
+              >
+                ›
+              </button>
+            </div>
+
+            <div class="book-flip-controls">
+              <button
+                class="book-control-button"
+                id="mariaBookPrevBottom"
+                type="button"
+              >
+                ← Anterior
+              </button>
+              <div class="book-flip-progress">
+                <span id="mariaBookCounter">Capa · 1 de 20</span>
+                <div class="book-flip-progress__track" aria-hidden="true">
+                  <span id="mariaBookProgressBar"></span>
+                </div>
+              </div>
+              <button
+                class="book-control-button book-control-button--primary"
+                id="mariaBookNextBottom"
+                type="button"
+              >
+                Próxima →
+              </button>
+            </div>
+
+            <nav
+              class="book-page-picker"
+              id="mariaBookPagePicker"
+              aria-label="Escolher página do livro"
+            ></nav>
+
+            <p class="book-flip-tip">
+              <strong>Dica:</strong> no computador, use as teclas ← e →. No
+              celular, deslize a página para o lado.
+            </p>
+          </div>
+        </section>
+
+        <section
           class="island-map-game section-shell"
           id="mapa-jogo"
           hidden
@@ -606,7 +895,7 @@
               <div class="island-map-game__map" id="islandMapBoard">
                 <img
                   id="islandMapImage"
-                  src="assets/img/jogos/mapa-ilha-referencia.png"
+                  src="assets/img/jogos/mapa-ilha-referencia-v8.png"
                   alt="Mapa da Ilha de Itaparica com localidades e comunidades"
                   width="1266"
                   height="1266"
@@ -660,9 +949,9 @@
                 <label>
                   Nível
                   <select id="mapDifficulty">
-                    <option value="facil">Fácil · nomes visíveis</option>
-                    <option selected value="medio">Médio · com pista</option>
-                    <option value="dificil">Difícil · sem pista</option>
+                    <option value="facil">Fácil · mapa com nomes + pista</option>
+                    <option selected value="medio">Médio · mapa sem nomes + pista</option>
+                    <option value="dificil">Difícil · mapa sem nomes e sem pista</option>
                   </select>
                 </label>
 
@@ -1134,33 +1423,34 @@
 
               <div class="states-board-column">
                 <div
-                  id="stateBoard"
-                  class="states-board"
-                  role="application"
-                  aria-label="Quebra-cabeça dos estados da região"
-                >
-                  <img
-                    id="stateBoardBase"
-                    class="states-board__base"
-                    src=""
-                    alt="Silhueta da região selecionada"
-                    draggable="false"
-                  />
-                  <div id="statePlacedLayer" class="states-board__placed"></div>
-                  <div
-                    id="stateHintLayer"
-                    class="states-board__hint"
-                    aria-hidden="true"
-                  ></div>
-                  <div id="stateBoardMessage" class="states-board__message">
-                    Observe a região completa antes de iniciar.
-                  </div>
-                </div>
-                <p class="states-board__instruction">
-                  Computador: arraste a peça. Celular: toque na peça e depois
-                  toque no lugar em que ela deve encaixar.
-                </p>
-              </div>
+  id="stateBoard"
+  class="states-board"
+  role="application"
+  aria-label="Quebra-cabeça dos estados da região"
+>
+  <img
+    id="stateBoardBase"
+    class="states-board__base"
+    src=""
+    alt="Silhueta da região selecionada"
+    draggable="false"
+  />
+  <div id="statePlacedLayer" class="states-board__placed"></div>
+  <div
+    id="stateHintLayer"
+    class="states-board__hint"
+    aria-hidden="true"
+  ></div>
+</div>
+
+<div id="stateBoardMessage" class="states-board__message">
+  Observe a região completa antes de iniciar.
+</div>
+
+<p class="states-board__instruction">
+  Computador: arraste a peça. Celular: toque na peça e depois
+  toque no lugar em que ela deve encaixar.
+</p>
 
               <aside class="states-info">
                 <span class="states-info__eyebrow">REGIÃO SELECIONADA</span>
@@ -1647,5 +1937,7 @@
     </main>
 
     <div data-cv-footer></div>
+  
+
   </body>
 </html>

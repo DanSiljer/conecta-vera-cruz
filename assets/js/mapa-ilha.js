@@ -1,241 +1,545 @@
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
+  /* =========================================================
+     ELEMENTOS PRINCIPAIS
+     ========================================================= */
+
   const section = document.querySelector("#mapa-jogo");
   const hotspotLayer = document.querySelector("#islandMapHotspots");
+  const mapImage = document.querySelector("#islandMapImage");
 
-  if (!section || !hotspotLayer) return;
+  if (!section || !hotspotLayer || !mapImage) {
+    console.warn("Mapa-jogo: elementos principais não encontrados.");
+    return;
+  }
+
+  /* =========================================================
+     CONFIGURAÇÃO
+     ========================================================= */
+
+  const MAP_REFERENCE =
+    "assets/img/jogos/mapa-ilha-referencia-v8.png";
+
+  const MAP_CHALLENGE =
+    "assets/img/jogos/mapa-ilha-desafio-v8.png";
+
+  /*
+   * false = jogo normal
+   * true  = clicar no mapa para descobrir left/top
+   */
+  const CALIBRATION_MODE = false;
 
   const RESULT_KEY = "veraSaberResults";
 
-  /*
-   * Coordenadas recalibradas sobre a imagem quadrada 1266 × 1266.
-   * Os pontos agora acompanham as localidades impressas no próprio mapa.
-   */
+  /* =========================================================
+     LOCALIDADES
+     ========================================================= */
+
   const PLACES = [
     {
       id: "itaparica",
       name: "Itaparica",
       municipality: "Itaparica",
       position: "Norte da ilha",
-      left: 56.8,
-      top: 12.0,
-      clue: "Procure a área urbana no norte da ilha.",
-      description: "Sede do município de Itaparica, na porção norte da ilha."
+      left: 56.6,
+      top: 2.0,
+      clue: "Procure a sede histórica na parte norte da ilha.",
+      description:
+        "Sede do município de Itaparica."
     },
+
     {
       id: "ponta-de-areia",
       name: "Ponta de Areia",
       municipality: "Itaparica",
-      position: "Nordeste da ilha",
-      left: 62.7,
-      top: 5.9,
-      clue: "Observe a parte superior e direita do mapa.",
-      description: "Localidade situada na faixa nordeste da Ilha de Itaparica."
+      position: "Extremo norte",
+      left: 62.9,
+      top: 5.5,
+      clue: "Fica na faixa mais ao norte da ilha.",
+      description:
+        "Localidade litorânea do município de Itaparica."
     },
+
     {
       id: "amoreiras",
       name: "Amoreiras",
       municipality: "Itaparica",
-      position: "Nordeste da ilha",
-      left: 67.4,
-      top: 8.3,
-      clue: "Fica próxima de Ponta de Areia.",
-      description: "Comunidade litorânea do município de Itaparica."
+      position: "Norte",
+      left: 68.0,
+      top: 8.0,
+      clue: "Fica entre Ponta de Areia e Manguinhos.",
+      description:
+        "Comunidade localizada na porção norte da ilha."
     },
+
     {
       id: "manguinhos",
       name: "Manguinhos",
       municipality: "Itaparica",
-      position: "Leste, porção norte",
-      left: 76.8,
-      top: 10.7,
-      clue: "Procure o litoral leste, acima de Porto dos Santos.",
-      description: "Localidade costeira na porção norte da ilha."
+      position: "Nordeste",
+      left: 75.3,
+      top: 9.7,
+      clue: "Procure a costa nordeste da ilha.",
+      description:
+        "Localidade costeira do município de Itaparica."
     },
+
     {
       id: "porto-dos-santos",
       name: "Porto dos Santos",
       municipality: "Itaparica",
-      position: "Leste, porção norte",
-      left: 81.5,
-      top: 14.7,
-      clue: "Fica na costa leste, abaixo de Manguinhos.",
-      description: "Comunidade localizada na costa leste do município de Itaparica."
+      position: "Nordeste",
+      left: 77.0,
+      top: 14.0,
+      clue: "Fica abaixo de Manguinhos.",
+      description:
+        "Comunidade localizada na costa leste."
     },
+
     {
       id: "bom-despacho",
       name: "Bom Despacho",
       municipality: "Itaparica",
-      position: "Leste da ilha",
-      left: 81.8,
-      top: 19.6,
-      clue: "Procure a área do terminal do ferry-boat.",
-      description: "Importante ponto de chegada e saída pelo sistema ferry-boat."
+      position: "Leste / norte",
+      left: 79.2,
+      top: 17.8,
+      clue: "Procure a região do ferry-boat.",
+      description:
+        "Importante ponto de chegada e saída da Ilha de Itaparica."
     },
+
     {
       id: "gameleira",
       name: "Gameleira",
       municipality: "Vera Cruz",
-      position: "Leste, área norte de Vera Cruz",
-      left: 82.9,
-      top: 24.7,
-      clue: "Fica abaixo de Bom Despacho, no lado leste.",
-      description: "Comunidade de Vera Cruz próxima à costa leste da ilha."
+      position: "Leste / norte",
+      left: 82.0,
+      top: 23.3,
+      clue: "Fica abaixo de Bom Despacho.",
+      description:
+        "Comunidade da costa leste de Vera Cruz."
     },
+
+    {
+      id: "buraco-do-boi",
+      name: "Buraco do Boi",
+      municipality: "Vera Cruz",
+      position: "Leste / norte",
+      left: 82.9,
+      top: 26.1,
+      clue: "Fica entre Gameleira e Jaburu.",
+      description:
+        "Localidade da faixa leste da ilha."
+    },
+
     {
       id: "jaburu",
       name: "Jaburu",
       municipality: "Vera Cruz",
-      position: "Leste, área central",
-      left: 85.0,
-      top: 30.4,
-      clue: "Procure o nome Jaburu na costa leste.",
-      description: "Localidade ligada à Capela dos Velasques e ao Moinho das Mercês."
+      position: "Leste",
+      left: 85.1,
+      top: 30.2,
+      clue: "Fica acima de Mar Grande.",
+      description:
+        "Localidade da costa leste de Vera Cruz."
     },
+
     {
       id: "mar-grande",
       name: "Mar Grande",
       municipality: "Vera Cruz",
-      position: "Leste, área central",
-      left: 84.4,
-      top: 33.2,
-      clue: "Procure a sede de Vera Cruz na costa leste.",
-      description: "Sede administrativa de Vera Cruz e importante ponto de travessia marítima."
+      position: "Leste / centro",
+      left: 85.4,
+      top: 33.1,
+      clue: "É a sede do município de Vera Cruz.",
+      description:
+        "Sede administrativa de Vera Cruz."
     },
+
+    {
+      id: "ilhota",
+      name: "Ilhota",
+      municipality: "Vera Cruz",
+      position: "Leste",
+      left: 83.7,
+      top: 35.5,
+      clue: "Fica entre Mar Grande e Gamboa.",
+      description:
+        "Localidade da faixa leste de Vera Cruz."
+    },
+
     {
       id: "gamboa",
       name: "Gamboa",
       municipality: "Vera Cruz",
-      position: "Leste, área central",
-      left: 82.6,
-      top: 39.9,
-      clue: "Fica abaixo de Mar Grande e próxima de Penha.",
-      description: "Comunidade ligada à mariscagem, ao samba de roda e aos saberes do mar."
+      position: "Leste / centro",
+      left: 82.8,
+      top: 39.0,
+      clue: "Fica abaixo de Mar Grande.",
+      description:
+        "Comunidade ligada à pesca, mariscagem e cultura popular."
     },
+
     {
       id: "penha",
       name: "Penha",
       municipality: "Vera Cruz",
-      position: "Leste, área central",
-      left: 78.4,
-      top: 42.8,
+      position: "Leste / centro",
+      left: 81.8,
+      top: 41.6,
       clue: "Procure a costa leste, abaixo de Gamboa.",
-      description: "Localidade conhecida pela praia, pelo rio e pelas ruínas do antigo forno de cal."
+      description:
+        "Localidade conhecida pela praia e pelo patrimônio histórico."
     },
+
+    {
+      id: "barra-do-gil",
+      name: "Barra do Gil",
+      municipality: "Vera Cruz",
+      position: "Leste",
+      left: 79.0,
+      top: 44.0,
+      clue: "Fica abaixo da Penha.",
+      description:
+        "Comunidade localizada na costa leste."
+    },
+
+    {
+      id: "taipoca",
+      name: "Taipoca",
+      municipality: "Vera Cruz",
+      position: "Leste",
+      left: 77.0,
+      top: 47.0,
+      clue: "Procure abaixo de Barra do Gil.",
+      description:
+        "Localidade da região leste da ilha."
+    },
+
+    {
+      id: "coroa",
+      name: "Coroa",
+      municipality: "Vera Cruz",
+      position: "Leste",
+      left: 75.0,
+      top: 50.0,
+      clue: "Fica abaixo de Taipoca.",
+      description:
+        "Localidade da costa de Vera Cruz."
+    },
+
+    {
+      id: "barra-do-pote",
+      name: "Barra do Pote",
+      municipality: "Vera Cruz",
+      position: "Leste",
+      left: 72.6,
+      top: 53.0,
+      clue: "Fica entre Coroa e Conceição.",
+      description:
+        "Comunidade costeira de Vera Cruz."
+    },
+
     {
       id: "conceicao",
       name: "Conceição",
       municipality: "Vera Cruz",
-      position: "Leste, área centro-sul",
-      left: 68.7,
-      top: 56.7,
-      clue: "Procure o litoral leste, próximo ao aeroporto indicado no mapa.",
-      description: "Comunidade conhecida pelas ruínas da Igreja de Nossa Senhora da Conceição."
+      position: "Centro-sul / leste",
+      left: 69.0,
+      top: 56.5,
+      clue: "Procure a costa próxima à área do aeroporto.",
+      description:
+        "Comunidade conhecida por seu patrimônio histórico."
     },
+
     {
-      id: "baiacu",
-      name: "Baiacu",
+      id: "barra-grande",
+      name: "Barra Grande",
       municipality: "Vera Cruz",
-      position: "Contracosta, área central",
-      left: 47.1,
-      top: 45.3,
-      clue: "Observe a contracosta na parte central da ilha.",
-      description: "Comunidade tradicional pesqueira ligada à antiga Vila do Senhor da Vera Cruz."
+      position: "Sudeste",
+      left: 63.5,
+      top: 64.2,
+      clue: "Procure a costa sudeste da ilha.",
+      description:
+        "Comunidade litorânea da parte sudeste."
     },
+
     {
-      id: "matarandiba",
-      name: "Matarandiba",
+      id: "ponta-da-cruz",
+      name: "Ponta da Cruz",
       municipality: "Vera Cruz",
-      position: "Oeste, porção central",
-      left: 23.8,
-      top: 45.9,
-      clue: "Procure a localidade insular no lado oeste.",
-      description: "Vila pesqueira e de marisqueiras com forte memória comunitária."
+      position: "Centro-sul",
+      left: 47.5,
+      top: 72.8,
+      clue: "Fica acima de Tairu.",
+      description:
+        "Localidade da região sul de Vera Cruz."
     },
-    {
-      id: "jiribatuba",
-      name: "Jiribatuba",
-      municipality: "Vera Cruz",
-      position: "Sudoeste da ilha",
-      left: 15.2,
-      top: 76.9,
-      clue: "Observe a parte inferior esquerda do mapa.",
-      description: "Distrito marcado por paisagem costeira, fé, pesca e memória comunitária."
-    },
+
     {
       id: "tairu",
       name: "Tairu",
       municipality: "Vera Cruz",
-      position: "Centro-sul da ilha",
-      left: 42.2,
-      top: 77.0,
-      clue: "Procure a localidade indicada acima de Aratuba.",
-      description: "Localidade conhecida pela praia e pela ocupação litorânea."
+      position: "Sul / sudeste",
+      left: 41.0,
+      top: 76.0,
+      clue: "Fica entre Ponta da Cruz e Aratuba.",
+      description:
+        "Localidade conhecida pela Praia de Tairu."
     },
+
     {
-      id: "catu",
-      name: "Catu",
+      id: "aratuba",
+      name: "Aratuba",
       municipality: "Vera Cruz",
-      position: "Sul da ilha",
-      left: 13.5,
-      top: 90.2,
-      clue: "Procure o nome Catu na faixa sudoeste.",
-      description: "Povoado antigo ligado à Fazenda Santo Amaro do Catu e à Praia do Calado."
+      position: "Sul",
+      left: 31.5,
+      top: 82.0,
+      clue: "Fica entre Tairu e Berlinque.",
+      description:
+        "Comunidade da porção sul da ilha."
     },
+
     {
       id: "berlinque",
       name: "Berlinque",
       municipality: "Vera Cruz",
-      position: "Sul da ilha",
-      left: 27.7,
+      position: "Sul",
+      left: 27.0,
       top: 89.8,
-      clue: "Fica abaixo de Aratuba, próximo ao litoral.",
-      description: "Comunidade costeira localizada na porção sul de Vera Cruz."
+      clue: "Procure a costa sul da ilha.",
+      description:
+        "Comunidade costeira de Vera Cruz."
     },
+
+    {
+      id: "catu",
+      name: "Catu",
+      municipality: "Vera Cruz",
+      position: "Sudoeste",
+      left: 12.9,
+      top: 86.0,
+      clue: "Fica na faixa sudoeste da ilha.",
+      description:
+        "Povoado histórico da região sul de Vera Cruz."
+    },
+
     {
       id: "cacha-pregos",
       name: "Cacha-Pregos",
       municipality: "Vera Cruz",
       position: "Extremo sul",
-      left: 14.0,
-      top: 97.2,
-      clue: "Procure a extremidade inferior da ilha.",
-      description: "Comunidade do extremo sul conhecida pela pesca, pela orla e pelas regatas."
+      left: 13.4,
+      top: 95.7,
+      clue: "Procure a extremidade sul da ilha.",
+      description:
+        "Comunidade conhecida pela pesca, orla e regatas."
+    },
+
+    {
+      id: "jiribatuba",
+      name: "Jiribatuba",
+      municipality: "Vera Cruz",
+      position: "Sudoeste",
+      left: 15.0,
+      top: 76.8,
+      clue: "Procure a costa sudoeste.",
+      description:
+        "Distrito ligado à pesca e à memória comunitária."
+    },
+
+    {
+      id: "matarandiba",
+      name: "Matarandiba",
+      municipality: "Vera Cruz",
+      position: "Oeste",
+      left: 23.4,
+      top: 49.3,
+      clue: "Procure a área recortada por manguezais.",
+      description:
+        "Vila pesqueira e de marisqueiras."
+    },
+
+    {
+      id: "ponta-grossa",
+      name: "Ponta Grossa",
+      municipality: "Vera Cruz",
+      position: "Centro-oeste",
+      left: 43.3,
+      top: 47.0,
+      clue: "Procure abaixo de Ponta dos Tatus.",
+      description:
+        "Localidade da região oeste."
+    },
+
+    {
+      id: "baiacu",
+      name: "Baiacu",
+      municipality: "Vera Cruz",
+      position: "Centro-oeste",
+      left: 46.9,
+      top: 45.2,
+      clue: "Procure aproximadamente no meio da contracosta.",
+      description:
+        "Comunidade pesqueira de grande importância histórica."
+    },
+
+
+    {
+      id: "misericordia",
+      name: "Misericórdia",
+      municipality: "Itaparica",
+      position: "Norte / centro",
+      left: 54.5,
+      top: 18.4,
+      clue: "Fica abaixo de Itaparica.",
+      description:
+        "Localidade da região norte da ilha."
+    },
+
+    {
+      id: "juerana",
+      name: "Juerana",
+      municipality: "Vera Cruz",
+      position: "Centro-norte",
+      left: 59.0,
+      top: 27.0,
+      clue: "Procure entre Misericórdia e Vera Cruz.",
+      description:
+        "Comunidade situada na região centro-norte."
+    },
+
+    {
+      id: "vera-cruz",
+      name: "Vera Cruz",
+      municipality: "Vera Cruz",
+      position: "Centro-norte",
+      left: 56.0,
+      top: 30.0,
+      clue: "Procure a região central acima de Baiacu.",
+      description:
+        "Localidade histórica que dá nome ao município."
     }
   ];
 
+  /* =========================================================
+     ELEMENTOS DA INTERFACE
+     ========================================================= */
+
   const elements = {
-    modeButtons: [...section.querySelectorAll("[data-map-mode]")],
-    modeLabel: section.querySelector("#mapModeLabel"),
-    scoreLabel: section.querySelector("#mapScoreLabel"),
-    roundLabel: section.querySelector("#mapRoundLabel"),
-    targetCard: section.querySelector("#mapTargetCard"),
-    targetName: section.querySelector("#mapTargetName"),
-    targetClue: section.querySelector("#mapTargetClue"),
-    placeEyebrow: section.querySelector(".map-place-card__eyebrow"),
-    placeName: section.querySelector("#mapPlaceName"),
-    placeDescription: section.querySelector("#mapPlaceDescription"),
-    placeMunicipality: section.querySelector("#mapPlaceMunicipality"),
-    placePosition: section.querySelector("#mapPlacePosition"),
-    settings: section.querySelector("#mapChallengeSettings"),
-    difficulty: section.querySelector("#mapDifficulty"),
-    rounds: section.querySelector("#mapRounds"),
-    feedback: section.querySelector("#mapFeedback"),
-    resetButton: section.querySelector("#resetMapGame")
+    modeButtons: [
+      ...section.querySelectorAll("[data-map-mode]")
+    ],
+
+    modeLabel:
+      section.querySelector("#mapModeLabel"),
+
+    scoreLabel:
+      section.querySelector("#mapScoreLabel"),
+
+    roundLabel:
+      section.querySelector("#mapRoundLabel"),
+
+    targetCard:
+      section.querySelector("#mapTargetCard"),
+
+    targetName:
+      section.querySelector("#mapTargetName"),
+
+    targetClue:
+      section.querySelector("#mapTargetClue"),
+
+    placeEyebrow:
+      section.querySelector(".map-place-card__eyebrow"),
+
+    placeName:
+      section.querySelector("#mapPlaceName"),
+
+    placeDescription:
+      section.querySelector("#mapPlaceDescription"),
+
+    placeMunicipality:
+      section.querySelector("#mapPlaceMunicipality"),
+
+    placePosition:
+      section.querySelector("#mapPlacePosition"),
+
+    settings:
+      section.querySelector("#mapChallengeSettings"),
+
+    difficulty:
+      section.querySelector("#mapDifficulty"),
+
+    rounds:
+      section.querySelector("#mapRounds"),
+
+    feedback:
+      section.querySelector("#mapFeedback"),
+
+    resetButton:
+      section.querySelector("#resetMapGame")
   };
+
+  /* =========================================================
+     ESTADO
+     ========================================================= */
 
   const state = {
     mode: "explore",
+
     started: false,
+
     difficulty: "medio",
+
     order: [],
+
     roundIndex: 0,
+
     score: 0,
+
     correct: 0,
+
+    attemptsInRound: 0,
+
     locked: false,
+
     finished: false
   };
+
+  /* =========================================================
+     EMBARALHAR
+     ========================================================= */
+
+  function shuffle(items) {
+    const copy = [...items];
+
+    for (
+      let index = copy.length - 1;
+      index > 0;
+      index -= 1
+    ) {
+      const randomIndex =
+        Math.floor(
+          Math.random() *
+          (index + 1)
+        );
+
+      [
+        copy[index],
+        copy[randomIndex]
+      ] = [
+        copy[randomIndex],
+        copy[index]
+      ];
+    }
+
+    return copy;
+  }
+
+  /* =========================================================
+     ESCAPAR HTML
+     ========================================================= */
 
   function escapeHtml(value) {
     return String(value || "")
@@ -246,199 +550,596 @@ document.addEventListener("DOMContentLoaded", function () {
       .replaceAll("'", "&#039;");
   }
 
-  function shuffle(items) {
-    const copy = [...items];
+  /* =========================================================
+     FEEDBACK
+     ========================================================= */
 
-    for (let index = copy.length - 1; index > 0; index -= 1) {
-      const randomIndex = Math.floor(Math.random() * (index + 1));
-      [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+  function setFeedback(
+    title,
+    message,
+    type = ""
+  ) {
+    if (!elements.feedback) {
+      return;
     }
 
-    return copy;
-  }
+    elements.feedback.classList.remove(
+      "is-success",
+      "is-error"
+    );
 
-  function getHotspot(id) {
-    return hotspotLayer.querySelector('[data-place-id="' + id + '"]');
-  }
-
-  function clearHotspotStates() {
-    hotspotLayer.querySelectorAll(".map-hotspot").forEach(function (button) {
-      button.classList.remove("is-selected", "is-correct", "is-wrong");
-      button.disabled = false;
-    });
-  }
-
-  function lockHotspots(locked) {
-    hotspotLayer.querySelectorAll(".map-hotspot").forEach(function (button) {
-      button.disabled = locked;
-    });
-  }
-
-  function setFeedback(title, message, type) {
-    if (!elements.feedback) return;
-
-    elements.feedback.classList.remove("is-success", "is-error");
-    if (type) elements.feedback.classList.add(type);
+    if (type) {
+      elements.feedback.classList.add(
+        type
+      );
+    }
 
     elements.feedback.innerHTML =
-      "<strong>" + escapeHtml(title) + "</strong>" +
-      "<p>" + escapeHtml(message) + "</p>";
+      "<strong>" +
+      escapeHtml(title) +
+      "</strong>" +
+      "<p>" +
+      escapeHtml(message) +
+      "</p>";
   }
 
+  /* =========================================================
+     MAPA CORRETO POR NÍVEL
+     ========================================================= */
+
+  function updateMapImage() {
+    /*
+     * EXPLORAR
+     * mapa com nomes
+     */
+
+    if (state.mode === "explore") {
+      mapImage.src =
+        MAP_REFERENCE;
+
+      section.dataset.mapStyle =
+        "reference";
+
+      return;
+    }
+
+    /*
+     * FÁCIL
+     * mapa com nomes
+     */
+
+    if (state.difficulty === "facil") {
+      mapImage.src =
+        MAP_REFERENCE;
+
+      section.dataset.mapStyle =
+        "reference";
+
+      return;
+    }
+
+    /*
+     * MÉDIO E DIFÍCIL
+     * mapa sem nomes
+     */
+
+    mapImage.src =
+      MAP_CHALLENGE;
+
+    section.dataset.mapStyle =
+      "challenge";
+  }
+
+  /* =========================================================
+     INTERFACE DA DIFICULDADE
+     ========================================================= */
+
+  function updateDifficultyInterface() {
+    section.dataset.difficulty =
+      state.difficulty;
+
+    /* FÁCIL */
+
+    if (state.difficulty === "facil") {
+      elements.modeLabel.textContent =
+        "Fácil · nomes + pista";
+
+      if (!state.started) {
+        elements.placeEyebrow.textContent =
+          "NÍVEL FÁCIL";
+
+        elements.placeName.textContent =
+          "Nomes + pista";
+
+        elements.placeDescription.textContent =
+          "O mapa mostra os nomes das localidades e também oferece uma pista.";
+      }
+
+      return;
+    }
+
+    /* MÉDIO */
+
+    if (state.difficulty === "medio") {
+      elements.modeLabel.textContent =
+        "Médio · sem nomes + pista";
+
+      if (elements.targetClue) {
+        elements.targetClue.hidden = false;
+        elements.targetClue.style.display = "block";
+      }
+
+      if (!state.started) {
+        elements.placeEyebrow.textContent =
+          "NÍVEL MÉDIO";
+
+        elements.placeName.textContent =
+          "Sem nomes + pista";
+
+        elements.placeDescription.textContent =
+          "O mapa fica sem nomes. Durante a rodada aparecem pista, município e posição aproximada.";
+      }
+
+      return;
+    }
+
+    /* DIFÍCIL */
+
+    if (state.difficulty === "dificil") {
+      elements.modeLabel.textContent =
+        "Difícil · sem nomes e sem pista";
+
+      if (elements.targetClue) {
+        elements.targetClue.textContent = "";
+        elements.targetClue.hidden = true;
+        elements.targetClue.style.display = "none";
+      }
+
+      if (!state.started) {
+        elements.placeEyebrow.textContent =
+          "NÍVEL DIFÍCIL";
+
+        elements.placeName.textContent =
+          "Memória total";
+
+        elements.placeDescription.textContent =
+          "O mapa fica sem nomes. Não aparecem pista, município nem posição aproximada.";
+      }
+    }
+  }
+
+  /* =========================================================
+     ATUALIZAR BOTÕES EXPLORAR / JOGAR
+     ========================================================= */
+
+  function updateModeButtons() {
+    elements.modeButtons.forEach(
+      function (button) {
+        const active =
+          button.dataset.mapMode ===
+          state.mode;
+
+        button.classList.toggle(
+          "is-active",
+          active
+        );
+
+        button.setAttribute(
+          "aria-pressed",
+          String(active)
+        );
+      }
+    );
+  }
+
+  /* =========================================================
+     CRIAR MARCADORES
+     ========================================================= */
+
+  function renderHotspots() {
+    hotspotLayer.innerHTML = "";
+
+    PLACES.forEach(function (place) {
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.type =
+        "button";
+
+      button.className =
+        "map-hotspot";
+
+      button.dataset.placeId =
+        place.id;
+
+      button.dataset.label =
+        place.name;
+
+      button.style.left =
+        place.left + "%";
+
+      button.style.top =
+        place.top + "%";
+
+      /*
+       * Só permite nome no title
+       * em Explorar e Fácil.
+       */
+
+      const showName =
+        state.mode === "explore" ||
+        state.difficulty === "facil";
+
+      if (showName) {
+        button.title =
+          place.name;
+
+        button.setAttribute(
+          "aria-label",
+          place.name
+        );
+      } else {
+        button.removeAttribute(
+          "title"
+        );
+
+        button.setAttribute(
+          "aria-label",
+          "Ponto do mapa"
+        );
+      }
+
+      button.addEventListener(
+        "click",
+        function () {
+          handlePlaceClick(
+            place,
+            button
+          );
+        }
+      );
+
+      hotspotLayer.appendChild(
+        button
+      );
+    });
+  }
+
+  /* =========================================================
+     PEGAR MARCADOR
+     ========================================================= */
+
+  function getHotspot(id) {
+    return hotspotLayer.querySelector(
+      '[data-place-id="' +
+      id +
+      '"]'
+    );
+  }
+
+  /* =========================================================
+     LIMPAR MARCADORES
+     ========================================================= */
+
+  function clearHotspots() {
+    hotspotLayer
+      .querySelectorAll(
+        ".map-hotspot"
+      )
+      .forEach(function (button) {
+        button.classList.remove(
+          "is-selected",
+          "is-correct",
+          "is-wrong"
+        );
+
+        button.disabled =
+          false;
+      });
+  }
+
+  /* =========================================================
+     BLOQUEAR MARCADORES
+     ========================================================= */
+
+  function lockHotspots(value) {
+    hotspotLayer
+      .querySelectorAll(
+        ".map-hotspot"
+      )
+      .forEach(function (button) {
+        button.disabled =
+          value;
+      });
+  }
+
+  /* =========================================================
+     MOSTRAR LOCALIDADE NO MODO EXPLORAR
+     ========================================================= */
+
   function showPlace(place) {
-    clearHotspotStates();
+    clearHotspots();
 
-    const button = getHotspot(place.id);
-    if (button) button.classList.add("is-selected");
+    const button =
+      getHotspot(
+        place.id
+      );
 
-    elements.placeEyebrow.textContent = "LOCALIDADE SELECIONADA";
-    elements.placeName.textContent = place.name;
-    elements.placeDescription.textContent = place.description;
-    elements.placeMunicipality.textContent = place.municipality;
-    elements.placePosition.textContent = place.position;
+    if (button) {
+      button.classList.add(
+        "is-selected"
+      );
+    }
+
+    elements.placeEyebrow.textContent =
+      "LOCALIDADE SELECIONADA";
+
+    elements.placeName.textContent =
+      place.name;
+
+    elements.placeDescription.textContent =
+      place.description;
+
+    elements.placeMunicipality.textContent =
+      place.municipality;
+
+    elements.placePosition.textContent =
+      place.position;
 
     setFeedback(
       "Exploração livre",
-      "Observe a posição de " + place.name + " e escolha outro ponto quando desejar.",
-      ""
+      "Observe a localização de " +
+      place.name +
+      "."
     );
   }
 
-  function renderHotspots() {
-    hotspotLayer.replaceChildren();
-
-    PLACES.forEach(function (place) {
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.className = "map-hotspot";
-      button.dataset.placeId = place.id;
-      button.dataset.label = place.name;
-      button.style.left = place.left + "%";
-      button.style.top = place.top + "%";
-      button.setAttribute("aria-label", place.name);
-      button.title = place.name;
-
-      button.addEventListener("click", function () {
-        handlePlaceClick(place, button);
-      });
-
-      hotspotLayer.appendChild(button);
-    });
-  }
-
-  function updateModeButtons() {
-    elements.modeButtons.forEach(function (button) {
-      const active = button.dataset.mapMode === state.mode;
-      button.classList.toggle("is-active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-  }
+  /* =========================================================
+     MODO EXPLORAR
+     ========================================================= */
 
   function setExploreMode() {
-    state.mode = "explore";
-    state.started = false;
-    state.order = [];
-    state.roundIndex = 0;
-    state.score = 0;
-    state.correct = 0;
-    state.locked = false;
-    state.finished = false;
+    state.mode =
+      "explore";
 
-    section.dataset.mode = "explore";
+    state.started =
+      false;
+
+    state.finished =
+      false;
+
+    state.locked =
+      false;
+
+    state.score =
+      0;
+
+    state.correct =
+      0;
+
+    state.roundIndex =
+      0;
+
+    state.order =
+      [];
+
+    section.dataset.mode =
+      "explore";
+
+    section.dataset.difficulty =
+      "explore";
+
     updateModeButtons();
-    clearHotspotStates();
 
-    elements.modeLabel.textContent = "Exploração livre";
-    elements.scoreLabel.textContent = "0 pontos";
-    elements.roundLabel.textContent = "Livre";
-    elements.targetCard.hidden = true;
+    updateMapImage();
 
-    elements.placeEyebrow.textContent = "COMECE EXPLORANDO";
-    elements.placeName.textContent = "Clique em um ponto";
+    renderHotspots();
+
+    clearHotspots();
+
+    elements.modeLabel.textContent =
+      "Exploração livre";
+
+    elements.scoreLabel.textContent =
+      "0 pontos";
+
+    elements.roundLabel.textContent =
+      "Livre";
+
+    elements.targetCard.hidden =
+      true;
+
+    elements.placeEyebrow.textContent =
+      "COMECE EXPLORANDO";
+
+    elements.placeName.textContent =
+      "Clique em um ponto";
+
     elements.placeDescription.textContent =
-      "Os marcadores estão posicionados sobre as localidades indicadas na imagem.";
-    elements.placeMunicipality.textContent = "Itaparica ou Vera Cruz";
-    elements.placePosition.textContent = "Norte, centro ou sul da ilha";
+      "Use o mapa com nomes para estudar as localidades.";
+
+    elements.placeMunicipality.textContent =
+      "Itaparica ou Vera Cruz";
+
+    elements.placePosition.textContent =
+      "Norte, centro ou sul";
 
     setFeedback(
-      "Modo exploração ativado.",
-      "Clique em um marcador para conhecer a localidade.",
-      ""
+      "Modo exploração",
+      "Clique em qualquer marcador para conhecer a localidade."
     );
   }
+
+  /* =========================================================
+     PREPARAR MODO JOGO
+     ========================================================= */
 
   function prepareChallengeMode() {
-    state.mode = "challenge";
-    state.started = false;
-    state.order = [];
-    state.roundIndex = 0;
-    state.score = 0;
-    state.correct = 0;
-    state.locked = false;
-    state.finished = false;
+    state.mode =
+      "challenge";
 
-    section.dataset.mode = "challenge";
+    state.started =
+      false;
+
+    state.finished =
+      false;
+
+    state.locked =
+      false;
+
+    state.difficulty =
+      elements.difficulty
+        ? elements.difficulty.value
+        : "medio";
+
+    state.score =
+      0;
+
+    state.correct =
+      0;
+
+    state.roundIndex =
+      0;
+
+    state.order =
+      [];
+
+    section.dataset.mode =
+      "challenge";
+
+    section.dataset.difficulty =
+      state.difficulty;
+
     updateModeButtons();
-    clearHotspotStates();
 
-    elements.modeLabel.textContent = "Configurar desafio";
-    elements.scoreLabel.textContent = "0 pontos";
-    elements.roundLabel.textContent = "Aguardando";
-    elements.targetCard.hidden = true;
+    updateMapImage();
 
-    elements.placeEyebrow.textContent = "MODO JOGO";
-    elements.placeName.textContent = "Configure a partida";
-    elements.placeDescription.textContent =
-      "Escolha o nível e a quantidade de rodadas e pressione Iniciar jogo.";
-    elements.placeMunicipality.textContent = "Itaparica e Vera Cruz";
-    elements.placePosition.textContent = "Mapa completo";
+    renderHotspots();
+
+    clearHotspots();
+
+    updateDifficultyInterface();
+
+    elements.scoreLabel.textContent =
+      "0 pontos";
+
+    elements.roundLabel.textContent =
+      "Aguardando";
+
+    elements.targetCard.hidden =
+      true;
 
     setFeedback(
-      "Jogo ainda não iniciado.",
-      "Use o formulário acima e clique em “Iniciar jogo”.",
-      ""
+      "Configure a partida",
+      "Escolha o nível e a quantidade de rodadas."
     );
   }
 
+  /* =========================================================
+     PONTUAÇÃO
+     ========================================================= */
+
   function pointsPerCorrectAnswer() {
-    if (state.difficulty === "facil") return 10;
-    if (state.difficulty === "dificil") return 20;
+    if (state.difficulty === "facil") {
+      return 10;
+    }
+
+    if (state.difficulty === "dificil") {
+      return 25;
+    }
+
     return 15;
   }
 
+  /* =========================================================
+     INICIAR JOGO
+     ========================================================= */
+
   function startChallenge() {
-    const requestedRounds = Number(elements.rounds.value);
-    const totalRounds = Math.min(requestedRounds, PLACES.length);
+    if (!elements.rounds) {
+      return;
+    }
 
-    state.mode = "challenge";
-    state.started = true;
-    state.difficulty = elements.difficulty.value;
-    state.order = shuffle(PLACES).slice(0, totalRounds);
-    state.roundIndex = 0;
-    state.score = 0;
-    state.correct = 0;
-    state.locked = false;
-    state.finished = false;
+    const requested =
+      Number(
+        elements.rounds.value
+      );
 
-    section.dataset.mode = "challenge";
+    const total =
+      Math.min(
+        requested,
+        PLACES.length
+      );
+
+    state.mode =
+      "challenge";
+
+    state.started =
+      true;
+
+    state.finished =
+      false;
+
+    state.locked =
+      false;
+
+    state.difficulty =
+      elements.difficulty
+        ? elements.difficulty.value
+        : "medio";
+
+    state.score =
+      0;
+
+    state.correct =
+      0;
+
+    state.roundIndex =
+      0;
+
+    state.attemptsInRound =
+      0;
+
+    state.order =
+      shuffle(
+        PLACES
+      ).slice(
+        0,
+        total
+      );
+
+    section.dataset.mode =
+      "challenge";
+
+    section.dataset.difficulty =
+      state.difficulty;
+
     updateModeButtons();
-    clearHotspotStates();
 
-    elements.modeLabel.textContent =
-      state.difficulty === "facil"
-        ? "Desafio fácil"
-        : state.difficulty === "dificil"
-          ? "Desafio difícil"
-          : "Desafio médio";
+    updateMapImage();
 
-    elements.scoreLabel.textContent = "0 pontos";
+    renderHotspots();
+
+    updateDifficultyInterface();
+
+    elements.scoreLabel.textContent =
+      "0 pontos";
+
     showCurrentTarget();
   }
 
+  /* =========================================================
+     MOSTRAR RODADA
+     ========================================================= */
+
   function showCurrentTarget() {
-    clearHotspotStates();
+    clearHotspots();
     lockHotspots(false);
+
+    state.locked = false;
+    state.attemptsInRound = 0;
 
     const target = state.order[state.roundIndex];
 
@@ -451,248 +1152,786 @@ document.addEventListener("DOMContentLoaded", function () {
       (state.roundIndex + 1) + " de " + state.order.length;
 
     elements.targetName.textContent = target.name;
-    elements.targetClue.textContent =
-      state.difficulty === "dificil"
-        ? "Encontre a localidade sem pista."
-        : target.clue;
-
     elements.targetCard.hidden = false;
-    elements.placeEyebrow.textContent = "DESAFIO EM ANDAMENTO";
-    elements.placeName.textContent = "Encontre " + target.name;
-    elements.placeDescription.textContent =
-      state.difficulty === "dificil"
-        ? "Use sua memória da posição da localidade."
-        : target.clue;
-    elements.placeMunicipality.textContent = "Descubra no mapa";
-    elements.placePosition.textContent = "Rodada " + (state.roundIndex + 1);
 
-    setFeedback(
-      "Sua vez.",
-      "Clique no ponto correspondente a " + target.name + ".",
-      ""
-    );
+    elements.placeEyebrow.textContent =
+      "DESAFIO EM ANDAMENTO";
 
-    state.locked = false;
-    lockHotspots(false);
+    elements.placeName.textContent =
+      "Encontre " + target.name;
+
+    elements.placePosition.textContent =
+      "Rodada " + (state.roundIndex + 1);
+
+    /*
+     * FÁCIL
+     * mapa com nomes + pista completa
+     */
+    if (state.difficulty === "facil") {
+      elements.modeLabel.textContent =
+        "Fácil · nomes + pista";
+
+      elements.targetClue.hidden = false;
+      elements.targetClue.style.display = "block";
+      elements.targetClue.textContent =
+        "Pista: " + target.clue;
+
+      elements.placeDescription.textContent =
+        "Os nomes estão visíveis no mapa e a pista está disponível.";
+
+      elements.placeMunicipality.textContent =
+        target.municipality;
+
+      elements.placePosition.textContent =
+        target.position;
+
+      setFeedback(
+        "Nível Fácil",
+        "Encontre " + target.name +
+        ". Use os nomes do mapa e a pista.",
+        ""
+      );
+
+      return;
+    }
+
+    /*
+     * MÉDIO
+     * mapa sem nomes + pista + município + região aproximada
+     */
+    if (state.difficulty === "medio") {
+      elements.modeLabel.textContent =
+        "Médio · sem nomes + pista";
+
+      elements.targetClue.hidden = false;
+      elements.targetClue.style.display = "block";
+      elements.targetClue.textContent =
+        "PISTA: " + target.clue;
+
+      elements.placeDescription.textContent =
+        "Os nomes estão escondidos. Use a pista, o município e a posição aproximada.";
+
+      elements.placeMunicipality.textContent =
+        target.municipality;
+
+      elements.placePosition.textContent =
+        target.position;
+
+      setFeedback(
+        "Nível Médio",
+        "Pista: " + target.clue +
+        " Município: " + target.municipality +
+        ". Região: " + target.position + ".",
+        ""
+      );
+
+      return;
+    }
+
+    /*
+     * DIFÍCIL
+     * mapa sem nomes + sem pista + sem município + sem posição
+     */
+    if (state.difficulty === "dificil") {
+      elements.modeLabel.textContent =
+        "Difícil · sem nomes e sem pista";
+
+      elements.targetClue.textContent = "";
+      elements.targetClue.hidden = true;
+      elements.targetClue.style.display = "none";
+
+      elements.placeDescription.textContent =
+        "Use apenas sua memória para localizar a comunidade.";
+
+      elements.placeMunicipality.textContent =
+        "Oculto";
+
+      elements.placePosition.textContent =
+        "Oculto";
+
+      setFeedback(
+        "Nível Difícil",
+        "Encontre " + target.name +
+        ". Nenhuma pista, município ou posição será mostrada.",
+        ""
+      );
+    }
   }
 
-  function handlePlaceClick(place, button) {
+  /* =========================================================
+     PRÓXIMA RODADA
+     ========================================================= */
+
+  function nextRound(delay) {
+    window.setTimeout(
+      function () {
+        state.roundIndex +=
+          1;
+
+        if (
+          state.roundIndex >=
+          state.order.length
+        ) {
+          finishChallenge();
+        } else {
+          showCurrentTarget();
+        }
+      },
+      delay
+    );
+  }
+
+  /* =========================================================
+     CLIQUE NO MARCADOR
+     ========================================================= */
+
+  function handlePlaceClick(
+    place,
+    button
+  ) {
+    /* EXPLORAÇÃO */
+
     if (state.mode === "explore") {
       showPlace(place);
       return;
     }
 
+    /* PARTIDA NÃO INICIADA */
+
     if (!state.started) {
       setFeedback(
-        "Inicie a partida.",
-        "Escolha o nível, as rodadas e clique em “Iniciar jogo”.",
+        "Inicie o jogo",
+        "Escolha o nível e clique em Iniciar jogo.",
         "is-error"
       );
+
       return;
     }
 
-    if (state.locked || state.finished) return;
+    if (
+      state.finished ||
+      state.locked
+    ) {
+      return;
+    }
 
-    state.locked = true;
-    lockHotspots(true);
+    const target =
+      state.order[
+        state.roundIndex
+      ];
 
-    const target = state.order[state.roundIndex];
-    const correct = place.id === target.id;
+    if (!target) {
+      return;
+    }
 
-    clearHotspotStates();
-    lockHotspots(true);
+    state.attemptsInRound +=
+      1;
+
+    const correct =
+      place.id ===
+      target.id;
+
+    /* =====================================================
+       ACERTO
+       ===================================================== */
 
     if (correct) {
-      state.correct += 1;
-      state.score += pointsPerCorrectAnswer();
-      button.classList.add("is-correct");
+      state.locked =
+        true;
 
-      elements.scoreLabel.textContent = state.score + " pontos";
+      lockHotspots(true);
+
+      state.correct +=
+        1;
+
+      let earned =
+        pointsPerCorrectAnswer();
+
+      /* MÉDIO */
+
+      if (state.difficulty === "medio") {
+        earned =
+          Math.max(
+            8,
+            earned -
+            (
+              state.attemptsInRound -
+              1
+            ) *
+            3
+          );
+      }
+
+      /* DIFÍCIL */
+
+      if (state.difficulty === "dificil") {
+        earned =
+          Math.max(
+            10,
+            earned -
+            (
+              state.attemptsInRound -
+              1
+            ) *
+            4
+          );
+      }
+
+      state.score +=
+        earned;
+
+      button.classList.add(
+        "is-correct"
+      );
+
+      elements.scoreLabel.textContent =
+        state.score +
+        " pontos";
 
       setFeedback(
         "Resposta correta!",
-        target.name + " foi localizado no mapa.",
+        target.name +
+        " localizado. +" +
+        earned +
+        " pontos.",
         "is-success"
       );
-    } else {
-      button.classList.add("is-wrong");
 
-      const correctButton = getHotspot(target.id);
-      if (correctButton) correctButton.classList.add("is-correct");
+      nextRound(900);
+
+      return;
+    }
+
+    /* =====================================================
+       ERRO
+       ===================================================== */
+
+    button.classList.add(
+      "is-wrong"
+    );
+
+    /* =====================================================
+       ERRO NO FÁCIL
+
+       mostra a resposta
+       ===================================================== */
+
+    if (state.difficulty === "facil") {
+      state.locked =
+        true;
+
+      lockHotspots(true);
+
+      const correctButton =
+        getHotspot(
+          target.id
+        );
+
+      if (correctButton) {
+        correctButton.classList.add(
+          "is-correct"
+        );
+      }
 
       setFeedback(
         "Quase!",
-        "O ponto correto era " + target.name + ". Observe a posição destacada.",
+        "O ponto correto de " +
+        target.name +
+        " foi destacado.",
         "is-error"
       );
+
+      nextRound(1400);
+
+      return;
     }
 
-    window.setTimeout(function () {
-      state.roundIndex += 1;
+    /* =====================================================
+       ERRO NO MÉDIO
 
-      if (state.roundIndex >= state.order.length) {
-        finishChallenge();
-      } else {
-        showCurrentTarget();
+       primeira tentativa:
+       deixa tentar novamente
+
+       segunda tentativa:
+       mostra a resposta
+       ===================================================== */
+
+    if (state.difficulty === "medio") {
+      if (
+        state.attemptsInRound <
+        2
+      ) {
+        setFeedback(
+          "Tente novamente",
+          target.clue,
+          "is-error"
+        );
+
+        window.setTimeout(
+          function () {
+            button.classList.remove(
+              "is-wrong"
+            );
+          },
+          500
+        );
+
+        return;
       }
-    }, correct ? 900 : 1400);
-  }
 
-  function getStudent() {
-    if (window.MissaoAprenderAluno && typeof window.MissaoAprenderAluno.get === "function") {
-      const registered = window.MissaoAprenderAluno.get();
-      return {
-        name: registered.name || "Visitante",
-        className: registered.className || "Não informada"
-      };
+      state.locked =
+        true;
+
+      lockHotspots(true);
+
+      const correctButton =
+        getHotspot(
+          target.id
+        );
+
+      if (correctButton) {
+        correctButton.classList.add(
+          "is-correct"
+        );
+      }
+
+      setFeedback(
+        "Veja a posição",
+        "Depois de duas tentativas, o ponto correto foi mostrado.",
+        "is-error"
+      );
+
+      nextRound(1500);
+
+      return;
     }
 
-    const name = document.querySelector("#studentName");
-    const className = document.querySelector("#studentClass");
+    /* =====================================================
+       ERRO NO DIFÍCIL
 
-    return {
-      name: name && name.value.trim()
-        ? name.value.trim()
-        : "Visitante",
-      className: className && className.value.trim()
-        ? className.value.trim()
-        : "Não informada"
-    };
+       nunca revela a resposta
+       ===================================================== */
+
+    if (state.difficulty === "dificil") {
+      setFeedback(
+        "Não é esse ponto",
+        "Continue tentando. Nenhuma pista ou resposta será mostrada.",
+        "is-error"
+      );
+
+      window.setTimeout(
+        function () {
+          button.classList.remove(
+            "is-wrong"
+          );
+        },
+        500
+      );
+
+      return;
+    }
   }
+
+  /* =========================================================
+     RESULTADOS
+     ========================================================= */
 
   function loadResults() {
     try {
-      const stored = JSON.parse(localStorage.getItem(RESULT_KEY) || "[]");
-      return Array.isArray(stored) ? stored : [];
+      const stored =
+        JSON.parse(
+          localStorage.getItem(
+            RESULT_KEY
+          ) || "[]"
+        );
+
+      return Array.isArray(stored)
+        ? stored
+        : [];
     } catch (error) {
       return [];
     }
   }
 
-  function saveMapResult() {
-    const student = getStudent();
-    const total = state.order.length;
-    const percentage = total
-      ? Math.round((state.correct / total) * 100)
-      : 0;
+  /* =========================================================
+     SALVAR RESULTADO
+     ========================================================= */
+
+  function saveResult() {
+    const total =
+      state.order.length;
+
+    const percentage =
+      total
+        ? Math.round(
+            (
+              state.correct /
+              total
+            ) *
+            100
+          )
+        : 0;
+
+    const studentName =
+      document.querySelector(
+        "#studentName"
+      );
+
+    const studentClass =
+      document.querySelector(
+        "#studentClass"
+      );
 
     const result = {
-      id: Date.now(),
-      student: student.name,
-      className: student.className,
-      activity: "Mapa-jogo da Ilha de Itaparica",
-      subject: "Geografia e História local",
-      correct: state.correct,
-      total: total,
-      percentage: percentage,
-      date: new Date().toLocaleString("pt-BR")
+      id:
+        Date.now(),
+
+      student:
+        studentName &&
+        studentName.value.trim()
+          ? studentName.value.trim()
+          : "Visitante",
+
+      className:
+        studentClass &&
+        studentClass.value.trim()
+          ? studentClass.value.trim()
+          : "Não informada",
+
+      activity:
+        "Mapa-jogo da Ilha de Itaparica",
+
+      subject:
+        "Geografia e História local",
+
+      difficulty:
+        state.difficulty,
+
+      correct:
+        state.correct,
+
+      total:
+        total,
+
+      score:
+        state.score,
+
+      percentage:
+        percentage,
+
+      date:
+        new Date()
+          .toLocaleString(
+            "pt-BR"
+          )
     };
 
-    const results = loadResults();
-    results.unshift(result);
-    localStorage.setItem(RESULT_KEY, JSON.stringify(results.slice(0, 100)));
+    const results =
+      loadResults();
 
-    refreshResultsTable();
+    results.unshift(
+      result
+    );
+
+    localStorage.setItem(
+      RESULT_KEY,
+      JSON.stringify(
+        results.slice(
+          0,
+          100
+        )
+      )
+    );
+
     return result;
   }
 
-  function refreshResultsTable() {
-    const tableBody = document.querySelector("#resultsTableBody");
-    const totalActivities = document.querySelector("#totalActivities");
-    const averageScore = document.querySelector("#averageScore");
-    const bestScore = document.querySelector("#bestScore");
-    const results = loadResults();
+  /* =========================================================
+     FINALIZAR
+     ========================================================= */
 
-    if (!tableBody || !totalActivities || !averageScore || !bestScore) return;
+  function finishChallenge() {
+    state.finished =
+      true;
 
-    if (!results.length) {
-      tableBody.innerHTML =
-        '<tr class="empty-row"><td colspan="7">Nenhum jogo concluído ainda.</td></tr>';
-      totalActivities.textContent = "0";
-      averageScore.textContent = "0%";
-      bestScore.textContent = "0%";
+    state.locked =
+      true;
+
+    lockHotspots(false);
+
+    elements.targetCard.hidden =
+      true;
+
+    const result =
+      saveResult();
+
+    elements.modeLabel.textContent =
+      "Desafio concluído";
+
+    elements.roundLabel.textContent =
+      state.order.length +
+      " rodadas";
+
+    elements.placeEyebrow.textContent =
+      "MISSÃO CONCLUÍDA";
+
+    elements.placeName.textContent =
+      result.percentage +
+      "% de aproveitamento";
+
+    elements.placeDescription.textContent =
+      "Você acertou " +
+      state.correct +
+      " de " +
+      state.order.length +
+      " localidades.";
+
+    elements.placeMunicipality.textContent =
+      "Geografia e História local";
+
+    elements.placePosition.textContent =
+      result.date;
+
+    setFeedback(
+      "Missão concluída!",
+      "Pontuação final: " +
+      state.score +
+      " pontos.",
+      "is-success"
+    );
+  }
+
+  /* =========================================================
+     MODO CALIBRAÇÃO
+     ========================================================= */
+
+  function enableCalibrationMode() {
+    if (!CALIBRATION_MODE) {
       return;
     }
 
-    const average = Math.round(
-      results.reduce(function (sum, item) {
-        return sum + Number(item.percentage || 0);
-      }, 0) / results.length
+    console.log(
+      "=============================="
     );
 
-    const best = Math.max.apply(
-      null,
-      results.map(function (item) {
-        return Number(item.percentage || 0);
-      })
+    console.log(
+      "MODO DE CALIBRAÇÃO ATIVADO"
     );
 
-    totalActivities.textContent = String(results.length);
-    averageScore.textContent = average + "%";
-    bestScore.textContent = best + "%";
-
-    tableBody.innerHTML = results.map(function (item) {
-      return (
-        "<tr>" +
-          "<td>" + escapeHtml(item.student) + "</td>" +
-          "<td>" + escapeHtml(item.className) + "</td>" +
-          "<td>" + escapeHtml(item.activity) + "</td>" +
-          "<td>" + escapeHtml(item.subject) + "</td>" +
-          "<td>" + Number(item.correct || 0) + "/" + Number(item.total || 0) + "</td>" +
-          '<td><span class="score-pill">' + Number(item.percentage || 0) + "%</span></td>" +
-          "<td>" + escapeHtml(item.date) + "</td>" +
-        "</tr>"
-      );
-    }).join("");
-  }
-
-  function finishChallenge() {
-    state.finished = true;
-    state.locked = true;
-    elements.targetCard.hidden = true;
-    clearHotspotStates();
-    lockHotspots(false);
-
-    const result = saveMapResult();
-
-    elements.modeLabel.textContent = "Desafio concluído";
-    elements.roundLabel.textContent = state.order.length + " rodadas";
-    elements.placeEyebrow.textContent = "MISSÃO CONCLUÍDA";
-    elements.placeName.textContent = result.percentage + "% de aproveitamento";
-    elements.placeDescription.textContent =
-      "Você acertou " + state.correct + " de " + state.order.length +
-      " localidades. O resultado foi salvo em Meu progresso.";
-    elements.placeMunicipality.textContent = result.subject;
-    elements.placePosition.textContent = result.date;
-
-    setFeedback(
-      result.percentage >= 70 ? "Excelente exploração!" : "Missão concluída!",
-      "Pontuação final: " + state.score + " pontos.",
-      result.percentage >= 70 ? "is-success" : ""
+    console.log(
+      "Clique no ponto exato do mapa."
     );
-  }
 
-  elements.modeButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      if (button.dataset.mapMode === "challenge") {
-        prepareChallengeMode();
-      } else {
-        setExploreMode();
+    console.log(
+      "=============================="
+    );
+
+    mapImage.style.cursor =
+      "crosshair";
+
+    mapImage.addEventListener(
+      "click",
+      function (event) {
+        const rect =
+          mapImage.getBoundingClientRect();
+
+        const x =
+          event.clientX -
+          rect.left;
+
+        const y =
+          event.clientY -
+          rect.top;
+
+        const left =
+          (
+            x /
+            rect.width *
+            100
+          ).toFixed(2);
+
+        const top =
+          (
+            y /
+            rect.height *
+            100
+          ).toFixed(2);
+
+        console.log(
+          "COORDENADAS:"
+        );
+
+        console.log(
+          "left:",
+          left
+        );
+
+        console.log(
+          "top:",
+          top
+        );
+
+        console.log(
+          `{ left: ${left}, top: ${top} }`
+        );
+
+        /* MARCADOR TEMPORÁRIO */
+
+        const marker =
+          document.createElement(
+            "span"
+          );
+
+        marker.style.position =
+          "absolute";
+
+        marker.style.left =
+          left + "%";
+
+        marker.style.top =
+          top + "%";
+
+        marker.style.width =
+          "18px";
+
+        marker.style.height =
+          "18px";
+
+        marker.style.borderRadius =
+          "50%";
+
+        marker.style.background =
+          "#ff0000";
+
+        marker.style.border =
+          "3px solid white";
+
+        marker.style.boxShadow =
+          "0 0 0 2px black";
+
+        marker.style.transform =
+          "translate(-50%, -50%)";
+
+        marker.style.zIndex =
+          "999";
+
+        marker.style.pointerEvents =
+          "none";
+
+        hotspotLayer.appendChild(
+          marker
+        );
       }
-    });
-  });
+    );
+  }
+
+  /* =========================================================
+     EVENTO EXPLORAR / JOGAR
+     ========================================================= */
+
+  elements.modeButtons.forEach(
+    function (button) {
+      button.addEventListener(
+        "click",
+        function () {
+          const mode =
+            button.dataset.mapMode;
+
+          if (mode === "challenge") {
+            prepareChallengeMode();
+          } else {
+            setExploreMode();
+          }
+        }
+      );
+    }
+  );
+
+  /* =========================================================
+     TROCAR DIFICULDADE
+
+     ESTA PARTE CORRIGE O PROBLEMA
+     ========================================================= */
+
+  if (elements.difficulty) {
+    elements.difficulty.addEventListener(
+      "change",
+      function () {
+        state.difficulty =
+          elements.difficulty.value;
+
+        section.dataset.difficulty =
+          state.difficulty;
+
+        /*
+         * Atualiza imediatamente
+         * a interface.
+         */
+
+        updateDifficultyInterface();
+
+        /*
+         * Se estiver no modo jogo,
+         * troca o mapa.
+         */
+
+        if (
+          state.mode ===
+          "challenge"
+        ) {
+          updateMapImage();
+
+          renderHotspots();
+
+          /*
+           * Se a partida já começou,
+           * atualiza a rodada atual.
+           */
+
+          if (
+            state.started &&
+            !state.finished
+          ) {
+            showCurrentTarget();
+          }
+        }
+      }
+    );
+  }
+
+  /* =========================================================
+     INICIAR JOGO
+     ========================================================= */
 
   if (elements.settings) {
-    elements.settings.addEventListener("submit", function (event) {
-      event.preventDefault();
-      startChallenge();
-    });
+    elements.settings.addEventListener(
+      "submit",
+      function (event) {
+        event.preventDefault();
+
+        startChallenge();
+      }
+    );
   }
+
+  /* =========================================================
+     VOLTAR PARA EXPLORAR
+     ========================================================= */
 
   if (elements.resetButton) {
-    elements.resetButton.addEventListener("click", setExploreMode);
+    elements.resetButton.addEventListener(
+      "click",
+      function () {
+        setExploreMode();
+      }
+    );
   }
 
-  renderHotspots();
+  /* =========================================================
+     INICIALIZAÇÃO
+     ========================================================= */
+
   setExploreMode();
+
+  enableCalibrationMode();
 });
