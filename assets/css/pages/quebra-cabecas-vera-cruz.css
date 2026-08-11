@@ -1,0 +1,143 @@
+/* ==========================================================
+   QUEBRA-CABEÇAS DE VERA CRUZ · SELETOR DOS DOIS JOGOS
+   ========================================================== */
+.game-card--puzzle-collection {
+  background: linear-gradient(145deg, #6f3cc3 0%, #3659b8 55%, #0d7187 100%) !important;
+}
+
+.puzzle-library {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 0 0, rgba(111, 60, 195, .10), transparent 28rem),
+    radial-gradient(circle at 100% 100%, rgba(13, 113, 135, .10), transparent 26rem),
+    #fff;
+}
+
+.puzzle-library__heading {
+  margin-bottom: 22px;
+}
+
+.puzzle-library__heading h2 {
+  margin: 5px 0 8px;
+  color: #14334b;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+
+.puzzle-library__heading p {
+  max-width: 700px;
+  margin: 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.puzzle-library__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.puzzle-choice-card {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid #dce4ea;
+  border-radius: 24px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  box-shadow: 0 16px 38px rgba(20, 43, 63, .09);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.puzzle-choice-card:hover,
+.puzzle-choice-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: #aebfd0;
+  box-shadow: 0 22px 48px rgba(20, 43, 63, .14);
+  outline: none;
+}
+
+.puzzle-choice-card__media {
+  position: relative;
+  min-height: 250px;
+  margin: 0;
+  overflow: hidden;
+  background: #e9edf1;
+}
+
+.puzzle-choice-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.puzzle-choice-card:hover .puzzle-choice-card__media img {
+  transform: scale(1.025);
+}
+
+.puzzle-choice-card__media > span {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(15, 43, 63, .88);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.puzzle-choice-card__body {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+  padding: 20px;
+}
+
+.puzzle-choice-card__body small {
+  color: #14755e;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.puzzle-choice-card__body strong {
+  color: #17344b;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.15;
+}
+
+.puzzle-choice-card__body > span {
+  color: #667085;
+  line-height: 1.5;
+}
+
+.puzzle-choice-card__body b {
+  margin-top: 5px;
+  color: #5c3db6;
+}
+
+@media (max-width: 760px) {
+  .puzzle-library__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .puzzle-choice-card__media,
+  .puzzle-choice-card__media img {
+    min-height: 210px;
+  }
+
+  .puzzle-choice-card {
+    border-radius: 19px;
+  }
+}

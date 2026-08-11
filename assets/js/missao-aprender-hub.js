@@ -12,8 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     "mapa-jogo",
     "quebra-cabeca-regioes",
     "quebra-cabeca-estados-regioes",
+    "quebra-cabecas-vera-cruz",
     "quebra-cabeca-igreja-vera-cruz",
     "quebra-cabeca-jaburu",
+    "quebra-cabeca-bandeira-vera-cruz",
+    "quebra-cabeca-sagrado-coracao",
     "disciplinas",
     "resultados"
   ];
@@ -77,8 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
     "mapa-jogo": "Mapa-jogo da Ilha de Itaparica",
     "quebra-cabeca-regioes": "Quebra-cabeça das Regiões do Brasil",
     "quebra-cabeca-estados-regioes": "Quebra-cabeça dos Estados por Região",
+    "quebra-cabecas-vera-cruz": "Quebra-cabeças de Vera Cruz",
     "quebra-cabeca-igreja-vera-cruz": "Quebra-cabeça da Igreja Nosso Senhor da Vera Cruz",
     "quebra-cabeca-jaburu": "Quebra-cabeça da Capela do Jaburu",
+    "quebra-cabeca-bandeira-vera-cruz": "Quebra-cabeça da Bandeira de Vera Cruz",
+    "quebra-cabeca-sagrado-coracao": "Quebra-cabeça da Igreja Sagrado Coração de Jesus",
     "resultados": "Meu progresso nos jogos"
   };
 
