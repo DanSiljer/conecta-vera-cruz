@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "quebra-cabeca-jaburu",
     "quebra-cabeca-bandeira-vera-cruz",
     "quebra-cabeca-sagrado-coracao",
+    "quebra-cabeca-forno-penha",
+    "quebra-cabeca-bom-jesus-gamboa",
     "disciplinas",
     "resultados"
   ];
@@ -85,6 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "quebra-cabeca-jaburu": "Quebra-cabeça da Capela do Jaburu",
     "quebra-cabeca-bandeira-vera-cruz": "Quebra-cabeça da Bandeira de Vera Cruz",
     "quebra-cabeca-sagrado-coracao": "Quebra-cabeça da Igreja Sagrado Coração de Jesus",
+    "quebra-cabeca-forno-penha": "Quebra-cabeça do Forno da Penha",
+    "quebra-cabeca-bom-jesus-gamboa": "Quebra-cabeça do Bom Jesus da Gamboa",
     "resultados": "Meu progresso nos jogos"
   };
 
