@@ -5,27 +5,21 @@
   <url>
     <loc>https://conectaveracruz.com.br/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/historia</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/missao-aprender</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/pousadas</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/blog</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/nossa-historia</loc>
   </url>
@@ -34,41 +28,43 @@
   <url>
     <loc>https://conectaveracruz.com.br/bairros/jiribatuba/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/cacha-pregos/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/gamboa/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/baiacu/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/mar-grande/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/matarandiba/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/catu/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/penha/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/conceicao/</loc>
   </url>
-
   <url>
     <loc>https://conectaveracruz.com.br/bairros/jaburu/</loc>
+  </url>
+
+  <!-- Artigos do blog com URL própria -->
+  <url>
+    <loc>https://conectaveracruz.com.br/blog/mariscagem-pinauna/</loc>
+  </url>
+  <url>
+    <loc>https://conectaveracruz.com.br/blog/forno-da-penha/</loc>
+  </url>
+  <url>
+    <loc>https://conectaveracruz.com.br/blog/historia-vera-cruz/</loc>
   </url>
 
 </urlset>
