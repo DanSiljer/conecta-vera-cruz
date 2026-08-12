@@ -448,3 +448,165 @@
   .jaburu-puzzle__stats article { min-width: 0; padding-inline: 5px; }
   .jaburu-puzzle__tray { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+
+/* ==========================================================
+   v5 · MESA DE MONTAGEM PRÓXIMA
+   Tabuleiro central + peças logo abaixo, sem coluna distante.
+   ========================================================== */
+.jaburu-puzzle__workspace {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 10px !important;
+  width: 100%;
+  max-width: 1020px;
+  margin-inline: auto;
+}
+.jaburu-puzzle__board-column {
+  width: 100%;
+  max-width: 900px;
+  justify-self: center;
+  order: 1;
+}
+.jaburu-puzzle__tray-panel {
+  order: 2;
+  width: 100%;
+  margin-top: 0 !important;
+  padding: 11px 12px !important;
+  border-radius: 18px !important;
+  background: #f3f7f9 !important;
+  box-shadow: 0 9px 24px rgba(24,32,51,.06) !important;
+}
+.jaburu-puzzle__tray-heading {
+  align-items: center !important;
+  margin-bottom: 7px !important;
+}
+.jaburu-puzzle__tray-heading h3 {
+  font-size: .98rem !important;
+}
+.jaburu-puzzle__tray-help {
+  font-size: .68rem !important;
+}
+.jaburu-puzzle__tray {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)) !important;
+  gap: 9px !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  padding: 10px !important;
+  border-radius: 14px !important;
+  background: #e8eff3 !important;
+}
+.jaburu-puzzle__tray .jaburu-puzzle__piece {
+  width: 100% !important;
+  max-width: 98px !important;
+  justify-self: center;
+  --scatter-rotate: 0deg;
+}
+.jaburu-puzzle__board-shell {
+  padding: 8px !important;
+  border-radius: 20px !important;
+}
+.jaburu-puzzle__instruction {
+  margin-top: 7px !important;
+}
+
+@media (min-width: 981px) {
+  .jaburu-puzzle__tray {
+    grid-template-columns: repeat(auto-fit, minmax(82px, 1fr)) !important;
+  }
+  .jaburu-puzzle__tray .jaburu-puzzle__piece {
+    max-width: 106px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .jaburu-puzzle__workspace { gap: 7px !important; }
+  .jaburu-puzzle__board-shell { padding: 4px !important; border-radius: 14px !important; }
+  .jaburu-puzzle__tray-panel {
+    padding: 8px !important;
+    border-radius: 14px !important;
+  }
+  .jaburu-puzzle__tray-heading { margin-bottom: 5px !important; }
+  .jaburu-puzzle__tray-help { display: none; }
+  .jaburu-puzzle__tray {
+    display: flex !important;
+    gap: 7px !important;
+    min-height: 98px !important;
+    padding: 8px 7px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .jaburu-puzzle__tray .jaburu-puzzle__piece {
+    flex: 0 0 84px !important;
+    width: 84px !important;
+    max-width: 84px !important;
+    scroll-snap-align: center;
+  }
+}
+
+
+/* ==========================================================
+   v6 · PEÇAS AO REDOR DO TABULEIRO (desktop)
+   Mantém as peças dentro da área do jogo, como nos exemplos.
+   ========================================================== */
+.jaburu-puzzle.has-floating-tray .jaburu-puzzle__workspace {
+  max-width: 1180px !important;
+}
+.jaburu-puzzle.has-floating-tray .jaburu-puzzle__board-column {
+  max-width: 1180px !important;
+}
+.jaburu-puzzle.has-floating-tray .jaburu-puzzle__board-shell {
+  padding: 84px 126px 92px !important;
+  overflow: visible !important;
+}
+.jaburu-puzzle.has-floating-tray .jaburu-puzzle__board {
+  position: relative;
+  z-index: 5;
+}
+.jaburu-puzzle.has-floating-tray .jaburu-puzzle__tray-panel {
+  display: none !important;
+}
+.jaburu-puzzle__board-tray {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.jaburu-puzzle__board-tray .jaburu-puzzle__tray {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+.jaburu-puzzle__board-tray .jaburu-puzzle__piece {
+  position: absolute !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 88px !important;
+  pointer-events: auto !important;
+  box-sizing: border-box;
+  z-index: 2;
+}
+.jaburu-puzzle__board-tray .jaburu-puzzle__piece:hover,
+.jaburu-puzzle__board-tray .jaburu-puzzle__piece:focus-visible {
+  z-index: 25;
+}
+.jaburu-puzzle__board-tray .jaburu-puzzle__piece.is-dragging {
+  z-index: 1000 !important;
+}
+
+@media (min-width: 981px) and (max-width: 1150px) {
+  .jaburu-puzzle.has-floating-tray .jaburu-puzzle__board-shell {
+    padding: 74px 108px 82px !important;
+  }
+  .jaburu-puzzle__board-tray .jaburu-puzzle__piece {
+    width: 78px !important;
+  }
+}
