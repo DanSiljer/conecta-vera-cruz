@@ -1,6 +1,7 @@
 /* ==========================================================
-   MISSÃO APRENDER · QUEBRA-CABEÇA ONLINE DA FORNO DA PENHA · v4
-   Peças soltas, arrastar/soltar, encaixe correto e toque mobile.
+   MISSÃO APRENDER · QUEBRA-CABEÇA ONLINE · V8 FUNCIONAL
+   Mesa compacta: tabuleiro + peças lado a lado no computador.
+   No celular, as peças ficam em uma faixa logo abaixo do tabuleiro.
    ========================================================== */
 .game-card--puzzle {
   background: linear-gradient(145deg, #7a4a2b 0%, #174e78 100%) !important;
@@ -8,55 +9,49 @@
 }
 
 .forno-puzzle {
-  width: min(100% - 24px, 1220px);
-  scroll-margin-top: calc(var(--cv-header-height, 72px) + 70px);
+  width: min(100% - 20px, 1120px);
+  scroll-margin-top: calc(var(--cv-header-height, 72px) + 68px);
 }
 .forno-puzzle[hidden] { display: none !important; }
 
-.forno-puzzle__header {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: end;
-  margin-bottom: 18px;
-}
+.forno-puzzle__header { margin-bottom: 14px; }
 .forno-puzzle__header h2 {
-  margin: 6px 0 8px;
+  margin: 5px 0 6px;
   color: #16334a;
-  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-size: clamp(1.65rem, 3.2vw, 2.65rem);
   line-height: 1.04;
 }
 .forno-puzzle__header p {
-  max-width: 800px;
+  max-width: 780px;
   margin: 0;
   color: #667085;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .forno-puzzle__toolbar {
   display: grid;
-  grid-template-columns: minmax(220px, .75fr) minmax(0, 1fr) auto;
-  gap: 14px;
+  grid-template-columns: minmax(175px, .62fr) minmax(0, 1.15fr) minmax(250px, .9fr);
+  gap: 10px;
   align-items: end;
-  margin-bottom: 18px;
-  padding: 14px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
   border: 1px solid #dbe4ea;
-  border-radius: 20px;
+  border-radius: 16px;
   background: #f8fbfc;
 }
 .forno-puzzle__toolbar label {
   display: grid;
-  gap: 7px;
+  gap: 5px;
   color: #243b53;
-  font-size: .82rem;
+  font-size: .75rem;
   font-weight: 850;
 }
 .forno-puzzle__toolbar select {
   width: 100%;
-  min-height: 48px;
-  padding: 0 13px;
+  min-height: 42px;
+  padding: 0 11px;
   border: 1px solid #cfd8e3;
-  border-radius: 13px;
+  border-radius: 11px;
   background: #fff;
   color: #203247;
   font: inherit;
@@ -64,68 +59,75 @@
 .forno-puzzle__buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 .forno-puzzle__buttons .button {
-  min-height: 48px;
-  padding: 10px 15px;
+  min-height: 42px;
+  padding: 9px 12px;
+  font-size: .76rem;
 }
 .forno-puzzle__stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(82px, 1fr));
-  gap: 7px;
+  grid-template-columns: repeat(3, minmax(68px, 1fr));
+  gap: 6px;
 }
 .forno-puzzle__stats article {
-  min-width: 82px;
-  padding: 9px 11px;
+  min-width: 0;
+  padding: 7px 8px;
   border: 1px solid #e0e8ed;
-  border-radius: 13px;
+  border-radius: 11px;
   background: #fff;
   text-align: center;
 }
 .forno-puzzle__stats span {
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   color: #6b7280;
-  font-size: .64rem;
+  font-size: .56rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: .035em;
 }
-.forno-puzzle__stats strong {
-  color: #17344b;
-  font-size: 1.22rem;
-}
+.forno-puzzle__stats strong { color: #17344b; font-size: 1.05rem; }
 
+/* Mesa de jogo: tudo fica no mesmo campo visual. */
 .forno-puzzle__workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(300px, .72fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
+  gap: 12px;
   align-items: start;
+  width: 100%;
+  max-width: 1040px;
+  margin-inline: auto;
+  overflow: visible;
 }
 .forno-puzzle__board-column,
-.forno-puzzle__tray-panel {
-  min-width: 0;
-}
+.forno-puzzle__tray-panel { min-width: 0; overflow: visible; }
+
 .forno-puzzle__board-shell {
   position: relative;
-  padding: 12px;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 8px;
+  overflow: visible;
   border: 1px solid #cfdbe3;
-  border-radius: 24px;
+  border-radius: 18px;
   background:
-    linear-gradient(45deg, rgba(20, 70, 95, .025) 25%, transparent 25%, transparent 75%, rgba(20, 70, 95, .025) 75%),
-    linear-gradient(45deg, rgba(20, 70, 95, .025) 25%, #f8fbfc 25%, #f8fbfc 75%, rgba(20, 70, 95, .025) 75%);
-  background-position: 0 0, 12px 12px;
-  background-size: 24px 24px;
-  box-shadow: 0 18px 45px rgba(24,32,51,.08);
+    linear-gradient(45deg, rgba(20,70,95,.022) 25%, transparent 25%, transparent 75%, rgba(20,70,95,.022) 75%),
+    linear-gradient(45deg, rgba(20,70,95,.022) 25%, #f8fbfc 25%, #f8fbfc 75%, rgba(20,70,95,.022) 75%);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+  box-shadow: 0 12px 28px rgba(24,32,51,.07);
 }
 .forno-puzzle__board {
   position: relative;
   width: 100%;
-  min-height: 250px;
+  min-width: 0;
+  min-height: 210px;
   overflow: visible;
   border: 2px solid #b9c8d2;
-  border-radius: 13px;
+  border-radius: 11px;
   background: #e7eef2;
   isolation: isolate;
 }
@@ -142,15 +144,15 @@
   position: absolute;
   inset: 0;
   z-index: 500;
-  border-radius: 10px;
+  border-radius: 9px;
   background: url("../../img/jogos/forno-da-penha.webp") center / 100% 100% no-repeat;
-  box-shadow: inset 0 0 0 4px rgba(255,255,255,.72);
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.75);
   content: "";
   pointer-events: none;
-  animation: capelaHintIn .18s ease both;
+  animation: puzzleHintIn .16s ease both;
 }
 .forno-puzzle__board.is-complete {
-  box-shadow: 0 0 0 4px rgba(19,121,91,.15), 0 20px 45px rgba(19,121,91,.14);
+  box-shadow: 0 0 0 4px rgba(19,121,91,.14), 0 16px 36px rgba(19,121,91,.13);
 }
 
 .forno-puzzle__slot {
@@ -167,39 +169,36 @@
   position: absolute;
   inset: 1px;
   z-index: -1;
-  border: 1px dashed rgba(55, 82, 98, .28);
-  background: rgba(255,255,255,.10);
+  border: 1px dashed rgba(55,82,98,.25);
+  background: rgba(255,255,255,.08);
   content: "";
 }
 .forno-puzzle__slot.is-wrong::after {
-  border-color: rgba(186, 57, 57, .78);
-  background: rgba(220, 38, 38, .08);
-  animation: capelaShake .28s ease;
+  border-color: rgba(186,57,57,.78);
+  background: rgba(220,38,38,.07);
+  animation: puzzleShake .28s ease;
 }
 .forno-puzzle__slot.is-filled::after { display: none; }
 
 .forno-puzzle__ghost-outline {
-  fill: rgba(255,255,255,.02);
-  stroke: rgba(73, 99, 115, .22);
-  stroke-width: 1.15;
+  fill: rgba(255,255,255,.015);
+  stroke: rgba(73,99,115,.2);
+  stroke-width: 1.05;
   stroke-dasharray: 4 3;
 }
 .forno-puzzle__piece-outline {
   fill: none;
-  stroke: rgba(15, 38, 52, .58);
-  stroke-width: 1.35;
+  stroke: rgba(15,38,52,.56);
+  stroke-width: 1.25;
   pointer-events: none;
 }
 .forno-puzzle__piece-svg {
   position: absolute;
   inset: auto;
-  /* left/top/width/height são calculados pelo JS conforme a proporção
-     de cada imagem. Isso elimina as frestas entre peças. */
   overflow: visible;
   pointer-events: none;
-  filter: drop-shadow(0 3px 3px rgba(15, 35, 48, .22));
+  filter: drop-shadow(0 2px 2px rgba(15,35,48,.20));
 }
-
 .forno-puzzle__piece {
   position: relative;
   display: block;
@@ -215,398 +214,330 @@
   -webkit-user-select: none;
   transform: rotate(var(--scatter-rotate, 0deg));
   transform-origin: center;
-  transition: transform .18s ease, filter .18s ease;
+  transition: transform .12s ease, filter .12s ease;
 }
 .forno-puzzle__piece:hover,
 .forno-puzzle__piece:focus-visible {
-  z-index: 20;
+  z-index: 30;
   outline: none;
   filter: brightness(1.04);
-  transform: rotate(0deg) scale(1.035);
+  transform: rotate(0deg) scale(1.04);
 }
 .forno-puzzle__piece.is-selected {
-  z-index: 30;
-  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+  z-index: 35;
   transform: rotate(0deg) scale(1.06);
 }
 .forno-puzzle__piece.is-selected .forno-puzzle__piece-svg {
-  filter: drop-shadow(0 0 5px #f0a51b) drop-shadow(0 5px 4px rgba(15,35,48,.24));
+  filter: drop-shadow(0 0 5px #f0a51b) drop-shadow(0 4px 3px rgba(15,35,48,.22));
 }
 .forno-puzzle__piece.is-dragging {
+  z-index: 1000 !important;
   cursor: grabbing;
   transition: none;
   will-change: transform;
 }
 .forno-puzzle__piece.is-dragging .forno-puzzle__piece-svg {
-  filter: drop-shadow(0 13px 9px rgba(15,35,48,.34));
+  filter: drop-shadow(0 10px 7px rgba(15,35,48,.3));
 }
-.forno-puzzle__piece.is-wrong {
-  animation: capelaShake .32s ease;
-}
+.forno-puzzle__piece.is-wrong { animation: puzzleShake .30s ease; }
 .forno-puzzle__piece.is-placed {
-  position: absolute;
-  inset: 0;
+  position: absolute !important;
+  inset: 0 !important;
   z-index: 10;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
   aspect-ratio: auto;
   cursor: default;
   pointer-events: none;
-  transform: rotate(0deg) scale(1);
-  animation: capelaSnap .22s cubic-bezier(.2,.9,.3,1.25) both;
+  transform: rotate(0deg) scale(1) !important;
+  animation: puzzleSnap .2s cubic-bezier(.2,.9,.3,1.2) both;
 }
-.forno-puzzle__piece.is-placed .forno-puzzle__piece-svg {
-  filter: none;
-}
+.forno-puzzle__piece.is-placed .forno-puzzle__piece-svg { filter: none; }
 
 .forno-puzzle__instruction {
-  margin: 11px 5px 0;
+  margin: 7px 4px 0;
   color: #667085;
-  font-size: .78rem;
-  line-height: 1.5;
+  font-size: .72rem;
+  line-height: 1.4;
   text-align: center;
 }
 .forno-puzzle__message {
-  margin: 12px 0 0;
-  padding: 13px 15px;
+  margin: 8px 0 0;
+  padding: 9px 11px;
   border: 1px solid #dbe4ea;
-  border-radius: 15px;
+  border-radius: 12px;
   color: #29465a;
   background: #f7fafb;
-  font-size: .84rem;
+  font-size: .75rem;
   font-weight: 700;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 .forno-puzzle__message strong { color: #0f6f67; }
 
+/* Bandeja ao lado: sem sair da tela para procurar peça. */
 .forno-puzzle__tray-panel {
-  padding: 15px;
+  padding: 10px;
   border: 1px solid #d7e1e7;
-  border-radius: 22px;
+  border-radius: 16px;
   background: #f7fafb;
-  box-shadow: 0 14px 34px rgba(24,32,51,.06);
+  box-shadow: 0 10px 24px rgba(24,32,51,.05);
 }
 .forno-puzzle__tray-heading {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
-  align-items: end;
-  margin-bottom: 12px;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 7px;
 }
 .forno-puzzle__tray-heading span {
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   color: #71808b;
-  font-size: .65rem;
+  font-size: .55rem;
   font-weight: 900;
-  letter-spacing: .07em;
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 .forno-puzzle__tray-heading h3 {
   margin: 0;
   color: #17344b;
-  font-size: 1.08rem;
+  font-size: .9rem;
 }
 .forno-puzzle__tray-help {
   color: #6f7e88;
-  font-size: .7rem;
+  font-size: .6rem;
   font-weight: 700;
 }
 .forno-puzzle__tray {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px 15px;
-  align-items: center;
-  min-height: 240px;
-  padding: 18px 11px;
+  gap: 9px 7px;
+  align-content: start;
+  min-height: 150px;
+  padding: 9px 7px;
   overflow: visible;
   border: 1px dashed #becbd3;
-  border-radius: 16px;
+  border-radius: 12px;
   background: #edf3f6;
 }
 .forno-puzzle__tray .forno-puzzle__piece {
-  max-width: 125px;
+  width: 100%;
+  max-width: 78px;
   justify-self: center;
+  --scatter-rotate: 0deg;
 }
 .forno-puzzle__tray-empty {
   grid-column: 1 / -1;
   align-self: center;
-  padding: 28px 10px;
+  padding: 22px 8px;
   color: #657680;
   text-align: center;
 }
-.forno-puzzle__tray-empty span {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 2rem;
-}
-.forno-puzzle__tray-empty strong {
-  display: block;
-  color: #2c4858;
-}
-.forno-puzzle__tray-empty p {
-  margin: 5px 0 0;
-  font-size: .76rem;
-}
+.forno-puzzle__tray-empty span { display: block; margin-bottom: 6px; font-size: 1.65rem; }
+.forno-puzzle__tray-empty strong { display: block; color: #2c4858; font-size: .78rem; }
+.forno-puzzle__tray-empty p { margin: 4px 0 0; font-size: .66rem; }
 
 .forno-puzzle__reference {
-  margin-top: 13px;
+  margin-top: 8px;
   border-top: 1px solid #dce5ea;
-  padding-top: 11px;
+  padding-top: 7px;
 }
 .forno-puzzle__reference summary {
   color: #29465a;
   cursor: pointer;
-  font-size: .78rem;
+  font-size: .68rem;
   font-weight: 850;
 }
-.forno-puzzle__reference figure {
-  margin: 10px 0 0;
-  overflow: hidden;
-  border-radius: 14px;
-  background: #fff;
-}
-.forno-puzzle__reference img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1650 / 928;
-  object-fit: cover;
-}
-.forno-puzzle__reference figcaption {
-  padding: 7px 9px;
-  color: #6b7280;
-  font-size: .66rem;
-}
+.forno-puzzle__reference figure { margin: 7px 0 0; overflow: hidden; border-radius: 10px; background: #fff; }
+.forno-puzzle__reference img { display: block; width: 100%; max-height: 180px; object-fit: contain; background: #fff; }
+.forno-puzzle__reference figcaption { padding: 5px 7px; color: #6b7280; font-size: .58rem; }
 
-@keyframes capelaSnap {
-  from { transform: scale(.86); opacity: .7; }
-  to { transform: scale(1); opacity: 1; }
-}
-@keyframes capelaShake {
-  0%,100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-3px); }
-}
-@keyframes capelaHintIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes puzzleSnap { from { transform: scale(.84); opacity: .65; } to { transform: scale(1); opacity: 1; } }
+@keyframes puzzleShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
+@keyframes puzzleHintIn { from { opacity: 0; } to { opacity: 1; } }
 
-@media (max-width: 980px) {
-  .forno-puzzle__toolbar {
-    grid-template-columns: 1fr 1.4fr;
-  }
+@media (max-width: 900px) {
+  .forno-puzzle__toolbar { grid-template-columns: 1fr 1.4fr; }
   .forno-puzzle__stats { grid-column: 1 / -1; }
-  .forno-puzzle__workspace {
-    grid-template-columns: 1fr;
-  }
-  .forno-puzzle__tray {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    min-height: 170px;
-  }
+  .forno-puzzle__workspace { grid-template-columns: minmax(0, 1fr) minmax(205px, 250px); }
+  .forno-puzzle__tray { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px 5px; }
+  .forno-puzzle__tray .forno-puzzle__piece { max-width: 68px; }
 }
 
-@media (max-width: 680px) {
-  .forno-puzzle {
-    width: calc(100% - 10px);
-    padding: 12px 8px 18px;
-  }
-  .forno-puzzle__toolbar {
-    grid-template-columns: 1fr;
-    padding: 11px;
-  }
-  .forno-puzzle__buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .forno-puzzle__buttons #jaburuPuzzleReset {
-    grid-column: 1 / -1;
-  }
+@media (max-width: 720px) {
+  .forno-puzzle { width: calc(100% - 8px); padding: 12px 8px 18px; }
+  .forno-puzzle__toolbar { grid-template-columns: 1fr; padding: 9px; }
   .forno-puzzle__stats { grid-column: auto; }
-  .forno-puzzle__board-shell {
-    padding: 7px;
-    border-radius: 17px;
-  }
-  .forno-puzzle__board { min-height: 180px; }
-  .forno-puzzle__tray {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px 11px;
-    padding: 15px 8px;
-  }
-  .forno-puzzle__piece-svg {
-    inset: -24%;
-    width: 148%;
-    height: 148%;
-  }
-}
-
-@media (max-width: 400px) {
-  .forno-puzzle__buttons { grid-template-columns: 1fr; }
-  .forno-puzzle__buttons #jaburuPuzzleReset { grid-column: auto; }
-  .forno-puzzle__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .forno-puzzle__stats article { min-width: 0; padding-inline: 5px; }
-  .forno-puzzle__tray { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-
-/* ==========================================================
-   v5 · MESA DE MONTAGEM PRÓXIMA
-   Tabuleiro central + peças logo abaixo, sem coluna distante.
-   ========================================================== */
-.forno-puzzle__workspace {
-  grid-template-columns: minmax(0, 1fr) !important;
-  gap: 10px !important;
-  width: 100%;
-  max-width: 1020px;
-  margin-inline: auto;
-}
-.forno-puzzle__board-column {
-  width: 100%;
-  max-width: 900px;
-  justify-self: center;
-  order: 1;
-}
-.forno-puzzle__tray-panel {
-  order: 2;
-  width: 100%;
-  margin-top: 0 !important;
-  padding: 11px 12px !important;
-  border-radius: 18px !important;
-  background: #f3f7f9 !important;
-  box-shadow: 0 9px 24px rgba(24,32,51,.06) !important;
-}
-.forno-puzzle__tray-heading {
-  align-items: center !important;
-  margin-bottom: 7px !important;
-}
-.forno-puzzle__tray-heading h3 {
-  font-size: .98rem !important;
-}
-.forno-puzzle__tray-help {
-  font-size: .68rem !important;
-}
-.forno-puzzle__tray {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(74px, 1fr)) !important;
-  gap: 9px !important;
-  align-items: center !important;
-  min-height: 0 !important;
-  padding: 10px !important;
-  border-radius: 14px !important;
-  background: #e8eff3 !important;
-}
-.forno-puzzle__tray .forno-puzzle__piece {
-  width: 100% !important;
-  max-width: 98px !important;
-  justify-self: center;
-  --scatter-rotate: 0deg;
-}
-.forno-puzzle__board-shell {
-  padding: 8px !important;
-  border-radius: 20px !important;
-}
-.forno-puzzle__instruction {
-  margin-top: 7px !important;
-}
-
-@media (min-width: 981px) {
-  .forno-puzzle__tray {
-    grid-template-columns: repeat(auto-fit, minmax(82px, 1fr)) !important;
-  }
-  .forno-puzzle__tray .forno-puzzle__piece {
-    max-width: 106px !important;
-  }
-}
-
-@media (max-width: 680px) {
-  .forno-puzzle__workspace { gap: 7px !important; }
-  .forno-puzzle__board-shell { padding: 4px !important; border-radius: 14px !important; }
-  .forno-puzzle__tray-panel {
-    padding: 8px !important;
-    border-radius: 14px !important;
-  }
-  .forno-puzzle__tray-heading { margin-bottom: 5px !important; }
+  .forno-puzzle__buttons { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .forno-puzzle__buttons .button { min-width: 0; padding-inline: 6px; font-size: .68rem; }
+  .forno-puzzle__workspace { grid-template-columns: 1fr; gap: 7px; }
+  .forno-puzzle__board-shell { padding: 4px; border-radius: 13px; }
+  .forno-puzzle__board { min-height: 170px; }
+  .forno-puzzle__tray-panel { padding: 7px; border-radius: 12px; }
   .forno-puzzle__tray-help { display: none; }
   .forno-puzzle__tray {
-    display: flex !important;
-    gap: 7px !important;
-    min-height: 98px !important;
-    padding: 8px 7px !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    display: flex;
+    gap: 6px;
+    min-height: 88px;
+    padding: 7px 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x proximity;
     overscroll-behavior-inline: contain;
     -webkit-overflow-scrolling: touch;
   }
   .forno-puzzle__tray .forno-puzzle__piece {
-    flex: 0 0 84px !important;
-    width: 84px !important;
-    max-width: 84px !important;
+    flex: 0 0 72px;
+    width: 72px;
+    max-width: 72px;
     scroll-snap-align: center;
   }
+  .forno-puzzle__reference { display: none; }
 }
 
 
 /* ==========================================================
-   v6 · PEÇAS AO REDOR DO TABULEIRO (desktop)
-   Mantém as peças dentro da área do jogo, como nos exemplos.
+   V10 · MESA ÚNICA DE QUEBRA-CABEÇA
+   Tudo cabe no mesmo campo visual. As peças ficam em uma
+   faixa compacta imediatamente abaixo do tabuleiro.
    ========================================================== */
-.forno-puzzle.has-floating-tray .forno-puzzle__workspace {
-  max-width: 1180px !important;
-}
-.forno-puzzle.has-floating-tray .forno-puzzle__board-column {
-  max-width: 1180px !important;
-}
-.forno-puzzle.has-floating-tray .forno-puzzle__board-shell {
-  padding: 84px 126px 92px !important;
-  overflow: visible !important;
-}
-.forno-puzzle.has-floating-tray .forno-puzzle__board {
-  position: relative;
-  z-index: 5;
-}
-.forno-puzzle.has-floating-tray .forno-puzzle__tray-panel {
-  display: none !important;
-}
-.forno-puzzle__board-tray {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-}
-.forno-puzzle__board-tray .forno-puzzle__tray {
-  position: absolute !important;
-  inset: 0 !important;
-  display: block !important;
-  min-height: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important;
-  border: 0 !important;
-  background: transparent !important;
-}
-.forno-puzzle__board-tray .forno-puzzle__piece {
-  position: absolute !important;
-  margin: 0 !important;
-  max-width: none !important;
-  width: 88px !important;
-  pointer-events: auto !important;
-  box-sizing: border-box;
-  z-index: 2;
-}
-.forno-puzzle__board-tray .forno-puzzle__piece:hover,
-.forno-puzzle__board-tray .forno-puzzle__piece:focus-visible {
-  z-index: 25;
-}
-.forno-puzzle__board-tray .forno-puzzle__piece.is-dragging {
-  z-index: 1000 !important;
+
+.forno-puzzle__workspace {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 6px !important;
+  width: min(100%, 980px) !important;
+  max-width: 980px !important;
+  margin-inline: auto !important;
+  padding: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid #cfdbe3 !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(45deg, rgba(20,70,95,.018) 25%, transparent 25%, transparent 75%, rgba(20,70,95,.018) 75%),
+    linear-gradient(45deg, rgba(20,70,95,.018) 25%, #f8fbfc 25%, #f8fbfc 75%, rgba(20,70,95,.018) 75%) !important;
+  background-position: 0 0, 10px 10px !important;
+  background-size: 20px 20px !important;
+  box-shadow: 0 12px 30px rgba(24,32,51,.07) !important;
 }
 
-@media (min-width: 981px) and (max-width: 1150px) {
-  .forno-puzzle.has-floating-tray .forno-puzzle__board-shell {
-    padding: 74px 108px 82px !important;
+.forno-puzzle__board-column {
+  min-width: 0 !important;
+  display: grid !important;
+  justify-items: center !important;
+  gap: 4px !important;
+}
+
+.forno-puzzle__board-shell {
+  width: 100% !important;
+  min-height: 0 !important;
+  padding: 4px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.forno-puzzle__board {
+  width: auto !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  margin-inline: auto !important;
+}
+
+.forno-puzzle__instruction {
+  display: none !important;
+}
+
+.forno-puzzle__message {
+  width: 100% !important;
+  margin: 2px 0 0 !important;
+  padding: 7px 10px !important;
+  border-radius: 10px !important;
+  font-size: .70rem !important;
+  line-height: 1.3 !important;
+}
+
+.forno-puzzle__tray-panel {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.forno-puzzle__tray-heading {
+  display: none !important;
+}
+
+.forno-puzzle__tray {
+  display: grid !important;
+  grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+  gap: 4px !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 5px 4px 4px !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(120,145,160,.20) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.forno-puzzle__tray .forno-puzzle__piece {
+  width: 100% !important;
+  max-width: 82px !important;
+  justify-self: center !important;
+  --scatter-rotate: 0deg !important;
+}
+
+.forno-puzzle__reference {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .forno-puzzle__tray {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
   }
-  .forno-puzzle__board-tray .forno-puzzle__piece {
-    width: 78px !important;
+  .forno-puzzle__tray .forno-puzzle__piece {
+    max-width: 72px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .forno-puzzle__workspace {
+    width: 100% !important;
+    padding: 5px !important;
+    gap: 4px !important;
+    border-radius: 12px !important;
+  }
+  .forno-puzzle__message {
+    display: none !important;
+  }
+  .forno-puzzle__tray {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 5px !important;
+    min-height: 76px !important;
+    padding: 5px 3px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x proximity !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .forno-puzzle__tray .forno-puzzle__piece {
+    flex: 0 0 64px !important;
+    width: 64px !important;
+    max-width: 64px !important;
+    scroll-snap-align: center !important;
   }
 }

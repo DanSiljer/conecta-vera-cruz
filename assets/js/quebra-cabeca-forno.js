@@ -16,98 +16,6 @@
   const messageOutput = document.getElementById("fornoPuzzleMessage");
   const trayTitle = document.getElementById("fornoPuzzleTrayTitle");
 
-  const puzzleRoot = board.closest("[class$='-puzzle']") || board.closest("section") || board.parentElement;
-  const boardShell = board.closest("[class$='__board-shell']") || board.parentElement;
-  const trayPanel = tray.closest("[class$='__tray-panel']") || tray.parentElement;
-  let floatingTrayLayer = null;
-
-  function hasFloatingTrayMode() {
-    return window.innerWidth > 980;
-  }
-
-  function ensureTrayPlacement() {
-    if (hasFloatingTrayMode()) {
-      if (puzzleRoot) puzzleRoot.classList.add("has-floating-tray");
-      if (!floatingTrayLayer) {
-        floatingTrayLayer = document.createElement("div");
-        floatingTrayLayer.className = tray.className.replace(/__tray\b/, "__board-tray");
-      }
-      if (!boardShell.contains(floatingTrayLayer)) boardShell.appendChild(floatingTrayLayer);
-      if (tray.parentNode !== floatingTrayLayer) floatingTrayLayer.appendChild(tray);
-    } else {
-      if (puzzleRoot) puzzleRoot.classList.remove("has-floating-tray");
-      if (tray.parentNode !== trayPanel) trayPanel.appendChild(tray);
-      if (floatingTrayLayer && floatingTrayLayer.parentNode) floatingTrayLayer.parentNode.removeChild(floatingTrayLayer);
-    }
-  }
-
-  function spreadPositions(count, start, end) {
-    if (count <= 0) return [];
-    if (count === 1) return [(start + end) / 2];
-    const span = end - start;
-    const step = span / (count - 1 || 1);
-    return Array.from({ length: count }, function (_, i) { return start + step * i; });
-  }
-
-  function layoutLoosePieces() {
-    ensureTrayPlacement();
-    const pieces = Array.from(tray.querySelectorAll("[data-piece]:not(.is-placed)"));
-    if (!pieces.length) return;
-
-    if (!hasFloatingTrayMode()) {
-      pieces.forEach(function (piece) {
-        piece.style.position = "";
-        piece.style.left = "";
-        piece.style.top = "";
-        piece.style.width = "";
-        piece.style.maxWidth = "";
-        piece.style.transform = "";
-        piece.style.margin = "";
-      });
-      return;
-    }
-
-    const shellWidth = boardShell.clientWidth;
-    const shellHeight = boardShell.clientHeight;
-    const boardLeft = board.offsetLeft;
-    const boardTop = board.offsetTop;
-    const boardWidth = board.clientWidth;
-    const boardHeight = board.clientHeight;
-    const pieceWidth = shellWidth <= 1100 ? 78 : 88;
-    const pieceHeight = pieceWidth / Math.max(0.65, state.ratio || 1.35);
-    const gutter = 10;
-
-    const topCount = Math.ceil(pieces.length * 0.28);
-    const rightCount = Math.floor(pieces.length * 0.22);
-    const bottomCount = Math.ceil(pieces.length * 0.28);
-    const leftCount = Math.max(0, pieces.length - topCount - rightCount - bottomCount);
-
-    const positions = [];
-    spreadPositions(topCount, boardLeft + gutter, boardLeft + Math.max(gutter, boardWidth - pieceWidth - gutter)).forEach(function (x, i) {
-      positions.push({ x: x, y: Math.max(6, boardTop - pieceHeight - 12 + ((i % 2) * 6)) });
-    });
-    spreadPositions(rightCount, boardTop + gutter, boardTop + Math.max(gutter, boardHeight - pieceHeight - gutter)).forEach(function (y, i) {
-      positions.push({ x: Math.min(shellWidth - pieceWidth - 8, boardLeft + boardWidth + 16 + ((i % 2) * 4)), y: y });
-    });
-    spreadPositions(bottomCount, boardLeft + gutter, boardLeft + Math.max(gutter, boardWidth - pieceWidth - gutter)).forEach(function (x, i) {
-      positions.push({ x: x, y: Math.min(shellHeight - pieceHeight - 6, boardTop + boardHeight + 14 + ((i % 2) * 5)) });
-    });
-    spreadPositions(leftCount, boardTop + gutter, boardTop + Math.max(gutter, boardHeight - pieceHeight - gutter)).forEach(function (y, i) {
-      positions.push({ x: Math.max(8, boardLeft - pieceWidth - 16 - ((i % 2) * 4)), y: y });
-    });
-
-    pieces.forEach(function (piece, index) {
-      const pos = positions[index] || { x: 8 + ((index % 4) * (pieceWidth + 6)), y: 8 + (Math.floor(index / 4) * (pieceHeight + 6)) };
-      piece.style.position = "absolute";
-      piece.style.left = pos.x.toFixed(1) + "px";
-      piece.style.top = pos.y.toFixed(1) + "px";
-      piece.style.width = pieceWidth + "px";
-      piece.style.maxWidth = pieceWidth + "px";
-      piece.style.margin = "0";
-      if (!piece.classList.contains("is-dragging")) piece.style.transform = "";
-    });
-  }
-
   const IMAGE_SRC = "assets/img/jogos/forno-da-penha.webp";
   const SVG_NS = "http://www.w3.org/2000/svg";
   const XLINK_NS = "http://www.w3.org/1999/xlink";
@@ -372,7 +280,7 @@
     piece.dataset.piece = String(index);
     piece.setAttribute("aria-label", "Peça " + (index + 1) + " do quebra-cabeça");
     piece.style.setProperty("--piece-ratio", String(state.ratio));
-    piece.style.setProperty("--scatter-rotate", ((Math.random() * 4) - 2).toFixed(2) + "deg");
+    piece.style.setProperty("--scatter-rotate", ((Math.random() * 8) - 4).toFixed(2) + "deg");
     piece.appendChild(createPieceSvg(index, false));
 
     piece.addEventListener("click", function (event) {
@@ -425,13 +333,42 @@
   }
 
   function buildTray() {
-    ensureTrayPlacement();
     tray.innerHTML = "";
     const order = shuffle(Array.from({ length: state.size * state.size }, function (_, index) { return index; }));
     order.forEach(function (index) {
       tray.appendChild(createPiece(index));
     });
-    window.requestAnimationFrame(layoutLoosePieces);
+  }
+
+  function fitPuzzleToScreen() {
+    const workspace = board.closest("[class$='__workspace']");
+    const boardColumn = board.closest("[class$='__board-column']");
+    if (!workspace || !boardColumn) return;
+
+    const mobile = window.innerWidth <= 650;
+    const workspaceWidth = Math.max(240, workspace.clientWidth - (mobile ? 8 : 16));
+
+    /* Reserva espaço para barra de ferramentas, mensagem e 2 fileiras de peças. */
+    const reservedHeight = mobile ? 250 : 300;
+    const maxStageHeight = Math.max(360, Math.min(640, window.innerHeight - reservedHeight));
+    const trayHeight = state.size >= 5 ? 150 : state.size === 4 ? 118 : 92;
+    const messageHeight = mobile ? 0 : 38;
+    const boardMaxHeight = Math.max(220, maxStageHeight - trayHeight - messageHeight - 16);
+
+    const targetWidth = Math.max(
+      220,
+      Math.min(workspaceWidth, boardMaxHeight * state.ratio)
+    );
+    const targetHeight = Math.floor(targetWidth / state.ratio);
+
+    board.style.width = Math.floor(targetWidth) + "px";
+    board.style.height = targetHeight + "px";
+    board.style.marginInline = "auto";
+
+    /* A mesa acompanha o conteúdo, sem criar áreas vazias gigantes. */
+    workspace.style.height = "auto";
+    workspace.style.minHeight = "0";
+    workspace.style.maxHeight = "none";
   }
 
   function beginDrag(event) {
@@ -484,7 +421,7 @@
       if (slotIndex !== null) {
         attemptPlacement(drag.piece, slotIndex, false);
       } else {
-        returnPiece(drag.piece, "Aproxime a peça do espaço correto. O jogo encaixa automaticamente quando ela estiver perto.");
+        returnPiece(drag.piece, "Leve a maior parte da peça para dentro do espaço correto do tabuleiro.");
       }
     }
 
@@ -509,10 +446,8 @@
   function slotFromPiece(piece) {
     const pieceRect = piece.getBoundingClientRect();
     const slots = board.querySelectorAll("[data-slot]");
-    const pieceIndex = Number(piece.dataset.piece);
     let bestIndex = null;
     let bestOverlap = 0;
-    let correctOverlap = 0;
 
     slots.forEach(function (slot) {
       if (slot.classList.contains("is-filled")) return;
@@ -522,19 +457,16 @@
       const overlapArea = overlapWidth * overlapHeight;
       const pieceArea = Math.max(1, pieceRect.width * pieceRect.height);
       const ratio = overlapArea / pieceArea;
-      const slotIndex = Number(slot.dataset.slot);
 
-      if (slotIndex === pieceIndex) correctOverlap = ratio;
       if (ratio > bestOverlap) {
         bestOverlap = ratio;
-        bestIndex = slotIndex;
+        bestIndex = Number(slot.dataset.slot);
       }
     });
 
-    /* Se a peça já entrou um pouco no espaço correto, o jogo entende a intenção
-       e faz o encaixe. Isso deixa o arrastar mais natural, principalmente no celular. */
-    if (correctOverlap >= 0.14) return pieceIndex;
-    return bestOverlap >= 0.22 ? bestIndex : null;
+    /* 28% já é suficiente para o jogo entender a intenção do aluno e
+       "puxar" a peça para o encaixe correto. */
+    return bestOverlap >= 0.18 ? bestIndex : null;
   }
 
   function returnPiece(piece, message) {
@@ -567,6 +499,11 @@
 
     piece.style.transform = "";
     piece.style.zIndex = "";
+    piece.style.left = "";
+    piece.style.top = "";
+    piece.style.width = "";
+    piece.style.maxWidth = "";
+    piece.style.margin = "";
     piece.style.setProperty("--scatter-rotate", "0deg");
     piece.classList.remove("is-selected", "is-wrong", "is-dragging");
     piece.classList.add("is-placed");
@@ -637,10 +574,11 @@
     board.classList.remove("is-complete", "is-hinting");
     buildBoard();
     buildTray();
+    fitPuzzleToScreen();
     updateStats();
     startTimer();
     startButton.textContent = "Embaralhar de novo";
-    messageOutput.textContent = "As peças ficam logo abaixo da área de montagem. Arraste cada uma para perto do lugar correto e ela encaixará automaticamente.";
+    messageOutput.textContent = "Arraste as peças soltas até o tabuleiro. Quando chegar ao lugar certo, a peça encaixa e fica presa.";
 
     window.requestAnimationFrame(function () {
       board.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -660,7 +598,7 @@
     clearSelection();
     board.classList.remove("is-complete", "is-hinting");
     buildBoard();
-    ensureTrayPlacement();
+    fitPuzzleToScreen();
     tray.innerHTML = '<div class="forno-puzzle__tray-empty"><span>🧩</span><strong>As peças aparecerão aqui</strong><p>Escolha o nível e clique em “Começar jogo”.</p></div>';
     updateStats();
     startButton.textContent = "Começar jogo";
@@ -689,8 +627,7 @@
   document.addEventListener("pointercancel", cancelDrag, { passive: false });
 
   window.addEventListener("resize", function () {
-    if (state.playing) window.requestAnimationFrame(layoutLoosePieces);
-    else ensureTrayPlacement();
+    window.requestAnimationFrame(fitPuzzleToScreen);
   });
 
   const preload = new Image();
