@@ -16,23 +16,21 @@
     if (normalizedPath.includes("/bairros/") || normalizedPath.endsWith("/bairros.html")) return "bairros";
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
-    if (normalizedPath.endsWith("/esporte.html")) return "esporte";
     if (normalizedPath.endsWith("/pousadas.html")) return "pousadas";
     if (normalizedPath.endsWith("/nossa-historia.html")) return "nossa-historia";
     if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
     return "inicio";
   })();
 
-  const links = [
-    ["inicio", "Início", "index.html"],
-    ["historia", "História de Vera Cruz", "historia.html"],
-    ["bairros", "Bairros", "bairros.html"],
-    ["esporte", "Esporte", "esporte.html"],
-    ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
-    ["pousadas", "Pousadas", "pousadas.html"],
-    ["blog", "Blog", "blog.html"],
-    ["nossa-historia", "Nossa História", "nossa-historia.html"]
-  ];
+const links = [
+  ["inicio", "Início", "index.html"],
+  ["historia", "História de Vera Cruz", "historia.html"],
+  ["bairros", "Bairros", "bairros.html"],
+  ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
+  ["pousadas", "Pousadas", "pousadas.html"],
+  ["blog", "Blog", "blog.html"],
+  ["nossa-historia", "Nossa História", "nossa-historia.html"]
+];
 
   const navLinks = links.map(([key, label, href]) => {
     const active = currentSection === key;
