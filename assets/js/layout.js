@@ -28,9 +28,9 @@
     ["historia", "História de Vera Cruz", "historia.html"],
     ["bairros", "Bairros", "bairros.html"],
     ["esporte", "Esporte", "esporte.html"],
-    ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
-    ["pousadas", "Pousadas", "pousadas.html"],
     ["blog", "Blog", "blog.html"],
+    ["pousadas", "Pousadas", "pousadas.html"],
+    ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
     ["nossa-historia", "Nossa História", "nossa-historia.html"]
   ];
 
