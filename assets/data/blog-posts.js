@@ -18,6 +18,106 @@
 
 window.CONECTA_BLOG_POSTS = [
   {
+    slug: "quilombo-tereré-luiz-eduardo-magalhaes",
+    titulo: "Alunos da Escola Municipal Luís Eduardo Magalhães conhecem o Quilombo do Tereré",
+    subtitulo: "Visita realizada em 15 de agosto de 2026.",
+    resumo: "Uma aula de campo no Quilombo do Tereré aproximou os estudantes da história, da cultura, da memória e dos saberes preservados pela comunidade.",
+    data: "2026-08-06",
+    dataTexto: "18 de agosto de 2026",
+    categoria: "Educação",
+    categoriaSlug: "educacao",
+    tags: ["Educação · Quilombo do Tereré · Aula de campo · História local · Cultura afro-brasileira · Memória · Escola Municipal Luís Eduardo Magalhães"],
+    autor: "Equipe Conecta Vera Cruz",
+    tempoLeitura: "2 min",
+    imagem: "assets/img/blog/quilombo-terere/quilombo-terere.jpeg",
+    imagemAlt: "Card do Colégio Luiz Eduardo Magalhães mostrando a evolução do IDEB dos anos finais de 3,1 em 2023 para 5,2 em 2025",
+    destaque: true,
+    conteudo: [
+      {
+        tipo: "paragrafo",
+        texto: "Visita realizada em 15 de agosto aproximou os estudantes da história, da cultura e dos saberes preservados pela comunidade quilombola."
+      },
+       {
+        tipo: "paragrafo",
+        texto: "No dia 15 de agosto de 2026, alunos da Escola Municipal Luís Eduardo Magalhães participaram de uma aula de campo no Quilombo do Tereré. A visita proporcionou uma experiência de aprendizagem para além da sala de aula, colocando os estudantes em contato direto com o território e com conhecimentos construídos e preservados pela comunidade."
+      },
+      {
+        tipo: "titulo",
+        texto: "Aprender onde a história acontece"
+      },
+     
+      {
+        tipo: "paragrafo",
+        texto: "Durante a visita, os estudantes puderam observar o espaço, acompanhar explicações e conhecer diferentes aspectos da vida e dos saberes presentes na comunidade."
+      },
+        {
+        tipo: "paragrafo",
+        texto: "A experiência ajudou a aproximar conteúdos estudados na escola de histórias, práticas e memórias que continuam vivas no território."
+      },
+         {
+        tipo: "titulo",
+        texto: "Memória, identidade e resistência"
+      },
+          {
+        tipo: "paragrafo",
+        texto: "Conhecer uma comunidade quilombola também amplia a compreensão sobre a participação da população negra na formação da sociedade brasileira e sobre a importância da resistência, da ancestralidade e da preservação da memória."
+      },
+          {
+        tipo: "paragrafo",
+        texto: "Mais do que uma visita, a atividade foi um convite para observar, ouvir, perguntar e aprender com quem vive e constrói a história do lugar."
+      },
+     
+      {
+        tipo: "citacao",
+        texto: "Conhecer o território é também reconhecer as pessoas, as memórias e os saberes que fazem parte dele."
+      },
+      {
+        tipo: "titulo",
+        texto: "A escola além dos seus muros"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "A aula de campo reforçou uma ideia importante para o trabalho desenvolvido pela escola: o território também pode ser espaço de aprendizagem."
+      },
+      {
+        tipo: "paragrafo",
+        texto: "Quando os estudantes conhecem de perto comunidades, patrimônios, modos de vida e histórias locais, o conteúdo dos livros ganha novos sentidos e passa a dialogar diretamente com a realidade."
+      },
+      {
+        tipo: "paragrafo",
+        texto: "Conhecer o território é também aprender a valorizar as pessoas, as memórias e os saberes que fazem parte dele."
+      },
+      
+      {
+        tipo: "galeria",
+        imagens: [
+          {
+            src: "assets/img/blog/quilombo-terere/abelha-terere.jpeg",
+            alt: "Alunos da Escola Municipal Luís Eduardo Magalhães durante visita ao Quilombo do Tereré",
+            legenda: "Estudantes durante a visita ao Quilombo do Tereré."
+          },
+          {
+            src: "assets/img/blog/quilombo-terere/quilombo do terere.jpeg",
+            alt: "Momento de explicação durante a visita dos alunos ao Quilombo do Tereré",
+            legenda: "A visita aproximou os estudantes da história, da memória e da cultura quilombola."
+          },
+          {
+            src: "assets/img/blog/quilombo-terere/parede-eira-e-beiras.jpeg",
+            alt: "Grupo de alunos em atividade educativa no Quilombo do Tereré",
+            legenda: ""
+          },
+            {
+            src: "assets/img/blog/quilombo-terere/agua-terere.jpeg",
+            alt: "Grupo de alunos em atividade educativa no Quilombo do Tereré",
+            legenda: "A fonte de água doce atraiu os primeiros moradores e formou o núcleo da comunidade quilombola"
+          }
+        ]
+      },
+
+
+    ]
+  },
+  {
     slug: "ideb-2025-luiz-eduardo-magalhaes",
     titulo: "Colégio Luiz Eduardo Magalhães conquista 1º lugar no IDEB de Vera Cruz",
     subtitulo: "Com nota 5,2 nos anos finais, o colégio celebra a evolução da aprendizagem e o melhor resultado do município.",

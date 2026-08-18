@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#007a4d" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Painel Administrativo | Conecta Vera Cruz</title>
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../assets/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-login" id="loginScreen">
+      <section class="admin-login__card" aria-labelledby="loginTitle">
+        <a class="admin-login__brand" href="../index.html">
+          <span class="admin-login__logo">CV</span>
+          <span
+            ><strong>Conecta Vera Cruz</strong
+            ><small>Painel Administrativo</small></span
+          >
+        </a>
+
+        <div class="admin-login__heading">
+          <span>Área restrita</span>
+          <h1 id="loginTitle">Entrar no painel</h1>
+          <p>
+            Use o e-mail e a senha cadastrados pela administração do projeto.
+          </p>
+        </div>
+
+        <form id="loginForm" class="admin-login__form">
+          <label>
+            E-mail
+            <input
+              id="loginEmail"
+              type="email"
+              autocomplete="username"
+              required
+              placeholder="seuemail@exemplo.com"
+            />
+          </label>
+
+          <label>
+            Senha
+            <input
+              id="loginPassword"
+              type="password"
+              autocomplete="current-password"
+              required
+              placeholder="Sua senha"
+            />
+          </label>
+
+          <button
+            class="admin-button admin-button--primary admin-button--full"
+            type="submit"
+          >
+            Entrar
+          </button>
+
+          <p
+            class="admin-status"
+            id="loginStatus"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+
+        <a class="admin-login__back" href="/"> ← Voltar ao site </a>
+      </section>
+    </div>
+
+    <div class="admin-app" id="adminApp" hidden>
+      <aside class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar__brand">
+          <a href="../index.html" aria-label="Voltar para Conecta Vera Cruz">
+            <span class="admin-sidebar__logo">CV</span>
+            <span><strong>Conecta</strong><small>Vera Cruz</small></span>
+          </a>
+        </div>
+
+        <nav class="admin-nav" aria-label="Menu do painel">
+          <button
+            class="admin-nav__item is-active"
+            type="button"
+            data-section-target="dashboard"
+          >
+            <span>⌂</span><b>Início</b>
+          </button>
+          <button
+            class="admin-nav__item"
+            type="button"
+            data-section-target="blog"
+          >
+            <span>▤</span><b>Blog</b>
+          </button>
+          <button
+            class="admin-nav__item"
+            type="button"
+            data-section-target="comunidades"
+          >
+            <span>⌖</span><b>Comunidades</b>
+          </button>
+          <button
+            class="admin-nav__item"
+            type="button"
+            data-section-target="imagens"
+          >
+            <span>▧</span><b>Imagens</b>
+          </button>
+          <button
+            class="admin-nav__item"
+            type="button"
+            data-section-target="usuarios"
+          >
+            <span>◎</span><b>Usuários</b>
+          </button>
+          <button
+            class="admin-nav__item"
+            type="button"
+            data-section-target="configuracoes"
+          >
+            <span>⚙</span><b>Configurações</b>
+          </button>
+        </nav>
+
+        <div class="admin-sidebar__footer">
+          <div class="admin-user-mini">
+            <span class="admin-user-mini__avatar" id="userInitials">CV</span>
+            <div>
+              <strong id="userName">Usuário</strong>
+              <small id="userRole">Editor</small>
+            </div>
+          </div>
+          <button id="logoutButton" class="admin-logout" type="button">
+            Sair
+          </button>
+        </div>
+      </aside>
+
+      <div class="admin-main">
+        <header class="admin-topbar">
+          <button
+            class="admin-menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Abrir menu"
+          >
+            ☰
+          </button>
+          <div>
+            <span class="admin-topbar__eyebrow">Conecta Vera Cruz</span>
+            <strong id="topbarTitle">Visão geral</strong>
+          </div>
+          <div class="admin-topbar__actions">
+            <a
+              class="admin-button admin-button--ghost"
+              href="../blog.html"
+              target="_blank"
+              rel="noopener"
+              >Ver blog</a
+            >
+            <button
+              class="admin-button admin-button--primary"
+              id="topNewPostButton"
+              type="button"
+            >
+              + Nova publicação
+            </button>
+          </div>
+        </header>
+
+        <main class="admin-content">
+          <section class="admin-section is-active" data-section="dashboard">
+            <header class="admin-page-heading">
+              <div>
+                <span>Painel Administrativo</span>
+                <h1>Visão geral</h1>
+                <p>
+                  Acompanhe o conteúdo e publique novidades sem editar os
+                  arquivos do site.
+                </p>
+              </div>
+              <button
+                class="admin-button admin-button--primary"
+                id="dashboardNewPostButton"
+                type="button"
+              >
+                + Nova publicação
+              </button>
+            </header>
+
+            <div class="admin-metrics">
+              <article class="admin-metric">
+                <span class="admin-metric__icon">▤</span>
+                <div>
+                  <small>Publicações</small><strong id="metricTotal">0</strong>
+                </div>
+              </article>
+              <article class="admin-metric">
+                <span class="admin-metric__icon">✓</span>
+                <div>
+                  <small>Publicadas</small
+                  ><strong id="metricPublished">0</strong>
+                </div>
+              </article>
+              <article class="admin-metric">
+                <span class="admin-metric__icon">✎</span>
+                <div>
+                  <small>Rascunhos</small><strong id="metricDrafts">0</strong>
+                </div>
+              </article>
+              <article class="admin-metric">
+                <span class="admin-metric__icon">★</span>
+                <div>
+                  <small>Em destaque</small
+                  ><strong id="metricFeatured">0</strong>
+                </div>
+              </article>
+            </div>
+
+            <div class="admin-dashboard-grid">
+              <section class="admin-panel-card">
+                <header class="admin-panel-card__heading">
+                  <div>
+                    <span>Conteúdo recente</span>
+                    <h2>Últimas publicações</h2>
+                  </div>
+                  <button
+                    class="admin-text-button"
+                    type="button"
+                    data-section-target="blog"
+                  >
+                    Ver todas
+                  </button>
+                </header>
+                <div class="admin-recent-list" id="recentPosts">
+                  <p class="admin-empty">Carregando publicações...</p>
+                </div>
+              </section>
+
+              <aside class="admin-panel-card admin-quick-card">
+                <span class="admin-quick-card__label">Acesso rápido</span>
+                <h2>O que deseja fazer?</h2>
+                <button
+                  class="admin-quick-action"
+                  id="quickNewPost"
+                  type="button"
+                >
+                  <span>+</span>
+                  <div>
+                    <strong>Nova publicação</strong
+                    ><small>Escrever uma notícia para o blog</small>
+                  </div>
+                </button>
+                <button
+                  class="admin-quick-action"
+                  type="button"
+                  data-section-target="blog"
+                >
+                  <span>▤</span>
+                  <div>
+                    <strong>Gerenciar Blog</strong
+                    ><small>Editar, publicar ou retirar matérias</small>
+                  </div>
+                </button>
+                <button
+                  class="admin-quick-action"
+                  type="button"
+                  data-section-target="imagens"
+                >
+                  <span>▧</span>
+                  <div>
+                    <strong>Biblioteca de imagens</strong
+                    ><small>Organizar fotografias do projeto</small>
+                  </div>
+                </button>
+              </aside>
+            </div>
+          </section>
+
+          <section class="admin-section" data-section="blog" hidden>
+            <header class="admin-page-heading">
+              <div>
+                <span>Conteúdo</span>
+                <h1>Blog</h1>
+                <p>
+                  Crie, edite, publique e organize as matérias do Conecta Vera
+                  Cruz.
+                </p>
+              </div>
+              <button
+                class="admin-button admin-button--primary"
+                id="blogNewPostButton"
+                type="button"
+              >
+                + Nova publicação
+              </button>
+            </header>
+
+            <div class="admin-blog-toolbar">
+              <label class="admin-search">
+                <span>⌕</span>
+                <input
+                  type="search"
+                  id="postSearch"
+                  placeholder="Pesquisar por título, categoria ou autor"
+                />
+              </label>
+              <label class="admin-select-wrap">
+                <span class="sr-only">Filtrar por status</span>
+                <select id="postStatusFilter">
+                  <option value="todos">Todos os status</option>
+                  <option value="publicado">Publicados</option>
+                  <option value="rascunho">Rascunhos</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="admin-table-card">
+              <div class="admin-table-scroll">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Publicação</th>
+                      <th>Categoria</th>
+                      <th>Data</th>
+                      <th>Status</th>
+                      <th>Destaque</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="postsTableBody">
+                    <tr>
+                      <td colspan="6" class="admin-table-empty">
+                        Carregando publicações...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-section" data-section="comunidades" hidden>
+            <div class="admin-placeholder">
+              <span>⌖</span>
+              <h1>Comunidades</h1>
+              <p>
+                Esta área ficará responsável pelos textos e informações das
+                páginas de bairros e comunidades.
+              </p>
+              <button
+                class="admin-button admin-button--ghost"
+                type="button"
+                disabled
+              >
+                Próxima etapa
+              </button>
+            </div>
+          </section>
+
+          <section class="admin-section" data-section="imagens" hidden>
+            <div class="admin-placeholder">
+              <span>▧</span>
+              <h1>Imagens</h1>
+              <p>
+                O upload da imagem de capa já funciona dentro do editor do Blog.
+                Depois podemos transformar esta tela em uma biblioteca completa.
+              </p>
+              <button
+                class="admin-button admin-button--primary"
+                id="imageSectionNewPost"
+                type="button"
+              >
+                Publicar com imagem
+              </button>
+            </div>
+          </section>
+
+          <section class="admin-section" data-section="usuarios" hidden>
+            <div class="admin-placeholder">
+              <span>◎</span>
+              <h1>Usuários</h1>
+              <p>
+                Os perfis de administrador e editor são controlados pela coleção
+                <code>usuarios</code> do Firestore.
+              </p>
+              <p class="admin-placeholder__note">
+                Para a primeira versão, cadastre os usuários no Firebase
+                Authentication e crie o documento correspondente no Firestore.
+              </p>
+            </div>
+          </section>
+
+          <section class="admin-section" data-section="configuracoes" hidden>
+            <header class="admin-page-heading">
+              <div>
+                <span>Sistema</span>
+                <h1>Configurações</h1>
+                <p>Ferramentas para a migração do Blog atual para o painel.</p>
+              </div>
+            </header>
+
+            <div class="admin-panel-card admin-import-card">
+              <div>
+                <span class="admin-quick-card__label">Migração inicial</span>
+                <h2>Importar publicações atuais</h2>
+                <p>
+                  Este botão lê o arquivo atual
+                  <code>assets/data/blog-posts.js</code> e copia as publicações
+                  para o Firestore, sem alterar o arquivo original.
+                </p>
+              </div>
+              <button
+                class="admin-button admin-button--primary"
+                id="importCurrentBlogButton"
+                type="button"
+              >
+                Importar blog atual
+              </button>
+              <p
+                class="admin-status"
+                id="importStatus"
+                role="status"
+                aria-live="polite"
+              ></p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div class="admin-modal" id="postEditorModal" hidden>
+      <div class="admin-modal__backdrop" data-close-editor></div>
+      <section
+        class="admin-editor"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="editorTitle"
+      >
+        <header class="admin-editor__header">
+          <div>
+            <span>Editor do Blog</span>
+            <h2 id="editorTitle">Nova publicação</h2>
+          </div>
+          <button
+            class="admin-editor__close"
+            type="button"
+            aria-label="Fechar editor"
+            data-close-editor
+          >
+            ×
+          </button>
+        </header>
+
+        <form id="postEditorForm" class="admin-editor__form">
+          <div class="admin-editor__grid">
+            <div class="admin-editor__main">
+              <label class="admin-field">
+                <span>Título *</span>
+                <input
+                  id="postTitle"
+                  type="text"
+                  maxlength="160"
+                  required
+                  placeholder="Título da publicação"
+                />
+              </label>
+
+              <label class="admin-field">
+                <span>Slug *</span>
+                <input
+                  id="postSlug"
+                  type="text"
+                  maxlength="180"
+                  required
+                  placeholder="titulo-da-publicacao"
+                />
+                <small
+                  >O slug cria o endereço interno da matéria. Depois da primeira
+                  gravação ele fica fixo.</small
+                >
+              </label>
+
+              <label class="admin-field">
+                <span>Subtítulo</span>
+                <textarea
+                  id="postSubtitle"
+                  rows="2"
+                  maxlength="300"
+                  placeholder="Frase de apresentação da matéria"
+                ></textarea>
+              </label>
+
+              <label class="admin-field">
+                <span>Resumo *</span>
+                <textarea
+                  id="postSummary"
+                  rows="4"
+                  maxlength="500"
+                  required
+                  placeholder="Resumo curto usado nos cards do Blog"
+                ></textarea>
+              </label>
+
+              <section class="admin-content-builder">
+                <header>
+                  <div>
+                    <span>Corpo da matéria</span>
+                    <h3>Conteúdo</h3>
+                  </div>
+                  <button
+                    class="admin-button admin-button--ghost admin-button--small"
+                    id="addContentBlock"
+                    type="button"
+                  >
+                    + Adicionar bloco
+                  </button>
+                </header>
+                <div id="contentBlocks" class="admin-content-blocks"></div>
+              </section>
+            </div>
+
+            <aside class="admin-editor__side">
+              <div class="admin-side-card">
+                <h3>Publicação</h3>
+
+                <label class="admin-field">
+                  <span>Data *</span>
+                  <input id="postDate" type="date" required />
+                </label>
+
+                <label class="admin-field">
+                  <span>Categoria *</span>
+                  <input
+                    id="postCategory"
+                    type="text"
+                    maxlength="60"
+                    required
+                    placeholder="Ex.: Educação"
+                  />
+                </label>
+
+                <label class="admin-field">
+                  <span>Tags</span>
+                  <input
+                    id="postTags"
+                    type="text"
+                    maxlength="240"
+                    placeholder="Vera Cruz, Educação, Gamboa"
+                  />
+                  <small>Separe as tags por vírgulas.</small>
+                </label>
+
+                <label class="admin-field">
+                  <span>Autor *</span>
+                  <input
+                    id="postAuthor"
+                    type="text"
+                    maxlength="90"
+                    required
+                    value="Equipe Conecta Vera Cruz"
+                  />
+                </label>
+
+                <label class="admin-field">
+                  <span>Tempo de leitura</span>
+                  <input
+                    id="postReadingTime"
+                    type="text"
+                    maxlength="20"
+                    value="3 min"
+                    placeholder="3 min"
+                  />
+                </label>
+
+                <label class="admin-check">
+                  <input id="postFeatured" type="checkbox" />
+                  <span
+                    ><strong>Destacar no Blog</strong
+                    ><small>Usar como publicação principal.</small></span
+                  >
+                </label>
+
+                <label class="admin-check">
+                  <input id="postShowHome" type="checkbox" checked />
+                  <span
+                    ><strong>Mostrar na página inicial</strong
+                    ><small
+                      >Permite usar a matéria em “Últimas do Blog”.</small
+                    ></span
+                  >
+                </label>
+              </div>
+
+              <div class="admin-side-card">
+                <h3>Imagem de capa</h3>
+                <div class="admin-image-preview" id="imagePreview">
+                  <span>Sem imagem</span>
+                </div>
+                <label class="admin-upload-button">
+                  <input
+                    id="postImageFile"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    hidden
+                  />
+                  Escolher imagem
+                </label>
+                <label class="admin-field">
+                  <span>Texto alternativo</span>
+                  <textarea
+                    id="postImageAlt"
+                    rows="2"
+                    maxlength="220"
+                    placeholder="Descreva o que aparece na imagem"
+                  ></textarea>
+                </label>
+                <input id="postImageUrl" type="hidden" />
+              </div>
+            </aside>
+          </div>
+
+          <footer class="admin-editor__footer">
+            <p
+              class="admin-status"
+              id="editorStatus"
+              role="status"
+              aria-live="polite"
+            ></p>
+            <div>
+              <button
+                class="admin-button admin-button--ghost"
+                type="button"
+                data-close-editor
+              >
+                Cancelar
+              </button>
+              <button
+                class="admin-button admin-button--secondary"
+                type="button"
+                data-save-status="rascunho"
+              >
+                Salvar rascunho
+              </button>
+              <button
+                class="admin-button admin-button--primary"
+                type="button"
+                data-save-status="publicado"
+              >
+                Publicar
+              </button>
+            </div>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <template id="contentBlockTemplate">
+      <article class="admin-content-block">
+        <div class="admin-content-block__top">
+          <label>
+            <span class="sr-only">Tipo de conteúdo</span>
+            <select data-block-type>
+              <option value="paragrafo">Parágrafo</option>
+              <option value="titulo">Título de seção</option>
+              <option value="citacao">Citação</option>
+              <option value="nota">Nota</option>
+              <option value="lista">Lista</option>
+            </select>
+          </label>
+          <button
+            type="button"
+            class="admin-remove-block"
+            data-remove-block
+            aria-label="Remover bloco"
+          >
+            Remover
+          </button>
+        </div>
+        <textarea
+          rows="5"
+          data-block-text
+          placeholder="Digite o conteúdo deste bloco"
+        ></textarea>
+        <small data-block-help>Digite o texto do parágrafo.</small>
+      </article>
+    </template>
+
+    <script type="module" src="../assets/js/admin.js"></script>
+  </body>
+</html>
