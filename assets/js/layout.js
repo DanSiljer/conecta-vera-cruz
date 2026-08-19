@@ -17,21 +17,23 @@
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
     if (normalizedPath.endsWith("/esportes.html")) return "esportes";
+    if (normalizedPath.endsWith("/meio-amb.html")) return "meio-amb";
     if (normalizedPath.endsWith("/pousadas.html")) return "pousadas";
-    if (normalizedPath.endsWith("/nossa-historia.html")) return "nossa-historia";
+    if (normalizedPath.endsWith("/o-projeto.html")) return "o-projeto";
     if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
     return "inicio";
   })();
 
   const links = [
     ["inicio", "Início", "index.html"],
-    ["historia", "História de Vera Cruz", "historia.html"],
+    ["historia", "História", "historia.html"],
     ["bairros", "Bairros", "bairros.html"],
     ["esportes", "Esportes", "esportes.html"],
+    ["meio-amb", "Meio Amb", "meio-amb.html"],
     ["blog", "Blog", "blog.html"],
     ["pousadas", "Pousadas", "pousadas.html"],
     ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
-    ["nossa-historia", "Nossa História", "nossa-historia.html"]
+    ["o-projeto", "O Projeto", "o-projeto.html"]
   ];
 
   const navLinks = links.map(([key, label, href]) => {
@@ -58,7 +60,13 @@
             ${navLinks}
           </nav>
 
-          <a class="cv-header__cta" href="${url("bairros.html")}">Visite Vera Cruz</a>
+          <a
+            class="cv-header__cta"
+            href="https://www.instagram.com/umanovaveracruz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Uma Nova Vera Cruz"
+          >Instagram</a>
         </div>
       </header>`;
   }
