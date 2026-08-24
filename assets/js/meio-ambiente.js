@@ -2,6 +2,144 @@ document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
   /* =========================================================
+     BANNER / CARROSSEL DE MEIO AMBIENTE
+     ========================================================= */
+  const heroCarousel = document.querySelector("[data-eco-hero-carousel]");
+
+  if (heroCarousel) {
+    const slides = [...heroCarousel.querySelectorAll("[data-eco-hero-slide]")];
+    const dots = [...heroCarousel.querySelectorAll("[data-eco-hero-dots] button")];
+    const prevButton = heroCarousel.querySelector("[data-eco-hero-prev]");
+    const nextButton = heroCarousel.querySelector("[data-eco-hero-next]");
+    const pauseButton = heroCarousel.querySelector("[data-eco-hero-pause]");
+    const pauseIcon = heroCarousel.querySelector("[data-eco-hero-pause-icon]");
+    const pauseText = heroCarousel.querySelector("[data-eco-hero-pause-text]");
+    const counter = heroCarousel.querySelector("[data-eco-hero-counter]");
+
+    let currentSlide = 0;
+    let autoplayId = null;
+    let paused = false;
+    let touchStartX = 0;
+    const delay = 5500;
+
+    function formatNumber(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function showSlide(index, userAction) {
+      if (!slides.length) return;
+
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides.forEach(function (slide, slideIndex) {
+        const active = slideIndex === currentSlide;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
+      });
+
+      dots.forEach(function (dot, dotIndex) {
+        const active = dotIndex === currentSlide;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-current", String(active));
+      });
+
+      if (counter) {
+        counter.textContent =
+          formatNumber(currentSlide + 1) + " / " + formatNumber(slides.length);
+      }
+
+      if (userAction && !paused) restartAutoplay();
+    }
+
+    function nextSlide(userAction) {
+      showSlide(currentSlide + 1, userAction);
+    }
+
+    function previousSlide(userAction) {
+      showSlide(currentSlide - 1, userAction);
+    }
+
+    function startAutoplay() {
+      if (paused || slides.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      stopAutoplay();
+      autoplayId = window.setInterval(function () {
+        nextSlide(false);
+      }, delay);
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        window.clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function restartAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    function updatePauseButton() {
+      if (!pauseButton) return;
+      pauseButton.setAttribute("aria-pressed", String(paused));
+      pauseButton.setAttribute("aria-label", paused ? "Retomar carrossel" : "Pausar carrossel");
+      if (pauseIcon) pauseIcon.textContent = paused ? "▶" : "Ⅱ";
+      if (pauseText) pauseText.textContent = paused ? "Retomar" : "Pausar";
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", function () {
+        previousSlide(true);
+      });
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", function () {
+        nextSlide(true);
+      });
+    }
+
+    dots.forEach(function (dot, index) {
+      dot.addEventListener("click", function () {
+        showSlide(index, true);
+      });
+    });
+
+    if (pauseButton) {
+      pauseButton.addEventListener("click", function () {
+        paused = !paused;
+        updatePauseButton();
+
+        if (paused) stopAutoplay();
+        else startAutoplay();
+      });
+    }
+
+    heroCarousel.addEventListener("touchstart", function (event) {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    heroCarousel.addEventListener("touchend", function (event) {
+      const touchEndX = event.changedTouches[0].clientX;
+      const distance = touchEndX - touchStartX;
+
+      if (Math.abs(distance) < 45) return;
+      if (distance > 0) previousSlide(true);
+      else nextSlide(true);
+    }, { passive: true });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopAutoplay();
+      else if (!paused) startAutoplay();
+    });
+
+    showSlide(0, false);
+    updatePauseButton();
+    startAutoplay();
+  }
+
+
+  /* =========================================================
      CHECKLIST DE ATITUDES
      ========================================================= */
   const checklist = document.querySelector("[data-eco-checklist]");

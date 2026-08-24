@@ -1,536 +1,932 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#08794c">
-  <meta name="description" content="Meio ambiente em Vera Cruz: preservação dos manguezais, praias e recifes, pesca consciente, turismo responsável e educação ambiental na Ilha de Itaparica.">
-  <title>Meio Ambiente | Conecta Vera Cruz</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#08794c" />
+    <meta
+      name="description"
+      content="Meio ambiente em Vera Cruz: preservação dos manguezais, praias e recifes, pesca consciente, turismo responsável e educação ambiental na Ilha de Itaparica."
+    />
+    <title>Meio Ambiente | Conecta Vera Cruz</title>
 
-  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="assets/css/global.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/pages/meio-ambiente.css">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/pages/meio-ambiente.css" />
 
-  <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/layout.js"></script>
-  <script defer src="assets/js/meio-ambiente.js"></script>
-</head>
+    <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/layout.js"></script>
+    <script defer src="assets/js/meio-ambiente.js"></script>
+  </head>
 
-<body class="page-meio-ambiente">
-  <div data-cv-header></div>
+  <body class="page-meio-ambiente">
+    <div data-cv-header></div>
 
-  <main id="conteudo">
-    <section class="eco-hero" aria-labelledby="eco-title">
-      <img
-        class="eco-hero__image"
-        src="assets/img/jiribatuba/faixa-areia-jiribatuba.webp"
-        alt="Paisagem costeira de Jiribatuba, em Vera Cruz"
-        width="1600"
-        height="900"
-        fetchpriority="high"
+    <main id="conteudo">
+      <section
+        class="eco-hero"
+        aria-labelledby="eco-title"
+        aria-roledescription="carrossel"
+        data-eco-hero-carousel
       >
-      <div class="eco-hero__overlay"></div>
+        <div class="eco-hero__slides">
+          <figure
+            class="eco-hero__slide is-active"
+            data-eco-hero-slide
+            aria-hidden="false"
+          >
+            <img
+              src="assets/img/meio-ambiente/cais-cacha-pregos.png"
+              alt="Cais com embarcações e vegetação às margens das águas em Vera Cruz"
+              width="1600"
+              height="1067"
+              fetchpriority="high"
+            />
+          </figure>
 
-      <div class="container eco-hero__content">
-        <span class="eco-kicker eco-kicker--light">Conecta Vera Cruz · Natureza e futuro</span>
-        <h1 id="eco-title">Cuidar de Vera Cruz é cuidar de <span>tudo o que vive aqui</span></h1>
-        <p>
-          Praias, manguezais, recifes, marés, comunidades e modos de vida fazem parte do mesmo território.
-          Preservar a natureza também significa proteger a pesca, o turismo, a cultura e o futuro de quem vive na ilha.
-        </p>
+          <figure
+            class="eco-hero__slide"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/cais-mare-baixa.png"
+              alt="Embarcações junto ao cais e manguezal em Vera Cruz"
+              width="1600"
+              height="1067"
+              loading="lazy"
+            />
+            <figcaption class="eco-hero__credit">Foto: Edgar Santos</figcaption>
+          </figure>
 
-        <div class="eco-hero__actions">
-          <a class="eco-button eco-button--primary" href="#preservacao">Começar a explorar</a>
-          <a class="eco-button eco-button--glass" href="#atitudes">Ver atitudes práticas</a>
+          <figure
+            class="eco-hero__slide"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/cratera-2018.png"
+              alt="Rio cercado por manguezal e embarcações em Vera Cruz"
+              width="1600"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure
+            class="eco-hero__slide"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/hero-catu.webp"
+              alt="Paisagem costeira com barcos, árvores e águas tranquilas em Vera Cruz"
+              width="1600"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure
+            class="eco-hero__slide eco-hero__slide--portrait"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/manguezal.png"
+              alt="Manguezal e rio ao pôr do sol em Vera Cruz"
+              width="1152"
+              height="1536"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure
+            class="eco-hero__slide eco-hero__slide--portrait"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/mural-rio.webp"
+              alt="Ponte sobre área de mata e água em Vera Cruz"
+              width="1152"
+              height="1536"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure
+            class="eco-hero__slide"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/rio-penha.png"
+              alt="Vista aérea de lago cercado por vegetação"
+              width="481"
+              height="415"
+              loading="lazy"
+            />
+          </figure>
+
+          <figure
+            class="eco-hero__slide"
+            data-eco-hero-slide
+            aria-hidden="true"
+          >
+            <img
+              src="assets/img/meio-ambiente/trilha-ponte.png"
+              alt="Manguezal junto à faixa de areia e às águas"
+              width="359"
+              height="484"
+              loading="lazy"
+            />
+          </figure>
         </div>
-      </div>
-    </section>
 
-    <nav class="eco-subnav" aria-label="Navegação da página Meio Ambiente">
-      <div class="container eco-subnav__inner">
-        <a href="#preservacao">Preservação</a>
-        <a href="#pesca">Pesca consciente</a>
-        <a href="#turismo">Turismo consciente</a>
-        <a href="#educacao">Educação ambiental</a>
-        <a href="#desafio">Desafio ambiental</a>
-      </div>
-    </nav>
+        <div class="eco-hero__overlay" aria-hidden="true"></div>
 
-    <section class="eco-opening">
-      <div class="container eco-opening__grid">
-        <div>
-          <span class="eco-kicker">Um território conectado pelas águas</span>
-          <h2>O meio ambiente não é cenário. É parte da vida de Vera Cruz.</h2>
-          <p class="eco-lead">
-            O mar influencia o trabalho, a alimentação, as travessias, o lazer e a memória das comunidades.
-            O manguezal funciona como abrigo e área de desenvolvimento para muitas espécies. Praias e recifes
-            também fazem parte desse equilíbrio.
-          </p>
+        <div class="container eco-hero__content">
+          <span class="eco-kicker eco-kicker--light"
+            >Meio ambiente · Vera Cruz</span
+          >
+          <h1 id="eco-title">
+            Natureza que sustenta a <span>vida da ilha</span>
+          </h1>
           <p>
-            Quando lixo, esgoto, retirada irregular de animais, pisoteio de áreas sensíveis ou práticas inadequadas
-            degradam esses ambientes, o problema não fica apenas na paisagem. Ele alcança a pesca, o turismo,
-            a saúde, a renda e o cotidiano das pessoas.
+            Mar, manguezais, rios, praias e comunidades formam um só território.
+            Preservar esses ambientes é cuidar da pesca, do turismo, da cultura
+            e das próximas gerações.
           </p>
+
+          <div class="eco-hero__actions">
+            <a class="eco-button eco-button--primary" href="#preservacao"
+              >Conheça os cuidados</a
+            >
+            <a class="eco-button eco-button--glass" href="#calendario-defeso"
+              >Calendário do defeso</a
+            >
+          </div>
         </div>
 
-        <aside class="eco-manifesto" aria-label="Mensagem principal">
-          <span>01</span>
-          <strong>Preservar é uma forma de pertencimento.</strong>
-          <p>Quem conhece o território entende melhor por que vale a pena defendê-lo.</p>
-        </aside>
-      </div>
-    </section>
+        <button
+          class="eco-hero__arrow eco-hero__arrow--prev"
+          type="button"
+          aria-label="Mostrar imagem anterior"
+          data-eco-hero-prev
+        >
+          ‹
+        </button>
 
-    <section class="eco-pillars" aria-label="Quatro pilares da página">
-      <div class="container eco-pillars__grid">
-        <a href="#preservacao">
-          <span aria-hidden="true">♧</span>
-          <strong>Preservação</strong>
-          <small>Proteger praias, mangues e recifes</small>
-        </a>
-        <a href="#pesca">
-          <span aria-hidden="true">≈</span>
-          <strong>Pesca consciente</strong>
-          <small>Respeitar ciclos e garantir o amanhã</small>
-        </a>
-        <a href="#turismo">
-          <span aria-hidden="true">⌖</span>
-          <strong>Turismo consciente</strong>
-          <small>Visitar sem deixar prejuízo</small>
-        </a>
-        <a href="#educacao">
-          <span aria-hidden="true">✦</span>
-          <strong>Educação ambiental</strong>
-          <small>Conhecimento que vira atitude</small>
-        </a>
-      </div>
-    </section>
+        <button
+          class="eco-hero__arrow eco-hero__arrow--next"
+          type="button"
+          aria-label="Mostrar próxima imagem"
+          data-eco-hero-next
+        >
+          ›
+        </button>
 
-    <section class="eco-section" id="preservacao">
-      <div class="container">
-        <header class="eco-heading">
+        <div class="eco-hero__controls">
+          <span
+            class="eco-hero__counter"
+            aria-live="polite"
+            data-eco-hero-counter
+            >01 / 08</span
+          >
+
+          <div
+            class="eco-hero__dots"
+            aria-label="Escolher imagem do banner"
+            data-eco-hero-dots
+          >
+            <button
+              class="is-active"
+              type="button"
+              aria-label="Mostrar imagem 1"
+              aria-current="true"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 2"
+              aria-current="false"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 3"
+              aria-current="false"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 4"
+              aria-current="false"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 5"
+              aria-current="false"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 6"
+              aria-current="false"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 7"
+              aria-current="false"
+            ></button>
+            <button
+              type="button"
+              aria-label="Mostrar imagem 8"
+              aria-current="false"
+            ></button>
+          </div>
+
+          <button
+            class="eco-hero__pause"
+            type="button"
+            aria-pressed="false"
+            aria-label="Pausar carrossel"
+            data-eco-hero-pause
+          >
+            <span aria-hidden="true" data-eco-hero-pause-icon>Ⅱ</span>
+            <span data-eco-hero-pause-text>Pausar</span>
+          </button>
+        </div>
+      </section>
+
+      <nav class="eco-subnav" aria-label="Navegação da página Meio Ambiente">
+        <div class="container eco-subnav__inner">
+          <a href="#preservacao">Preservação</a>
+          <a href="#pesca">Pesca consciente</a>
+          <a href="#turismo">Turismo consciente</a>
+          <a href="#educacao">Educação ambiental</a>
+          <a href="#desafio">Desafio ambiental</a>
+        </div>
+      </nav>
+
+      <section class="eco-opening">
+        <div class="container eco-opening__grid">
           <div>
-            <span class="eco-kicker">Preservação ambiental</span>
-            <h2>Proteger os ambientes que protegem a ilha</h2>
-          </div>
-          <p>
-            Uma ilha saudável depende de ecossistemas costeiros conservados. Cada ambiente exerce funções diferentes
-            e todos estão ligados pela água, pelas marés e pela circulação de espécies.
-          </p>
-        </header>
-
-        <div class="eco-habitat-grid">
-          <article class="eco-habitat-card eco-habitat-card--large">
-            <figure>
-              <img
-                src="assets/img/jiribatuba/faixa-areia-jiribatuba.webp"
-                alt="Faixa de areia, mar e vegetação em Jiribatuba"
-                width="1600"
-                height="900"
-                loading="lazy"
-              >
-            </figure>
-            <div>
-              <span>Praias e faixa costeira</span>
-              <h3>Praia limpa é mais do que uma praia bonita</h3>
-              <p>
-                Resíduos deixados na areia podem ser levados pelo vento e pela maré. Evitar lixo, descarte de vidro,
-                plástico, bitucas, linhas e outros materiais protege animais, moradores e visitantes.
-              </p>
-            </div>
-          </article>
-
-          <article class="eco-habitat-card">
-            <div class="eco-habitat-card__symbol" aria-hidden="true">⌁</div>
-            <span>Manguezais</span>
-            <h3>Berçário das águas</h3>
-            <p>
-              O manguezal abriga diferentes formas de vida e se conecta diretamente à pesca e à mariscagem.
-              Pisoteio, lixo, aterros e retirada inadequada de recursos enfraquecem esse ambiente.
+            <span class="eco-kicker">Um território conectado pelas águas</span>
+            <h2>
+              O meio ambiente não é cenário. É parte da vida de Vera Cruz.
+            </h2>
+            <p class="eco-lead">
+              O mar influencia o trabalho, a alimentação, as travessias, o lazer
+              e a memória das comunidades. O manguezal funciona como abrigo e
+              área de desenvolvimento para muitas espécies. Praias e recifes
+              também fazem parte desse equilíbrio.
             </p>
-          </article>
-
-          <article class="eco-habitat-card">
-            <div class="eco-habitat-card__symbol" aria-hidden="true">◌</div>
-            <span>Recifes e piscinas naturais</span>
-            <h3>Beleza que exige cuidado</h3>
             <p>
-              Recifes são ambientes vivos. Evite quebrar, retirar organismos ou apoiar objetos sobre estruturas naturais.
-              A melhor lembrança é a fotografia, não um pedaço do ecossistema.
+              Quando lixo, esgoto, retirada irregular de animais, pisoteio de
+              áreas sensíveis ou práticas inadequadas degradam esses ambientes,
+              o problema não fica apenas na paisagem. Ele alcança a pesca, o
+              turismo, a saúde, a renda e o cotidiano das pessoas.
             </p>
-          </article>
-
-          <article class="eco-habitat-card eco-habitat-card--action">
-            <span>Atitude diária</span>
-            <h3>O lixo começa muito antes de chegar ao mar</h3>
-            <p>
-              Reduzir descartáveis, reutilizar materiais, separar resíduos quando houver coleta adequada e nunca
-              jogar lixo em ruas, canais, praias ou mangues são escolhas pequenas com efeito coletivo.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="eco-section eco-section--sea" id="pesca">
-      <div class="container">
-        <header class="eco-heading eco-heading--light">
-          <div>
-            <span class="eco-kicker eco-kicker--light">Pesca consciente</span>
-            <h2>O mar alimenta hoje. O cuidado garante amanhã.</h2>
           </div>
-          <p>
-            Pescar de forma consciente significa respeitar o tempo de reprodução das espécies, as regras aplicáveis,
-            os ambientes de criação e o conhecimento de quem vive da pesca e da mariscagem.
-          </p>
-        </header>
 
-        <div class="eco-fishing-layout">
-          <div class="eco-fishing-principles">
-            <article>
-              <b>01</b>
-              <div>
-                <h3>Respeite o período de defeso</h3>
-                <p>O defeso existe para proteger fases importantes do ciclo de vida das espécies e permitir sua renovação.</p>
-              </div>
-            </article>
-
-            <article>
-              <b>02</b>
-              <div>
-                <h3>Observe tamanhos, espécies e regras</h3>
-                <p>Antes da captura ou da compra, confira se a espécie pode ser pescada e comercializada naquele período.</p>
-              </div>
-            </article>
-
-            <article>
-              <b>03</b>
-              <div>
-                <h3>Proteja áreas de reprodução e crescimento</h3>
-                <p>Manguezais, estuários e recifes têm papel essencial no ciclo de muitas espécies.</p>
-              </div>
-            </article>
-
-            <article>
-              <b>04</b>
-              <div>
-                <h3>Consumidor também faz parte da cadeia</h3>
-                <p>Perguntar a origem do pescado e evitar produtos irregulares ajuda a reduzir a pressão sobre o ambiente.</p>
-              </div>
-            </article>
-          </div>
-          <aside class="eco-fishing-note">
-            <span class="eco-fishing-note__label">Pesca + preservação</span>
-            <h3>O defeso protege o ciclo da vida</h3>
+          <aside class="eco-manifesto" aria-label="Mensagem principal">
+            <span>01</span>
+            <strong>Preservar é uma forma de pertencimento.</strong>
             <p>
-              Durante determinados períodos, algumas espécies ficam protegidas para favorecer reprodução,
-              crescimento e renovação dos estoques naturais. O calendário completo está logo abaixo.
+              Quem conhece o território entende melhor por que vale a pena
+              defendê-lo.
             </p>
           </aside>
         </div>
+      </section>
 
-        <div class="eco-sea-message">
-          <strong>Pesca consciente não é pescar menos por princípio.</strong>
-          <span>É retirar do ambiente sem destruir a capacidade que ele tem de se renovar.</span>
+      <section class="eco-pillars" aria-label="Quatro pilares da página">
+        <div class="container eco-pillars__grid">
+          <a href="#preservacao">
+            <span aria-hidden="true">♧</span>
+            <strong>Preservação</strong>
+            <small>Proteger praias, mangues e recifes</small>
+          </a>
+          <a href="#pesca">
+            <span aria-hidden="true">≈</span>
+            <strong>Pesca consciente</strong>
+            <small>Respeitar ciclos e garantir o amanhã</small>
+          </a>
+          <a href="#turismo">
+            <span aria-hidden="true">⌖</span>
+            <strong>Turismo consciente</strong>
+            <small>Visitar sem deixar prejuízo</small>
+          </a>
+          <a href="#educacao">
+            <span aria-hidden="true">✦</span>
+            <strong>Educação ambiental</strong>
+            <small>Conhecimento que vira atitude</small>
+          </a>
         </div>
+      </section>
 
-        <section class="eco-defeso-calendar" id="calendario-defeso" aria-labelledby="eco-defeso-title">
-          <header class="eco-defeso-calendar__heading">
+      <section class="eco-section" id="preservacao">
+        <div class="container">
+          <header class="eco-heading">
             <div>
-              <span class="eco-kicker eco-kicker--light">Calendário 2026</span>
-              <h3 id="eco-defeso-title">Defeso em Vera Cruz</h3>
+              <span class="eco-kicker">Preservação ambiental</span>
+              <h2>Proteger os ambientes que protegem a ilha</h2>
             </div>
             <p>
-              Consulte os períodos de proteção das principais espécies relacionadas à pesca marinha e costeira.
-              Os cartões recebem destaque automaticamente quando a data atual estiver dentro do período indicado.
+              Uma ilha saudável depende de ecossistemas costeiros conservados.
+              Cada ambiente exerce funções diferentes e todos estão ligados pela
+              água, pelas marés e pela circulação de espécies.
             </p>
           </header>
 
-          <div class="eco-defeso-calendar__grid">
-            <article class="eco-defeso-period"
-              data-eco-defeso-periods="2026-04-01/2026-05-15,2026-09-15/2026-10-31">
-              <div class="eco-defeso-period__top">
-                <span class="eco-defeso-status" hidden>Defeso em vigor</span>
-                <span class="eco-defeso-icon" aria-hidden="true">≈</span>
+          <div class="eco-habitat-grid">
+            <article class="eco-habitat-card eco-habitat-card--large">
+              <figure>
+                <img
+                  src="assets/img/jiribatuba/faixa-areia-jiribatuba.webp"
+                  alt="Faixa de areia, mar e vegetação em Jiribatuba"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                />
+              </figure>
+              <div>
+                <span>Praias e faixa costeira</span>
+                <h3>Praia limpa é mais do que uma praia bonita</h3>
+                <p>
+                  Resíduos deixados na areia podem ser levados pelo vento e pela
+                  maré. Evitar lixo, descarte de vidro, plástico, bitucas,
+                  linhas e outros materiais protege animais, moradores e
+                  visitantes.
+                </p>
               </div>
-              <h4>Camarões</h4>
-              <p>Rosa, sete-barbas e branco. Períodos correspondentes ao trecho do litoral baiano onde está Vera Cruz.</p>
-              <div class="eco-defeso-dates"><time>1º abr</time><b>→</b><time>15 mai</time></div>
-              <div class="eco-defeso-dates"><time>15 set</time><b>→</b><time>31 out</time></div>
             </article>
 
-            <article class="eco-defeso-period"
-              data-eco-defeso-periods="2026-01-01/2026-04-30,2026-11-01/2026-12-31">
-              <div class="eco-defeso-period__top">
-                <span class="eco-defeso-status" hidden>Defeso em vigor</span>
-                <span class="eco-defeso-icon" aria-hidden="true">≋</span>
-              </div>
-              <h4>Lagostas</h4>
-              <p>Lagosta-vermelha, lagosta-verde e lagosta-pintada.</p>
-              <div class="eco-defeso-dates"><span>1º nov</span><b>→</b><span>30 abr</span></div>
+            <article class="eco-habitat-card">
+              <div class="eco-habitat-card__symbol" aria-hidden="true">⌁</div>
+              <span>Manguezais</span>
+              <h3>Berçário das águas</h3>
+              <p>
+                O manguezal abriga diferentes formas de vida e se conecta
+                diretamente à pesca e à mariscagem. Pisoteio, lixo, aterros e
+                retirada inadequada de recursos enfraquecem esse ambiente.
+              </p>
             </article>
 
-            <article class="eco-defeso-period"
-              data-eco-defeso-periods="2026-05-15/2026-07-31">
-              <div class="eco-defeso-period__top">
-                <span class="eco-defeso-status" hidden>Defeso em vigor</span>
-                <span class="eco-defeso-icon" aria-hidden="true">⌁</span>
-              </div>
-              <h4>Robalo</h4>
-              <p>Robalo, robalo-branco e camurim no litoral e nas águas interiores da Bahia.</p>
-              <div class="eco-defeso-dates"><time>15 mai</time><b>→</b><time>31 jul</time></div>
+            <article class="eco-habitat-card">
+              <div class="eco-habitat-card__symbol" aria-hidden="true">◌</div>
+              <span>Recifes e piscinas naturais</span>
+              <h3>Beleza que exige cuidado</h3>
+              <p>
+                Recifes são ambientes vivos. Evite quebrar, retirar organismos
+                ou apoiar objetos sobre estruturas naturais. A melhor lembrança
+                é a fotografia, não um pedaço do ecossistema.
+              </p>
             </article>
 
-            <article class="eco-defeso-period"
-              data-eco-defeso-periods="2026-01-01/2026-02-28,2026-11-01/2026-12-31">
-              <div class="eco-defeso-period__top">
-                <span class="eco-defeso-status" hidden>Defeso em vigor</span>
-                <span class="eco-defeso-icon" aria-hidden="true">◌</span>
-              </div>
-              <h4>Garoupa-verdadeira</h4>
-              <p>Proteção válida em águas jurisdicionais brasileiras.</p>
-              <div class="eco-defeso-dates"><span>1º nov</span><b>→</b><span>28 fev</span></div>
-            </article>
-
-            <article class="eco-defeso-period"
-              data-eco-defeso-periods="2026-08-01/2026-09-30">
-              <div class="eco-defeso-period__top">
-                <span class="eco-defeso-status" hidden>Defeso em vigor</span>
-                <span class="eco-defeso-icon" aria-hidden="true">◇</span>
-              </div>
-              <h4>Peixes recifais</h4>
-              <p>Caranha, sirigado, garoupa-de-são-tomé e badejo-amarelo.</p>
-              <div class="eco-defeso-dates"><time>1º ago</time><b>→</b><time>30 set</time></div>
-            </article>
-
-            <article class="eco-defeso-period eco-defeso-period--wide"
-              data-eco-defeso-periods="2026-01-18/2026-01-23,2026-02-01/2026-02-06,2026-02-17/2026-02-22,2026-03-03/2026-03-08,2026-03-18/2026-03-23,2026-04-17/2026-04-22">
-              <div class="eco-defeso-period__top">
-                <span class="eco-defeso-status" hidden>Defeso em vigor</span>
-                <span class="eco-defeso-icon" aria-hidden="true">✦</span>
-              </div>
-              <h4>Caranguejo-uçá · andadas de 2026</h4>
-              <p>Durante as andadas reprodutivas, a espécie recebe proteção específica.</p>
-              <div class="eco-defeso-andadas">
-                <time>18 a 23 jan</time>
-                <time>1º a 6 fev</time>
-                <time>17 a 22 fev</time>
-                <time>3 a 8 mar</time>
-                <time>18 a 23 mar</time>
-                <time>17 a 22 abr</time>
-              </div>
+            <article class="eco-habitat-card eco-habitat-card--action">
+              <span>Atitude diária</span>
+              <h3>O lixo começa muito antes de chegar ao mar</h3>
+              <p>
+                Reduzir descartáveis, reutilizar materiais, separar resíduos
+                quando houver coleta adequada e nunca jogar lixo em ruas,
+                canais, praias ou mangues são escolhas pequenas com efeito
+                coletivo.
+              </p>
             </article>
           </div>
+        </div>
+      </section>
 
-          <div class="eco-defeso-guidance">
+      <section class="eco-section eco-section--sea" id="pesca">
+        <div class="container">
+          <header class="eco-heading eco-heading--light">
             <div>
-              <strong>Consumidor também protege o mar</strong>
-              <p>Antes de comprar, pergunte a origem do pescado. Durante o defeso, prefira espécies liberadas e evite produtos de origem irregular.</p>
+              <span class="eco-kicker eco-kicker--light">Pesca consciente</span>
+              <h2>O mar alimenta hoje. O cuidado garante amanhã.</h2>
             </div>
+            <p>
+              Pescar de forma consciente significa respeitar o tempo de
+              reprodução das espécies, as regras aplicáveis, os ambientes de
+              criação e o conhecimento de quem vive da pesca e da mariscagem.
+            </p>
+          </header>
+
+          <div class="eco-fishing-layout">
+            <div class="eco-fishing-principles">
+              <article>
+                <b>01</b>
+                <div>
+                  <h3>Respeite o período de defeso</h3>
+                  <p>
+                    O defeso existe para proteger fases importantes do ciclo de
+                    vida das espécies e permitir sua renovação.
+                  </p>
+                </div>
+              </article>
+
+              <article>
+                <b>02</b>
+                <div>
+                  <h3>Observe tamanhos, espécies e regras</h3>
+                  <p>
+                    Antes da captura ou da compra, confira se a espécie pode ser
+                    pescada e comercializada naquele período.
+                  </p>
+                </div>
+              </article>
+
+              <article>
+                <b>03</b>
+                <div>
+                  <h3>Proteja áreas de reprodução e crescimento</h3>
+                  <p>
+                    Manguezais, estuários e recifes têm papel essencial no ciclo
+                    de muitas espécies.
+                  </p>
+                </div>
+              </article>
+
+              <article>
+                <b>04</b>
+                <div>
+                  <h3>Consumidor também faz parte da cadeia</h3>
+                  <p>
+                    Perguntar a origem do pescado e evitar produtos irregulares
+                    ajuda a reduzir a pressão sobre o ambiente.
+                  </p>
+                </div>
+              </article>
+            </div>
+            <aside class="eco-fishing-note">
+              <span class="eco-fishing-note__label">Pesca + preservação</span>
+              <h3>O defeso protege o ciclo da vida</h3>
+              <p>
+                Durante determinados períodos, algumas espécies ficam protegidas
+                para favorecer reprodução, crescimento e renovação dos estoques
+                naturais. O calendário completo está logo abaixo.
+              </p>
+            </aside>
+          </div>
+
+          <div class="eco-sea-message">
+            <strong>Pesca consciente não é pescar menos por princípio.</strong>
+            <span
+              >É retirar do ambiente sem destruir a capacidade que ele tem de se
+              renovar.</span
+            >
+          </div>
+
+          <section
+            class="eco-defeso-calendar"
+            id="calendario-defeso"
+            aria-labelledby="eco-defeso-title"
+          >
+            <header class="eco-defeso-calendar__heading">
+              <div>
+                <span class="eco-kicker eco-kicker--light"
+                  >Calendário 2026</span
+                >
+                <h3 id="eco-defeso-title">Defeso em Vera Cruz</h3>
+              </div>
+              <p>
+                Consulte os períodos de proteção das principais espécies
+                relacionadas à pesca marinha e costeira. Os cartões recebem
+                destaque automaticamente quando a data atual estiver dentro do
+                período indicado.
+              </p>
+            </header>
+
+            <div class="eco-defeso-calendar__grid">
+              <article
+                class="eco-defeso-period"
+                data-eco-defeso-periods="2026-04-01/2026-05-15,2026-09-15/2026-10-31"
+              >
+                <div class="eco-defeso-period__top">
+                  <span class="eco-defeso-status" hidden>Defeso em vigor</span>
+                  <span class="eco-defeso-icon" aria-hidden="true">≈</span>
+                </div>
+                <h4>Camarões</h4>
+                <p>
+                  Rosa, sete-barbas e branco. Períodos correspondentes ao trecho
+                  do litoral baiano onde está Vera Cruz.
+                </p>
+                <div class="eco-defeso-dates">
+                  <time>1º abr</time><b>→</b><time>15 mai</time>
+                </div>
+                <div class="eco-defeso-dates">
+                  <time>15 set</time><b>→</b><time>31 out</time>
+                </div>
+              </article>
+
+              <article
+                class="eco-defeso-period"
+                data-eco-defeso-periods="2026-01-01/2026-04-30,2026-11-01/2026-12-31"
+              >
+                <div class="eco-defeso-period__top">
+                  <span class="eco-defeso-status" hidden>Defeso em vigor</span>
+                  <span class="eco-defeso-icon" aria-hidden="true">≋</span>
+                </div>
+                <h4>Lagostas</h4>
+                <p>Lagosta-vermelha, lagosta-verde e lagosta-pintada.</p>
+                <div class="eco-defeso-dates">
+                  <span>1º nov</span><b>→</b><span>30 abr</span>
+                </div>
+              </article>
+
+              <article
+                class="eco-defeso-period"
+                data-eco-defeso-periods="2026-05-15/2026-07-31"
+              >
+                <div class="eco-defeso-period__top">
+                  <span class="eco-defeso-status" hidden>Defeso em vigor</span>
+                  <span class="eco-defeso-icon" aria-hidden="true">⌁</span>
+                </div>
+                <h4>Robalo</h4>
+                <p>
+                  Robalo, robalo-branco e camurim no litoral e nas águas
+                  interiores da Bahia.
+                </p>
+                <div class="eco-defeso-dates">
+                  <time>15 mai</time><b>→</b><time>31 jul</time>
+                </div>
+              </article>
+
+              <article
+                class="eco-defeso-period"
+                data-eco-defeso-periods="2026-01-01/2026-02-28,2026-11-01/2026-12-31"
+              >
+                <div class="eco-defeso-period__top">
+                  <span class="eco-defeso-status" hidden>Defeso em vigor</span>
+                  <span class="eco-defeso-icon" aria-hidden="true">◌</span>
+                </div>
+                <h4>Garoupa-verdadeira</h4>
+                <p>Proteção válida em águas jurisdicionais brasileiras.</p>
+                <div class="eco-defeso-dates">
+                  <span>1º nov</span><b>→</b><span>28 fev</span>
+                </div>
+              </article>
+
+              <article
+                class="eco-defeso-period"
+                data-eco-defeso-periods="2026-08-01/2026-09-30"
+              >
+                <div class="eco-defeso-period__top">
+                  <span class="eco-defeso-status" hidden>Defeso em vigor</span>
+                  <span class="eco-defeso-icon" aria-hidden="true">◇</span>
+                </div>
+                <h4>Peixes recifais</h4>
+                <p>Caranha, sirigado, garoupa-de-são-tomé e badejo-amarelo.</p>
+                <div class="eco-defeso-dates">
+                  <time>1º ago</time><b>→</b><time>30 set</time>
+                </div>
+              </article>
+
+              <article
+                class="eco-defeso-period eco-defeso-period--wide"
+                data-eco-defeso-periods="2026-01-18/2026-01-23,2026-02-01/2026-02-06,2026-02-17/2026-02-22,2026-03-03/2026-03-08,2026-03-18/2026-03-23,2026-04-17/2026-04-22"
+              >
+                <div class="eco-defeso-period__top">
+                  <span class="eco-defeso-status" hidden>Defeso em vigor</span>
+                  <span class="eco-defeso-icon" aria-hidden="true">✦</span>
+                </div>
+                <h4>Caranguejo-uçá · andadas de 2026</h4>
+                <p>
+                  Durante as andadas reprodutivas, a espécie recebe proteção
+                  específica.
+                </p>
+                <div class="eco-defeso-andadas">
+                  <time>18 a 23 jan</time>
+                  <time>1º a 6 fev</time>
+                  <time>17 a 22 fev</time>
+                  <time>3 a 8 mar</time>
+                  <time>18 a 23 mar</time>
+                  <time>17 a 22 abr</time>
+                </div>
+              </article>
+            </div>
+
+            <div class="eco-defeso-guidance">
+              <div>
+                <strong>Consumidor também protege o mar</strong>
+                <p>
+                  Antes de comprar, pergunte a origem do pescado. Durante o
+                  defeso, prefira espécies liberadas e evite produtos de origem
+                  irregular.
+                </p>
+              </div>
+              <div>
+                <strong>Importante</strong>
+                <p>
+                  Além das datas, podem existir regras específicas de captura,
+                  estoque, transporte, tamanho mínimo e comercialização.
+                </p>
+              </div>
+            </div>
+
+            <p class="eco-defeso-source">
+              Fontes de referência: calendário ambiental 2026 do INEMA e página
+              de defesos marinhos do IBAMA.
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <section class="eco-section" id="turismo">
+        <div class="container">
+          <header class="eco-heading">
             <div>
-              <strong>Importante</strong>
-              <p>Além das datas, podem existir regras específicas de captura, estoque, transporte, tamanho mínimo e comercialização.</p>
+              <span class="eco-kicker">Turismo consciente</span>
+              <h2>Visitar a ilha sem transformar beleza em problema</h2>
+            </div>
+            <p>
+              O visitante pode movimentar a economia local e, ao mesmo tempo,
+              ajudar a preservar o território. O ponto decisivo está no
+              comportamento durante a experiência.
+            </p>
+          </header>
+
+          <div class="eco-tourism-grid">
+            <article>
+              <span aria-hidden="true">01</span>
+              <h3>Leve seu lixo com você</h3>
+              <p>
+                Se não houver local adequado para descarte, guarde os resíduos
+                até encontrar um ponto correto.
+              </p>
+            </article>
+
+            <article>
+              <span aria-hidden="true">02</span>
+              <h3>Não retire conchas, animais ou plantas</h3>
+              <p>
+                O que parece apenas uma lembrança pode fazer parte de uma cadeia
+                ecológica ou de um habitat.
+              </p>
+            </article>
+
+            <article>
+              <span aria-hidden="true">03</span>
+              <h3>Evite danos aos recifes</h3>
+              <p>
+                Não quebre estruturas naturais e evite pisar ou apoiar objetos
+                sobre organismos e formações sensíveis.
+              </p>
+            </article>
+
+            <article>
+              <span aria-hidden="true">04</span>
+              <h3>Valorize quem vive no lugar</h3>
+              <p>
+                Prefira serviços, alimentação, guias, artesanato e experiências
+                oferecidas por trabalhadores e empreendedores locais.
+              </p>
+            </article>
+
+            <article>
+              <span aria-hidden="true">05</span>
+              <h3>Respeite comunidades e patrimônios</h3>
+              <p>
+                Moradia, religião, trabalho e tradição não são atrações montadas
+                para fotografia. Peça permissão e aja com respeito.
+              </p>
+            </article>
+
+            <article>
+              <span aria-hidden="true">06</span>
+              <h3>Use água e energia com responsabilidade</h3>
+              <p>
+                Mesmo durante as férias, recursos naturais continuam sendo
+                limitados e necessários para moradores e serviços locais.
+              </p>
+            </article>
+          </div>
+
+          <div class="eco-tourism-banner">
+            <div>
+              <span class="eco-kicker">Uma pergunta simples antes de agir</span>
+              <h3>Se todo visitante fizesse isso, o lugar continuaria bem?</h3>
+            </div>
+            <p>Se a resposta for não, escolha outra atitude.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="eco-section eco-section--education" id="educacao">
+        <div class="container eco-education-grid">
+          <div class="eco-education-copy">
+            <span class="eco-kicker">Educação ambiental</span>
+            <h2>Conhecer para cuidar. Cuidar para pertencer.</h2>
+            <p>
+              Educação ambiental não precisa ficar restrita a uma aula sobre
+              reciclagem. Ela pode começar observando a maré, entrevistando
+              pescadores e marisqueiras, registrando pontos de descarte,
+              estudando o manguezal, acompanhando mudanças na praia ou
+              investigando de onde vem a água que usamos.
+            </p>
+            <p>
+              Quando estudantes pesquisam problemas reais do lugar onde vivem, o
+              conteúdo escolar deixa de ser abstrato. História, Geografia,
+              Ciências, Matemática, Língua Portuguesa e tecnologia podem
+              trabalhar juntas.
+            </p>
+
+            <div class="eco-education-actions">
+              <a class="eco-button eco-button--dark" href="missao-aprender.html"
+                >Ir para Missão Aprender</a
+              >
+              <a class="eco-text-link" href="nossa-historia.html"
+                >Conheça o projeto educativo <span>→</span></a
+              >
             </div>
           </div>
 
-          <p class="eco-defeso-source">
-            Fontes de referência: calendário ambiental 2026 do INEMA e página de defesos marinhos do IBAMA.
-          </p>
-        </section>
+          <div
+            class="eco-school-projects"
+            aria-label="Ideias de educação ambiental"
+          >
+            <article>
+              <span>Projeto 01</span>
+              <h3>Mapa dos cuidados ambientais</h3>
+              <p>
+                Estudantes registram pontos de preservação, descarte irregular,
+                manguezais, praias e áreas que precisam de atenção.
+              </p>
+            </article>
+            <article>
+              <span>Projeto 02</span>
+              <h3>Vozes do mar</h3>
+              <p>
+                Entrevistas com pescadores, pescadoras, marisqueiras, barqueiros
+                e moradores sobre mudanças percebidas no ambiente.
+              </p>
+            </article>
+            <article>
+              <span>Projeto 03</span>
+              <h3>Diário das marés</h3>
+              <p>
+                Observação periódica da praia para registrar maré, resíduos
+                encontrados, presença de animais e transformações da paisagem.
+              </p>
+            </article>
+            <article>
+              <span>Projeto 04</span>
+              <h3>Campanha criada pelos alunos</h3>
+              <p>
+                Produção de placas, QR Codes, vídeos curtos e cards para
+                orientar moradores e visitantes sobre atitudes responsáveis.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-      </div>
-    </section>
+      <section class="eco-section eco-actions-section" id="atitudes">
+        <div class="container">
+          <header class="eco-heading">
+            <div>
+              <span class="eco-kicker">Comece agora</span>
+              <h2>Checklist de atitudes que protegem Vera Cruz</h2>
+            </div>
+            <p>
+              Marque as atitudes que você já pratica. O progresso fica salvo
+              somente neste navegador.
+            </p>
+          </header>
 
-    <section class="eco-section" id="turismo">
-      <div class="container">
-        <header class="eco-heading">
+          <div class="eco-checklist-shell">
+            <div class="eco-checklist" data-eco-checklist>
+              <label
+                ><input type="checkbox" value="lixo" />
+                <span
+                  >Não deixo lixo em praias, ruas, trilhas ou manguezais.</span
+                ></label
+              >
+              <label
+                ><input type="checkbox" value="plasticos" />
+                <span
+                  >Evito descartáveis quando posso usar uma opção
+                  reutilizável.</span
+                ></label
+              >
+              <label
+                ><input type="checkbox" value="recifes" />
+                <span
+                  >Evito retirar ou danificar organismos e estruturas
+                  naturais.</span
+                ></label
+              >
+              <label
+                ><input type="checkbox" value="defeso" />
+                <span
+                  >Respeito e compartilho informações sobre períodos de
+                  defeso.</span
+                ></label
+              >
+              <label
+                ><input type="checkbox" value="pescado" />
+                <span>Pergunto a origem do pescado que compro.</span></label
+              >
+              <label
+                ><input type="checkbox" value="local" />
+                <span
+                  >Valorizo trabalhadores, serviços e produtos das comunidades
+                  locais.</span
+                ></label
+              >
+              <label
+                ><input type="checkbox" value="agua" />
+                <span>Evito desperdício de água e energia.</span></label
+              >
+              <label
+                ><input type="checkbox" value="educacao" />
+                <span
+                  >Compartilho boas práticas ambientais com outras
+                  pessoas.</span
+                ></label
+              >
+            </div>
+
+            <aside class="eco-progress-card">
+              <span>Seu compromisso</span>
+              <strong><b data-eco-progress>0</b> de 8</strong>
+              <div class="eco-progress-track" aria-hidden="true">
+                <i data-eco-progress-bar></i>
+              </div>
+              <p data-eco-progress-message>
+                Comece marcando uma atitude que já faz parte da sua rotina.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="eco-section eco-quiz-section" id="desafio">
+        <div class="container">
+          <header class="eco-heading eco-heading--center">
+            <div>
+              <span class="eco-kicker">Desafio ambiental</span>
+              <h2>Qual escolha protege melhor a ilha?</h2>
+            </div>
+            <p>
+              Quatro situações rápidas para transformar informação em decisão.
+            </p>
+          </header>
+
+          <div class="eco-quiz" data-eco-quiz>
+            <div class="eco-quiz__top">
+              <span data-eco-quiz-step>Pergunta 1 de 4</span>
+              <strong data-eco-quiz-score>0 pontos</strong>
+            </div>
+
+            <div class="eco-quiz__body">
+              <h3 data-eco-quiz-question></h3>
+              <div class="eco-quiz__options" data-eco-quiz-options></div>
+              <p
+                class="eco-quiz__feedback"
+                data-eco-quiz-feedback
+                aria-live="polite"
+              ></p>
+            </div>
+
+            <button
+              class="eco-button eco-button--primary eco-quiz__next"
+              type="button"
+              data-eco-quiz-next
+              disabled
+            >
+              Próxima pergunta
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="eco-final">
+        <div class="container eco-final__grid">
           <div>
-            <span class="eco-kicker">Turismo consciente</span>
-            <h2>Visitar a ilha sem transformar beleza em problema</h2>
-          </div>
-          <p>
-            O visitante pode movimentar a economia local e, ao mesmo tempo, ajudar a preservar o território.
-            O ponto decisivo está no comportamento durante a experiência.
-          </p>
-        </header>
-
-        <div class="eco-tourism-grid">
-          <article>
-            <span aria-hidden="true">01</span>
-            <h3>Leve seu lixo com você</h3>
-            <p>Se não houver local adequado para descarte, guarde os resíduos até encontrar um ponto correto.</p>
-          </article>
-
-          <article>
-            <span aria-hidden="true">02</span>
-            <h3>Não retire conchas, animais ou plantas</h3>
-            <p>O que parece apenas uma lembrança pode fazer parte de uma cadeia ecológica ou de um habitat.</p>
-          </article>
-
-          <article>
-            <span aria-hidden="true">03</span>
-            <h3>Evite danos aos recifes</h3>
-            <p>Não quebre estruturas naturais e evite pisar ou apoiar objetos sobre organismos e formações sensíveis.</p>
-          </article>
-
-          <article>
-            <span aria-hidden="true">04</span>
-            <h3>Valorize quem vive no lugar</h3>
-            <p>Prefira serviços, alimentação, guias, artesanato e experiências oferecidas por trabalhadores e empreendedores locais.</p>
-          </article>
-
-          <article>
-            <span aria-hidden="true">05</span>
-            <h3>Respeite comunidades e patrimônios</h3>
-            <p>Moradia, religião, trabalho e tradição não são atrações montadas para fotografia. Peça permissão e aja com respeito.</p>
-          </article>
-
-          <article>
-            <span aria-hidden="true">06</span>
-            <h3>Use água e energia com responsabilidade</h3>
-            <p>Mesmo durante as férias, recursos naturais continuam sendo limitados e necessários para moradores e serviços locais.</p>
-          </article>
-        </div>
-
-        <div class="eco-tourism-banner">
-          <div>
-            <span class="eco-kicker">Uma pergunta simples antes de agir</span>
-            <h3>Se todo visitante fizesse isso, o lugar continuaria bem?</h3>
-          </div>
-          <p>Se a resposta for não, escolha outra atitude.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="eco-section eco-section--education" id="educacao">
-      <div class="container eco-education-grid">
-        <div class="eco-education-copy">
-          <span class="eco-kicker">Educação ambiental</span>
-          <h2>Conhecer para cuidar. Cuidar para pertencer.</h2>
-          <p>
-            Educação ambiental não precisa ficar restrita a uma aula sobre reciclagem.
-            Ela pode começar observando a maré, entrevistando pescadores e marisqueiras, registrando pontos de descarte,
-            estudando o manguezal, acompanhando mudanças na praia ou investigando de onde vem a água que usamos.
-          </p>
-          <p>
-            Quando estudantes pesquisam problemas reais do lugar onde vivem, o conteúdo escolar deixa de ser abstrato.
-            História, Geografia, Ciências, Matemática, Língua Portuguesa e tecnologia podem trabalhar juntas.
-          </p>
-
-          <div class="eco-education-actions">
-            <a class="eco-button eco-button--dark" href="missao-aprender.html">Ir para Missão Aprender</a>
-            <a class="eco-text-link" href="nossa-historia.html">Conheça o projeto educativo <span>→</span></a>
-          </div>
-        </div>
-
-        <div class="eco-school-projects" aria-label="Ideias de educação ambiental">
-          <article>
-            <span>Projeto 01</span>
-            <h3>Mapa dos cuidados ambientais</h3>
-            <p>Estudantes registram pontos de preservação, descarte irregular, manguezais, praias e áreas que precisam de atenção.</p>
-          </article>
-          <article>
-            <span>Projeto 02</span>
-            <h3>Vozes do mar</h3>
-            <p>Entrevistas com pescadores, pescadoras, marisqueiras, barqueiros e moradores sobre mudanças percebidas no ambiente.</p>
-          </article>
-          <article>
-            <span>Projeto 03</span>
-            <h3>Diário das marés</h3>
-            <p>Observação periódica da praia para registrar maré, resíduos encontrados, presença de animais e transformações da paisagem.</p>
-          </article>
-          <article>
-            <span>Projeto 04</span>
-            <h3>Campanha criada pelos alunos</h3>
-            <p>Produção de placas, QR Codes, vídeos curtos e cards para orientar moradores e visitantes sobre atitudes responsáveis.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="eco-section eco-actions-section" id="atitudes">
-      <div class="container">
-        <header class="eco-heading">
-          <div>
-            <span class="eco-kicker">Comece agora</span>
-            <h2>Checklist de atitudes que protegem Vera Cruz</h2>
-          </div>
-          <p>Marque as atitudes que você já pratica. O progresso fica salvo somente neste navegador.</p>
-        </header>
-
-        <div class="eco-checklist-shell">
-          <div class="eco-checklist" data-eco-checklist>
-            <label><input type="checkbox" value="lixo"> <span>Não deixo lixo em praias, ruas, trilhas ou manguezais.</span></label>
-            <label><input type="checkbox" value="plasticos"> <span>Evito descartáveis quando posso usar uma opção reutilizável.</span></label>
-            <label><input type="checkbox" value="recifes"> <span>Evito retirar ou danificar organismos e estruturas naturais.</span></label>
-            <label><input type="checkbox" value="defeso"> <span>Respeito e compartilho informações sobre períodos de defeso.</span></label>
-            <label><input type="checkbox" value="pescado"> <span>Pergunto a origem do pescado que compro.</span></label>
-            <label><input type="checkbox" value="local"> <span>Valorizo trabalhadores, serviços e produtos das comunidades locais.</span></label>
-            <label><input type="checkbox" value="agua"> <span>Evito desperdício de água e energia.</span></label>
-            <label><input type="checkbox" value="educacao"> <span>Compartilho boas práticas ambientais com outras pessoas.</span></label>
+            <span class="eco-kicker eco-kicker--light"
+              >Uma ilha, muitas responsabilidades</span
+            >
+            <h2>
+              Preservar não depende de uma única pessoa. Mas começa em cada
+              escolha.
+            </h2>
+            <p>
+              O meio ambiente de Vera Cruz está ligado à vida das comunidades.
+              Cuidar do mar, dos manguezais, das praias e dos recifes é também
+              cuidar da cultura, do trabalho e das próximas gerações.
+            </p>
           </div>
 
-          <aside class="eco-progress-card">
-            <span>Seu compromisso</span>
-            <strong><b data-eco-progress>0</b> de 8</strong>
-            <div class="eco-progress-track" aria-hidden="true"><i data-eco-progress-bar></i></div>
-            <p data-eco-progress-message>Comece marcando uma atitude que já faz parte da sua rotina.</p>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="eco-section eco-quiz-section" id="desafio">
-      <div class="container">
-        <header class="eco-heading eco-heading--center">
-          <div>
-            <span class="eco-kicker">Desafio ambiental</span>
-            <h2>Qual escolha protege melhor a ilha?</h2>
+          <div class="eco-final__links">
+            <a href="bairros.html">Explorar comunidades <span>→</span></a>
+            <a href="#calendario-defeso">Calendário do defeso <span>→</span></a>
+            <a href="nossa-historia.html">Conhecer o projeto <span>→</span></a>
           </div>
-          <p>Quatro situações rápidas para transformar informação em decisão.</p>
-        </header>
-
-        <div class="eco-quiz" data-eco-quiz>
-          <div class="eco-quiz__top">
-            <span data-eco-quiz-step>Pergunta 1 de 4</span>
-            <strong data-eco-quiz-score>0 pontos</strong>
-          </div>
-
-          <div class="eco-quiz__body">
-            <h3 data-eco-quiz-question></h3>
-            <div class="eco-quiz__options" data-eco-quiz-options></div>
-            <p class="eco-quiz__feedback" data-eco-quiz-feedback aria-live="polite"></p>
-          </div>
-
-          <button class="eco-button eco-button--primary eco-quiz__next" type="button" data-eco-quiz-next disabled>
-            Próxima pergunta
-          </button>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <section class="eco-final">
-      <div class="container eco-final__grid">
-        <div>
-          <span class="eco-kicker eco-kicker--light">Uma ilha, muitas responsabilidades</span>
-          <h2>Preservar não depende de uma única pessoa. Mas começa em cada escolha.</h2>
-          <p>
-            O meio ambiente de Vera Cruz está ligado à vida das comunidades. Cuidar do mar, dos manguezais,
-            das praias e dos recifes é também cuidar da cultura, do trabalho e das próximas gerações.
-          </p>
-        </div>
-
-        <div class="eco-final__links">
-          <a href="bairros.html">Explorar comunidades <span>→</span></a>
-          <a href="#calendario-defeso">Calendário do defeso <span>→</span></a>
-          <a href="nossa-historia.html">Conhecer o projeto <span>→</span></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div data-cv-footer></div>
-</body>
+    <div data-cv-footer></div>
+  </body>
 </html>
