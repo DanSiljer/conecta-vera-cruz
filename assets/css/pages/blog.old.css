@@ -2986,8 +2986,8 @@ button {
 
 
 /* ==========================================================
-   MENSAGENS NO DESTAQUE DO BLOG
-   Funcionamento local, inspirado no campo de comentários do Instagram.
+   MENSAGENS E RESPOSTAS NO DESTAQUE DO BLOG
+   Nome obrigatório para publicar ou responder.
    ========================================================== */
 .blog-featured-comments {
   width: 100%;
@@ -3019,7 +3019,7 @@ button {
   align-items: center;
   padding: 7px 8px;
   border: 1px solid #dbe7e1;
-  border-radius: 999px;
+  border-radius: 22px;
   background: #f8fbf9;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -3046,24 +3046,42 @@ button {
   font-size: 0.82rem;
 }
 
+.blog-comment-form__fields {
+  display: grid;
+  grid-template-columns: minmax(105px, 0.36fr) minmax(160px, 1fr);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e1eae5;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.blog-comment-form__name,
 .blog-comment-form__input {
   min-width: 0;
   border: 0;
   outline: 0;
-  padding: 8px 2px;
+  padding: 10px 11px;
   background: transparent;
   color: #18332d;
 }
 
+.blog-comment-form__name {
+  border-right: 1px solid #e7eeea;
+  font-weight: 800;
+}
+
+.blog-comment-form__name::placeholder,
 .blog-comment-form__input::placeholder {
   color: #8a9692;
+  font-weight: 500;
 }
 
 .blog-comment-form__send {
-  min-height: 36px;
+  min-height: 38px;
   border: 0;
   border-radius: 999px;
-  padding: 7px 13px;
+  padding: 8px 14px;
   background: #007a4d;
   color: #fff;
   cursor: pointer;
@@ -3072,7 +3090,8 @@ button {
   font-weight: 900;
 }
 
-.blog-comment-form__send:disabled {
+.blog-comment-form__send:disabled,
+.blog-comment-reply-form__publish:disabled {
   cursor: not-allowed;
   opacity: 0.38;
 }
@@ -3086,8 +3105,8 @@ button {
 
 .blog-comment-list {
   display: grid;
-  gap: 10px;
-  max-height: 190px;
+  gap: 13px;
+  max-height: 360px;
   margin-top: 6px;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -3110,7 +3129,14 @@ button {
 .blog-comment__avatar {
   width: 34px;
   height: 34px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+}
+
+.blog-comment__avatar--reply {
+  width: 29px;
+  height: 29px;
+  font-size: 0.61rem;
+  background: linear-gradient(145deg, #075f79, #0b8da0);
 }
 
 .blog-comment__body {
@@ -3121,7 +3147,7 @@ button {
   margin: 0;
   color: #40554e;
   font-size: 0.82rem;
-  line-height: 1.45;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
@@ -3129,36 +3155,135 @@ button {
   color: #173b31;
 }
 
+.blog-comment__destination {
+  color: #7f8d88;
+  font-size: 0.76rem;
+}
+
 .blog-comment__meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  margin-top: 3px;
+  margin-top: 4px;
   color: #919b97;
   font-size: 0.66rem;
 }
 
+.blog-comment__reply,
 .blog-comment__remove {
   border: 0;
   padding: 0;
   background: transparent;
-  color: #a54757;
   cursor: pointer;
   font: inherit;
-  font-weight: 800;
+  font-weight: 850;
 }
 
+.blog-comment__reply {
+  color: #087b58;
+}
+
+.blog-comment__remove {
+  color: #a54757;
+}
+
+.blog-comment__reply:hover,
+.blog-comment__reply:focus-visible,
 .blog-comment__remove:hover,
 .blog-comment__remove:focus-visible {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-@media (max-width: 520px) {
+.blog-comment-replies {
+  display: grid;
+  gap: 9px;
+  margin-top: 10px;
+  padding: 10px 0 0 13px;
+  border-left: 2px solid #e1ebe6;
+}
+
+.blog-comment-reply {
+  display: grid;
+  grid-template-columns: 29px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.blog-comment-reply-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 11px;
+  padding: 11px;
+  border: 1px solid #d9e7e1;
+  border-radius: 14px;
+  background: #f7fbf9;
+}
+
+.blog-comment-reply-form__notice {
+  color: #526966;
+  font-size: 0.7rem;
+  font-weight: 850;
+}
+
+.blog-comment-reply-form__fields {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.34fr) minmax(150px, 1fr);
+  gap: 7px;
+}
+
+.blog-comment-reply-form__fields input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #dbe7e1;
+  border-radius: 10px;
+  outline: 0;
+  padding: 9px 10px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.blog-comment-reply-form__fields input:focus {
+  border-color: #78af98;
+  box-shadow: 0 0 0 3px rgba(0, 122, 77, 0.08);
+}
+
+.blog-comment-reply-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.blog-comment-reply-form__cancel,
+.blog-comment-reply-form__publish {
+  min-height: 32px;
+  border-radius: 999px;
+  padding: 6px 11px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.blog-comment-reply-form__cancel {
+  border: 1px solid #cfded7;
+  background: #fff;
+  color: #64756f;
+}
+
+.blog-comment-reply-form__publish {
+  border: 0;
+  background: #007a4d;
+  color: #fff;
+}
+
+@media (max-width: 620px) {
   .blog-comment-form {
     grid-template-columns: 34px minmax(0, 1fr);
-    border-radius: 20px;
+    border-radius: 18px;
   }
 
   .blog-comment-form__avatar {
@@ -3166,163 +3291,23 @@ button {
     height: 34px;
   }
 
+  .blog-comment-form__fields,
+  .blog-comment-reply-form__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-comment-form__name {
+    border-right: 0;
+    border-bottom: 1px solid #e7eeea;
+  }
+
   .blog-comment-form__send {
     grid-column: 1 / -1;
     width: 100%;
   }
-}
 
-
-
-
-/* ==========================================================
-   GUIGA FRANCISCO · PERFIL, OBRAS E FONTES
-   ========================================================== */
-.personality-row--guiga .personality-row__portrait {
-  object-position: center 18%;
-}
-
-.personality-row__subtitle {
-  margin: 22px 0 9px;
-  color: #073c5a;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.12rem;
-  line-height: 1.25;
-}
-
-.personality-row__work--guiga {
-  grid-template-columns: 105px minmax(0, 1fr);
-  border: 1px solid #e4ece8;
-  background: linear-gradient(135deg, #fffaf0 0%, #f7fbf9 100%);
-}
-
-.personality-row__work--guiga img {
-  width: 105px;
-  height: 140px;
-  object-fit: cover;
-}
-
-.page-blog .personality-row__mini-link {
-  display: inline-flex;
-  width: fit-content;
-  margin-top: 10px;
-  color: #087b58 !important;
-  font-size: .78rem;
-  font-weight: 900;
-  text-decoration: none;
-}
-
-.page-blog .personality-row__mini-link:hover,
-.page-blog .personality-row__mini-link:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.personality-row__guiga-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 20px 0 6px;
-}
-
-.personality-row__guiga-gallery figure {
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid #e1e9e5;
-  border-radius: 15px;
-  background: #f7faf8;
-}
-
-.personality-row__guiga-gallery img {
-  width: 100%;
-  height: 230px;
-  object-fit: contain;
-  background: #f0f3f1;
-}
-
-.personality-row__guiga-gallery-wide {
-  grid-column: 1 / -1;
-}
-
-.personality-row__guiga-gallery-wide img {
-  height: auto;
-  max-height: 470px;
-  object-fit: cover;
-}
-
-.personality-row__guiga-gallery figcaption {
-  padding: 9px 11px 11px;
-  color: #647772;
-  font-size: .74rem;
-  line-height: 1.45;
-}
-
-.personality-row__sources {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 10px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #e2ebe7;
-}
-
-.personality-row__sources strong {
-  width: 100%;
-  color: #073c5a;
-  font-size: .78rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.page-blog .personality-row__sources a {
-  display: inline-flex;
-  padding: 7px 10px;
-  border: 1px solid #d8e7df;
-  border-radius: 999px;
-  background: #f7fbf9;
-  color: #087b58 !important;
-  font-size: .74rem;
-  font-weight: 850;
-  text-decoration: none;
-}
-
-.page-blog .personality-row__sources a:hover,
-.page-blog .personality-row__sources a:focus-visible {
-  border-color: #87bca5;
-  background: #edf7f2;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-@media (max-width: 720px) {
-  .personality-row--guiga .personality-row__media {
-    max-width: 290px;
+  .blog-comment-list {
+    max-height: 430px;
   }
 }
 
-@media (max-width: 520px) {
-  .personality-row--guiga .personality-row__media {
-    max-width: none;
-  }
-
-  .personality-row__work--guiga {
-    grid-template-columns: 82px minmax(0, 1fr);
-  }
-
-  .personality-row__work--guiga img {
-    width: 82px;
-    height: 112px;
-  }
-
-  .personality-row__guiga-gallery {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .personality-row__guiga-gallery img {
-    height: 190px;
-  }
-
-  .personality-row__guiga-gallery-wide {
-    grid-column: 1 / -1;
-  }
-}
