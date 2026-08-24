@@ -228,6 +228,482 @@
 .ilhota-lightbox p { margin: 0; padding: 14px 18px 18px; color: rgba(255,255,255,.78); line-height: 1.55; }
 .lightbox-close { position: absolute; top: 10px; right: 10px; z-index: 2; display: grid; width: 42px; height: 42px; place-items: center; border: 0; border-radius: 50%; color: #fff; background: rgba(0,0,0,.62); font-size: 1.45rem; cursor: pointer; }
 
+
+
+/* =========================================================
+   QUILOMBO DO TERERÉ
+   ========================================================= */
+.quilombo-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(231, 187, 87, .18), transparent 24%),
+    radial-gradient(circle at 10% 48%, rgba(19, 98, 84, .12), transparent 30%),
+    #fbf8ef;
+}
+
+.quilombo-hero {
+  display: grid;
+  grid-template-columns: minmax(0, .88fr) minmax(420px, 1.12fr);
+  gap: clamp(34px, 6vw, 78px);
+  align-items: center;
+}
+
+.quilombo-hero__copy .section-kicker,
+.quilombo-panel-copy .section-kicker,
+.quilombo-culture .section-kicker,
+.quilombo-nature .section-kicker,
+.quilombo-gallery .section-kicker {
+  color: #8a5c1a;
+}
+
+.quilombo-hero h2 {
+  margin: 0;
+  color: #183b34;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.1rem, 7vw, 6.6rem);
+  line-height: .92;
+  letter-spacing: -.055em;
+}
+
+.quilombo-lead {
+  margin: 24px 0 0;
+  color: #586d66;
+  font-size: 1.06rem;
+  line-height: 1.82;
+}
+
+.quilombo-hero__photo,
+.quilombo-panel-photo,
+.quilombo-culture__media figure,
+.quilombo-nature__gallery figure,
+.quilombo-gallery__grid figure {
+  margin: 0;
+}
+
+.quilombo-hero__photo button,
+.quilombo-panel-photo button,
+.quilombo-culture__media button,
+.quilombo-nature__gallery button,
+.quilombo-gallery__grid button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.quilombo-hero__photo img {
+  width: 100%;
+  height: clamp(410px, 48vw, 620px);
+  border-radius: 34px;
+  object-fit: cover;
+  box-shadow: 0 28px 64px rgba(31, 63, 54, .18);
+}
+
+.quilombo-hero__photo figcaption,
+.quilombo-panel-photo figcaption,
+.quilombo-culture__media figcaption {
+  margin-top: 10px;
+  color: #718079;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.quilombo-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 48px;
+}
+
+.quilombo-facts article {
+  min-height: 150px;
+  padding: 22px;
+  border: 1px solid #e2d8bd;
+  border-radius: 22px;
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 12px 30px rgba(56, 73, 58, .06);
+}
+
+.quilombo-facts strong,
+.quilombo-facts span {
+  display: block;
+}
+
+.quilombo-facts strong {
+  color: #1d5145;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.6rem;
+}
+
+.quilombo-facts span {
+  margin-top: 9px;
+  color: #6e756d;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.quilombo-story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 58px;
+}
+
+.quilombo-story-card {
+  min-height: 300px;
+  padding: 28px;
+  border-radius: 28px;
+  color: #fff;
+  background: linear-gradient(145deg, #1b4d43, #113b34);
+  box-shadow: 0 18px 44px rgba(17, 59, 52, .13);
+}
+
+.quilombo-card-number {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.11);
+  color: #f1d99c;
+  font-weight: 900;
+}
+
+.quilombo-story-card h3 {
+  margin: 38px 0 12px;
+  font-size: 1.42rem;
+  line-height: 1.2;
+}
+
+.quilombo-story-card p {
+  margin: 0;
+  color: rgba(255,255,255,.74);
+  line-height: 1.72;
+}
+
+.quilombo-panel-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+  gap: clamp(34px, 6vw, 74px);
+  align-items: center;
+  margin-top: 76px;
+}
+
+.quilombo-panel-photo img {
+  width: 100%;
+  max-height: 700px;
+  border-radius: 28px;
+  object-fit: cover;
+  box-shadow: 0 24px 54px rgba(37, 58, 48, .14);
+}
+
+.quilombo-panel-copy h3,
+.quilombo-culture h3,
+.quilombo-nature h3,
+.quilombo-gallery h3 {
+  margin: 0;
+  color: #173e36;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 4.4vw, 4rem);
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.quilombo-panel-copy p,
+.quilombo-culture__copy p,
+.quilombo-nature__heading p {
+  color: #66746e;
+  font-size: 1rem;
+  line-height: 1.78;
+}
+
+.quilombo-note {
+  margin-top: 24px;
+  padding: 20px 22px;
+  border-left: 4px solid #b1843e;
+  border-radius: 0 18px 18px 0;
+  background: #fff;
+  color: #695e48;
+  line-height: 1.64;
+}
+
+.quilombo-culture,
+.quilombo-nature,
+.quilombo-gallery {
+  margin-top: 82px;
+  padding-top: 72px;
+  border-top: 1px solid #ded9c9;
+}
+
+.quilombo-culture {
+  display: grid;
+  grid-template-columns: .78fr 1.22fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.quilombo-culture__media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quilombo-culture__media img {
+  width: 100%;
+  height: 360px;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow: 0 14px 36px rgba(38, 55, 45, .12);
+}
+
+.quilombo-video {
+  width: 100%;
+  border-radius: 24px;
+  background: #0d2924;
+  box-shadow: 0 18px 44px rgba(24, 48, 41, .16);
+}
+
+.quilombo-video--wide {
+  grid-column: 1 / -1;
+  max-height: 500px;
+  margin-top: 4px;
+}
+
+.quilombo-nature__heading {
+  max-width: 820px;
+}
+
+.quilombo-nature__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .55fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 30px;
+}
+
+.quilombo-nature__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+}
+
+.quilombo-nature__gallery img {
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+  border-radius: 22px;
+  object-fit: cover;
+}
+
+.quilombo-video--portrait {
+  height: 100%;
+  min-height: 390px;
+  max-height: 660px;
+  object-fit: cover;
+}
+
+.quilombo-gallery header {
+  max-width: 700px;
+  margin-bottom: 28px;
+}
+
+.quilombo-gallery__grid {
+  display: grid;
+  grid-template-columns: 1.08fr .92fr .92fr;
+  gap: 14px;
+}
+
+.quilombo-gallery__grid img {
+  width: 100%;
+  height: 370px;
+  border-radius: 24px;
+  object-fit: cover;
+  box-shadow: 0 12px 30px rgba(34, 52, 43, .09);
+}
+
+.quilombo-visit-note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+  margin-top: 42px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: #173f37;
+  color: #fff;
+}
+
+.quilombo-visit-note strong {
+  color: #f1d99c;
+}
+
+.quilombo-visit-note p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+  line-height: 1.62;
+}
+
+@media (max-width: 960px) {
+  .quilombo-hero,
+  .quilombo-panel-grid,
+  .quilombo-culture,
+  .quilombo-nature__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .quilombo-facts,
+  .quilombo-story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quilombo-panel-photo {
+    max-width: 600px;
+  }
+
+  .quilombo-video--portrait {
+    max-width: 520px;
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 650px) {
+  .quilombo-facts,
+  .quilombo-story-grid,
+  .quilombo-culture__media,
+  .quilombo-nature__gallery,
+  .quilombo-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quilombo-hero__photo img {
+    height: 430px;
+    border-radius: 24px;
+  }
+
+  .quilombo-facts article,
+  .quilombo-story-card {
+    min-height: 0;
+  }
+
+  .quilombo-culture,
+  .quilombo-nature,
+  .quilombo-gallery {
+    margin-top: 58px;
+    padding-top: 52px;
+  }
+
+  .quilombo-culture__media img,
+  .quilombo-nature__gallery img,
+  .quilombo-gallery__grid img {
+    height: 340px;
+    min-height: 0;
+  }
+
+  .quilombo-video--portrait {
+    max-width: none;
+    min-height: 520px;
+  }
+
+  .quilombo-visit-note {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* =========================================================
+   FOTO DA FONTE DO TERERÉ
+   Substitui o antigo card gráfico verde.
+   ========================================================= */
+.terere-photo {
+  margin: 0;
+  align-self: stretch;
+}
+
+.terere-photo button {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(390px, 46vw, 560px);
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 36px;
+  background: #d9e8e5;
+  cursor: zoom-in;
+  box-shadow: 0 28px 60px rgba(6, 70, 83, .2);
+}
+
+.terere-photo button::after {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  content: "ampliar";
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(4, 42, 49, .72);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(7px);
+}
+
+.terere-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  transition: transform .35s ease;
+}
+
+.terere-photo button:hover img,
+.terere-photo button:focus-visible img {
+  transform: scale(1.025);
+}
+
+.terere-photo figcaption {
+  margin-top: 10px;
+  padding-inline: 4px;
+  color: #657a7e;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .terere-photo {
+    max-width: 660px;
+  }
+
+  .terere-photo button {
+    height: clamp(430px, 82vw, 650px);
+  }
+}
+
+@media (max-width: 620px) {
+  .terere-photo button {
+    height: 480px;
+    border-radius: 24px;
+  }
+
+  .terere-photo button::after {
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terere-photo img {
+    transition: none;
+  }
+}
+
+
 @media (max-width: 900px) {
   .ilhota-intro__grid, .terere-grid, .archive-heading, .archive-story, .archive-story--reverse, .sport-grid, .sources-grid { grid-template-columns: 1fr; }
   .ilhota-hero__facts { grid-template-columns: repeat(3, minmax(0,1fr)); }
