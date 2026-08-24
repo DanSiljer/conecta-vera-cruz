@@ -105,7 +105,7 @@
             <div class="cv-footer__column">
               <h2>Participe</h2>
               <p>Conheça o projeto, compartilhe memórias e ajude a valorizar as histórias do município.</p>
-              <a class="cv-footer__button" href="${url("nossa-historia.html")}">Conheça o projeto</a>
+              <a class="cv-footer__button" href="${url("o-projeto.html")}">Conheça o projeto</a>
             </div>
           </div>
 

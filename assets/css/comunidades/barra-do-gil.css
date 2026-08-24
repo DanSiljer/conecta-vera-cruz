@@ -491,67 +491,9 @@
     800 2.1rem/1.05 Georgia,
     serif;
 }
-.bdg-whale__gallery {
-  display: grid;
-  gap: 16px;
-}
-.bdg-whale__gallery figure {
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.16);
-}
-.bdg-whale__gallery img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-height: 360px;
-  object-fit: cover;
-  background: rgba(255, 255, 255, 0.05);
-}
-.bdg-whale__gallery figcaption {
-  padding: 12px 14px 14px;
-  color: rgba(255, 255, 255, 0.83);
-  font-size: 0.79rem;
-  line-height: 1.55;
-}
-.bdg-whale__caption-note {
-  margin: 0;
-  padding: 16px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.76);
-  line-height: 1.65;
-}
 .bdg-whale__content p {
   color: rgba(255, 255, 255, 0.78);
   line-height: 1.75;
-}
-.bdg-whale__highlights {
-  display: grid;
-  gap: 10px;
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.bdg-whale__highlights li {
-  padding: 14px 16px;
-  border-left: 3px solid #ffe39b;
-  border-radius: 0 14px 14px 0;
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.6;
-}
-.bdg-whale__highlights strong {
-  color: #ffe39b;
-}
-.bdg-whale__source {
-  margin-top: 18px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.9rem;
 }
 .bdg-whale__facts {
   display: grid;
@@ -838,45 +780,115 @@
   padding: 90px 0 100px;
   background: #f6f2e9;
 }
+
 .sources-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
-  gap: 60px;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(36px, 4vw, 64px);
   align-items: start;
 }
+
+.sources-grid > div {
+  min-width: 0;
+}
+
 .sources-grid > div:first-child {
   position: sticky;
   top: 90px;
+  max-width: 520px;
 }
+
+/* Título específico desta seção:
+   menor que os outros H2 para não invadir os cards */
+.bdg-sources .sources-grid h2 {
+  max-width: 500px;
+  margin: 12px 0 22px;
+  color: var(--bdg-navy);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, 3.7vw, 3.65rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
 .sources-grid > div:first-child p {
+  max-width: 470px;
+  margin: 0;
   color: var(--bdg-muted);
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.72;
 }
+
 .sources-list {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  min-width: 0;
 }
+
 .sources-list article {
-  padding: 22px 24px;
+  min-width: 0;
+  padding: 24px 28px;
   border: 1px solid #e1ddd2;
-  border-radius: 18px;
+  border-radius: 20px;
   background: #fff;
 }
+
 .sources-list strong {
   display: block;
   color: var(--bdg-navy);
   font:
-    800 1.15rem Georgia,
+    800 1.15rem/1.3 Georgia,
     serif;
 }
+
 .sources-list p {
-  margin: 7px 0;
+  margin: 8px 0 12px;
   color: var(--bdg-muted);
-  line-height: 1.58;
+  line-height: 1.6;
 }
+
 .sources-list a {
+  display: inline-flex;
   color: var(--bdg-green);
   font-weight: 900;
+}
+
+/* Antes do layout ficar apertado, empilha a seção. */
+@media (max-width: 1180px) {
+  .sources-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .sources-grid > div:first-child {
+    position: static;
+    max-width: 760px;
+  }
+
+  .bdg-sources .sources-grid h2 {
+    max-width: 760px;
+    font-size: clamp(2.7rem, 6vw, 4rem);
+  }
+
+  .sources-grid > div:first-child p {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 720px) {
+  .bdg-sources {
+    padding: 68px 0 76px;
+  }
+
+  .bdg-sources .sources-grid h2 {
+    font-size: clamp(2.45rem, 12vw, 3.2rem);
+    line-height: 1;
+  }
+
+  .sources-list article {
+    padding: 21px 20px;
+  }
 }
 
 .bdg-lightbox {
@@ -1014,9 +1026,8 @@
   .bdg-whale__facts {
     grid-template-columns: 1fr;
   }
-  .bdg-whale__gallery img {
-    max-height: none;
-    min-height: 220px;
+  .bdg-whale__visual {
+    min-height: 310px;
   }
   .bdg-timeline__list::before {
     left: 18px;
