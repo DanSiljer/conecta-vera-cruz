@@ -1,0 +1,58 @@
+/* =========================================================
+   CRÉDITOS VISÍVEIS NAS IMAGENS DOS CARDS
+   ========================================================= */
+.bairro-card__media {
+  position: relative !important;
+  display: block !important;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+.bairro-card__media > img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+}
+
+.bairro-card__credit {
+  position: absolute !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  left: auto !important;
+  z-index: 20 !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  max-width: calc(100% - 20px);
+  padding: 6px 10px !important;
+
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: rgba(0, 34, 50, .78) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .24);
+
+  color: #ffffff !important;
+  font-size: .68rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  text-align: right;
+  text-decoration: none !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+@media (max-width: 600px) {
+  .bairro-card__credit {
+    right: 8px !important;
+    bottom: 8px !important;
+    max-width: calc(100% - 16px);
+    padding: 5px 8px !important;
+    border-radius: 9px;
+    font-size: .61rem !important;
+  }
+}

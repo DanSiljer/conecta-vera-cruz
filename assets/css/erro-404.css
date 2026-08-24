@@ -1,0 +1,7 @@
+/* PÁGINA: ERRO 404 */
+.page-404 { min-height: 100vh; background: linear-gradient(180deg, #f4fbf7, #fffdf7); }
+.page-hero { min-height: 58vh; display: grid; place-items: center; padding: 90px 0 65px; text-align: center; }
+.page-hero .container { max-width: 760px; }
+.page-hero h1 { margin: 12px 0 14px; color: var(--green-dark); font-family: Georgia, serif; font-size: clamp(3rem,8vw,6.5rem); line-height: 1; }
+.page-hero p { margin: 0 auto 26px; color: var(--muted); font-size: 1.08rem; }
+@media (max-width: 720px) { .page-hero { padding: 65px 0 45px; } }

@@ -1,0 +1,871 @@
+/* =========================================================
+   PÁGINA: NOSSA HISTÓRIA
+   Escola Municipal Luís Eduardo Magalhães + Conecta Vera Cruz
+   ========================================================= */
+
+.page-nossa-historia {
+  --story-blue: #06356b;
+  --story-blue-deep: #03284f;
+  --story-green: #08794c;
+  --story-green-light: #0d9b67;
+  --story-mint: #eaf8f0;
+  --story-sand: #fff8e9;
+  --story-ink: #26343a;
+  --story-muted: #667279;
+  --story-shadow: 0 20px 54px rgba(4, 47, 102, .14);
+  background: #fffdf8;
+  color: var(--story-ink);
+}
+
+.page-nossa-historia main {
+  overflow: hidden;
+}
+
+.school-banner {
+  width: 100%;
+  background: #eef6fb;
+}
+
+.school-banner img {
+  width: 100%;
+  height: auto;
+  max-height: 760px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.story-menu-wrap {
+  position: relative;
+  z-index: 20;
+  margin-top: -26px;
+}
+
+.story-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px;
+  border: 1px solid rgba(215, 229, 220, .8);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: var(--story-shadow);
+}
+
+.story-menu a {
+  padding: 10px 15px;
+  border-radius: 999px;
+  background: var(--story-mint);
+  color: var(--story-green);
+  font-size: .86rem;
+  font-weight: 850;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.story-menu a:hover,
+.story-menu a:focus-visible {
+  color: #fff;
+  background: var(--story-green);
+  transform: translateY(-2px);
+}
+
+.story-opening {
+  padding: 92px 0 72px;
+}
+
+.story-opening__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(360px, .96fr);
+  gap: 54px;
+  align-items: center;
+}
+
+.story-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--story-mint);
+  color: var(--story-green);
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.story-opening h2,
+.story-timeline h2,
+.story-heading h2,
+.project-copy h2,
+.authors-section h2,
+.story-final h2 {
+  margin: 17px 0 0;
+  color: var(--story-blue);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, 5vw, 4.8rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+
+.story-opening h2 span {
+  color: var(--story-green);
+}
+
+.story-lead {
+  margin: 24px 0 0;
+  color: var(--story-muted);
+  font-size: 1.06rem;
+  line-height: 1.8;
+}
+
+.story-highlight {
+  margin-top: 24px;
+  padding: 20px 22px;
+  border-left: 5px solid #25a267;
+  border-radius: 0 16px 16px 0;
+  background: var(--story-mint);
+  color: var(--story-blue);
+  font-weight: 750;
+  line-height: 1.65;
+}
+
+.school-photo {
+  position: relative;
+  margin: 0;
+}
+
+.school-photo img {
+  width: 100%;
+  height: 450px;
+  border: 8px solid #fff;
+  border-radius: 28px;
+  object-fit: cover;
+  box-shadow: var(--story-shadow);
+}
+
+.school-photo figcaption {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  max-width: calc(100% - 170px);
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(3, 40, 79, .86);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 750;
+  backdrop-filter: blur(8px);
+}
+
+.school-year {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  display: grid;
+  width: 122px;
+  height: 122px;
+  place-items: center;
+  padding: 13px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  background: var(--story-green);
+  color: #fff;
+  text-align: center;
+  box-shadow: var(--story-shadow);
+}
+
+.school-year strong {
+  display: block;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.school-year small {
+  display: block;
+  margin-top: 4px;
+  font-size: .67rem;
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+.story-numbers {
+  padding: 0 0 82px;
+}
+
+.story-numbers__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.story-numbers article {
+  min-height: 142px;
+  padding: 24px 18px;
+  border: 1px solid #dce9e3;
+  border-radius: 19px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(4, 47, 102, .08);
+}
+
+.story-numbers strong {
+  display: block;
+  color: var(--story-green);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+  line-height: 1.08;
+}
+
+.story-numbers span {
+  display: block;
+  margin-top: 9px;
+  color: var(--story-muted);
+  font-size: .84rem;
+  font-weight: 720;
+  line-height: 1.4;
+}
+
+.story-timeline {
+  padding: 96px 0;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(14, 162, 110, .25), transparent 34%),
+    linear-gradient(145deg, #052d61, #075b67);
+  color: #fff;
+}
+
+.story-kicker {
+  display: block;
+  color: #7ee3ad;
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.story-timeline h2 {
+  max-width: 850px;
+  color: #fff;
+}
+
+.story-section-intro {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: 1rem;
+}
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 42px;
+}
+
+.timeline-card {
+  position: relative;
+  min-height: 300px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 21px;
+  background: rgba(255, 255, 255, .08);
+  overflow: hidden;
+}
+
+.timeline-card::after {
+  content: "";
+  position: absolute;
+  right: -35px;
+  bottom: -55px;
+  width: 150px;
+  height: 150px;
+  border: 25px solid rgba(255, 255, 255, .04);
+  border-radius: 50%;
+}
+
+.timeline-card b {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 50%;
+  background: #8de6b6;
+  color: #052d61;
+  font-size: .82rem;
+}
+
+.timeline-card > span {
+  display: block;
+  margin-top: 18px;
+  color: #a8f0c7;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.timeline-card h3 {
+  margin: 7px 0 0;
+  color: #fff;
+  font-size: 1.24rem;
+  line-height: 1.2;
+}
+
+.timeline-card p {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, .75);
+  font-size: .89rem;
+  line-height: 1.65;
+}
+
+.territory-section {
+  padding: 98px 0;
+  background: #fffdf8;
+}
+
+.story-heading {
+  max-width: 850px;
+  margin-bottom: 40px;
+}
+
+.story-heading h2,
+.project-copy h2,
+.authors-section h2 {
+  font-size: clamp(2.35rem, 4.5vw, 4rem);
+  line-height: 1.04;
+}
+
+.story-heading p,
+.project-copy > p {
+  margin: 18px 0 0;
+  color: var(--story-muted);
+  line-height: 1.75;
+}
+
+.territory-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.territory-card {
+  position: relative;
+  display: grid;
+  min-height: 560px;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: var(--story-shadow);
+}
+
+.territory-card--faith {
+  grid-column: span 4;
+}
+
+.territory-card--culture,
+.territory-card--sea {
+  grid-column: span 4;
+}
+
+.territory-card figure {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.territory-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+
+.territory-card--faith img {
+  object-position: center 38%;
+}
+
+.territory-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .04) 32%, rgba(2, 30, 55, .92) 100%);
+}
+
+.territory-card > div {
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  padding: 28px;
+  color: #fff;
+}
+
+.territory-card > div > span {
+  color: #ffdb68;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.territory-card h3 {
+  margin: 8px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.68rem;
+  line-height: 1.08;
+}
+
+.territory-card p {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, .82);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.territory-card:hover img {
+  transform: scale(1.045);
+}
+
+.project-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f6fbf8, #fffdf8);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr);
+  gap: 52px;
+  align-items: center;
+}
+
+.project-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+
+.project-collage figure {
+  position: relative;
+  min-height: 240px;
+  margin: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 34px rgba(4, 47, 102, .12);
+}
+
+.project-collage__wide {
+  grid-column: 1 / -1;
+  min-height: 330px !important;
+}
+
+.project-collage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-collage figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 46px 16px 14px;
+  background: linear-gradient(transparent, rgba(0, 31, 61, .9));
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 850;
+}
+
+.project-copy .story-kicker,
+.authors-section .story-kicker {
+  color: var(--story-green);
+}
+
+.project-steps {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.project-steps article {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #efe4c8;
+  border-radius: 17px;
+  background: var(--story-sand);
+}
+
+.project-steps b {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--story-green);
+  color: #fff;
+  font-size: .78rem;
+}
+
+.project-steps h3 {
+  margin: 0;
+  color: var(--story-blue);
+  font-size: 1rem;
+}
+
+.project-steps p {
+  margin: 4px 0 0;
+  color: var(--story-muted);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+.authors-section {
+  padding: 96px 0;
+  background: linear-gradient(135deg, var(--story-mint), #eaf4ff);
+}
+
+.authors-section h2 {
+  max-width: 760px;
+}
+
+.authors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 19px;
+  margin-top: 36px;
+}
+
+.author-card {
+  position: relative;
+  min-height: 310px;
+  padding: 34px;
+  border-radius: 26px;
+  color: #fff;
+  overflow: hidden;
+}
+
+.author-card::after {
+  content: "";
+  position: absolute;
+  right: -50px;
+  bottom: -70px;
+  width: 230px;
+  height: 230px;
+  border: 38px solid rgba(255, 255, 255, .07);
+  border-radius: 50%;
+}
+
+.author-card--students {
+  background: linear-gradient(145deg, #08794c, #0a9c68);
+}
+
+.author-card--teacher {
+  background: linear-gradient(145deg, #06356b, #0c68ae);
+}
+
+.author-card > span {
+  display: block;
+  color: rgba(255, 255, 255, .35);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: .8;
+}
+
+.author-card h3 {
+  position: relative;
+  z-index: 2;
+  margin: 28px 0 0;
+  font-size: 1.55rem;
+}
+
+.author-card p {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, .82);
+  line-height: 1.65;
+}
+
+.author-card strong {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin-top: 22px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 999px;
+  font-size: .75rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.story-final {
+  padding: 78px 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, .15), transparent 28%),
+    linear-gradient(120deg, #08794c, #075b67);
+  color: #fff;
+}
+
+.story-final__grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 34px;
+  align-items: center;
+  max-width: 980px;
+}
+
+.story-final img {
+  width: 220px;
+  padding: 14px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: var(--story-shadow);
+}
+
+.story-final span {
+  display: block;
+  color: #b9f2d1;
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.story-final h2 {
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.story-final p {
+  max-width: 680px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, .82);
+}
+
+.story-final__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  background: #ffcf3f;
+  color: #06356b;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .14);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.story-final__button span {
+  color: inherit;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.story-final__button:hover {
+  background: #ffdf77;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1020px) {
+  .story-opening__grid,
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .school-photo {
+    max-width: 760px;
+  }
+
+  .story-numbers__grid,
+  .timeline-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .territory-card--faith,
+  .territory-card--culture,
+  .territory-card--sea {
+    grid-column: span 6;
+  }
+
+  .territory-card--sea {
+    grid-column: 3 / span 8;
+  }
+}
+
+@media (max-width: 720px) {
+  .school-banner img {
+    min-height: 270px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .story-menu-wrap {
+    margin-top: -14px;
+  }
+
+  .story-menu {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .story-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .story-menu a {
+    flex: 0 0 auto;
+  }
+
+  .story-opening {
+    padding: 70px 0 58px;
+  }
+
+  .story-opening__grid {
+    gap: 34px;
+  }
+
+  .story-opening h2,
+  .story-timeline h2,
+  .story-heading h2,
+  .project-copy h2,
+  .authors-section h2 {
+    font-size: clamp(2.15rem, 12vw, 3.35rem);
+  }
+
+  .school-photo img {
+    height: 330px;
+    border-width: 5px;
+    border-radius: 22px;
+  }
+
+  .school-photo figcaption {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 130px);
+    font-size: .7rem;
+  }
+
+  .school-year {
+    left: 12px;
+    bottom: 12px;
+    width: 100px;
+    height: 100px;
+    border-width: 4px;
+  }
+
+  .story-numbers {
+    padding-bottom: 62px;
+  }
+
+  .story-numbers__grid,
+  .timeline-grid,
+  .authors-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-timeline,
+  .territory-section,
+  .project-section,
+  .authors-section {
+    padding: 72px 0;
+  }
+
+  .timeline-card {
+    min-height: auto;
+  }
+
+  .territory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .territory-card--faith,
+  .territory-card--culture,
+  .territory-card--sea {
+    grid-column: auto;
+  }
+
+  .territory-card {
+    min-height: 510px;
+  }
+
+  .project-collage {
+    grid-template-columns: 1fr;
+  }
+
+  .project-collage__wide {
+    grid-column: auto;
+  }
+
+  .project-collage figure,
+  .project-collage__wide {
+    min-height: 255px !important;
+  }
+
+  .author-card {
+    min-height: 280px;
+    padding: 27px;
+  }
+
+  .story-final {
+    padding: 66px 0;
+  }
+
+  .story-final__grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .story-final img {
+    width: 190px;
+    margin: auto;
+  }
+
+  .story-final__button {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 460px) {
+  .school-banner img {
+    min-height: 225px;
+  }
+
+  .story-highlight {
+    padding: 17px;
+  }
+
+  .story-numbers article {
+    min-height: 124px;
+  }
+
+  .territory-card {
+    min-height: 460px;
+  }
+
+  .territory-card > div {
+    padding: 22px;
+  }
+
+  .territory-card h3 {
+    font-size: 1.45rem;
+  }
+
+  .project-steps article {
+    grid-template-columns: 44px 1fr;
+  }
+
+  .project-steps b {
+    width: 44px;
+    height: 44px;
+  }
+}

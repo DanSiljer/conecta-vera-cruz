@@ -1,0 +1,589 @@
+/* ==========================================================
+   MAPA-JOGO DA ILHA DE ITAPARICA
+   VERSÃO 3
+   Corrige alinhamento, sobreposição e funcionamento do jogo.
+   ========================================================== */
+
+.missao-aprender-app .island-map-game {
+  position: relative;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 0 0, rgba(19, 121, 91, .09), transparent 25rem),
+    radial-gradient(circle at 100% 100%, rgba(34, 100, 229, .08), transparent 24rem),
+    #ffffff;
+}
+
+.missao-aprender-app .island-map-game__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.missao-aprender-app .island-map-game__heading h2 {
+  margin: 8px 0 10px;
+  color: var(--ink, #182033);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+
+.missao-aprender-app .island-map-game__heading p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted, #667085);
+  line-height: 1.7;
+}
+
+.missao-aprender-app .island-map-game__mode {
+  display: inline-flex;
+  padding: 5px;
+  border: 1px solid var(--line, #e6e9ef);
+  border-radius: 16px;
+  background: #f4f6fa;
+}
+
+.missao-aprender-app .island-map-game__mode button {
+  min-width: 104px;
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 12px;
+  color: #596273;
+  background: transparent;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.missao-aprender-app .island-map-game__mode button.is-active {
+  color: #fff;
+  background: linear-gradient(135deg, #13795b, #2264e5);
+  box-shadow: 0 10px 22px rgba(34, 100, 229, .18);
+}
+
+.missao-aprender-app .island-map-game__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.48fr) minmax(300px, .52fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.missao-aprender-app .island-map-game__board,
+.missao-aprender-app .island-map-game__panel {
+  min-width: 0;
+  border: 1px solid #e0e6ed;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(24, 32, 51, .08);
+}
+
+.missao-aprender-app .island-map-game__board {
+  padding: 16px;
+}
+
+.missao-aprender-app .island-map-game__toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.missao-aprender-app .map-status-chip {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #e3e8ef;
+  border-radius: 15px;
+  background: #f8fafc;
+}
+
+.missao-aprender-app .map-status-chip span,
+.missao-aprender-app .map-status-chip strong {
+  display: block;
+}
+
+.missao-aprender-app .map-status-chip span {
+  color: #7a8392;
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.missao-aprender-app .map-status-chip strong {
+  margin-top: 3px;
+  overflow: hidden;
+  color: #182033;
+  font-size: .88rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+ * O quadro fica sempre quadrado, exatamente como a imagem 1266 × 1266.
+ * Isso mantém os marcadores alinhados em qualquer largura de tela.
+ */
+.missao-aprender-app .island-map-game__map {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #dfe6ed;
+  border-radius: 20px;
+  background: #f7fbfd;
+  isolation: isolate;
+}
+
+.missao-aprender-app .island-map-game__map > img {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.missao-aprender-app .island-map-game__hotspots {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+}
+
+/*
+ * Marcadores menores para não cobrir nomes, estradas ou localidades.
+ */
+.missao-aprender-app .map-hotspot {
+  position: absolute;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  place-items: center;
+  color: #fff;
+  background: #e7684d;
+  box-shadow:
+    0 0 0 2px rgba(24, 32, 51, .20),
+    0 5px 13px rgba(24, 32, 51, .28);
+  font-size: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition:
+    transform .16s ease,
+    box-shadow .16s ease,
+    background .16s ease;
+}
+
+.missao-aprender-app .map-hotspot::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+/*
+ * Os nomes não ficam permanentemente soltos sobre o mapa.
+ * Aparecem somente ao passar o mouse, usar o teclado ou selecionar.
+ */
+.missao-aprender-app .map-hotspot::after {
+  position: absolute;
+  z-index: 12;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  min-width: max-content;
+  max-width: 180px;
+  padding: 6px 9px;
+  border: 1px solid rgba(24, 32, 51, .12);
+  border-radius: 9px;
+  color: #182033;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 8px 20px rgba(24, 32, 51, .16);
+  content: attr(data-label);
+  font-size: .67rem;
+  font-weight: 900;
+  line-height: 1.2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  white-space: nowrap;
+  transition: opacity .16s ease, transform .16s ease;
+}
+
+.missao-aprender-app .map-hotspot:hover,
+.missao-aprender-app .map-hotspot:focus-visible,
+.missao-aprender-app .map-hotspot.is-selected {
+  z-index: 9;
+  background: #2264e5;
+  box-shadow:
+    0 0 0 5px rgba(34, 100, 229, .18),
+    0 8px 18px rgba(24, 32, 51, .30);
+  transform: translate(-50%, -50%) scale(1.18);
+}
+
+.missao-aprender-app .map-hotspot:hover::after,
+.missao-aprender-app .map-hotspot:focus-visible::after,
+.missao-aprender-app .map-hotspot.is-selected::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.missao-aprender-app .map-hotspot.is-correct {
+  z-index: 10;
+  background: #14955f;
+  animation: mapCorrect .55s ease;
+}
+
+.missao-aprender-app .map-hotspot.is-wrong {
+  z-index: 10;
+  background: #d94d5c;
+  animation: mapWrong .42s ease;
+}
+
+.missao-aprender-app .map-hotspot:disabled {
+  cursor: default;
+}
+
+@keyframes mapCorrect {
+  50% { transform: translate(-50%, -50%) scale(1.45); }
+}
+
+@keyframes mapWrong {
+  25%, 75% { transform: translate(-62%, -50%); }
+  50% { transform: translate(-38%, -50%); }
+}
+
+.missao-aprender-app .island-map-game__target {
+  position: absolute;
+  z-index: 15;
+  top: 14px;
+  right: 14px;
+  max-width: min(300px, calc(100% - 28px));
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: 15px;
+  color: #fff;
+  background: rgba(24, 32, 51, .90);
+  box-shadow: 0 16px 35px rgba(24, 32, 51, .24);
+  backdrop-filter: blur(12px);
+}
+
+.missao-aprender-app .island-map-game__target span,
+.missao-aprender-app .island-map-game__target strong,
+.missao-aprender-app .island-map-game__target small {
+  display: block;
+}
+
+.missao-aprender-app .island-map-game__target span {
+  color: #f8c94c;
+  font-size: .64rem;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+.missao-aprender-app .island-map-game__target strong {
+  margin: 3px 0;
+  font-size: 1.15rem;
+}
+
+.missao-aprender-app .island-map-game__target small {
+  color: rgba(255, 255, 255, .78);
+  line-height: 1.45;
+}
+
+.missao-aprender-app .island-map-game__source {
+  margin: 12px 4px 0;
+  color: #7a8392;
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.missao-aprender-app .island-map-game__panel {
+  position: sticky;
+  top: calc(var(--cv-header-height, 72px) + 76px);
+  display: grid;
+  gap: 14px;
+  padding: 17px;
+}
+
+.missao-aprender-app .map-place-card,
+.missao-aprender-app .map-challenge-settings,
+.missao-aprender-app .map-feedback {
+  padding: 18px;
+  border: 1px solid #e0e6ed;
+  border-radius: 18px;
+  background: #f9fbfd;
+}
+
+.missao-aprender-app .map-place-card__eyebrow,
+.missao-aprender-app .map-challenge-settings__label {
+  color: #13795b;
+  font-size: .67rem;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+.missao-aprender-app .map-place-card h3 {
+  margin: 7px 0 8px;
+  color: #182033;
+  font-size: 1.42rem;
+  line-height: 1.1;
+}
+
+.missao-aprender-app .map-place-card > p {
+  margin: 0;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.missao-aprender-app .map-place-card dl {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+.missao-aprender-app .map-place-card dl div {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.missao-aprender-app .map-place-card dt {
+  color: #7a8392;
+  font-size: .66rem;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.missao-aprender-app .map-place-card dd {
+  margin: 2px 0 0;
+  color: #263247;
+  font-size: .84rem;
+  font-weight: 850;
+}
+
+.missao-aprender-app .map-challenge-settings {
+  display: grid;
+  gap: 12px;
+}
+
+.missao-aprender-app .map-challenge-settings label {
+  display: grid;
+  gap: 6px;
+}
+
+.missao-aprender-app .map-challenge-settings .button,
+.missao-aprender-app #resetMapGame {
+  width: 100%;
+}
+
+.missao-aprender-app .map-feedback strong,
+.missao-aprender-app .map-feedback p {
+  display: block;
+}
+
+.missao-aprender-app .map-feedback strong {
+  color: #182033;
+}
+
+.missao-aprender-app .map-feedback p {
+  margin: 4px 0 0;
+  color: #667085;
+  line-height: 1.55;
+}
+
+.missao-aprender-app .map-feedback.is-success {
+  border-color: #9ed8bd;
+  background: #edf9f3;
+}
+
+.missao-aprender-app .map-feedback.is-error {
+  border-color: #f0b3ba;
+  background: #fff1f3;
+}
+
+.missao-aprender-app .island-map-game__how {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.missao-aprender-app .island-map-game__how article {
+  display: flex;
+  gap: 13px;
+  padding: 17px;
+  border: 1px solid #e2e7ee;
+  border-radius: 17px;
+  background: #f9fbfd;
+}
+
+.missao-aprender-app .island-map-game__how article > span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #13795b, #2264e5);
+  font-weight: 950;
+}
+
+.missao-aprender-app .island-map-game__how h3 {
+  margin: 0;
+  color: #182033;
+  font-size: 1rem;
+}
+
+.missao-aprender-app .island-map-game__how p {
+  margin: 3px 0 0;
+  color: #667085;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1040px) {
+  .missao-aprender-app .island-map-game__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .island-map-game__panel {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .missao-aprender-app #resetMapGame {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .missao-aprender-app .island-map-game__heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .missao-aprender-app .island-map-game__mode {
+    width: 100%;
+  }
+
+  .missao-aprender-app .island-map-game__mode button {
+    flex: 1;
+  }
+
+  .missao-aprender-app .island-map-game__toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .island-map-game__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .island-map-game__how {
+    grid-template-columns: 1fr;
+  }
+
+  .missao-aprender-app .map-hotspot {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .missao-aprender-app .island-map-game__board,
+  .missao-aprender-app .island-map-game__panel {
+    border-radius: 18px;
+  }
+
+  .missao-aprender-app .island-map-game__board {
+    padding: 10px;
+  }
+
+  .missao-aprender-app .island-map-game__map {
+    border-radius: 15px;
+  }
+
+  .missao-aprender-app .map-hotspot::after {
+    bottom: calc(100% + 6px);
+    max-width: 130px;
+    font-size: .6rem;
+  }
+}
+
+@media print {
+  .missao-aprender-app .island-map-game__mode,
+  .missao-aprender-app .island-map-game__panel,
+  .missao-aprender-app .island-map-game__hotspots,
+  .missao-aprender-app .island-map-game__target {
+    display: none !important;
+  }
+
+  .missao-aprender-app .island-map-game__layout {
+    display: block;
+  }
+}
+
+
+/* ==========================================================
+   CORREÇÃO V4: ALVO DO DESAFIO FORA DO MAPA
+   ========================================================== */
+.missao-aprender-app .map-target-panel {
+  position: static;
+  display: grid;
+  gap: 5px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 18px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 100% 0, rgba(248, 201, 76, .20), transparent 10rem),
+    linear-gradient(135deg, #182033, #073d55);
+  box-shadow: 0 16px 32px rgba(24, 32, 51, .16);
+}
+
+.missao-aprender-app .map-target-panel[hidden] {
+  display: none !important;
+}
+
+.missao-aprender-app .map-target-panel span,
+.missao-aprender-app .map-target-panel strong,
+.missao-aprender-app .map-target-panel small {
+  display: block;
+}
+
+.missao-aprender-app .map-target-panel span {
+  color: #f8c94c;
+  font-size: .66rem;
+  font-weight: 950;
+  letter-spacing: .10em;
+}
+
+.missao-aprender-app .map-target-panel strong {
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.missao-aprender-app .map-target-panel small {
+  color: rgba(255, 255, 255, .80);
+  line-height: 1.5;
+}
+
+@media print {
+  .missao-aprender-app .map-target-panel {
+    display: none !important;
+  }
+}

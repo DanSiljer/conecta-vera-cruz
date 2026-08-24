@@ -1,0 +1,125 @@
+/* Destaque fixo do mural: pôr do sol em Cacha-Pregos */
+.cp-memory-item--featured {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(233, 183, 79, .42);
+  background: linear-gradient(180deg, #fffaf0 0%, #ffffff 58%);
+  box-shadow: 0 18px 40px rgba(4, 67, 80, .12);
+}
+
+.cp-memory-featured__head {
+  display: flex;
+  padding: 20px 20px 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cp-memory-featured__badge {
+  display: inline-flex;
+  margin-bottom: 8px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: #754b00;
+  background: #ffe5a7;
+  font-size: .66rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cp-memory-featured__head strong {
+  display: block;
+  max-width: 540px;
+  color: var(--cp-blue-deep, #063c5c);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.08;
+}
+
+.cp-memory-featured__sun {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 50%;
+  place-items: center;
+  color: #7b4700;
+  background: linear-gradient(145deg, #ffd063, #f29b38);
+  box-shadow: 0 10px 24px rgba(242, 155, 56, .24);
+  font-size: 1.35rem;
+}
+
+.cp-memory-featured__photo {
+  margin: 0;
+  background: #122f39;
+}
+
+.cp-memory-featured__photo img {
+  width: 100%;
+  max-height: 620px;
+  object-fit: cover;
+  object-position: center 70%;
+}
+
+.cp-memory-featured__photo figcaption {
+  padding: 9px 14px;
+  color: rgba(255,255,255,.78);
+  background: #073f4b;
+  font-size: .7rem;
+  text-align: right;
+}
+
+.cp-memory-featured__photo a {
+  color: #ffd879;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.cp-memory-featured__photo a:hover,
+.cp-memory-featured__photo a:focus-visible {
+  text-decoration: underline;
+}
+
+.cp-memory-featured__text {
+  margin: 0;
+  padding: 20px 20px 8px;
+  color: #435e5a;
+  font-size: .92rem;
+  line-height: 1.72;
+}
+
+.cp-memory-featured__tip {
+  margin: 8px 20px 20px !important;
+  padding: 14px 15px;
+  border-left: 4px solid #e9b74f;
+  border-radius: 0 13px 13px 0;
+  color: #725728 !important;
+  background: #fff6df;
+  font-size: .82rem;
+  line-height: 1.6 !important;
+}
+
+@media (max-width: 600px) {
+  .cp-memory-featured__head {
+    padding: 17px 16px 13px;
+  }
+
+  .cp-memory-featured__sun {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .cp-memory-featured__photo img {
+    max-height: 500px;
+  }
+
+  .cp-memory-featured__text {
+    padding: 17px 16px 7px;
+  }
+
+  .cp-memory-featured__tip {
+    margin: 8px 16px 17px !important;
+  }
+}

@@ -1,0 +1,8 @@
+@import url("../templates/artigo.css");
+
+/* ARTIGO: HISTORIA VERA CRUZ */
+.article-historia-vera-cruz {
+  --article-accent: #007a4d;
+  --article-accent-dark: #005f3c;
+  --article-soft: #e9f7f0;
+}

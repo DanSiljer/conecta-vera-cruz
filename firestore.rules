@@ -1,0 +1,78 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /memorias/{memoriaId} {
+      allow read: if resource.data.aprovado == true;
+
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'site',
+          'localidade',
+          'nome',
+          'texto',
+          'aprovado',
+          'curtidas',
+          'createdAt'
+        ]) &&
+        request.resource.data.site == 'Conecta Vera Cruz' &&
+        request.resource.data.localidade is string &&
+        request.resource.data.localidade.size() >= 2 &&
+        request.resource.data.localidade.size() <= 50 &&
+        request.resource.data.nome is string &&
+        request.resource.data.nome.size() >= 2 &&
+        request.resource.data.nome.size() <= 40 &&
+        request.resource.data.texto is string &&
+        request.resource.data.texto.size() >= 10 &&
+        request.resource.data.texto.size() <= 500 &&
+        request.resource.data.aprovado == true &&
+        request.resource.data.curtidas == 0 &&
+        request.resource.data.createdAt == request.time;
+
+      allow update: if
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['curtidas']) &&
+        request.resource.data.curtidas is int &&
+        request.resource.data.curtidas >= 0 &&
+        (
+          request.resource.data.curtidas == resource.data.curtidas + 1 ||
+          request.resource.data.curtidas == resource.data.curtidas - 1
+        );
+
+      allow delete: if false;
+    }
+
+    match /blogComentarios/{comentarioId} {
+      allow read: if resource.data.aprovado == true;
+
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'site',
+          'postSlug',
+          'nome',
+          'texto',
+          'parentId',
+          'parentName',
+          'aprovado',
+          'createdAt'
+        ]) &&
+        request.resource.data.site == 'Conecta Vera Cruz' &&
+        request.resource.data.postSlug is string &&
+        request.resource.data.postSlug.size() >= 2 &&
+        request.resource.data.postSlug.size() <= 120 &&
+        request.resource.data.nome is string &&
+        request.resource.data.nome.size() >= 2 &&
+        request.resource.data.nome.size() <= 50 &&
+        request.resource.data.texto is string &&
+        request.resource.data.texto.size() >= 2 &&
+        request.resource.data.texto.size() <= 220 &&
+        request.resource.data.parentId is string &&
+        request.resource.data.parentId.size() <= 120 &&
+        request.resource.data.parentName is string &&
+        request.resource.data.parentName.size() <= 50 &&
+        request.resource.data.aprovado == true &&
+        request.resource.data.createdAt == request.time;
+
+      allow update, delete: if false;
+    }
+  }
+}

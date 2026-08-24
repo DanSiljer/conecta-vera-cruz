@@ -1,0 +1,1544 @@
+/* =========================================================
+   CONECTA VERA CRUZ | PÁGINA BAIRROS E COMUNIDADES
+   Arquivo exclusivo da página bairros.html
+   ========================================================= */
+
+.page-bairros {
+  --bairros-green: #007a4d;
+  --bairros-green-dark: #00583a;
+  --bairros-green-deep: #063f31;
+  --bairros-blue: #0877bd;
+  --bairros-blue-dark: #073653;
+  --bairros-turquoise: #16b6b8;
+  --bairros-yellow: #ffc928;
+  --bairros-sand: #f6f1e7;
+  --bairros-cream: #fffdf8;
+  --bairros-ink: #15382d;
+  --bairros-muted: #65746e;
+  --bairros-line: #d8e5de;
+  --bairros-shadow: 0 22px 60px rgba(10, 70, 51, .13);
+
+  background: var(--bairros-cream);
+}
+
+.page-bairros main {
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   CARROSSEL DE PATRIMÔNIOS
+   --------------------------------------------------------- */
+
+.bairros-hero {
+  position: relative;
+  min-height: 560px;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(22, 182, 184, .25), transparent 30%),
+    linear-gradient(135deg, #0b4664, #082f4e 60%, #05283f);
+  color: #fff;
+  border-bottom: 5px solid var(--bairros-turquoise);
+}
+
+.bairros-hero__slides,
+.bairros-hero__slide {
+  position: absolute;
+  inset: 0;
+}
+
+.bairros-hero__slide {
+  display: grid;
+  align-items: end;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .7s ease, visibility .7s ease;
+}
+
+.bairros-hero__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.bairros-hero__slide > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -3;
+  transform: scale(1.015);
+  transition: transform 8s ease;
+}
+
+.bairros-hero__slide.is-active > img {
+  transform: scale(1.07);
+}
+
+.bairros-hero__slide.is-image-missing {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 201, 40, .22), transparent 26%),
+    linear-gradient(135deg, #075b60, #083b5c 62%, #062b44);
+}
+
+.bairros-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(3, 31, 36, .88) 0%, rgba(3, 31, 36, .66) 43%, rgba(3, 31, 36, .16) 72%, rgba(3, 31, 36, .28) 100%),
+    linear-gradient(0deg, rgba(2, 24, 30, .70) 0%, transparent 52%);
+}
+
+.bairros-hero__content {
+  position: relative;
+  z-index: 3;
+  padding-top: 150px;
+  padding-bottom: 104px;
+}
+
+.bairros-hero__content > * {
+  max-width: 720px;
+}
+
+.bairros-hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: max-content;
+  margin-bottom: 15px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 255, 255, .36);
+  border-radius: 999px;
+  background: rgba(5, 47, 58, .42);
+  backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, .96);
+  font-size: .73rem;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.bairros-hero__tag::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bairros-yellow);
+  box-shadow: 0 0 0 5px rgba(255, 201, 40, .18);
+}
+
+.bairros-hero h1,
+.bairros-hero h2 {
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.85rem, 6vw, 5.45rem);
+  line-height: .96;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.bairros-hero h1 strong,
+.bairros-hero h2 strong {
+  color: #ffe07a;
+  font-weight: inherit;
+}
+
+.bairros-hero__content p {
+  margin: 20px 0 26px;
+  color: rgba(255, 255, 255, .91);
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.bairros-hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--bairros-green-dark);
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 15px 32px rgba(0, 0, 0, .22);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.bairros-hero__button:hover {
+  transform: translateY(-2px);
+  background: #fff6ce;
+}
+
+.bairros-hero__button span {
+  transition: transform .2s ease;
+}
+
+.bairros-hero__button:hover span {
+  transform: translateX(4px);
+}
+
+.bairros-hero__label {
+  position: absolute;
+  top: 24px;
+  left: max(16px, calc((100% - var(--container)) / 2));
+  z-index: 8;
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 255, 255, .42);
+  border-radius: 999px;
+  background: rgba(4, 45, 63, .46);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(9px);
+}
+
+.bairros-hero__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  border-radius: 50%;
+  background: rgba(3, 40, 50, .34);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transform: translateY(-50%);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.bairros-hero__arrow:hover {
+  background: rgba(0, 122, 77, .9);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.bairros-hero__arrow--prev {
+  left: 22px;
+}
+
+.bairros-hero__arrow--next {
+  right: 22px;
+}
+
+.bairros-hero__controls {
+  position: absolute;
+  right: max(16px, calc((100% - var(--container)) / 2));
+  bottom: 26px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bairros-hero__dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.bairros-hero__dots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  transition: width .2s ease, background .2s ease;
+}
+
+.bairros-hero__dots button.is-active {
+  width: 28px;
+  background: var(--bairros-yellow);
+  border-color: var(--bairros-yellow);
+}
+
+.bairros-hero__pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid rgba(255, 255, 255, .44);
+  border-radius: 999px;
+  background: rgba(3, 40, 50, .36);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+/* ---------------------------------------------------------
+   APRESENTAÇÃO E ATALHOS
+   --------------------------------------------------------- */
+
+.bairros-intro {
+  position: relative;
+  padding: 88px 0 82px;
+  background:
+    radial-gradient(circle at 8% 28%, rgba(22, 182, 184, .08), transparent 26%),
+    var(--bairros-cream);
+}
+
+.bairros-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .65fr);
+  gap: 52px;
+  align-items: end;
+  margin-bottom: 42px;
+}
+
+.bairros-intro__text h1 {
+  max-width: 820px;
+  margin: 12px 0 18px;
+  color: var(--bairros-green-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.7rem, 5.4vw, 5rem);
+  line-height: .98;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+
+.bairros-intro__text p {
+  max-width: 790px;
+  margin: 0;
+  color: var(--bairros-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.bairros-intro__note {
+  padding: 26px;
+  border: 1px solid var(--bairros-line);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(16, 74, 53, .09);
+}
+
+.bairros-intro__note strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--bairros-blue-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.bairros-intro__note p {
+  margin: 0 0 17px;
+  color: var(--bairros-muted);
+  line-height: 1.6;
+}
+
+.bairros-intro__note span {
+  display: inline-flex;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #eaf7f1;
+  color: var(--bairros-green-dark);
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.bairros-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.bairros-shortcuts a {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 10px;
+  min-height: 78px;
+  padding: 13px 14px;
+  border: 1px solid var(--bairros-line);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--bairros-ink);
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(16, 74, 53, .06);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.bairros-shortcuts a:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 122, 77, .42);
+  box-shadow: 0 18px 34px rgba(16, 74, 53, .12);
+}
+
+.bairros-shortcuts a > span {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--bairros-green);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 900;
+}
+
+.bairros-shortcuts strong {
+  align-self: end;
+  color: var(--bairros-green-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.bairros-shortcuts small {
+  align-self: start;
+  min-width: 0;
+  color: var(--bairros-muted);
+  font-size: .69rem;
+  line-height: 1.25;
+}
+
+.bairros-shortcuts b {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  color: var(--bairros-blue);
+  font-size: 1.2rem;
+  transition: transform .2s ease;
+}
+
+.bairros-shortcuts a:hover b {
+  transform: translateX(4px);
+}
+
+/* ---------------------------------------------------------
+   DIRETÓRIO DE COMUNIDADES
+   --------------------------------------------------------- */
+
+.bairros-directory {
+  padding: 92px 0 100px;
+  background: var(--bairros-sand);
+  border-top: 1px solid #ebe2d5;
+}
+
+.bairros-section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, .65fr);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 42px;
+}
+
+.bairros-section-heading h2 {
+  max-width: 780px;
+  margin: 12px 0 0;
+  color: var(--bairros-blue-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.45rem, 4.8vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.bairros-section-heading > p {
+  margin: 0;
+  color: var(--bairros-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.bairros-cards {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.bairro-card {
+  position: relative;
+  grid-column: span 4;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(14, 92, 67, .12);
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(16, 74, 53, .10);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.bairro-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 58px rgba(16, 74, 53, .16);
+}
+
+.bairro-card--wide {
+  grid-column: span 8;
+  display: grid;
+  grid-template-columns: minmax(0, 1.24fr) minmax(300px, .76fr);
+  min-height: 390px;
+}
+
+.bairro-card--reverse .bairro-card__media {
+  order: 2;
+}
+
+.bairro-card__media {
+  position: relative;
+  display: block;
+  min-height: 230px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(255, 201, 40, .35), transparent 28%),
+    linear-gradient(135deg, #79c9db, #14826e);
+}
+
+.bairro-card--wide .bairro-card__media {
+  min-height: 100%;
+}
+
+.bairro-card__media img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  transition: transform .65s ease;
+}
+
+.bairro-card:hover .bairro-card__media img {
+  transform: scale(1.055);
+}
+
+.bairro-card__media.is-image-missing::after {
+  content: "Imagem da comunidade";
+  position: absolute;
+  inset: auto 20px 20px;
+  color: rgba(255, 255, 255, .86);
+  font-size: .8rem;
+  font-weight: 800;
+}
+
+.bairro-card__content {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 27px;
+}
+
+.bairro-card--wide .bairro-card__content {
+  justify-content: center;
+  padding: 38px;
+}
+
+.bairro-card__number {
+  position: absolute;
+  top: 16px;
+  right: 19px;
+  color: rgba(0, 122, 77, .11);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: .9;
+  pointer-events: none;
+}
+
+.bairro-card__content small {
+  position: relative;
+  z-index: 1;
+  max-width: calc(100% - 62px);
+  color: #158f79;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.bairro-card__content h3 {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 11px;
+  color: var(--bairros-green-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.bairro-card__content p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 24px;
+  color: var(--bairros-muted);
+  line-height: 1.66;
+}
+
+.bairro-card__link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  margin-top: auto;
+  color: var(--bairros-green-dark);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.bairro-card__link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  left: 0;
+  height: 2px;
+  border-radius: 99px;
+  background: var(--bairros-yellow);
+  transform: scaleX(.28);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+
+.bairro-card__link:hover::after {
+  transform: scaleX(1);
+}
+
+.bairro-card__link span {
+  transition: transform .2s ease;
+}
+
+.bairro-card__link:hover span {
+  transform: translateX(4px);
+}
+
+.bairro-card--dark {
+  background: var(--bairros-green-deep);
+  border-color: transparent;
+}
+
+.bairro-card--dark .bairro-card__content small,
+.bairro-card--dark .bairro-card__content h3,
+.bairro-card--dark .bairro-card__link {
+  color: #fff;
+}
+
+.bairro-card--dark .bairro-card__content p {
+  color: rgba(255, 255, 255, .76);
+}
+
+.bairro-card--dark .bairro-card__number {
+  color: rgba(255, 255, 255, .10);
+}
+
+.bairro-card--graphic {
+  display: grid;
+  grid-template-rows: 205px 1fr;
+  color: #fff;
+  border: 0;
+}
+
+.bairro-card__graphic {
+  position: relative;
+  overflow: hidden;
+}
+
+.bairro-card__graphic::before,
+.bairro-card__graphic::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bairro-card__graphic::before {
+  width: 240px;
+  height: 240px;
+  right: -55px;
+  top: -95px;
+  background: rgba(255, 255, 255, .14);
+}
+
+.bairro-card__graphic::after {
+  width: 150px;
+  height: 150px;
+  left: -40px;
+  bottom: -80px;
+  background: rgba(255, 201, 40, .36);
+}
+
+.bairro-card__graphic span {
+  position: absolute;
+  right: 25px;
+  bottom: 14px;
+  z-index: 2;
+  color: rgba(255, 255, 255, .82);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.bairro-card--cacha {
+  background: linear-gradient(145deg, #075470, #0a8092 52%, #08a38d);
+}
+
+.bairro-card--cacha .bairro-card__graphic {
+  background:
+    linear-gradient(150deg, transparent 45%, rgba(255, 255, 255, .12) 45% 52%, transparent 52%),
+    repeating-radial-gradient(circle at 10% 120%, transparent 0 20px, rgba(255, 255, 255, .16) 21px 24px);
+}
+
+.bairro-card--matarandiba {
+  background: linear-gradient(145deg, #7a4a15, #b56c20 47%, #d99635);
+}
+
+.bairro-card--matarandiba .bairro-card__graphic {
+  background:
+    linear-gradient(28deg, transparent 54%, rgba(255, 255, 255, .12) 55% 62%, transparent 63%),
+    radial-gradient(circle at 30% 50%, rgba(255, 226, 126, .34), transparent 28%);
+}
+
+.bairro-card--graphic .bairro-card__content {
+  background: rgba(4, 45, 46, .22);
+}
+
+.bairro-card--graphic .bairro-card__content small,
+.bairro-card--graphic .bairro-card__content h3,
+.bairro-card--graphic .bairro-card__content p,
+.bairro-card--graphic .bairro-card__link {
+  color: #fff;
+}
+
+.bairro-card--graphic .bairro-card__content p {
+  color: rgba(255, 255, 255, .84);
+}
+
+.bairro-card--graphic .bairro-card__number {
+  display: none;
+}
+
+/* ---------------------------------------------------------
+   ROTAS
+   --------------------------------------------------------- */
+
+.bairros-routes {
+  padding: 94px 0 104px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 10% 14%, rgba(22, 182, 184, .20), transparent 27%),
+    radial-gradient(circle at 86% 78%, rgba(255, 201, 40, .14), transparent 24%),
+    linear-gradient(135deg, #062f43, #073a58 58%, #064c4a);
+}
+
+.bairros-section-heading--light h2 {
+  color: #fff;
+}
+
+.bairros-section-heading--light > p {
+  color: rgba(255, 255, 255, .72);
+}
+
+.bairros-section-heading--light .eyebrow {
+  color: #85e5d7;
+}
+
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.route-card {
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .075);
+  backdrop-filter: blur(8px);
+  transition: transform .2s ease, background .2s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, .11);
+}
+
+.route-card__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: var(--bairros-yellow);
+  color: #143e3a;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.route-card h3 {
+  margin: 21px 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.85rem;
+}
+
+.route-card p {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, .74);
+  line-height: 1.65;
+}
+
+.route-card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.route-card a {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.route-card a:hover {
+  background: #fff;
+  color: var(--bairros-green-dark);
+}
+
+/* ---------------------------------------------------------
+   MURAL DE MEMÓRIAS COM FIREBASE
+   --------------------------------------------------------- */
+
+.bairros-memory {
+  padding: 92px 0 104px;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(22, 182, 184, .13), transparent 25%),
+    radial-gradient(circle at 94% 90%, rgba(255, 201, 40, .16), transparent 28%),
+    #fff8e6;
+}
+
+.bairros-memory__heading {
+  max-width: 880px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.bairros-memory__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--bairros-green);
+  font-size: .75rem;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.bairros-memory__label::before,
+.bairros-memory__label::after {
+  content: "";
+  width: 30px;
+  height: 2px;
+  border-radius: 99px;
+  background: var(--bairros-turquoise);
+}
+
+.bairros-memory h2 {
+  margin: 12px auto 14px;
+  color: var(--bairros-blue-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, 5vw, 4.45rem);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.bairros-memory__heading p {
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--bairros-muted);
+  font-size: 1.03rem;
+  line-height: 1.72;
+}
+
+.bairros-memory__layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 390px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.memory-form,
+.memory-feed {
+  border: 1px solid rgba(0, 122, 77, .13);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: 0 24px 60px rgba(44, 63, 30, .10);
+}
+
+.memory-form {
+  position: sticky;
+  top: 98px;
+  padding: 26px;
+}
+
+.memory-card__header,
+.memory-feed__header,
+.memory-item__header,
+.memory-item__footer,
+.memory-field__footer {
+  display: flex;
+  align-items: center;
+}
+
+.memory-card__header {
+  gap: 13px;
+  margin-bottom: 13px;
+}
+
+.memory-card__icon {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(145deg, var(--bairros-green), #0b9672);
+  box-shadow: 0 11px 24px rgba(0, 122, 77, .20);
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.memory-card__header small,
+.memory-feed__header small {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--bairros-green);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.memory-card__header h3,
+.memory-feed__header h3 {
+  margin: 0;
+  color: var(--bairros-blue-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  line-height: 1.08;
+}
+
+.memory-form__intro {
+  margin: 0 0 21px;
+  color: var(--bairros-muted);
+  font-size: .9rem;
+  line-height: 1.58;
+}
+
+.memory-field {
+  margin-bottom: 17px;
+}
+
+.memory-field[hidden] {
+  display: none;
+}
+
+.memory-field label,
+.memory-feed__tools label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--bairros-ink);
+  font-size: .83rem;
+  font-weight: 850;
+}
+
+.memory-field label span {
+  color: var(--bairros-muted);
+  font-size: .74rem;
+  font-weight: 500;
+}
+
+.memory-field input,
+.memory-field select,
+.memory-field textarea,
+.memory-feed__tools select {
+  width: 100%;
+  border: 1px solid #c9d9d1;
+  border-radius: 13px;
+  color: var(--bairros-ink);
+  background: #fff;
+  font: inherit;
+  font-size: .9rem;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.memory-field input,
+.memory-field select,
+.memory-feed__tools select {
+  min-height: 48px;
+  padding: 0 13px;
+}
+
+.memory-field textarea {
+  min-height: 145px;
+  padding: 12px 13px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.memory-field input:focus,
+.memory-field select:focus,
+.memory-field textarea:focus,
+.memory-feed__tools select:focus {
+  border-color: var(--bairros-green);
+  box-shadow: 0 0 0 4px rgba(0, 122, 77, .10);
+}
+
+.memory-field__footer {
+  min-height: 20px;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+  color: var(--bairros-muted);
+  font-size: .7rem;
+}
+
+.memory-warning {
+  color: #a83d38;
+}
+
+.memory-submit {
+  display: flex;
+  width: 100%;
+  min-height: 51px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 13px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--bairros-green), #0a916c);
+  box-shadow: 0 14px 28px rgba(0, 122, 77, .18);
+  cursor: pointer;
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 900;
+  transition: transform .2s ease, filter .2s ease, opacity .2s ease;
+}
+
+.memory-submit:hover:not(:disabled) {
+  filter: brightness(.94);
+  transform: translateY(-2px);
+}
+
+.memory-submit:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+  box-shadow: none;
+}
+
+.memory-privacy {
+  margin: 12px 0 0;
+  color: var(--bairros-muted);
+  font-size: .69rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.memory-status {
+  display: none;
+  margin-top: 13px;
+  padding: 11px 12px;
+  border-radius: 11px;
+  font-size: .77rem;
+  line-height: 1.45;
+}
+
+.memory-status.is-visible {
+  display: block;
+}
+
+.memory-status.is-info {
+  color: #315b52;
+  background: #edf6f2;
+}
+
+.memory-status.is-success {
+  color: #1f653d;
+  background: #e5f6e9;
+}
+
+.memory-status.is-error {
+  color: #913a35;
+  background: #fcebea;
+}
+
+.memory-feed {
+  min-width: 0;
+  padding: 27px;
+}
+
+.memory-feed__header {
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid var(--bairros-line);
+}
+
+.memory-count {
+  flex: 0 0 auto;
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: var(--bairros-green-dark);
+  background: #e9f7f0;
+  font-size: .73rem;
+  font-weight: 850;
+}
+
+.memory-feed__tools {
+  display: grid;
+  grid-template-columns: auto minmax(190px, 260px);
+  align-items: center;
+  justify-content: end;
+  gap: 12px;
+  padding: 18px 0;
+}
+
+.memory-feed__tools label {
+  margin: 0;
+  color: var(--bairros-muted);
+}
+
+.memory-list {
+  display: grid;
+  max-height: 650px;
+  gap: 13px;
+  padding-right: 5px;
+  overflow-y: auto;
+  scrollbar-color: #bdd5ca transparent;
+  scrollbar-width: thin;
+}
+
+.memory-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.memory-list::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: #bdd5ca;
+}
+
+.memory-item {
+  padding: 18px;
+  border: 1px solid #dce8e2;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(233, 247, 240, .50), transparent 44%),
+    #fff;
+  animation: memory-entry .25s ease;
+}
+
+@keyframes memory-entry {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.memory-item__header {
+  gap: 11px;
+}
+
+.memory-avatar {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(145deg, var(--bairros-blue), var(--bairros-turquoise));
+  font-size: .74rem;
+  font-weight: 900;
+}
+
+.memory-item__header > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.memory-item__header strong {
+  color: var(--bairros-ink);
+  font-size: .88rem;
+}
+
+.memory-item__header > div span {
+  color: var(--bairros-muted);
+  font-size: .68rem;
+}
+
+.memory-place {
+  max-width: 160px;
+  margin-left: auto;
+  padding: 6px 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  color: #046346;
+  background: #e8f7f0;
+  font-size: .68rem;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memory-item__text {
+  margin: 14px 0 15px;
+  color: #354941;
+  font-size: .9rem;
+  line-height: 1.68;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.memory-item__footer {
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--bairros-muted);
+  font-size: .67rem;
+}
+
+.memory-like {
+  min-height: 35px;
+  padding: 6px 11px;
+  border: 1px solid #d6e4dd;
+  border-radius: 999px;
+  color: var(--bairros-muted);
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: .73rem;
+  font-weight: 800;
+}
+
+.memory-like:hover,
+.memory-like.is-liked {
+  border-color: var(--bairros-green);
+  color: var(--bairros-green-dark);
+  background: #eaf7f1;
+}
+
+.memory-empty {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  padding: 28px;
+  border: 1px dashed #bdcec5;
+  border-radius: 17px;
+  color: var(--bairros-muted);
+  background: #fbfdfc;
+  text-align: center;
+}
+
+.memory-empty strong {
+  color: var(--bairros-blue-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+}
+
+.memory-empty span {
+  max-width: 460px;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVIDADE
+   --------------------------------------------------------- */
+
+@media (max-width: 1080px) {
+  .bairros-hero {
+    min-height: 530px;
+  }
+
+  .bairros-intro__grid,
+  .bairros-section-heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .bairros-intro__note {
+    max-width: 650px;
+  }
+
+  .bairros-shortcuts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bairro-card {
+    grid-column: span 6;
+  }
+
+  .bairro-card--wide {
+    grid-column: 1 / -1;
+  }
+
+  .route-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .route-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .bairros-memory__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .memory-form {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .bairros-hero {
+    min-height: 500px;
+  }
+
+  .bairros-hero__slide > img {
+    object-position: 55% center;
+  }
+
+  .bairros-hero__overlay {
+    background:
+      linear-gradient(0deg, rgba(2, 27, 34, .92) 0%, rgba(2, 27, 34, .70) 55%, rgba(2, 27, 34, .24) 100%);
+  }
+
+  .bairros-hero__content {
+    padding-top: 130px;
+    padding-bottom: 94px;
+  }
+
+  .bairros-hero__content p {
+    margin-top: 15px;
+    font-size: .96rem;
+  }
+
+  .bairros-hero__label {
+    top: 16px;
+    left: 12px;
+    max-width: calc(100% - 96px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .bairros-hero__arrow {
+    top: auto;
+    bottom: 22px;
+    width: 40px;
+    height: 40px;
+    transform: none;
+  }
+
+  .bairros-hero__arrow:hover {
+    transform: scale(1.05);
+  }
+
+  .bairros-hero__arrow--prev {
+    left: 12px;
+  }
+
+  .bairros-hero__arrow--next {
+    right: 12px;
+  }
+
+  .bairros-hero__controls {
+    right: 60px;
+    bottom: 29px;
+    left: 60px;
+    justify-content: center;
+  }
+
+  .bairros-hero__pause {
+    display: none;
+  }
+
+  .bairros-intro,
+  .bairros-directory,
+  .bairros-routes {
+    padding-top: 68px;
+    padding-bottom: 72px;
+  }
+
+  .bairros-intro__grid {
+    margin-bottom: 30px;
+  }
+
+  .bairros-intro__text h1 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .bairros-shortcuts {
+    grid-template-columns: 1fr;
+  }
+
+  .bairros-shortcuts a {
+    min-height: 72px;
+  }
+
+  .bairros-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .bairro-card,
+  .bairro-card--wide {
+    grid-column: 1;
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .bairro-card--reverse .bairro-card__media {
+    order: 0;
+  }
+
+  .bairro-card--wide .bairro-card__media,
+  .bairro-card__media {
+    min-height: 230px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .bairro-card--wide .bairro-card__content,
+  .bairro-card__content {
+    padding: 25px;
+  }
+
+  .bairro-card--graphic {
+    display: grid;
+    grid-template-rows: 180px 1fr;
+  }
+
+  .route-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-card:last-child {
+    grid-column: auto;
+  }
+
+  .bairros-memory {
+    padding: 66px 0 72px;
+  }
+
+  .bairros-memory__label::before,
+  .bairros-memory__label::after {
+    width: 18px;
+  }
+
+  .bairros-memory__layout {
+    gap: 18px;
+  }
+
+  .memory-form,
+  .memory-feed {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .memory-feed__header {
+    align-items: flex-start;
+  }
+
+  .memory-feed__tools {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+
+  .memory-feed__tools select {
+    max-width: none;
+  }
+
+  .memory-list {
+    max-height: 720px;
+  }
+}
+
+@media (max-width: 430px) {
+  .bairros-hero {
+    min-height: 510px;
+  }
+
+  .bairros-hero h1,
+  .bairros-hero h2 {
+    font-size: clamp(2.35rem, 12vw, 3.15rem);
+  }
+
+  .bairros-hero__tag {
+    font-size: .64rem;
+  }
+
+  .bairros-hero__button {
+    width: 100%;
+  }
+
+  .bairros-intro__note {
+    padding: 21px;
+  }
+
+  .bairros-section-heading h2 {
+    font-size: 2.35rem;
+  }
+
+  .bairro-card__content h3 {
+    font-size: 2rem;
+  }
+
+  .bairros-memory h2 {
+    font-size: 2.45rem;
+  }
+
+  .bairros-memory__heading {
+    margin-bottom: 25px;
+  }
+
+  .memory-feed__header {
+    flex-direction: column;
+  }
+
+  .memory-place {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bairros-hero__slide,
+  .bairros-hero__slide > img,
+  .bairro-card,
+  .bairro-card__media img {
+    transition: none !important;
+  }
+}

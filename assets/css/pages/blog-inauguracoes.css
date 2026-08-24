@@ -1,0 +1,9 @@
+@import url("blog-artigo-base.css");
+.page-blog-article {
+  --article-accent: #208b38;
+  --article-accent-dark: #0c5226;
+  --article-soft: #edf8e9;
+}
+.article-hero__image img {
+  object-position: center top;
+}

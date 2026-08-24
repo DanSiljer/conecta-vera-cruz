@@ -1,0 +1,8 @@
+@import url("../templates/artigo.css");
+
+/* ARTIGO: MARISCAGEM PINAUNA */
+.article-mariscagem-pinauna {
+  --article-accent: #0877bd;
+  --article-accent-dark: #045783;
+  --article-soft: #eaf6fc;
+}

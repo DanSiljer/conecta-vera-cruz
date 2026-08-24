@@ -1,0 +1,8 @@
+@import url("../templates/artigo.css");
+
+/* ARTIGO: FORNO DA PENHA */
+.article-forno-da-penha {
+  --article-accent: #d28b19;
+  --article-accent-dark: #8d5700;
+  --article-soft: #fff4da;
+}
