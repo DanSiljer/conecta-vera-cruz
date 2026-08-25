@@ -4,12 +4,7 @@
 const root = document.getElementById("mariaBookFlipbook");
 if (!root) return;
 
-const pages = [
-  {
-    src: "assets/img/livros/maria-felipa/capa.png",
-    title: "Capa",
-    alt: "Capa do livro infantil Quem sou eu? Maria Felipa"
-  },
+
 
   ...Array.from({ length: 20 }, function (_, index) {
     const number = String(index + 1).padStart(2, "0");
