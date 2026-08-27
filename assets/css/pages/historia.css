@@ -998,3 +998,406 @@
     padding: 18px 50px 18px 18px;
   }
 }
+
+/* =========================================================
+   SAVEIROS · QUANDO O MAR ERA A ESTRADA
+   ========================================================= */
+.history-page .saveiros-story {
+  position: relative;
+  overflow: hidden;
+  padding-top: 78px !important;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(11,111,147,.13), transparent 26%),
+    radial-gradient(circle at 90% 92%, rgba(245,201,92,.18), transparent 28%),
+    linear-gradient(180deg, #eef8fa 0%, #fffdf7 72%);
+}
+
+.history-page .saveiros-story::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(8,59,92,.18), transparent);
+}
+
+.history-page .saveiros-story__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.history-page .saveiros-story__header > div {
+  max-width: 870px;
+}
+
+.history-page .saveiros-story__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 9px 15px;
+  border: 1px solid rgba(11,111,147,.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  color: var(--azul-escuro);
+  box-shadow: 0 8px 20px rgba(8,59,92,.07);
+  font-size: .73rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.history-page .saveiros-story__hero {
+  position: relative;
+  min-height: 480px;
+  margin: 0 0 22px;
+  overflow: hidden;
+  background: #082f46;
+}
+
+.history-page .saveiros-story__hero img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  object-position: center 45%;
+  filter: contrast(1.03);
+}
+
+.history-page .saveiros-story__hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(3,30,45,.06) 28%, rgba(3,30,45,.90) 100%);
+}
+
+.history-page .saveiros-story__hero-overlay {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 860px;
+  padding: 34px;
+  color: #fff;
+}
+
+.history-page .saveiros-story__hero-overlay span,
+.history-page .saveiros-story__eyebrow {
+  display: block;
+  color: #f7d570;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.history-page .saveiros-story__hero-overlay strong {
+  display: block;
+  margin-top: 7px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 4vw, 3.1rem);
+  line-height: 1.05;
+}
+
+.history-page .saveiros-story__hero-overlay p {
+  max-width: 720px;
+  margin: 12px 0 0;
+  color: rgba(255,255,255,.84);
+  line-height: 1.6;
+}
+
+.history-page .saveiros-story__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.history-page .saveiros-story__article {
+  padding: clamp(26px, 4vw, 40px);
+}
+
+.history-page .saveiros-story__article h3,
+.history-page .saveiros-story__names h3,
+.history-page .saveiros-story__ending-copy h3 {
+  margin: 8px 0 16px;
+  color: var(--azul-escuro);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 3vw, 2.4rem);
+  line-height: 1.12;
+}
+
+.history-page .saveiros-story__article p {
+  margin: 0;
+  color: #3b4d55;
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.history-page .saveiros-story__article p + p {
+  margin-top: 17px;
+}
+
+.history-page .saveiros-story__aside {
+  display: grid;
+  gap: 13px;
+}
+
+.history-page .saveiros-story__fact {
+  padding: 22px;
+  background: rgba(255,255,255,.94);
+}
+
+.history-page .saveiros-story__fact span {
+  color: var(--verde);
+  font-size: .69rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.history-page .saveiros-story__fact strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--azul-escuro);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.history-page .saveiros-story__fact p {
+  margin: 8px 0 0;
+  color: var(--texto-claro);
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.history-page .saveiros-story__names {
+  display: grid;
+  grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 28px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(245,201,92,.15), transparent 30%),
+    #fff;
+}
+
+.history-page .saveiros-story__names p {
+  margin: 0;
+  color: var(--texto-claro);
+}
+
+.history-page .saveiros-story__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.history-page .saveiros-story__chips b {
+  padding: 8px 12px;
+  border: 1px solid #dcebea;
+  border-radius: 999px;
+  background: #edf8f5;
+  color: var(--verde-escuro);
+  font-size: .82rem;
+}
+
+.history-page .saveiros-story__ending {
+  display: grid;
+  grid-template-columns: minmax(250px, .74fr) minmax(0, 1.26fr);
+  gap: 24px;
+  align-items: center;
+  margin-top: 22px;
+  padding: 30px;
+  border-radius: 26px;
+  background: linear-gradient(140deg, #073b57 0%, #0b6f93 55%, #0c6c5b 100%);
+  box-shadow: var(--sombra);
+}
+
+.history-page .saveiros-story__boat {
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.history-page .saveiros-story__boat img {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.history-page .saveiros-story__boat figcaption {
+  padding: 10px 14px 13px;
+  color: var(--texto-claro);
+  font-size: .78rem;
+  text-align: center;
+}
+
+.history-page .saveiros-story__ending-copy,
+.history-page .saveiros-story__ending-copy h3 {
+  color: #fff;
+}
+
+.history-page .saveiros-story__ending-copy .saveiros-story__eyebrow {
+  color: #ffd978;
+}
+
+.history-page .saveiros-story__ending-copy p {
+  margin: 0;
+  color: rgba(255,255,255,.84);
+  line-height: 1.72;
+}
+
+.history-page .saveiros-story__ending-copy p + p {
+  margin-top: 14px;
+}
+
+.history-page .saveiros-story__ending-copy blockquote {
+  margin: 22px 0 0;
+  padding: 16px 18px;
+  border-left: 4px solid var(--amarelo);
+  border-radius: 0 14px 14px 0;
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.history-page .saveiros-original {
+  margin: 22px 0 0;
+  overflow: hidden;
+}
+
+.history-page .saveiros-original > summary {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 20px 58px 20px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.history-page .saveiros-original > summary::-webkit-details-marker {
+  display: none;
+}
+
+.history-page .saveiros-original > summary span {
+  color: var(--azul-escuro);
+  font-weight: 900;
+}
+
+.history-page .saveiros-original > summary small {
+  color: var(--texto-claro);
+  font-size: .82rem;
+}
+
+.history-page .saveiros-original > summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  translate: 0 -50%;
+  color: var(--verde);
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.history-page .saveiros-original[open] > summary::after {
+  content: "−";
+}
+
+.history-page .saveiros-original__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 0 22px 22px;
+}
+
+.history-page .saveiros-original__grid figure {
+  margin: 0;
+}
+
+.history-page .saveiros-original__grid img {
+  width: 100%;
+  max-height: 650px;
+  object-fit: contain;
+  object-position: top center;
+  border: 1px solid rgba(8,59,92,.12);
+  border-radius: 16px;
+  background: #f5f0e5;
+}
+
+.history-page .saveiros-original__grid figcaption {
+  margin-top: 8px;
+  color: var(--texto-claro);
+  font-size: .8rem;
+  text-align: center;
+}
+
+.history-page .saveiros-story__source {
+  margin-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .history-page .saveiros-story__header,
+  .history-page .saveiros-story__layout,
+  .history-page .saveiros-story__names,
+  .history-page .saveiros-story__ending {
+    grid-template-columns: 1fr;
+  }
+
+  .history-page .saveiros-story__badge {
+    justify-self: start;
+  }
+
+  .history-page .saveiros-story__boat {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 680px) {
+  .history-page .saveiros-story {
+    padding-top: 54px !important;
+  }
+
+  .history-page .saveiros-story__hero {
+    min-height: 420px;
+  }
+
+  .history-page .saveiros-story__hero img {
+    height: 430px;
+  }
+
+  .history-page .saveiros-story__hero-overlay {
+    padding: 24px 20px;
+  }
+
+  .history-page .saveiros-story__article,
+  .history-page .saveiros-story__names {
+    padding: 22px 20px;
+  }
+
+  .history-page .saveiros-story__ending {
+    padding: 20px;
+  }
+
+  .history-page .saveiros-story__boat img {
+    height: 330px;
+  }
+
+  .history-page .saveiros-original__grid {
+    grid-template-columns: 1fr;
+    padding: 0 16px 16px;
+  }
+
+  .history-page .saveiros-original__grid img {
+    max-height: none;
+  }
+}
