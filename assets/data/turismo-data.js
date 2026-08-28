@@ -1,4 +1,4 @@
-window.CONECTA_POUSADAS = [
+window.CONECTA_TURISMO_HOSPEDAGENS = [
   {
     id: "pousada-jardins-mar-grande",
     nome: "Pousada Jardins - Mar Grande",

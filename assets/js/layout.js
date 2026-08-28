@@ -17,23 +17,22 @@
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
     if (normalizedPath.endsWith("/esportes.html")) return "esportes";
-    if (normalizedPath.endsWith("/meio-amb.html")) return "meio-amb";
-    if (normalizedPath.endsWith("/pousadas.html")) return "pousadas";
-    if (normalizedPath.endsWith("/o-projeto.html")) return "o-projeto";
+    if (normalizedPath.endsWith("/meio-ambiente.html")) return "meio-ambiente";
+    if (normalizedPath.endsWith("/turismo.html")) return "turismo";
+    if (normalizedPath.endsWith("/nossa-historia.html")) return "nossa-historia";
     if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
     return "inicio";
   })();
 
   const links = [
     ["inicio", "Início", "index.html"],
-    ["historia", "História", "historia.html"],
+    ["historia", "História de Vera Cruz", "historia.html"],
     ["bairros", "Bairros", "bairros.html"],
     ["esportes", "Esportes", "esportes.html"],
-    ["meio-amb", "Meio Amb", "meio-amb.html"],
     ["blog", "Blog", "blog.html"],
-    ["pousadas", "Pousadas", "pousadas.html"],
+    ["turismo", "Turismo", "turismo.html"],
     ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
-    ["o-projeto", "O Projeto", "o-projeto.html"]
+    ["nossa-historia", "Nossa História", "nossa-historia.html"]
   ];
 
   const navLinks = links.map(([key, label, href]) => {
@@ -60,13 +59,7 @@
             ${navLinks}
           </nav>
 
-          <a
-            class="cv-header__cta"
-            href="https://www.instagram.com/umanovaveracruz/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram Uma Nova Vera Cruz"
-          >Instagram</a>
+          <a class="cv-header__cta" href="${url("bairros.html")}">Visite Vera Cruz</a>
         </div>
       </header>`;
   }
@@ -105,7 +98,7 @@
             <div class="cv-footer__column">
               <h2>Participe</h2>
               <p>Conheça o projeto, compartilhe memórias e ajude a valorizar as histórias do município.</p>
-              <a class="cv-footer__button" href="${url("o-projeto.html")}">Conheça o projeto</a>
+              <a class="cv-footer__button" href="${url("nossa-historia.html")}">Conheça o projeto</a>
             </div>
           </div>
 
