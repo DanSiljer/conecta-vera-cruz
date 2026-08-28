@@ -17,22 +17,24 @@
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
     if (normalizedPath.endsWith("/esportes.html")) return "esportes";
-    if (normalizedPath.endsWith("/meio-ambiente.html")) return "meio-ambiente";
+    if (normalizedPath.endsWith("/meio-amb .html")) return "meio-amb";
     if (normalizedPath.endsWith("/turismo.html")) return "turismo";
-    if (normalizedPath.endsWith("/nossa-historia.html")) return "nossa-historia";
-    if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
+     if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
+    if (normalizedPath.endsWith("/o-projeto.html")) return "o-projeto";
+  
     return "inicio";
   })();
 
   const links = [
     ["inicio", "Início", "index.html"],
-    ["historia", "História de Vera Cruz", "historia.html"],
+    ["historia", "História", "historia.html"],
     ["bairros", "Bairros", "bairros.html"],
     ["esportes", "Esportes", "esportes.html"],
+    ["meio-amb", "Meio Amb", "meio-amb.html"],
     ["blog", "Blog", "blog.html"],
     ["turismo", "Turismo", "turismo.html"],
     ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
-    ["nossa-historia", "Nossa História", "nossa-historia.html"]
+    ["o-projeto", "O Projeto", "o-projeto.html"]
   ];
 
   const navLinks = links.map(([key, label, href]) => {

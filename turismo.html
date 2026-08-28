@@ -4,41 +4,133 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#007a4d">
-  <meta name="description" content="Planeje sua visita a Vera Cruz: encontre pousadas e hospedagens, conheça condutores de turismo locais e explore comunidades, histórias e patrimônios da Ilha de Itaparica.">
-  <title>Turismo e hospedagens | Conecta Vera Cruz</title>
+  <meta name="description" content="Descubra Vera Cruz: praias, pousadas, resorts, condutores de turismo, comunidades, história, cultura e experiências na Ilha de Itaparica.">
+  <title>Turismo em Vera Cruz | Praias, hospedagens e experiências</title>
   <link rel="icon" href="assets/img/favicon.ico" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="assets/css/global.css">
   <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/pages/turismo.css?v=20260827-3">
+  <link rel="stylesheet" href="assets/css/pages/turismo.css?v=20260828-2">
   <script defer src="assets/js/main.js"></script>
   <script defer src="assets/js/layout.js"></script>
-  <script defer src="assets/js/turismo.js?v=20260827-3"></script>
+  <script defer src="assets/js/turismo.js?v=20260828-1"></script>
 
+  
   <style>
-    .tourism-banner-hero{padding:32px 0 22px;background:linear-gradient(180deg,#f5fbff 0%,#ffffff 100%)}
-    .tourism-banner-wrap{max-width:1320px;margin:0 auto;padding:0 18px}
-    .tourism-banner-card{position:relative;overflow:hidden;border-radius:28px;box-shadow:0 24px 70px rgba(4,44,77,.18);background:#0d5ea8}
-    .tourism-banner-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-    .tourism-banner-overlay{position:absolute;inset:auto 0 0 0;padding:22px 24px 24px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(5,33,58,.72) 100%);display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}
-    .tourism-banner-text{max-width:700px;color:#fff}
-    .tourism-banner-text span{display:inline-block;margin-bottom:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-    .tourism-banner-text p{margin:0;font-size:1rem;line-height:1.6;color:rgba(255,255,255,.92)}
-    .tourism-banner-actions{display:flex;gap:12px;flex-wrap:wrap}
-    .tourism-banner-actions .lodging-button{box-shadow:none}
-    .tourism-banner-actions .lodging-button--primary{background:#00a36a}
-    .tourism-banner-intro{max-width:1180px;margin:22px auto 0;padding:0 18px;text-align:center}
-    .tourism-banner-intro p{margin:0;color:#49645d;font-size:1.04rem;line-height:1.8}
-    @media (max-width: 760px){
-      .tourism-banner-overlay{padding:16px}
-      .tourism-banner-text p{font-size:.95rem}
-      .tourism-banner-actions{width:100%}
-      .tourism-banner-actions .lodging-button{flex:1 1 100%}
-      .tourism-banner-card{border-radius:20px}
-      .tourism-banner-wrap{padding:0 14px}
-      .tourism-banner-intro{padding:0 14px}
+    /* Banner de Turismo no mesmo porte visual da página inicial */
+    .tourism-banner-hero{
+      width:100%;
+      padding:0;
+      margin:0;
+      background:#eaf5fb;
+      overflow:hidden;
+    }
+
+    .tourism-banner-wrap{
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:0;
+    }
+
+    .tourism-banner-card{
+      position:relative;
+      width:100%;
+      max-width:none;
+      margin:0;
+      overflow:hidden;
+      border-radius:0;
+      box-shadow:none;
+      background:#0d5ea8;
+    }
+
+    .tourism-banner-card img{
+      display:block;
+      width:100%;
+      height:clamp(560px, 72vh, 760px);
+      object-fit:cover;
+      object-position:center 48%;
+    }
+
+    .tourism-banner-overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      z-index:2;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:96px 24px 20px;
+      background:linear-gradient(180deg,rgba(3,24,42,0) 0%,rgba(3,24,42,.06) 40%,rgba(3,24,42,.62) 100%);
+      pointer-events:none;
+    }
+
+    .tourism-banner-actions{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      pointer-events:auto;
+    }
+
+    .tourism-banner-actions .lodging-button{
+      min-height:42px;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.58);
+      background:rgba(255,255,255,.88);
+      color:#0b5b49;
+      box-shadow:0 6px 18px rgba(0,0,0,.10);
+      backdrop-filter:blur(8px);
+      font-size:.88rem;
+      font-weight:800;
+    }
+
+    .tourism-banner-actions .lodging-button--primary{
+      background:rgba(0,163,106,.88);
+      border-color:rgba(0,163,106,.88);
+      color:#fff;
+      box-shadow:0 8px 20px rgba(0,122,77,.14);
+    }
+
+    .tourism-banner-actions .lodging-button:hover,
+    .tourism-banner-actions .lodging-button:focus-visible{
+      transform:translateY(-2px);
+    }
+
+    @media (max-width:1100px){
+      .tourism-banner-card img{
+        height:clamp(500px, 64vh, 660px);
+      }
+    }
+
+    @media (max-width:760px){
+      .tourism-banner-card img{
+        height:clamp(360px, 58vh, 520px);
+        object-position:center center;
+      }
+
+      .tourism-banner-overlay{
+        padding:70px 14px 16px;
+      }
+
+      .tourism-banner-actions{
+        width:100%;
+        gap:8px;
+      }
+
+      .tourism-banner-actions .lodging-button{
+        flex:1 1 100%;
+        width:min(100%, 340px);
+        min-height:40px;
+        padding:10px 16px;
+        margin-inline:auto;
+        font-size:.86rem;
+      }
     }
   </style>
+
 
 </head>
 <body class="page-turismo">
@@ -66,7 +158,7 @@
 <section class="lodging-notice">
       <div class="container lodging-notice__inner">
         <span aria-hidden="true">i</span>
-        <p>Esta página funciona como catálogo informativo, não como plataforma de reservas. Preços, disponibilidade, acessibilidade e serviços podem mudar.</p>
+        <p>Antes de reservar ou contratar, confirme diretamente com cada estabelecimento ou profissional os valores, a disponibilidade e as condições de atendimento.</p>
       </div>
     </section>
 
@@ -115,7 +207,7 @@
             <span class="lodging-kicker">Conheça Vera Cruz com quem vive o território</span>
             <h2 id="tour-guides-title">Condutores de turismo</h2>
           </div>
-          <p>O projeto <strong>Descubra Vera Cruz</strong> reúne condutores para acompanhar visitantes em experiências pelo município. Consulte diretamente cada profissional para confirmar roteiro, disponibilidade, valores e ponto de encontro.</p>
+          <p>O <strong>Descubra Vera Cruz</strong> reúne condutores de turismo que podem acompanhar visitantes em roteiros e experiências pelo município. Entre em contato com o profissional de sua preferência para combinar percurso, horário, valor e ponto de encontro.</p>
         </header>
 
         <div class="tour-guides__feature">
@@ -126,15 +218,15 @@
 
           <div class="tour-guides__content">
             <span class="tour-guides__eyebrow">Descubra Vera Cruz</span>
-            <h3>Um ponto de partida para explorar a ilha com acompanhamento local</h3>
-            <p>Além de facilitar o contato, esta seção transforma a página de turismo em uma área de apoio ao visitante. Você pode escolher onde ficar e, no mesmo lugar, encontrar quem pode ajudar a conhecer Vera Cruz com mais contexto e proximidade com as comunidades.</p>
+            <h3>Conheça Vera Cruz com quem vive e conhece o território</h3>
+            <p>Os condutores locais podem apresentar caminhos, paisagens, histórias e comunidades de Vera Cruz a partir de uma experiência mais próxima do território. Escolha um contato e combine diretamente o passeio que melhor se encaixa na sua visita.</p>
             <div class="tour-guides__actions">
               <a class="lodging-button lodging-button--primary" href="https://www.instagram.com/descubraveracruz/" target="_blank" rel="noopener noreferrer">Abrir @descubraveracruz</a>
               <a class="lodging-button lodging-button--secondary" href="#lista-condutores">Ver contatos</a>
             </div>
             <div class="tour-guides__note">
-              <strong>Antes de combinar o passeio</strong>
-              <span>Confirme o roteiro, o valor, a duração, o ponto de encontro, as condições de acessibilidade e o que está incluído na atividade.</span>
+              <strong>Antes do passeio</strong>
+              <span>Combine antecipadamente o roteiro, o valor, a duração, o ponto de encontro, as condições de acessibilidade e o que está incluído na experiência.</span>
             </div>
           </div>
         </div>
@@ -152,7 +244,7 @@
           <article><div><strong>Creuza Santana Bastos</strong><span>Condutora de turismo</span></div><a href="tel:+5571988610516">(71) 98861-0516</a></article>
         </div>
 
-        <p class="tour-guides__source">Fonte dos contatos: material de divulgação fornecido para o Conecta Vera Cruz e perfil <a href="https://www.instagram.com/descubraveracruz/" target="_blank" rel="noopener noreferrer">@descubraveracruz</a>. Dados sujeitos a atualização.</p>
+        <p class="tour-guides__source">Contatos divulgados pelo <a href="https://www.instagram.com/descubraveracruz/" target="_blank" rel="noopener noreferrer">@descubraveracruz</a>. Telefones, disponibilidade e roteiros podem ser atualizados pelos próprios profissionais.</p>
       </div>
     </section>
 
@@ -160,10 +252,10 @@
       <div class="container">
         <header class="lodging-heading lodging-heading--center visit-planner__heading">
           <div>
-            <span class="lodging-kicker">Monte seu passeio</span>
-            <h2 id="visit-planner-title">Use o Conecta Vera Cruz para planejar a visita</h2>
+            <span class="lodging-kicker">Continue sua viagem</span>
+            <h2 id="visit-planner-title">Descubra mais de Vera Cruz durante a sua visita</h2>
           </div>
-          <p>Depois de escolher a hospedagem, continue explorando o município pelo próprio site.</p>
+          <p>Conheça comunidades, patrimônios, histórias e experiências que podem fazer parte do seu roteiro pelo município.</p>
         </header>
 
         <div class="visit-planner__grid">
@@ -175,20 +267,20 @@
           </a>
           <a href="historia.html" class="visit-planner__card">
             <span>02</span>
-            <strong>Entenda a história</strong>
+            <strong>Conheça a história</strong>
             <p>Descubra a formação do município, a memória local, a emancipação e os símbolos de Vera Cruz.</p>
             <b>Viajar pela história →</b>
           </a>
           <a href="#condutores" class="visit-planner__card">
             <span>03</span>
             <strong>Converse com um condutor</strong>
-            <p>Combine uma experiência acompanhada e confirme diretamente roteiro, horário e condições do passeio.</p>
+            <p>Encontre um condutor local e combine diretamente o roteiro, o horário e as condições da experiência.</p>
             <b>Ver contatos →</b>
           </a>
           <a href="#hospedagens" class="visit-planner__card">
             <span>04</span>
-            <strong>Compare onde ficar</strong>
-            <p>Use os filtros por comunidade e tipo para encontrar uma hospedagem que combine com sua viagem.</p>
+            <strong>Escolha onde ficar</strong>
+            <p>Pesquise por comunidade e tipo de hospedagem para encontrar uma opção que combine com a sua viagem.</p>
             <b>Buscar hospedagem →</b>
           </a>
         </div>
@@ -212,26 +304,26 @@
     <section class="lodging-register" id="cadastro" aria-labelledby="register-title">
       <div class="container lodging-register__grid">
         <div class="lodging-register__intro">
-          <span class="lodging-kicker lodging-kicker--light">Participe do catálogo</span>
-          <h2 id="register-title">Cadastre sua pousada ou hospedagem</h2>
-          <p>O responsável pode enviar os dados para análise da equipe do Conecta Vera Cruz. O cadastro não é publicado automaticamente.</p>
+          <span class="lodging-kicker lodging-kicker--light">Faça parte do guia</span>
+          <h2 id="register-title">Divulgue sua pousada ou hospedagem</h2>
+          <p>Tem uma pousada, hotel ou hospedagem em Vera Cruz? Envie as informações do estabelecimento para fazer parte deste guia turístico.</p>
           <div class="lodging-register__checklist">
-            <article><span>✓</span><div><strong>Cadastro gratuito</strong><small>Sem cobrança para aparecer no catálogo.</small></div></article>
-            <article><span>✓</span><div><strong>Informações revisadas</strong><small>A equipe poderá confirmar dados e solicitar correções.</small></div></article>
-            <article><span>✓</span><div><strong>Fotos autorizadas</strong><small>Envie somente imagens próprias ou com autorização.</small></div></article>
+            <article><span>✓</span><div><strong>Divulgação gratuita</strong><small>O envio das informações não tem custo.</small></div></article>
+            <article><span>✓</span><div><strong>Informações atualizadas</strong><small>Mantenha localização, contato e serviços do estabelecimento sempre corretos.</small></div></article>
+            <article><span>✓</span><div><strong>Mostre seu espaço</strong><small>Use fotos próprias ou autorizadas que representem bem a hospedagem.</small></div></article>
           </div>
         </div>
 
         <form class="lodging-form" id="lodgingRegistrationForm" novalidate>
           <div class="lodging-form__heading">
-            <span>Ficha de cadastro</span>
+            <span>Divulgue sua hospedagem</span>
             <h3>Dados da hospedagem</h3>
             <p>Os campos marcados com * são obrigatórios.</p>
           </div>
 
           <div class="lodging-form__row">
             <label>Nome da hospedagem *<input type="text" name="nome" maxlength="90" required placeholder="Ex.: Pousada Mar Azul"></label>
-            <label>Tipo *<select name="tipo" required><option value="">Selecione</option><option>Pousada</option><option>Hotel</option><option>Resort</option><option>Apart-hotel</option><option>Hospedagem familiar</option><option>Casa de temporada</option><option>Outro</option></select></label>
+            <label>Tipo *<select name="tipo" required><option value="">Selecione</option><option>Pousada</option><option>Hotel</option><option>Resort</option><option>Apart-hotel</option><option>Hospedagem familiar</option><option>Outro</option></select></label>
           </div>
 
           <div class="lodging-form__row">
@@ -266,28 +358,28 @@
           <label class="lodging-form__consent"><input type="checkbox" name="consentimento" required><span>Confirmo que sou responsável ou tenho autorização para enviar estas informações e imagens.</span></label>
 
           <div class="lodging-form__actions">
-            <button class="lodging-button lodging-button--primary" type="submit">Preparar solicitação</button>
+            <button class="lodging-button lodging-button--primary" type="submit">Enviar cadastro</button>
             <button class="lodging-button lodging-button--outline" id="saveLodgingDraft" type="button">Salvar rascunho</button>
           </div>
 
           <p class="lodging-form__status" id="lodgingFormStatus" role="status" aria-live="polite"></p>
-          <p class="lodging-form__note">Ao enviar, o programa de e-mail do aparelho será aberto com a ficha preenchida. Troque o e-mail de destino no arquivo JavaScript caso o contato oficial seja diferente.</p>
+          <p class="lodging-form__note">Ao clicar em “Enviar cadastro”, seu aplicativo de e-mail será aberto com as informações preenchidas para você concluir o envio.</p>
         </form>
       </div>
     </section>
 
     <section class="lodging-correction">
       <div class="container lodging-correction__inner">
-        <div><span class="lodging-kicker">Atualização de cadastro</span><h2>Encontrou uma informação incorreta?</h2><p>O responsável pode solicitar correção, atualização ou remoção do estabelecimento.</p></div>
-        <a class="lodging-button lodging-button--dark" href="mailto:contato@conectaveracruz.com.br?subject=Atualização%20de%20hospedagem">Solicitar atualização</a>
+        <div><span class="lodging-kicker">Mantenha as informações corretas</span><h2>Alguma informação mudou?</h2><p>Se você representa um estabelecimento desta página, pode solicitar a atualização ou a retirada das informações divulgadas.</p></div>
+        <a class="lodging-button lodging-button--dark" href="mailto:contato@conectaveracruz.com.br?subject=Atualização%20de%20hospedagem">Atualizar informações</a>
       </div>
     </section>
 
     <section class="lodging-sources">
       <div class="container">
         <details>
-          <summary>Fontes usadas para montar a lista inicial</summary>
-          <p>A lista foi preparada a partir de páginas públicas de estabelecimentos e plataformas de hospedagem consultadas em agosto de 2026. A presença nesta página não representa classificação, recomendação comercial ou garantia de disponibilidade.</p>
+          <summary>Sobre as informações das hospedagens</summary>
+          <p>As informações das hospedagens foram reunidas a partir de páginas públicas dos estabelecimentos e plataformas de hospedagem consultadas em agosto de 2026. A presença no guia não representa classificação ou garantia de disponibilidade. Confirme os dados diretamente com cada hospedagem antes da reserva.</p>
           <ul id="lodgingSourcesList"></ul>
         </details>
       </div>
