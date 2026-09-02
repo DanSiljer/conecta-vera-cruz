@@ -3172,157 +3172,379 @@ button {
   }
 }
 
-
-
-
 /* ==========================================================
-   GUIGA FRANCISCO · PERFIL, OBRAS E FONTES
+   CAPA DO BLOG · INTERAÇÃO COMPACTA
+   Curtir permanece no destaque e os comentários ficam dentro
+   do próprio card, sem aumentar a capa desnecessariamente.
    ========================================================== */
-.personality-row--guiga .personality-row__portrait {
-  object-position: center 18%;
+
+/* Garante que a área de interação nunca escape da coluna do destaque. */
+.blog-compact-card--featured .blog-compact-card__content {
+  min-width: 0;
+  overflow: hidden;
 }
 
-.personality-row__subtitle {
-  margin: 22px 0 9px;
-  color: #073c5a;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.12rem;
-  line-height: 1.25;
+.blog-compact-card--featured .blog-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #edf1ef;
 }
 
-.personality-row__work--guiga {
-  grid-template-columns: 105px minmax(0, 1fr);
-  border: 1px solid #e4ece8;
-  background: linear-gradient(135deg, #fffaf0 0%, #f7fbf9 100%);
-}
-
-.personality-row__work--guiga img {
-  width: 105px;
-  height: 140px;
-  object-fit: cover;
-}
-
-.page-blog .personality-row__mini-link {
+/* Curtir vem primeiro, de forma discreta e visível já na capa. */
+.blog-compact-card--featured .blog-like-button {
   display: inline-flex;
-  width: fit-content;
-  margin-top: 10px;
-  color: #087b58 !important;
+  min-width: 0;
+  min-height: 36px;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #263a33;
+  box-shadow: none;
+}
+
+.blog-compact-card--featured .blog-like-button:hover,
+.blog-compact-card--featured .blog-like-button:focus-visible,
+.blog-compact-card--featured .blog-like-button.is-liked {
+  transform: none;
+  border: 0;
+  background: transparent;
+  color: #ed4956;
+  box-shadow: none;
+}
+
+.blog-compact-card--featured .blog-like-button__icon {
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.blog-compact-card--featured .blog-like-button__label,
+.blog-compact-card--featured .blog-like-button__count {
+  color: currentColor;
   font-size: .78rem;
   font-weight: 900;
-  text-decoration: none;
 }
 
-.page-blog .personality-row__mini-link:hover,
-.page-blog .personality-row__mini-link:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.personality-row__guiga-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 20px 0 6px;
-}
-
-.personality-row__guiga-gallery figure {
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid #e1e9e5;
-  border-radius: 15px;
-  background: #f7faf8;
-}
-
-.personality-row__guiga-gallery img {
-  width: 100%;
-  height: 230px;
-  object-fit: contain;
-  background: #f0f3f1;
-}
-
-.personality-row__guiga-gallery-wide {
-  grid-column: 1 / -1;
-}
-
-.personality-row__guiga-gallery-wide img {
+.blog-compact-card--featured .blog-like-button__count {
+  display: inline;
+  min-width: 0;
   height: auto;
-  max-height: 470px;
-  object-fit: cover;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
-.personality-row__guiga-gallery figcaption {
-  padding: 9px 11px 11px;
-  color: #647772;
-  font-size: .74rem;
-  line-height: 1.45;
-}
-
-.personality-row__sources {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 10px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #e2ebe7;
-}
-
-.personality-row__sources strong {
-  width: 100%;
-  color: #073c5a;
-  font-size: .78rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.page-blog .personality-row__sources a {
-  display: inline-flex;
-  padding: 7px 10px;
-  border: 1px solid #d8e7df;
-  border-radius: 999px;
-  background: #f7fbf9;
+.blog-compact-card--featured .blog-card-open {
+  min-height: 36px;
+  margin: 0 0 0 auto;
+  padding: 7px 13px;
+  border: 1px solid #d9e6df;
+  background: #fff;
   color: #087b58 !important;
-  font-size: .74rem;
-  font-weight: 850;
-  text-decoration: none;
+  font-size: .78rem;
 }
 
-.page-blog .personality-row__sources a:hover,
-.page-blog .personality-row__sources a:focus-visible {
-  border-color: #87bca5;
-  background: #edf7f2;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.blog-compact-card--featured .blog-card-open:hover,
+.blog-compact-card--featured .blog-card-open:focus-visible {
+  border-color: #087b58;
+  background: #f4faf7;
+  color: #066546 !important;
 }
 
-@media (max-width: 720px) {
-  .personality-row--guiga .personality-row__media {
-    max-width: 290px;
+/* Comentários ficam compactos e DENTRO da capa. */
+.blog-compact-card--featured .blog-featured-comments {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #edf1ef;
+  overflow: hidden;
+}
+
+.blog-compact-card--featured .blog-featured-comments__heading {
+  min-height: 22px;
+  margin: 0 0 7px;
+  color: #243a32;
+  font-size: .76rem;
+}
+
+.blog-compact-card--featured .blog-featured-comments__total {
+  font-size: .66rem;
+}
+
+/* Corrige a estrutura real criada pelo blog-comments.js: avatar + nome/mensagem + publicar. */
+.blog-compact-card--featured .blog-comment-form {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 7px;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  padding: 5px 7px;
+  border: 1px solid #dfe6e2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.blog-compact-card--featured .blog-comment-form__avatar {
+  width: 30px;
+  height: 30px;
+  font-size: .67rem;
+}
+
+.blog-compact-card--featured .blog-comment-form__fields {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 7px;
+  min-width: 0;
+  align-items: center;
+}
+
+.blog-compact-card--featured .blog-comment-form__name,
+.blog-compact-card--featured .blog-comment-form__input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  padding: 4px 6px;
+  background: transparent;
+  color: #273a33;
+  font: inherit;
+  font-size: .73rem;
+}
+
+.blog-compact-card--featured .blog-comment-form__name {
+  border-right: 1px solid #e7ece9;
+  font-weight: 800;
+}
+
+.blog-compact-card--featured .blog-comment-form__name::placeholder,
+.blog-compact-card--featured .blog-comment-form__input::placeholder {
+  color: #98a29e;
+  font-weight: 500;
+}
+
+.blog-compact-card--featured .blog-comment-form__send {
+  min-height: 30px;
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #0095f6;
+  font-size: .7rem;
+  font-weight: 900;
+}
+
+.blog-compact-card--featured .blog-comment-form__send:hover:not(:disabled),
+.blog-compact-card--featured .blog-comment-form__send:focus-visible:not(:disabled) {
+  background: #eef8ff;
+}
+
+.blog-compact-card--featured .blog-comment-form__send:disabled {
+  color: #bdc9d0;
+  background: transparent;
+  opacity: 1;
+}
+
+.blog-compact-card--featured .blog-comment-status {
+  min-height: 0;
+  margin: 4px 2px 0;
+  font-size: .64rem;
+  line-height: 1.3;
+}
+
+/* Só ocupa uma pequena faixa da capa. Se houver muitos comentários, rola internamente. */
+.blog-compact-card--featured .blog-comment-list {
+  display: grid;
+  gap: 6px;
+  max-height: 82px;
+  margin-top: 5px;
+  padding-right: 3px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.blog-compact-card--featured .blog-comment-empty {
+  margin: 0;
+  padding: 4px 2px 1px;
+  color: #8b9692;
+  font-size: .68rem;
+  line-height: 1.3;
+}
+
+.blog-compact-card--featured .blog-comment {
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.blog-compact-card--featured .blog-comment__avatar {
+  width: 26px;
+  height: 26px;
+  font-size: .58rem;
+}
+
+.blog-compact-card--featured .blog-comment__text {
+  font-size: .7rem;
+  line-height: 1.32;
+}
+
+.blog-compact-card--featured .blog-comment__meta {
+  margin-top: 2px;
+  font-size: .58rem;
+}
+
+.blog-compact-card--featured .blog-comment__reply {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #6f7b76;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.blog-compact-card--featured .blog-comment-replies {
+  display: grid;
+  gap: 5px;
+  margin-top: 5px;
+  padding-left: 8px;
+  border-left: 1px solid #e7ece9;
+}
+
+.blog-compact-card--featured .blog-comment-reply {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.blog-compact-card--featured .blog-comment__avatar--reply {
+  width: 24px;
+  height: 24px;
+  font-size: .54rem;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 7px;
+  border: 1px solid #e1e8e4;
+  border-radius: 10px;
+  background: #fafcfb;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form__notice {
+  color: #75807c;
+  font-size: .61rem;
+  font-weight: 800;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form__fields {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #dfe6e2;
+  border-radius: 7px;
+  padding: 6px 7px;
+  background: #fff;
+  color: #273a33;
+  font: inherit;
+  font-size: .67rem;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form__cancel,
+.blog-compact-card--featured .blog-comment-reply-form__publish {
+  min-height: 27px;
+  border: 0;
+  border-radius: 7px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: .64rem;
+  font-weight: 900;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form__cancel {
+  background: #edf2ef;
+  color: #52625c;
+}
+
+.blog-compact-card--featured .blog-comment-reply-form__publish {
+  background: #0095f6;
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .blog-compact-card--featured .blog-featured-comments {
+    margin-top: 10px;
+  }
+
+  .blog-compact-card--featured .blog-comment-form__fields,
+  .blog-compact-card--featured .blog-comment-reply-form__fields {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+
+  .blog-compact-card--featured .blog-comment-form__name {
+    height: 26px;
+    border-right: 0;
+    border-bottom: 1px solid #edf1ef;
+  }
+
+  .blog-compact-card--featured .blog-comment-list {
+    max-height: 72px;
   }
 }
 
 @media (max-width: 520px) {
-  .personality-row--guiga .personality-row__media {
-    max-width: none;
+  .blog-compact-card--featured .blog-card-actions {
+    flex-direction: row;
+    align-items: center;
   }
 
-  .personality-row__work--guiga {
-    grid-template-columns: 82px minmax(0, 1fr);
+  .blog-compact-card--featured .blog-like-button {
+    width: auto;
   }
 
-  .personality-row__work--guiga img {
-    width: 82px;
-    height: 112px;
+  .blog-compact-card--featured .blog-like-button__label {
+    display: inline;
   }
 
-  .personality-row__guiga-gallery {
-    grid-template-columns: 1fr 1fr;
+  .blog-compact-card--featured .blog-card-open {
+    width: auto;
+    margin-left: auto;
   }
 
-  .personality-row__guiga-gallery img {
-    height: 190px;
+  .blog-compact-card--featured .blog-comment-form {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    border-radius: 12px;
   }
 
-  .personality-row__guiga-gallery-wide {
-    grid-column: 1 / -1;
+  .blog-compact-card--featured .blog-comment-form__avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .blog-compact-card--featured .blog-comment-form__send {
+    grid-column: auto;
+    width: auto;
   }
 }

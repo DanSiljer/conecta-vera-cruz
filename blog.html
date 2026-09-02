@@ -11,13 +11,15 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20260824-2" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
-<link href="assets/css/pages/blog-fliver.css?v=20260902-6" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20260902-4" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
+<link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
 <script defer="" src="assets/js/layout.js"></script>
 <script defer="" src="assets/data/blog-posts.js"></script>
-<script defer="" src="assets/js/blog-fliver.js?v=20260902-6"></script>
-<script src="assets/js/blog-comments.js?v=20260806-1" type="module"></script>
+<script defer="" src="assets/js/blog-fliver.js?v=20260902-7"></script>
+<script defer src="assets/js/blog-fliver-social.js?v=20260902-1"></script>
+<script src="assets/js/blog-comments.js?v=20260902-4" type="module"></script>
 </head>
 <body class="page-blog">
 <!-- Menu padrão inserido por assets/js/layout.js -->
@@ -36,17 +38,20 @@
 </div>
 <div aria-live="polite" class="container blog-featured-container" data-blog-featured=""></div>
 </section>
-<section aria-label="Pesquisa e categorias do blog" class="blog-navigation">
-<div class="container blog-navigation__inner">
-<label class="blog-search">
-<svg aria-hidden="true" viewbox="0 0 24 24">
+<section aria-label="Pesquisa e atalhos do blog" class="blog-navigation blog-navigation--compact">
+<div class="container blog-navigation__inner blog-navigation__inner--compact">
+<label class="blog-search blog-search--compact">
+<svg aria-hidden="true" viewBox="0 0 24 24">
 <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"></path>
 </svg>
 <span class="sr-only">Pesquisar no blog</span>
 <input data-blog-search="" placeholder="Pesquisar notícia, bairro ou tema..." type="search"/>
 </label>
-<div aria-label="Categorias" class="blog-categories" data-blog-categories=""></div>
-<a class="blog-personalities-link" href="#personalidades">Personalidades de Vera Cruz</a>
+<nav aria-label="Acesso rápido" class="blog-quick-links">
+<a href="#personalidades">Personalidades de Vera Cruz</a>
+<a href="#ultimas-noticias">Últimas notícias</a>
+<a href="#participe">Participe</a>
+</nav>
 </div>
 </section>
 <section aria-live="polite" class="blog-reader-section" data-blog-reader="" hidden=""></section>
@@ -350,7 +355,7 @@
 <p>Conheça os perfis de Silvano Sulzart, Fernando Bernardes Souza, Guiga Francisco e Gil Lima em uma seção dedicada a trajetórias que ajudam a contar Vera Cruz.</p>
 <a href="#personalidades">Ver personalidades <span>→</span></a>
 </section>
-<section class="sidebar-card sidebar-card--contribute">
+<section class="sidebar-card sidebar-card--contribute" id="participe">
 <span class="blog-eyebrow">Participe</span>
 <h2>Tem uma pauta ou fotografia?</h2>
 <p>
@@ -748,8 +753,8 @@
           });
 
           const actions = make("div", "blog-card-actions");
-          actions.appendChild(button);
           if (featured) actions.appendChild(createLikeButton(post));
+          actions.appendChild(button);
 
           content.append(top, title, summary, meta, actions);
           if (featured) content.appendChild(createCommentBox(post));

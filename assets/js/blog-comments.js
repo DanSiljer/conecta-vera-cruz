@@ -103,6 +103,10 @@ function readableError(error) {
     return "As mensagens estão temporariamente indisponíveis. Tente novamente em instantes.";
   }
 
+  if (code.includes("failed-precondition")) {
+    return "O Firestore pediu um índice para esta consulta. Abra o link indicado no Console do navegador e crie o índice sugerido.";
+  }
+
   return `Não foi possível acessar as mensagens. (${code})`;
 }
 
@@ -119,7 +123,7 @@ function initCommentBox(section) {
   let comments = [];
 
   const heading = make("div", "blog-featured-comments__heading");
-  const title = make("strong", "", "Mensagens");
+  const title = make("strong", "", "Comentários");
   const total = make("span", "blog-featured-comments__total", "Carregando...");
   heading.append(title, total);
 
@@ -161,7 +165,7 @@ function initCommentBox(section) {
 
   const list = make("div", "blog-comment-list");
   list.setAttribute("aria-live", "polite");
-  list.appendChild(make("p", "blog-comment-empty", "Carregando mensagens..."));
+  list.appendChild(make("p", "blog-comment-empty", "Carregando comentários..."));
 
   function setStatus(message, type = "info") {
     status.textContent = message;
@@ -411,21 +415,35 @@ function initCommentBox(section) {
 
   const commentsQuery = query(
     collection(db, CONFIG.collectionName),
+    where("site", "==", CONFIG.site),
     where("aprovado", "==", true),
     limit(CONFIG.readLimit)
   );
 
+  let receivedFirstSnapshot = false;
+  const loadingTimer = window.setTimeout(() => {
+    if (receivedFirstSnapshot) return;
+    total.textContent = "Conexão lenta";
+    list.replaceChildren(
+      make("p", "blog-comment-empty", "As mensagens demoraram para carregar. Confira a conexão e as regras do Firestore.")
+    );
+  }, 8000);
+
   const unsubscribe = onSnapshot(
     commentsQuery,
     snapshot => {
+      receivedFirstSnapshot = true;
+      window.clearTimeout(loadingTimer);
       comments = snapshot.docs
         .map(document => ({ id: document.id, ...document.data() }))
         .filter(comment => comment.site === CONFIG.site && comment.postSlug === postSlug);
       renderComments();
     },
     error => {
+      receivedFirstSnapshot = true;
+      window.clearTimeout(loadingTimer);
       console.error("Erro ao carregar mensagens do blog:", error);
-      total.textContent = "Mensagens indisponíveis";
+      total.textContent = "Comentários indisponíveis";
       list.replaceChildren(make("p", "blog-comment-empty", readableError(error)));
       setStatus(readableError(error), "error");
     }
