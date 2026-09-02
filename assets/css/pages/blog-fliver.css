@@ -1,0 +1,407 @@
+/* FLIVER · destaque e reportagem do Blog Conecta Vera Cruz */
+.blog-lead-story--fliver .blog-lead-story__media,
+.blog-fliver-title-link,
+.blog-read-link.blog-fliver-open {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.blog-lead-story--fliver .blog-lead-story__media {
+  padding: 0;
+  text-align: left;
+}
+
+.blog-fliver-title-link {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.blog-fliver-title-link:hover,
+.blog-fliver-title-link:focus-visible {
+  color: var(--blog-green, #007a4d);
+}
+
+.blog-read-link.blog-fliver-open {
+  padding: 0;
+  background: transparent;
+}
+
+/* Corrige o desalinhamento causado pelo layout base do leitor do blog */
+.blog-fliver-report,
+.blog-fliver-report.blog-reader-shell {
+  display: block !important;
+  width: min(100%, 1240px);
+  overflow: hidden;
+  margin-block: clamp(34px, 6vw, 78px);
+  border: 1px solid var(--blog-line, #dce8e2);
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 22px 70px rgba(12, 73, 53, 0.13);
+}
+
+.blog-fliver-report > * {
+  grid-column: 1 / -1 !important;
+}
+
+.blog-fliver-report .blog-reader-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 24px 0;
+}
+
+.blog-fliver-report .blog-reader-header {
+  width: 100%;
+  max-width: 930px;
+  margin-inline: auto;
+  padding: clamp(34px, 6vw, 68px) clamp(22px, 6vw, 70px) 30px;
+  text-align: center;
+}
+
+.blog-fliver-report .blog-reader-header h2 {
+  margin: 16px auto 18px;
+  color: var(--blog-blue, #073b62);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4.2vw, 4.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.blog-reader-subtitle {
+  max-width: 820px;
+  margin: 0 auto;
+  color: var(--blog-muted, #61736e);
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.blog-fliver-cover {
+  margin: 0 clamp(14px, 4vw, 48px) clamp(34px, 6vw, 62px);
+}
+
+.blog-fliver-cover img {
+  display: block;
+  width: 100%;
+  max-height: 760px;
+  border-radius: 24px;
+  object-fit: contain;
+  background: #0c3b25;
+}
+
+.blog-fliver-cover figcaption {
+  margin-top: 9px;
+  color: #72817d;
+  font-size: .8rem;
+  text-align: center;
+}
+
+.blog-fliver-body {
+  display: block !important;
+  width: 100%;
+  max-width: 1040px;
+  margin-inline: auto;
+  padding: 0 clamp(18px, 4vw, 40px) 8px;
+}
+
+.blog-fliver-body > .blog-article__paragraph,
+.blog-fliver-body > .blog-article__section-title,
+.blog-fliver-body > .blog-article__tags {
+  max-width: 790px;
+  margin-inline: auto;
+}
+
+.blog-fliver-body > .blog-article__section-title {
+  margin-top: 2.2em;
+  margin-bottom: .75em;
+}
+
+.blog-fliver-body .blog-article__figure {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.blog-fliver-body .blog-article__figure img {
+  display: block;
+  width: 100%;
+  max-height: 680px;
+  object-fit: contain;
+  background: #f4f6f4;
+}
+
+.blog-fliver-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 940px;
+  margin: 34px auto 42px;
+}
+
+.blog-fliver-gallery figure {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f3f6f4;
+}
+
+.blog-fliver-gallery img {
+  display: block;
+  width: 100%;
+  height: 360px;
+  border-radius: 18px 18px 0 0;
+  object-fit: cover;
+}
+
+.blog-fliver-gallery figcaption {
+  margin: 0;
+  padding: 10px 13px 13px;
+  background: #fff;
+}
+
+.blog-fliver-report .blog-featured-comments {
+  margin: 0 clamp(22px, 6vw, 70px) 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--blog-line, #dce8e2);
+}
+
+@media (max-width: 900px) {
+  .blog-fliver-report .blog-reader-header h2 {
+    font-size: clamp(1.8rem, 8vw, 3.15rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .blog-fliver-report {
+    border-radius: 22px;
+  }
+
+  .blog-fliver-report .blog-reader-header {
+    padding-bottom: 22px;
+    text-align: left;
+  }
+
+  .blog-fliver-report .blog-full-post__eyebrow,
+  .blog-fliver-report .blog-full-post__meta {
+    justify-content: flex-start;
+  }
+
+  .blog-fliver-cover {
+    margin-inline: 10px;
+  }
+
+  .blog-fliver-cover img {
+    border-radius: 15px;
+  }
+
+  .blog-fliver-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-fliver-gallery img {
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+  }
+
+  .blog-fliver-report .blog-featured-comments {
+    margin-inline: 16px;
+  }
+}
+
+
+/* ==========================================================
+   CORREÇÃO DEFINITIVA DO CARD DE DESTAQUE DA FLIVER
+   O problema visto na captura estava no card principal, não
+   no leitor da reportagem.
+   ========================================================== */
+.blog-featured-container {
+  min-width: 0;
+}
+
+.blog-lead-story--fliver {
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+}
+
+.blog-lead-story--fliver > * {
+  min-width: 0;
+}
+
+.blog-lead-story--fliver .blog-lead-story__content {
+  min-width: 0;
+  overflow: visible;
+}
+
+.blog-lead-story--fliver .blog-fliver-featured-title {
+  width: 100%;
+  max-width: 680px;
+  margin: 18px 0 14px !important;
+  color: var(--blog-blue, #073b62) !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(2rem, 3.3vw, 3.35rem) !important;
+  font-weight: 700;
+  line-height: 1.02 !important;
+  letter-spacing: -0.04em !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  text-wrap: balance;
+}
+
+.blog-lead-story--fliver .blog-lead-story__content > p {
+  max-width: 620px;
+}
+
+@media (max-width: 980px) {
+  .blog-lead-story--fliver {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr);
+  }
+
+  .blog-lead-story--fliver .blog-fliver-featured-title {
+    font-size: clamp(1.9rem, 4.4vw, 2.75rem) !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .blog-lead-story--fliver {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+  }
+
+  .blog-lead-story--fliver .blog-lead-story__media,
+  .blog-lead-story--fliver .blog-lead-story__media img {
+    width: 100% !important;
+    min-height: 360px !important;
+    max-height: 520px;
+  }
+
+  .blog-lead-story--fliver .blog-lead-story__content {
+    width: 100% !important;
+    padding: 28px 26px 32px !important;
+  }
+
+  .blog-lead-story--fliver .blog-fliver-featured-title {
+    max-width: none;
+    font-size: clamp(1.9rem, 7vw, 2.65rem) !important;
+    line-height: 1.06 !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .blog-featured-container.container {
+    width: calc(100% - 28px) !important;
+    max-width: none !important;
+  }
+
+  .blog-lead-story--fliver {
+    border-radius: 20px !important;
+  }
+
+  .blog-lead-story--fliver .blog-lead-story__media,
+  .blog-lead-story--fliver .blog-lead-story__media img {
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .blog-lead-story--fliver .blog-lead-story__content {
+    padding: 24px 20px 28px !important;
+  }
+
+  .blog-lead-story--fliver .blog-meta {
+    gap: 6px 12px;
+  }
+
+  .blog-lead-story--fliver .blog-meta span + span::before {
+    margin-right: 12px;
+  }
+
+  .blog-lead-story--fliver .blog-fliver-featured-title {
+    margin: 14px 0 12px !important;
+    font-size: clamp(1.75rem, 8vw, 2.15rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  .blog-lead-story--fliver .blog-lead-story__content > p {
+    font-size: .98rem;
+    line-height: 1.65;
+  }
+}
+
+
+/* Vídeo da FLIVER em outra unidade escolar */
+.blog-fliver-video {
+  max-width: 940px;
+  margin: 46px auto 54px;
+  padding: clamp(22px, 4vw, 36px);
+  border: 1px solid #d9e9e1;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #f2faf6, #ffffff);
+}
+
+.blog-fliver-video__copy {
+  max-width: 780px;
+  margin: 0 auto 22px;
+  text-align: center;
+}
+
+.blog-fliver-video__kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--blog-green, #007a4d);
+  font-size: .74rem;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.blog-fliver-video__copy h3 {
+  margin: 0 0 12px;
+  color: var(--blog-blue, #073b62);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 3.4vw, 2.55rem);
+  line-height: 1.08;
+}
+
+.blog-fliver-video__copy p {
+  margin: 0;
+  color: var(--blog-muted, #61736e);
+  line-height: 1.7;
+}
+
+.blog-fliver-video__media {
+  overflow: hidden;
+  border-radius: 18px;
+  background: #061f18;
+  box-shadow: 0 15px 38px rgba(7, 59, 98, .13);
+}
+
+.blog-fliver-video__media video {
+  display: block;
+  width: 100%;
+  max-height: 720px;
+  background: #061f18;
+}
+
+@media (max-width: 720px) {
+  .blog-fliver-video {
+    margin: 34px auto 42px;
+    padding: 18px;
+    border-radius: 19px;
+  }
+
+  .blog-fliver-video__copy {
+    text-align: left;
+  }
+
+  .blog-fliver-video__media {
+    border-radius: 14px;
+  }
+}
