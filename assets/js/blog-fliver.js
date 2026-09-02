@@ -128,7 +128,7 @@
     video.controls = true;
     video.preload = "metadata";
     video.playsInline = true;
-    video.poster = "assets/img/blog/fliver/fliver-programacao.jpeg";
+    video.poster = "assets/img/blog/fliver/fliver-programacao-cmgm.jpeg";
     video.setAttribute(
       "aria-label",
       "Vídeo da FLIVER no Colégio Municipal Geralda Maria da Conceição"
