@@ -141,3 +141,95 @@
     border-radius: 19px;
   }
 }
+
+
+/* Celebração exibida ao concluir qualquer quebra-cabeça de Vera Cruz. */
+.puzzle-celebration {
+  position: absolute;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255,255,255,.08), rgba(10,35,48,.30));
+  pointer-events: none;
+  animation: puzzleCelebrationFade 4.2s ease both;
+}
+
+.puzzle-celebration__badge {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 18px 28px;
+  border: 3px solid rgba(255,255,255,.9);
+  border-radius: 24px;
+  color: #fff;
+  background: linear-gradient(145deg, #0f766e, #0a4d68);
+  box-shadow: 0 18px 50px rgba(0,0,0,.30);
+  text-align: center;
+  animation: puzzleBadgePop .65s cubic-bezier(.2,1.35,.4,1) both;
+}
+
+.puzzle-celebration__badge span {
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  line-height: 1;
+  animation: puzzleTrophyBounce .8s .35s ease both;
+}
+
+.puzzle-celebration__badge strong {
+  font-size: clamp(1.35rem, 4vw, 2.4rem);
+}
+
+.puzzle-celebration__badge small {
+  font-size: clamp(.78rem, 2vw, 1rem);
+  font-weight: 750;
+}
+
+.puzzle-celebration__confetti {
+  position: absolute;
+  top: -12%;
+  left: var(--x);
+  width: 10px;
+  height: 18px;
+  border-radius: 3px;
+  background: var(--color);
+  opacity: 0;
+  transform: rotate(var(--spin));
+  animation: puzzleConfettiFall 2.5s var(--delay) ease-in infinite;
+}
+
+@keyframes puzzleBadgePop {
+  0% { opacity: 0; transform: scale(.35) rotate(-8deg); }
+  70% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes puzzleTrophyBounce {
+  0% { transform: translateY(-22px) scale(.5); }
+  55% { transform: translateY(5px) scale(1.18); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes puzzleConfettiFall {
+  0% { opacity: 0; transform: translateY(-10%) rotate(var(--spin)); }
+  10% { opacity: 1; }
+  100% { opacity: .9; transform: translateY(720px) rotate(calc(var(--spin) + 720deg)); }
+}
+
+@keyframes puzzleCelebrationFade {
+  0%, 82% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puzzle-celebration,
+  .puzzle-celebration__badge,
+  .puzzle-celebration__badge span,
+  .puzzle-celebration__confetti {
+    animation: none !important;
+  }
+  .puzzle-celebration { background: rgba(10,35,48,.28); }
+}
