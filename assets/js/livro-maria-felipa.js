@@ -6,7 +6,7 @@ if (!root) return;
 
 const pages = [
   {
-    src: "assets/img/livros/maria-felipa/capa.png",
+    src: "assets/img/livros/maria-felipa/Capa.png",
     title: "Capa",
     alt: "Capa do livro infantil Quem sou eu? Maria Felipa"
   },
