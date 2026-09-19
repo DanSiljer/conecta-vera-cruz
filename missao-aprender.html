@@ -67,6 +67,7 @@
     <script defer="" src="assets/js/quebra-cabeca-jaburu.js?v=32"></script>
     <script defer="" src="assets/js/quebra-cabeca-bandeira.js?v=32"></script>
     <script defer="" src="assets/js/quebra-cabeca-sagrado.js?v=32"></script>
+    <script defer="" src="assets/js/quebra-cabeca-mar-grande.js?v=1"></script>
     <script defer="" src="assets/js/quebra-cabeca-forno.js?v=32"></script>
     <script defer="" src="assets/js/quebra-cabeca-bom-jesus.js?v=32"></script>
     <script defer="" src="assets/js/identificacao-aluno.js?v=2"></script>
@@ -1334,6 +1335,28 @@
                 <b>Jogar este quebra-cabeça →</b>
               </span>
             </button>
+            <button
+              class="puzzle-choice-card"
+              data-module-target="quebra-cabeca-mar-grande"
+              type="button"
+            >
+              <figure class="puzzle-choice-card__media">
+                <img
+                  alt="Vista aérea da Igreja Sagrado Coração de Jesus e da praça de Mar Grande"
+                  height="600"
+                  loading="lazy"
+                  src="assets/img/jogos/mar-grande-vista-aerea.png"
+                  width="886"
+                />
+                <span>Mar Grande · Vista aérea</span>
+              </figure>
+              <span class="puzzle-choice-card__body">
+                <small>MAR GRANDE · PAISAGEM E FÉ</small>
+                <strong>Igreja e praça de Mar Grande</strong>
+                <span>Monte a vista aérea de Mar Grande em 9, 16 ou 25 peças.</span>
+                <b>Jogar este quebra-cabeça →</b>
+              </span>
+            </button>
           </div>
         </section>
         <section
@@ -1465,6 +1488,139 @@
                   />
                   <figcaption>
                     Igreja Nosso Senhor da Vera Cruz · Vera Cruz
+                  </figcaption>
+                </figure>
+              </details>
+            </aside>
+          </div>
+        </section>
+        <section
+          aria-labelledby="marGrandePuzzleTitle"
+          class="sagrado-puzzle section-shell"
+          hidden=""
+          id="quebra-cabeca-mar-grande"
+        >
+          <header class="sagrado-puzzle__header">
+            <div>
+              <span class="section-kicker"
+                >PATRIMÔNIO RELIGIOSO · QUEBRA-CABEÇA</span
+              >
+              <h2 id="marGrandePuzzleTitle">
+                Quebra-cabeça online da igreja e da praça de Mar Grande
+              </h2>
+              <p>
+                Arraste as peças da vista aérea até o tabuleiro. Elas só encaixam
+                quando chegam ao lugar correto.
+              </p>
+            </div>
+          </header>
+          <div class="sagrado-puzzle__toolbar">
+            <label
+              >Nível
+              <select id="marGrandePuzzleDifficulty">
+                <option value="3">Fácil · 3 × 3 · 9 peças</option>
+                <option selected="" value="4">Médio · 4 × 4 · 16 peças</option>
+                <option value="5">Difícil · 5 × 5 · 25 peças</option>
+              </select>
+            </label>
+            <div class="sagrado-puzzle__buttons">
+              <button
+                class="button button--primary"
+                id="marGrandePuzzleStart"
+                type="button"
+              >
+                Começar jogo
+              </button>
+              <button
+                class="button button--ghost-dark"
+                id="marGrandePuzzleShow"
+                type="button"
+              >
+                Mostrar dica
+              </button>
+              <button
+                class="button button--ghost-dark"
+                id="marGrandePuzzleReset"
+                type="button"
+              >
+                Reiniciar
+              </button>
+            </div>
+            <div
+              aria-label="Informações da partida"
+              class="sagrado-puzzle__stats"
+            >
+              <article>
+                <span>Encaixadas</span
+                ><strong
+                  ><b id="marGrandePuzzlePlaced">0</b>/<b id="marGrandePuzzleTotal"
+                    >16</b
+                  ></strong
+                >
+              </article>
+              <article>
+                <span>Movimentos</span
+                ><strong id="marGrandePuzzleMoves">0</strong>
+              </article>
+              <article>
+                <span>Tempo</span><strong id="marGrandePuzzleTime">00:00</strong>
+              </article>
+            </div>
+          </div>
+          <div class="sagrado-puzzle__workspace">
+            <div class="sagrado-puzzle__board-column">
+              <div class="sagrado-puzzle__board-shell">
+                <div
+                  aria-label="Tabuleiro do quebra-cabeça da vista aérea de Mar Grande"
+                  class="sagrado-puzzle__board"
+                  id="marGrandePuzzleBoard"
+                ></div>
+              </div>
+              <p class="sagrado-puzzle__instruction">
+                <strong>Computador:</strong> arraste a peça até o lugar correto.
+                <strong>Celular:</strong> arraste com o dedo ou toque na peça e
+                depois no espaço do tabuleiro.
+              </p>
+              <p
+                aria-live="polite"
+                class="sagrado-puzzle__message"
+                id="marGrandePuzzleMessage"
+                role="status"
+              >
+                Escolha o nível e clique em “Começar jogo”.
+              </p>
+            </div>
+            <aside
+              aria-labelledby="marGrandePuzzleTrayTitle"
+              class="sagrado-puzzle__tray-panel"
+            >
+              <div class="sagrado-puzzle__tray-heading">
+                <div>
+                  <span>PEÇAS DO QUEBRA-CABEÇA</span>
+                  <h3 id="marGrandePuzzleTrayTitle">Prepare a partida</h3>
+                </div>
+                <small class="sagrado-puzzle__tray-help"
+                  >Arraste para o tabuleiro</small
+                >
+              </div>
+              <div class="sagrado-puzzle__tray" id="marGrandePuzzleTray">
+                <div class="sagrado-puzzle__tray-empty">
+                  <span>🧩</span><strong>As peças aparecerão aqui</strong>
+                  <p>Escolha o nível e clique em “Começar jogo”.</p>
+                </div>
+              </div>
+              <details class="sagrado-puzzle__reference">
+                <summary>Ver imagem de referência</summary>
+                <figure>
+                  <img
+                    alt="Vista aérea da Igreja Sagrado Coração de Jesus e da praça de Mar Grande"
+                    height="600"
+                    loading="lazy"
+                    src="assets/img/jogos/mar-grande-vista-aerea.png"
+                    width="886"
+                  />
+                  <figcaption>
+                    Igreja Sagrado Coração de Jesus e praça · Mar Grande · Vera Cruz
                   </figcaption>
                 </figure>
               </details>
