@@ -17,6 +17,8 @@
   const trayTitle = document.getElementById("sagradoPuzzleTrayTitle");
 
   const IMAGE_SRC = "assets/img/jogos/igreja-sagrado-coracao-de-jesus.webp";
+  const puzzleSection = board.closest("section");
+  if (puzzleSection) puzzleSection.style.setProperty("--puzzle-image", 'url("' + IMAGE_SRC + '")');
   const SVG_NS = "http://www.w3.org/2000/svg";
   const XLINK_NS = "http://www.w3.org/1999/xlink";
 
@@ -209,7 +211,7 @@
     const col = index % state.size;
     const pathData = piecePath(index);
     const svg = document.createElementNS(SVG_NS, "svg");
-    const clipId = "capelaPieceClip-" + state.size + "-" + index + "-" + Math.random().toString(36).slice(2, 8);
+    const clipId = "sagradoPieceClip-" + state.size + "-" + index + "-" + Math.random().toString(36).slice(2, 8);
 
     svg.setAttribute("viewBox", [
       -g.pad,
@@ -644,7 +646,7 @@
     if (!board.children.length) return;
     board.classList.add("is-hinting");
     showButton.disabled = true;
-    messageOutput.textContent = "Dica rápida: memorize a posição da capela, do coqueiro, do céu e das pedras.";
+    messageOutput.textContent = "Dica rápida: memorize a posição das torres, da rosácea, das portas e do céu.";
     window.setTimeout(function () {
       board.classList.remove("is-hinting");
       showButton.disabled = false;

@@ -17,6 +17,8 @@
   const trayTitle = document.getElementById("marGrandePuzzleTrayTitle");
 
   const IMAGE_SRC = "assets/img/jogos/mar-grande-vista-aerea.jpg";
+  const puzzleSection = board.closest("section");
+  if (puzzleSection) puzzleSection.style.setProperty("--puzzle-image", 'url("' + IMAGE_SRC + '")');
   const SVG_NS = "http://www.w3.org/2000/svg";
   const XLINK_NS = "http://www.w3.org/1999/xlink";
 

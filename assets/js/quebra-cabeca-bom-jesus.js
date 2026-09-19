@@ -17,6 +17,8 @@
   const trayTitle = document.getElementById("bomJesusPuzzleTrayTitle");
 
   const IMAGE_SRC = "assets/img/jogos/bom-jesus-gamboa.jpg";
+  const puzzleSection = board.closest("section");
+  if (puzzleSection) puzzleSection.style.setProperty("--puzzle-image", 'url("' + IMAGE_SRC + '")');
   const SVG_NS = "http://www.w3.org/2000/svg";
   const XLINK_NS = "http://www.w3.org/1999/xlink";
 
@@ -209,7 +211,7 @@
     const col = index % state.size;
     const pathData = piecePath(index);
     const svg = document.createElementNS(SVG_NS, "svg");
-    const clipId = "capelaPieceClip-" + state.size + "-" + index + "-" + Math.random().toString(36).slice(2, 8);
+    const clipId = "bomJesusPieceClip-" + state.size + "-" + index + "-" + Math.random().toString(36).slice(2, 8);
 
     svg.setAttribute("viewBox", [
       -g.pad,
@@ -591,7 +593,7 @@
     saveProgress();
     board.classList.add("is-complete");
     celebrateCompletion();
-    messageOutput.innerHTML = "<strong>Quebra-cabeça concluído!</strong> Você montou a Bom Jesus da Gamboa em " + state.moves + " movimentos e " + formatTime(state.seconds) + ". O resultado foi salvo em Meu progresso.";
+    messageOutput.innerHTML = "<strong>Quebra-cabeça concluído!</strong> Você montou a imagem do Bom Jesus da Gamboa em " + state.moves + " movimentos e " + formatTime(state.seconds) + ". O resultado foi salvo em Meu progresso.";
     startButton.textContent = "Jogar novamente";
   }
 
@@ -644,7 +646,7 @@
     if (!board.children.length) return;
     board.classList.add("is-hinting");
     showButton.disabled = true;
-    messageOutput.textContent = "Dica rápida: memorize a posição da capela, do coqueiro, do céu e das pedras.";
+    messageOutput.textContent = "Dica rápida: memorize a posição das pessoas, dos enfeites, das cores e do andor.";
     window.setTimeout(function () {
       board.classList.remove("is-hinting");
       showButton.disabled = false;

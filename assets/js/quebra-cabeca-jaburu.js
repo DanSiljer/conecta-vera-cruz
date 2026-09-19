@@ -17,6 +17,8 @@
   const trayTitle = document.getElementById("jaburuPuzzleTrayTitle");
 
   const IMAGE_SRC = "assets/img/jogos/capela-velasquez-jaburu.jpg";
+  const puzzleSection = board.closest("section");
+  if (puzzleSection) puzzleSection.style.setProperty("--puzzle-image", 'url("' + IMAGE_SRC + '")');
   const SVG_NS = "http://www.w3.org/2000/svg";
   const XLINK_NS = "http://www.w3.org/1999/xlink";
 
@@ -209,7 +211,7 @@
     const col = index % state.size;
     const pathData = piecePath(index);
     const svg = document.createElementNS(SVG_NS, "svg");
-    const clipId = "capelaPieceClip-" + state.size + "-" + index + "-" + Math.random().toString(36).slice(2, 8);
+    const clipId = "jaburuPieceClip-" + state.size + "-" + index + "-" + Math.random().toString(36).slice(2, 8);
 
     svg.setAttribute("viewBox", [
       -g.pad,

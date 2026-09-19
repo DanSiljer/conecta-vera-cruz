@@ -131,11 +131,21 @@
   color: #5c3db6;
 }
 
-/* O jogo de Mar Grande reutiliza a estrutura do quebra-cabeça da igreja,
-   mas precisa usar sua própria fotografia na prévia e na dica. */
-#quebra-cabeca-mar-grande .sagrado-puzzle__board::before,
-#quebra-cabeca-mar-grande .sagrado-puzzle__board.is-hinting::after {
-  background-image: url("../../img/jogos/mar-grande-vista-aerea.jpg");
+/* Uma única fonte de imagem para peças, fundo e dica.
+   O JavaScript de cada jogo define --puzzle-image com seu IMAGE_SRC. */
+.capela-puzzle__board::before,
+.capela-puzzle__board.is-hinting::after,
+.jaburu-puzzle__board::before,
+.jaburu-puzzle__board.is-hinting::after,
+.bandeira-puzzle__board::before,
+.bandeira-puzzle__board.is-hinting::after,
+.sagrado-puzzle__board::before,
+.sagrado-puzzle__board.is-hinting::after,
+.forno-puzzle__board::before,
+.forno-puzzle__board.is-hinting::after,
+.bomjesus-puzzle__board::before,
+.bomjesus-puzzle__board.is-hinting::after {
+  background-image: var(--puzzle-image) !important;
   background-position: center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
