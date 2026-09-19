@@ -343,29 +343,28 @@
   function fitPuzzleToScreen() {
     const workspace = board.closest("[class$='__workspace']");
     const boardColumn = board.closest("[class$='__board-column']");
-    if (!workspace || !boardColumn) return;
+    const boardShell = board.closest("[class$='__board-shell']");
+    if (!workspace || !boardColumn || !boardShell) return;
 
-    const mobile = window.innerWidth <= 650;
-    const workspaceWidth = Math.max(240, workspace.clientWidth - (mobile ? 8 : 16));
-
-    /* Reserva espaço para barra de ferramentas, mensagem e 2 fileiras de peças. */
-    const reservedHeight = mobile ? 250 : 300;
-    const maxStageHeight = Math.max(360, Math.min(640, window.innerHeight - reservedHeight));
-    const trayHeight = state.size >= 5 ? 150 : state.size === 4 ? 118 : 92;
-    const messageHeight = mobile ? 0 : 38;
-    const boardMaxHeight = Math.max(220, maxStageHeight - trayHeight - messageHeight - 16);
+    const mobile = window.innerWidth <= 720;
+    const availableWidth = Math.max(
+      220,
+      (mobile ? workspace.clientWidth : boardColumn.clientWidth) - (mobile ? 10 : 20)
+    );
+    const maxBoardHeight = mobile
+      ? Math.max(260, Math.min(560, window.innerHeight * 0.58))
+      : Math.max(420, Math.min(680, window.innerHeight - 230));
 
     const targetWidth = Math.max(
       220,
-      Math.min(workspaceWidth, boardMaxHeight * state.ratio)
+      Math.min(availableWidth, 700, maxBoardHeight * state.ratio)
     );
-    const targetHeight = Math.floor(targetWidth / state.ratio);
+    const targetHeight = Math.round(targetWidth / state.ratio);
 
-    board.style.width = Math.floor(targetWidth) + "px";
+    board.style.width = Math.round(targetWidth) + "px";
     board.style.height = targetHeight + "px";
     board.style.marginInline = "auto";
 
-    /* A mesa acompanha o conteúdo, sem criar áreas vazias gigantes. */
     workspace.style.height = "auto";
     workspace.style.minHeight = "0";
     workspace.style.maxHeight = "none";
@@ -417,7 +416,9 @@
     drag.piece.style.zIndex = "";
 
     if (drag.moved) {
-      const slotIndex = slotFromPiece(drag.piece);
+      /* Usa a posição final do ponteiro. As abas curvas aumentam o retângulo
+         visual da peça e tornavam o cálculo por sobreposição impreciso. */
+      const slotIndex = slotFromPoint(drag.lastX, drag.lastY);
       if (slotIndex !== null) {
         attemptPlacement(drag.piece, slotIndex, false);
       } else {
