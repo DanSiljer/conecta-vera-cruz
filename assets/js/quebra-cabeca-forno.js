@@ -552,11 +552,45 @@
     if (typeof window.renderResults === "function") window.renderResults();
   }
 
+
+  function celebrateCompletion() {
+    const shell = board.closest("[class$='__board-shell']") || board.parentElement;
+    if (!shell) return;
+
+    const previous = shell.querySelector(".puzzle-celebration");
+    if (previous) previous.remove();
+
+    const celebration = document.createElement("div");
+    celebration.className = "puzzle-celebration";
+    celebration.setAttribute("aria-hidden", "true");
+    celebration.innerHTML =
+      '<div class="puzzle-celebration__badge">' +
+      '<span>🏆</span><strong>Parabéns!</strong>' +
+      '<small>Quebra-cabeça concluído</small></div>';
+
+    const colors = ["#ffd166", "#ef476f", "#06d6a0", "#4cc9f0", "#ffffff", "#f77f00"];
+    for (let i = 0; i < 42; i += 1) {
+      const confetti = document.createElement("i");
+      confetti.className = "puzzle-celebration__confetti";
+      confetti.style.setProperty("--x", (Math.random() * 100).toFixed(2) + "%");
+      confetti.style.setProperty("--delay", (Math.random() * 1.25).toFixed(2) + "s");
+      confetti.style.setProperty("--spin", Math.floor(Math.random() * 360) + "deg");
+      confetti.style.setProperty("--color", colors[i % colors.length]);
+      celebration.appendChild(confetti);
+    }
+
+    shell.appendChild(celebration);
+    window.setTimeout(function () {
+      if (celebration.isConnected) celebration.remove();
+    }, 4300);
+  }
+
   function finishGame() {
     state.playing = false;
     stopTimer();
     saveProgress();
     board.classList.add("is-complete");
+    celebrateCompletion();
     messageOutput.innerHTML = "<strong>Quebra-cabeça concluído!</strong> Você montou a Forno da Penha em " + state.moves + " movimentos e " + formatTime(state.seconds) + ". O resultado foi salvo em Meu progresso.";
     startButton.textContent = "Jogar novamente";
   }
