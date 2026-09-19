@@ -16,7 +16,7 @@
   const messageOutput = document.getElementById("marGrandePuzzleMessage");
   const trayTitle = document.getElementById("marGrandePuzzleTrayTitle");
 
-  const IMAGE_SRC = "assets/img/jogos/mar-grande-vista-aerea.png";
+  const IMAGE_SRC = "assets/img/jogos/mar-grande-vista-aerea.jpg";
   const SVG_NS = "http://www.w3.org/2000/svg";
   const XLINK_NS = "http://www.w3.org/1999/xlink";
 
@@ -676,7 +676,7 @@
   });
   preload.addEventListener("error", function () {
     resetGame();
-    messageOutput.textContent = "A imagem do quebra-cabeça não foi encontrada. Confira assets/img/jogos/mar-grande-vista-aerea.png.";
+    messageOutput.textContent = "A imagem do quebra-cabeça não foi encontrada. Confira assets/img/jogos/mar-grande-vista-aerea.jpg.";
   });
   preload.src = IMAGE_SRC;
 
