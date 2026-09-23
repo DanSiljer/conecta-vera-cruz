@@ -11,7 +11,7 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20260902-4" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20260923-1" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
@@ -36,7 +36,44 @@
             comunidades e guardar as histórias que estão sendo construídas hoje.
           </p>
 </div>
-<div aria-live="polite" class="container blog-featured-container" data-blog-featured=""></div>
+<section class="container election-featured" aria-labelledby="election-featured-title">
+  <header class="election-featured__header">
+    <div>
+      <span class="blog-eyebrow">Em destaque</span>
+      <h2 id="election-featured-title">Alterações em locais de votação · Zona 141</h2>
+      <p>Confira as mudanças divulgadas para eleitoras e eleitores de Vera Cruz e Itaparica nas Eleições 2026.</p>
+    </div>
+    <a class="election-featured__official-link" href="https://www.tse.jus.br/servicos-eleitorais/local-de-votacao-zonas-eleitorais" target="_blank" rel="noopener noreferrer">Consultar meu local de votação ↗</a>
+  </header>
+
+  <div class="election-featured__grid">
+    <article class="election-featured__card">
+      <figure class="election-featured__media">
+        <img src="assets/img/blog/eleicoes-2026-vera-cruz.jpeg" alt="Aviso da Justiça Eleitoral sobre alteração de local de votação em Vera Cruz, Zona 141" loading="eager" fetchpriority="high" width="1120" height="1400" />
+      </figure>
+      <div class="election-featured__content">
+        <span class="election-featured__place">Vera Cruz · Eleições 2026</span>
+        <h3>Colégio Júlio Virgílio de Santana não é mais local de votação</h3>
+        <p>As seções eleitorais que funcionavam no <strong>Colégio Júlio Virgílio de Santana</strong> foram transferidas para o <strong>Colégio Municipal Telma Régis de Andrade</strong>.</p>
+        <span class="election-featured__zone">Zona Eleitoral 141</span>
+      </div>
+    </article>
+
+    <article class="election-featured__card">
+      <figure class="election-featured__media">
+        <img src="assets/img/blog/eleicoes-2026-itaparica.jpeg" alt="Aviso da Justiça Eleitoral sobre alteração de locais de votação em Itaparica, Zona 141" loading="eager" width="1120" height="1400" />
+      </figure>
+      <div class="election-featured__content">
+        <span class="election-featured__place">Itaparica · Eleições 2026</span>
+        <h3>Perolina Gonçalves da Cruz e antigo BOB não são mais locais de votação</h3>
+        <p>As seções eleitorais da <strong>Escola Perolina Gonçalves da Cruz</strong> e do <strong>antigo BOB</strong> foram transferidas para o <strong>Colégio Estadual Ernesto Carneiro Ribeiro</strong>.</p>
+        <span class="election-featured__zone">Zona Eleitoral 141</span>
+      </div>
+    </article>
+  </div>
+
+  <p class="election-featured__note"><strong>Antes de votar:</strong> confirme seu endereço de votação no e-Título ou no Portal do Tribunal Superior Eleitoral.</p>
+</section>
 </section>
 <section aria-label="Pesquisa e atalhos do blog" class="blog-navigation blog-navigation--compact">
 <div class="container blog-navigation__inner blog-navigation__inner--compact">
@@ -574,12 +611,9 @@
           return new Date(b.data).getTime() - new Date(a.data).getTime();
         });
 
-        const featuredPost =
-          sortedPosts.find(function (post) {
-            return post.destaque;
-          }) ||
-          sortedPosts[0] ||
-          null;
+        /* O destaque principal desta página é o aviso eleitoral acima.
+           As publicações do arquivo continuam aparecendo normalmente no feed. */
+        const featuredPost = null;
 
         function normalize(value) {
           return String(value || "")
