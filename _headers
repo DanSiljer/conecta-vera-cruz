@@ -5,3 +5,17 @@
 /missao-aprender.html
   Cache-Control: no-cache, no-store, must-revalidate
   Content-Type: text/html; charset=utf-8
+
+/blog
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: text/html; charset=utf-8
+
+/blog.html
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: text/html; charset=utf-8
+
+/assets/css/pages/blog.css
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/assets/data/blog-posts.js
+  Cache-Control: no-cache, no-store, must-revalidate
