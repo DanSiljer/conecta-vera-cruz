@@ -3368,3 +3368,64 @@ button {
     padding: 22px 20px 24px;
   }
 }
+
+
+/* ==========================================================
+   EM DESTAQUE · GRANDE FINAL DA COPA INTEGRAÇÃO DA GAMBOA
+   Preserva o cartaz vertical sem cortar escudos, texto ou data.
+   ========================================================== */
+.blog-compact-card--sports-final.blog-compact-card--featured {
+  min-height: 560px;
+  grid-template-columns: minmax(330px, 0.82fr) minmax(0, 1.18fr);
+  border-color: rgba(7, 59, 98, 0.18);
+}
+
+.blog-compact-card--sports-final .blog-compact-card__media {
+  display: grid;
+  min-height: 560px;
+  place-items: center;
+  background: linear-gradient(180deg, #071b34 0%, #0c2f58 100%);
+}
+
+.blog-compact-card--sports-final .blog-compact-card__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+}
+
+.blog-reader-shell--sports-final .blog-reader-cover {
+  background: linear-gradient(180deg, #071b34 0%, #0c2f58 100%);
+}
+
+.blog-reader-shell--sports-final .blog-reader-cover img {
+  width: 100%;
+  height: auto;
+  max-height: 920px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 760px) {
+  .blog-compact-card--sports-final.blog-compact-card--featured {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .blog-compact-card--sports-final .blog-compact-card__media,
+  .blog-compact-card--sports-final.blog-compact-card--featured .blog-compact-card__media {
+    min-height: 0;
+    aspect-ratio: 3 / 4;
+  }
+
+  .blog-compact-card--sports-final .blog-compact-card__media img {
+    height: 100%;
+  }
+
+  .blog-reader-shell--sports-final .blog-reader-cover img {
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+}
