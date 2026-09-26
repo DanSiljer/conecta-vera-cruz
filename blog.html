@@ -11,7 +11,7 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20260923-1" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20260926-2" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
@@ -36,44 +36,7 @@
             comunidades e guardar as histórias que estão sendo construídas hoje.
           </p>
 </div>
-<section class="container election-featured" aria-labelledby="election-featured-title">
-  <header class="election-featured__header">
-    <div>
-      <span class="blog-eyebrow">Em destaque</span>
-      <h2 id="election-featured-title">Alterações em locais de votação · Zona 141</h2>
-      <p>Confira as mudanças divulgadas para eleitoras e eleitores de Vera Cruz e Itaparica nas Eleições 2026.</p>
-    </div>
-    <a class="election-featured__official-link" href="https://www.tse.jus.br/servicos-eleitorais/local-de-votacao-zonas-eleitorais" target="_blank" rel="noopener noreferrer">Consultar meu local de votação ↗</a>
-  </header>
-
-  <div class="election-featured__grid">
-    <article class="election-featured__card">
-      <figure class="election-featured__media">
-        <img src="assets/img/blog/eleicoes-2026-vera-cruz.jpeg" alt="Aviso da Justiça Eleitoral sobre alteração de local de votação em Vera Cruz, Zona 141" loading="eager" fetchpriority="high" width="1120" height="1400" />
-      </figure>
-      <div class="election-featured__content">
-        <span class="election-featured__place">Vera Cruz · Eleições 2026</span>
-        <h3>Colégio Júlio Virgílio de Santana não é mais local de votação</h3>
-        <p>As seções eleitorais que funcionavam no <strong>Colégio Júlio Virgílio de Santana</strong> foram transferidas para o <strong>Colégio Municipal Telma Régis de Andrade</strong>.</p>
-        <span class="election-featured__zone">Zona Eleitoral 141</span>
-      </div>
-    </article>
-
-    <article class="election-featured__card">
-      <figure class="election-featured__media">
-        <img src="assets/img/blog/eleicoes-2026-itaparica.jpeg" alt="Aviso da Justiça Eleitoral sobre alteração de locais de votação em Itaparica, Zona 141" loading="eager" width="1120" height="1400" />
-      </figure>
-      <div class="election-featured__content">
-        <span class="election-featured__place">Itaparica · Eleições 2026</span>
-        <h3>Perolina Gonçalves da Cruz e antigo BOB não são mais locais de votação</h3>
-        <p>As seções eleitorais da <strong>Escola Perolina Gonçalves da Cruz</strong> e do <strong>antigo BOB</strong> foram transferidas para o <strong>Colégio Estadual Ernesto Carneiro Ribeiro</strong>.</p>
-        <span class="election-featured__zone">Zona Eleitoral 141</span>
-      </div>
-    </article>
-  </div>
-
-  <p class="election-featured__note"><strong>Antes de votar:</strong> confirme seu endereço de votação no e-Título ou no Portal do Tribunal Superior Eleitoral.</p>
-</section>
+<div aria-live="polite" class="container blog-featured-container" data-blog-featured=""></div>
 </section>
 <section aria-label="Pesquisa e atalhos do blog" class="blog-navigation blog-navigation--compact">
 <div class="container blog-navigation__inner blog-navigation__inner--compact">
@@ -587,6 +550,103 @@
           ? [...window.CONECTA_BLOG_POSTS]
           : [];
 
+        /* Em destaque: grande final da Copa Integração da Gamboa. */
+        posts.unshift({
+          slug: "grande-final-copa-integracao-gamboa-2026",
+          titulo: "Grande Final da Copa Integração da Gamboa: Cava Uma Falta x Joia Juve",
+          subtitulo: "A decisão da Liga Esportiva e Distrital da Gamboa reúne as equipes da Gamboa e de Tairu neste domingo, 27 de setembro.",
+          resumo: "Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu, fazem a grande final da Copa Integração. A comunidade está convidada a acompanhar a decisão no campo da Gamboa.",
+          categoria: "Esporte",
+          categoriaSlug: "esporte",
+          data: "2026-09-26",
+          dataTexto: "26 de setembro de 2026",
+          autor: "Equipe Conecta Vera Cruz",
+          tempoLeitura: "1 min de leitura",
+          imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.webp",
+          imagemAlt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa entre Cava Uma Falta F.C. e Joia Juve",
+          destaque: true,
+          tags: ["Esporte", "Gamboa", "Futebol", "Copa Integração"],
+          conteudo: [
+            {
+              tipo: "paragrafo",
+              texto: "A Gamboa recebe neste domingo, 27 de setembro, a grande final da Copa Integração de Futebol da Liga Esportiva e Distrital da Gamboa. A decisão coloca frente a frente Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu."
+            },
+            {
+              tipo: "titulo",
+              texto: "Futebol local e encontro entre comunidades"
+            },
+            {
+              tipo: "paragrafo",
+              texto: "A final reúne atletas, torcedores, famílias e moradores em mais um momento de valorização do esporte amador e da participação comunitária em Vera Cruz."
+            },
+            {
+              tipo: "nota",
+              texto: "As artes compartilhadas informam a final para domingo, 27/09, mas apresentam horários diferentes. Antes de sair de casa, confirme o horário diretamente com a organização da competição."
+            },
+            {
+              tipo: "imagem",
+              src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.webp",
+              alt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa",
+              legenda: "Divulgação da grande final da Copa Integração de Futebol da Gamboa."
+            }
+          ]
+        });
+
+        /* O aviso eleitoral que estava em destaque permanece disponível no feed. */
+        posts.unshift({
+          slug: "alteracoes-locais-votacao-zona-141-2026",
+          titulo: "Zona 141: alterações em locais de votação de Vera Cruz e Itaparica",
+          subtitulo: "Mudanças divulgadas para eleitoras e eleitores nas Eleições 2026.",
+          resumo: "Seções eleitorais foram transferidas em Vera Cruz e Itaparica. Antes de votar, confirme o endereço atualizado no e-Título ou no Portal do TSE.",
+          categoria: "Utilidade pública",
+          categoriaSlug: "utilidade-publica",
+          data: "2026-09-23",
+          dataTexto: "23 de setembro de 2026",
+          autor: "Equipe Conecta Vera Cruz",
+          tempoLeitura: "1 min de leitura",
+          imagem: "assets/img/blog/eleicoes-2026-vera-cruz.jpeg",
+          imagemAlt: "Aviso da Justiça Eleitoral sobre alteração de local de votação em Vera Cruz, Zona 141",
+          destaque: false,
+          tags: ["Eleições 2026", "Zona 141", "Vera Cruz", "Itaparica", "Utilidade pública"],
+          conteudo: [
+            {
+              tipo: "titulo",
+              texto: "Vera Cruz"
+            },
+            {
+              tipo: "paragrafo",
+              texto: "As seções eleitorais que funcionavam no Colégio Júlio Virgílio de Santana foram transferidas para o Colégio Municipal Telma Régis de Andrade."
+            },
+            {
+              tipo: "titulo",
+              texto: "Itaparica"
+            },
+            {
+              tipo: "paragrafo",
+              texto: "As seções eleitorais da Escola Perolina Gonçalves da Cruz e do antigo BOB foram transferidas para o Colégio Estadual Ernesto Carneiro Ribeiro."
+            },
+            {
+              tipo: "nota",
+              texto: "Antes de votar, confirme seu endereço de votação no e-Título ou no Portal do Tribunal Superior Eleitoral."
+            },
+            {
+              tipo: "galeria",
+              imagens: [
+                {
+                  src: "assets/img/blog/eleicoes-2026-vera-cruz.jpeg",
+                  alt: "Aviso sobre alteração de local de votação em Vera Cruz",
+                  legenda: "Vera Cruz · Zona Eleitoral 141."
+                },
+                {
+                  src: "assets/img/blog/eleicoes-2026-itaparica.jpeg",
+                  alt: "Aviso sobre alteração de local de votação em Itaparica",
+                  legenda: "Itaparica · Zona Eleitoral 141."
+                }
+              ]
+            }
+          ]
+        });
+
         const elements = {
           featured: document.querySelector("[data-blog-featured]"),
           grid: document.querySelector("[data-blog-grid]"),
@@ -611,9 +671,12 @@
           return new Date(b.data).getTime() - new Date(a.data).getTime();
         });
 
-        /* O destaque principal desta página é o aviso eleitoral acima.
-           As publicações do arquivo continuam aparecendo normalmente no feed. */
-        const featuredPost = null;
+        const featuredPost =
+          sortedPosts.find(function (post) {
+            return post.destaque;
+          }) ||
+          sortedPosts[0] ||
+          null;
 
         function normalize(value) {
           return String(value || "")
@@ -757,6 +820,10 @@
               : "blog-compact-card",
           );
 
+          if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
+            article.classList.add("blog-compact-card--sports-final");
+          }
+
           const content = make("div", "blog-compact-card__content");
           const top = make("div", "blog-compact-card__top");
           const category = make(
@@ -854,6 +921,10 @@
           if (!elements.reader) return;
 
           const shell = make("article", "container blog-reader-shell");
+          if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
+            shell.classList.add("blog-reader-shell--sports-final");
+          }
+
           const toolbar = make("div", "blog-reader-toolbar");
           const close = make(
             "button",
@@ -981,8 +1052,8 @@
 
           const label = make("div", "blog-featured-label");
           label.append(
-            make("span", "blog-eyebrow", "Destaque do blog"),
-            make("strong", "", "Leitura recomendada"),
+            make("span", "blog-eyebrow", "Em destaque"),
+            make("strong", "", "Copa Integração da Gamboa"),
           );
           elements.featured.replaceChildren(
             label,
