@@ -11,7 +11,7 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20260926-4" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20260926-1" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
@@ -550,7 +550,7 @@
           ? [...window.CONECTA_BLOG_POSTS]
           : [];
 
-        /* Em destaque: grande final da Copa Integração da Gamboa. */
+        /* Destaque especial: final da Copa Integração da Gamboa. */
         posts.unshift({
           slug: "grande-final-copa-integracao-gamboa-2026",
           titulo: "Grande Final da Copa Integração da Gamboa: Cava Uma Falta x Joia Juve",
@@ -562,7 +562,7 @@
           dataTexto: "26 de setembro de 2026",
           autor: "Equipe Conecta Vera Cruz",
           tempoLeitura: "1 min de leitura",
-          imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.webp",
+          imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
           imagemAlt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa entre Cava Uma Falta F.C. e Joia Juve",
           destaque: true,
           tags: ["Esporte", "Gamboa", "Futebol", "Copa Integração"],
@@ -585,64 +585,9 @@
             },
             {
               tipo: "imagem",
-              src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.webp",
+              src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
               alt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa",
               legenda: "Divulgação da grande final da Copa Integração de Futebol da Gamboa."
-            }
-          ]
-        });
-
-        /* O aviso eleitoral que estava em destaque permanece disponível no feed. */
-        posts.unshift({
-          slug: "alteracoes-locais-votacao-zona-141-2026",
-          titulo: "Zona 141: alterações em locais de votação de Vera Cruz e Itaparica",
-          subtitulo: "Mudanças divulgadas para eleitoras e eleitores nas Eleições 2026.",
-          resumo: "Seções eleitorais foram transferidas em Vera Cruz e Itaparica. Antes de votar, confirme o endereço atualizado no e-Título ou no Portal do TSE.",
-          categoria: "Utilidade pública",
-          categoriaSlug: "utilidade-publica",
-          data: "2026-09-23",
-          dataTexto: "23 de setembro de 2026",
-          autor: "Equipe Conecta Vera Cruz",
-          tempoLeitura: "1 min de leitura",
-          imagem: "assets/img/blog/eleicoes-2026-vera-cruz.jpeg",
-          imagemAlt: "Aviso da Justiça Eleitoral sobre alteração de local de votação em Vera Cruz, Zona 141",
-          destaque: false,
-          tags: ["Eleições 2026", "Zona 141", "Vera Cruz", "Itaparica", "Utilidade pública"],
-          conteudo: [
-            {
-              tipo: "titulo",
-              texto: "Vera Cruz"
-            },
-            {
-              tipo: "paragrafo",
-              texto: "As seções eleitorais que funcionavam no Colégio Júlio Virgílio de Santana foram transferidas para o Colégio Municipal Telma Régis de Andrade."
-            },
-            {
-              tipo: "titulo",
-              texto: "Itaparica"
-            },
-            {
-              tipo: "paragrafo",
-              texto: "As seções eleitorais da Escola Perolina Gonçalves da Cruz e do antigo BOB foram transferidas para o Colégio Estadual Ernesto Carneiro Ribeiro."
-            },
-            {
-              tipo: "nota",
-              texto: "Antes de votar, confirme seu endereço de votação no e-Título ou no Portal do Tribunal Superior Eleitoral."
-            },
-            {
-              tipo: "galeria",
-              imagens: [
-                {
-                  src: "assets/img/blog/eleicoes-2026-vera-cruz.jpeg",
-                  alt: "Aviso sobre alteração de local de votação em Vera Cruz",
-                  legenda: "Vera Cruz · Zona Eleitoral 141."
-                },
-                {
-                  src: "assets/img/blog/eleicoes-2026-itaparica.jpeg",
-                  alt: "Aviso sobre alteração de local de votação em Itaparica",
-                  legenda: "Itaparica · Zona Eleitoral 141."
-                }
-              ]
             }
           ]
         });
@@ -819,7 +764,6 @@
               ? "blog-compact-card blog-compact-card--featured"
               : "blog-compact-card",
           );
-
           if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
             article.classList.add("blog-compact-card--sports-final");
           }
@@ -924,7 +868,6 @@
           if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
             shell.classList.add("blog-reader-shell--sports-final");
           }
-
           const toolbar = make("div", "blog-reader-toolbar");
           const close = make(
             "button",
