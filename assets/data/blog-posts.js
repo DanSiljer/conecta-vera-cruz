@@ -18,6 +18,46 @@
 
 window.CONECTA_BLOG_POSTS = [
   {
+    slug: "grande-final-copa-integracao-gamboa-2026",
+    titulo: "Grande Final da Copa Integração da Gamboa: Cava Uma Falta x Joia Juve",
+    subtitulo: "A decisão da Liga Esportiva e Distrital da Gamboa reúne as equipes da Gamboa e de Tairu.",
+    resumo: "Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu, fazem a grande final da Copa Integração. A comunidade está convidada a acompanhar a decisão.",
+    data: "2026-09-27",
+    dataTexto: "27 de setembro de 2026",
+    categoria: "Esporte",
+    categoriaSlug: "esporte",
+    tags: ["Esporte", "Gamboa", "Futebol", "Copa Integração"],
+    autor: "Equipe Conecta Vera Cruz",
+    tempoLeitura: "1 min",
+    imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
+    imagemAlt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa entre Cava Uma Falta F.C. e Joia Juve",
+    destaque: true,
+    conteudo: [
+      {
+        tipo: "paragrafo",
+        texto: "A Gamboa recebe a grande final da Copa Integração de Futebol da Liga Esportiva e Distrital da Gamboa. A decisão coloca frente a frente Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu."
+      },
+      {
+        tipo: "titulo",
+        texto: "Futebol local e encontro entre comunidades"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "A final reúne atletas, torcedores, famílias e moradores em mais um momento de valorização do esporte amador e da participação comunitária em Vera Cruz."
+      },
+      {
+        tipo: "nota",
+        texto: "As artes compartilhadas apresentam horários diferentes para a partida. Confirme o horário diretamente com a organização da competição antes de sair de casa."
+      },
+      {
+        tipo: "imagem",
+        src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
+        alt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa",
+        legenda: "Divulgação da grande final da Copa Integração de Futebol da Gamboa."
+      }
+    ]
+  },
+  {
     slug: "quilombo-tereré-luiz-eduardo-magalhaes",
     titulo: "Alunos da Escola Municipal Luís Eduardo Magalhães conhecem o Quilombo do Tereré",
     subtitulo: "Visita realizada em 15 de agosto de 2026.",
@@ -31,7 +71,7 @@ window.CONECTA_BLOG_POSTS = [
     tempoLeitura: "2 min",
     imagem: "assets/img/blog/quilombo-terere/quilombo-terere.jpeg",
     imagemAlt: "Card do Colégio Luiz Eduardo Magalhães mostrando a evolução do IDEB dos anos finais de 3,1 em 2023 para 5,2 em 2025",
-    destaque: true,
+    destaque: false,
     conteudo: [
       {
         tipo: "paragrafo",
@@ -131,7 +171,7 @@ window.CONECTA_BLOG_POSTS = [
     tempoLeitura: "2 min",
     imagem: "assets/img/blog/card-ideb.png",
     imagemAlt: "Card do Colégio Luiz Eduardo Magalhães mostrando a evolução do IDEB dos anos finais de 3,1 em 2023 para 5,2 em 2025",
-    destaque: true,
+    destaque: false,
     conteudo: [
       {
         tipo: "paragrafo",
