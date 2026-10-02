@@ -11,12 +11,12 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20260926-1" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20261001-1" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
 <script defer="" src="assets/js/layout.js"></script>
-<script defer="" src="assets/data/blog-posts.js"></script>
+<script defer="" src="assets/data/blog-posts.js?v=20261001-1"></script>
 <script defer="" src="assets/js/blog-fliver.js?v=20260902-7"></script>
 <script defer src="assets/js/blog-fliver-social.js?v=20260902-1"></script>
 <script src="assets/js/blog-comments.js?v=20260902-4" type="module"></script>
@@ -549,47 +549,137 @@
         const posts = Array.isArray(window.CONECTA_BLOG_POSTS)
           ? [...window.CONECTA_BLOG_POSTS]
           : [];
+        /* Destaques editoriais locais. Remove versões repetidas pelo slug antes de inserir. */
+        posts.forEach(function (post) {
+          post.destaque = false;
+        });
 
-        /* Destaque especial: final da Copa Integração da Gamboa. */
-        posts.unshift({
-          slug: "grande-final-copa-integracao-gamboa-2026",
-          titulo: "Grande Final da Copa Integração da Gamboa: Cava Uma Falta x Joia Juve",
-          subtitulo: "A decisão da Liga Esportiva e Distrital da Gamboa reúne as equipes da Gamboa e de Tairu neste domingo, 27 de setembro.",
-          resumo: "Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu, fazem a grande final da Copa Integração. A comunidade está convidada a acompanhar a decisão no campo da Gamboa.",
-          categoria: "Esporte",
-          categoriaSlug: "esporte",
-          data: "2026-09-26",
-          dataTexto: "26 de setembro de 2026",
-          autor: "Equipe Conecta Vera Cruz",
-          tempoLeitura: "1 min de leitura",
-          imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
-          imagemAlt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa entre Cava Uma Falta F.C. e Joia Juve",
-          destaque: true,
-          tags: ["Esporte", "Gamboa", "Futebol", "Copa Integração"],
-          conteudo: [
-            {
-              tipo: "paragrafo",
-              texto: "A Gamboa recebe neste domingo, 27 de setembro, a grande final da Copa Integração de Futebol da Liga Esportiva e Distrital da Gamboa. A decisão coloca frente a frente Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu."
-            },
-            {
-              tipo: "titulo",
-              texto: "Futebol local e encontro entre comunidades"
-            },
-            {
-              tipo: "paragrafo",
-              texto: "A final reúne atletas, torcedores, famílias e moradores em mais um momento de valorização do esporte amador e da participação comunitária em Vera Cruz."
-            },
-            {
-              tipo: "nota",
-              texto: "As artes compartilhadas informam a final para domingo, 27/09, mas apresentam horários diferentes. Antes de sair de casa, confirme o horário diretamente com a organização da competição."
-            },
-            {
-              tipo: "imagem",
-              src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
-              alt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa",
-              legenda: "Divulgação da grande final da Copa Integração de Futebol da Gamboa."
-            }
-          ]
+        const specialPosts = [
+          {
+            slug: "grande-final-copa-integracao-gamboa-2026",
+            titulo: "Grande Final da Copa Integração da Gamboa: Cava Uma Falta x Joia Juve",
+            subtitulo: "A decisão da Liga Esportiva e Distrital da Gamboa reuniu as equipes da Gamboa e de Tairu.",
+            resumo: "Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu, disputaram a grande final da Copa Integração no campo da Gamboa.",
+            categoria: "Esporte",
+            categoriaSlug: "esporte",
+            data: "2026-09-27",
+            dataTexto: "27 de setembro de 2026",
+            autor: "Equipe Conecta Vera Cruz",
+            tempoLeitura: "1 min de leitura",
+            imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
+            imagemAlt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa entre Cava Uma Falta F.C. e Joia Juve",
+            destaque: false,
+            tags: ["Esporte", "Gamboa", "Futebol", "Copa Integração"],
+            conteudo: [
+              {
+                tipo: "paragrafo",
+                texto: "A Gamboa recebeu a grande final da Copa Integração de Futebol da Liga Esportiva e Distrital da Gamboa, reunindo Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu."
+              },
+              {
+                tipo: "titulo",
+                texto: "Futebol local e encontro entre comunidades"
+              },
+              {
+                tipo: "paragrafo",
+                texto: "A decisão reuniu atletas, torcedores, famílias e moradores em mais um momento de valorização do esporte amador e da participação comunitária em Vera Cruz."
+              },
+              {
+                tipo: "imagem",
+                src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
+                alt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa",
+                legenda: "Divulgação da grande final da Copa Integração de Futebol da Gamboa."
+              }
+            ]
+          },
+          {
+            slug: "transporte-gratuito-eleicoes-2026-ilha-itaparica",
+            titulo: "Eleições 2026: transporte gratuito em Salvador e na travessia para a Ilha de Itaparica",
+            subtitulo: "Lanchinhas Salvador–Mar Grande e ferry-boat estão entre os serviços com gratuidade no período do primeiro turno.",
+            resumo: "A gratuidade inclui as lanchinhas da travessia Salvador–Mar Grande e o ferry-boat, neste caso somente para pedestres. Em Salvador, ônibus, BRT, STEC, metrô e Elevador Lacerda também terão operação gratuita em períodos definidos para o dia da votação.",
+            categoria: "Utilidade pública",
+            categoriaSlug: "utilidade-publica",
+            data: "2026-10-01",
+            dataTexto: "1º de outubro de 2026",
+            autor: "Equipe Conecta Vera Cruz",
+            tempoLeitura: "2 min de leitura",
+            imagem: "assets/img/blog/gratuidade-travessia-eleicoes-2026.jpg",
+            imagemAlt: "Embarcação da travessia Salvador–Mar Grande em vídeo informativo sobre a operação durante as Eleições 2026",
+            destaque: true,
+            destaqueRotulo: "Serviço · Eleições 2026",
+            tags: ["Eleições 2026", "Transporte", "Mar Grande", "Ilha de Itaparica", "Lanchinhas", "Ferry-Boat", "Salvador"],
+            conteudo: [
+              {
+                tipo: "paragrafo",
+                texto: "Eleitores que precisam se deslocar entre Salvador, Vera Cruz, Itaparica e outros municípios da Bahia terão opções de transporte público gratuito durante o período do primeiro turno das Eleições 2026. A medida foi estabelecida pelos Decretos estaduais nº 24.833 e nº 24.834."
+              },
+              {
+                tipo: "titulo",
+                texto: "Travessia Salvador–Mar Grande"
+              },
+              {
+                tipo: "paragrafo",
+                texto: "As lanchinhas que fazem a travessia Salvador–Mar Grande estão incluídas na gratuidade prevista para o período eleitoral. Pelo Decreto nº 24.834, o benefício no primeiro turno começa às 18h de sábado, 3 de outubro, e vai até 23h59 de domingo, 4 de outubro."
+              },
+              {
+                tipo: "video",
+                src: "assets/video/blog/gratuidade-travessia-eleicoes-2026.mp4",
+                poster: "assets/img/blog/gratuidade-travessia-eleicoes-2026.jpg",
+                legenda: "Vídeo informativo sobre a travessia marítima entre Salvador e Vera Cruz durante o período eleitoral."
+              },
+              {
+                tipo: "titulo",
+                texto: "Ferry-Boat: gratuidade somente para pedestres"
+              },
+              {
+                tipo: "paragrafo",
+                texto: "No Sistema Ferry-Boat, a gratuidade é exclusiva para passageiros pedestres. Veículos continuam sujeitos à cobrança normal. A Internacional Travessias Salvador orienta que o eleitor procure a bilheteria de pedestres e apresente o título de eleitor para retirar o bilhete gratuito."
+              },
+              {
+                tipo: "nota",
+                texto: "A operadora do Ferry-Boat informa, para o primeiro turno, gratuidade das 18h de 3 de outubro até 23h30 de 4 de outubro e recomenda chegar com antecedência aos terminais."
+              },
+              {
+                tipo: "titulo",
+                texto: "Transporte gratuito em Salvador"
+              },
+              {
+                tipo: "paragrafo",
+                texto: "No domingo, 4 de outubro, Salvador também terá gratuidade em sistemas municipais de transporte, incluindo ônibus convencionais, BRT, STEC (amarelinhos) e Elevador Lacerda. O metrô Salvador–Lauro de Freitas também terá acesso gratuito no dia da votação."
+              },
+              {
+                tipo: "lista",
+                itens: [
+                  "Lanchinhas Salvador–Mar Grande: incluídas na gratuidade estadual do período eleitoral.",
+                  "Ferry-Boat: gratuidade apenas para pedestres; veículos pagam normalmente.",
+                  "Ferry-Boat: para retirar o bilhete gratuito, a operadora orienta apresentar o título de eleitor na bilheteria de pedestres.",
+                  "Ônibus municipais de Salvador, BRT, STEC e Elevador Lacerda: gratuidade no domingo de votação, conforme operação divulgada pela Prefeitura.",
+                  "Metrô Salvador–Lauro de Freitas: gratuidade no domingo da eleição."
+                ]
+              },
+              {
+                tipo: "nota",
+                texto: "Planeje o deslocamento com antecedência. Horários operacionais podem variar entre os sistemas, e a procura tende a aumentar no período da votação."
+              },
+              {
+                tipo: "link",
+                href: "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/09/29/transportes-da-bahia-serao-gratuitos-nas-eleicoes-2026.ghtml",
+                texto: "Fonte principal: g1 Bahia — transportes gratuitos nas Eleições 2026"
+              },
+              {
+                tipo: "link",
+                href: "https://www.internacionaltravessias.com.br/2026/09/30/informe-its-30-09-2026/",
+                texto: "Orientação oficial do Sistema Ferry-Boat"
+              }
+            ]
+          }
+        ];
+
+        specialPosts.forEach(function (specialPost) {
+          const existingIndex = posts.findIndex(function (post) {
+            return post.slug === specialPost.slug;
+          });
+          if (existingIndex >= 0) posts.splice(existingIndex, 1);
+          posts.push(specialPost);
         });
 
         const elements = {
@@ -767,6 +857,9 @@
           if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
             article.classList.add("blog-compact-card--sports-final");
           }
+          if (post.slug === "transporte-gratuito-eleicoes-2026-ilha-itaparica") {
+            article.classList.add("blog-compact-card--transport-election");
+          }
 
           const content = make("div", "blog-compact-card__content");
           const top = make("div", "blog-compact-card__top");
@@ -840,6 +933,32 @@
                 figure.appendChild(make("figcaption", "", block.legenda));
               return figure;
             }
+            case "video": {
+              const figure = make("figure", "blog-article__figure blog-article__video");
+              const video = document.createElement("video");
+              video.controls = true;
+              video.playsInline = true;
+              video.preload = "metadata";
+              if (block.poster) video.poster = block.poster;
+              const source = document.createElement("source");
+              source.src = block.src || "";
+              source.type = "video/mp4";
+              video.appendChild(source);
+              figure.appendChild(video);
+              if (block.legenda)
+                figure.appendChild(make("figcaption", "", block.legenda));
+              return figure;
+            }
+            case "link": {
+              const source = make("p", "blog-article__source");
+              const link = document.createElement("a");
+              link.href = block.href || "#";
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.textContent = block.texto || "Abrir fonte";
+              source.appendChild(link);
+              return source;
+            }
             case "galeria": {
               const gallery = make("div", "blog-article__gallery");
               (block.imagens || []).forEach(function (item) {
@@ -867,6 +986,9 @@
           const shell = make("article", "container blog-reader-shell");
           if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
             shell.classList.add("blog-reader-shell--sports-final");
+          }
+          if (post.slug === "transporte-gratuito-eleicoes-2026-ilha-itaparica") {
+            shell.classList.add("blog-reader-shell--transport-election");
           }
           const toolbar = make("div", "blog-reader-toolbar");
           const close = make(
@@ -996,7 +1118,7 @@
           const label = make("div", "blog-featured-label");
           label.append(
             make("span", "blog-eyebrow", "Em destaque"),
-            make("strong", "", "Copa Integração da Gamboa"),
+            make("strong", "", featuredPost.destaqueRotulo || "Leitura recomendada"),
           );
           elements.featured.replaceChildren(
             label,
