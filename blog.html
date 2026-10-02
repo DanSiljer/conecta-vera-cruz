@@ -11,12 +11,12 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20260927-1" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20261001-2" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
 <script defer="" src="assets/js/layout.js"></script>
-<script defer="" src="assets/data/blog-posts.js?v=20260927-1"></script>
+<script defer="" src="assets/data/blog-posts.js?v=20261001-2"></script>
 <script defer="" src="assets/js/blog-fliver.js?v=20260902-7"></script>
 <script defer src="assets/js/blog-fliver-social.js?v=20260902-1"></script>
 <script src="assets/js/blog-comments.js?v=20260902-4" type="module"></script>
@@ -725,6 +725,9 @@
           if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
             article.classList.add("blog-compact-card--sports-final");
           }
+          if (post.slug === "transporte-gratuito-eleicoes-2026-ilha-itaparica") {
+            article.classList.add("blog-compact-card--transport-election");
+          }
 
           const content = make("div", "blog-compact-card__content");
           const top = make("div", "blog-compact-card__top");
@@ -798,6 +801,16 @@
                 figure.appendChild(make("figcaption", "", block.legenda));
               return figure;
             }
+            case "link": {
+              const source = make("p", "blog-article__source");
+              const link = document.createElement("a");
+              link.href = block.href || "#";
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.textContent = block.texto || "Abrir fonte";
+              source.appendChild(link);
+              return source;
+            }
             case "galeria": {
               const gallery = make("div", "blog-article__gallery");
               (block.imagens || []).forEach(function (item) {
@@ -825,6 +838,9 @@
           const shell = make("article", "container blog-reader-shell");
           if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
             shell.classList.add("blog-reader-shell--sports-final");
+          }
+          if (post.slug === "transporte-gratuito-eleicoes-2026-ilha-itaparica") {
+            shell.classList.add("blog-reader-shell--transport-election");
           }
           const toolbar = make("div", "blog-reader-toolbar");
           const close = make(
@@ -954,7 +970,7 @@
           const label = make("div", "blog-featured-label");
           label.append(
             make("span", "blog-eyebrow", "Em destaque"),
-            make("strong", "", "Copa Integração da Gamboa"),
+            make("strong", "", featuredPost.destaqueRotulo || "Leitura recomendada"),
           );
           elements.featured.replaceChildren(
             label,
