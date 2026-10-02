@@ -225,9 +225,9 @@
   }
 
   function boot() {
-    renderFeatured();
-    window.setTimeout(renderFeatured, 40);
-    window.setTimeout(renderFeatured, 220);
+    // A FLIVER continua preservada neste arquivo como reportagem histórica,
+    // mas não deve substituir o destaque definido por assets/data/blog-posts.js.
+    // O destaque atual é controlado exclusivamente pelo mecanismo principal do blog.
   }
 
   if (document.readyState === "loading") {
