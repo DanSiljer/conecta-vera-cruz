@@ -47,6 +47,12 @@ window.CONECTA_BLOG_POSTS = [
         texto: "As lanchinhas que fazem a travessia Salvador–Mar Grande estão incluídas na gratuidade prevista para o período eleitoral. Pelo Decreto nº 24.834, o benefício no primeiro turno começa às 18h de sábado, 3 de outubro, e vai até 23h59 de domingo, 4 de outubro."
       },
       {
+        tipo: "video",
+        src: "assets/video/blog/sobre-a-lancha-eleicoes-2026.mp4",
+        poster: "assets/img/mar-grande/orla-mar-grande.webp",
+        legenda: "Vídeo informativo sobre a travessia Salvador–Mar Grande e a gratuidade no período eleitoral."
+      },
+      {
         tipo: "titulo",
         texto: "Ferry-Boat: gratuidade somente para pedestres"
       },
