@@ -48,7 +48,7 @@ window.CONECTA_BLOG_POSTS = [
       },
       {
         tipo: "video",
-        src: "assets/video/blog/sobre-a-lancha-eleicoes-2026.mp4",
+        src: "assets/video/blog/gratuidade-travessia-eleicoes-2026.mp4",
         poster: "assets/img/mar-grande/orla-mar-grande.webp",
         legenda: "Vídeo informativo sobre a travessia Salvador–Mar Grande e a gratuidade no período eleitoral."
       },
