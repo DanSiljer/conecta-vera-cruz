@@ -3497,3 +3497,38 @@ button {
     min-height: 280px;
   }
 }
+
+
+/* ==========================================================
+   VÍDEO INFORMATIVO · TRAVESSIA SALVADOR–MAR GRANDE
+   ========================================================== */
+.blog-article__video {
+  margin: 2rem 0;
+}
+
+.blog-article__video video {
+  display: block;
+  width: min(100%, 430px);
+  max-height: 760px;
+  margin-inline: auto;
+  border-radius: 18px;
+  background: #061b25;
+  box-shadow: 0 16px 42px rgba(6, 59, 82, 0.16);
+}
+
+.blog-article__video figcaption {
+  max-width: 620px;
+  margin: 10px auto 0;
+  color: #72817d;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  .blog-article__video video {
+    width: 100%;
+    max-height: none;
+    border-radius: 14px;
+  }
+}
