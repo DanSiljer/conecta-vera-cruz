@@ -18,6 +18,129 @@
 
 window.CONECTA_BLOG_POSTS = [
   {
+    slug: "transporte-gratuito-eleicoes-2026-ilha-itaparica",
+    titulo: "Eleições 2026: transporte gratuito em Salvador e na travessia para a Ilha de Itaparica",
+    subtitulo: "Lanchinhas Salvador–Mar Grande e ferry-boat estão entre os serviços com gratuidade no período do primeiro turno.",
+    resumo: "A gratuidade inclui as lanchinhas da travessia Salvador–Mar Grande e o ferry-boat, neste caso somente para pedestres. Em Salvador, ônibus, BRT, STEC, metrô e Elevador Lacerda também terão operação gratuita em períodos definidos para o dia da votação.",
+    data: "2026-10-01",
+    dataTexto: "1º de outubro de 2026",
+    categoria: "Utilidade pública",
+    categoriaSlug: "utilidade-publica",
+    tags: ["Eleições 2026", "Transporte", "Mar Grande", "Ilha de Itaparica", "Lanchinhas", "Ferry-Boat", "Salvador"],
+    autor: "Equipe Conecta Vera Cruz",
+    tempoLeitura: "2 min",
+    imagem: "assets/img/mar-grande/orla-mar-grande.webp",
+    imagemAlt: "Orla de Mar Grande, em Vera Cruz, na Ilha de Itaparica",
+    destaque: true,
+    destaqueRotulo: "Serviço · Eleições 2026",
+    conteudo: [
+      {
+        tipo: "paragrafo",
+        texto: "Eleitores que precisam se deslocar entre Salvador, Vera Cruz, Itaparica e outros municípios da Bahia terão opções de transporte público gratuito durante o período do primeiro turno das Eleições 2026. A medida foi estabelecida pelos Decretos estaduais nº 24.833 e nº 24.834."
+      },
+      {
+        tipo: "titulo",
+        texto: "Travessia Salvador–Mar Grande"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "As lanchinhas que fazem a travessia Salvador–Mar Grande estão incluídas na gratuidade prevista para o período eleitoral. Pelo Decreto nº 24.834, o benefício no primeiro turno começa às 18h de sábado, 3 de outubro, e vai até 23h59 de domingo, 4 de outubro."
+      },
+      {
+        tipo: "titulo",
+        texto: "Ferry-Boat: gratuidade somente para pedestres"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "No Sistema Ferry-Boat, a gratuidade é exclusiva para passageiros pedestres. Veículos continuam sujeitos à cobrança normal. A Internacional Travessias Salvador orienta que o eleitor procure a bilheteria de pedestres e apresente o título de eleitor para retirar o bilhete gratuito."
+      },
+      {
+        tipo: "nota",
+        texto: "A operadora do Ferry-Boat informa, para o primeiro turno, gratuidade das 18h de 3 de outubro até 23h30 de 4 de outubro e recomenda chegar com antecedência aos terminais."
+      },
+      {
+        tipo: "titulo",
+        texto: "Transporte gratuito em Salvador"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "No domingo, 4 de outubro, Salvador também terá gratuidade em sistemas municipais de transporte, incluindo ônibus convencionais, BRT, STEC (amarelinhos) e Elevador Lacerda. O metrô Salvador–Lauro de Freitas também terá acesso gratuito no dia da votação."
+      },
+      {
+        tipo: "lista",
+        itens: [
+          "Lanchinhas Salvador–Mar Grande: incluídas na gratuidade estadual do período eleitoral.",
+          "Ferry-Boat: gratuidade apenas para pedestres; veículos pagam normalmente.",
+          "Ferry-Boat: para retirar o bilhete gratuito, a operadora orienta apresentar o título de eleitor na bilheteria de pedestres.",
+          "Ônibus municipais de Salvador, BRT, STEC e Elevador Lacerda: gratuidade no domingo da votação.",
+          "Metrô Salvador–Lauro de Freitas: gratuidade no domingo da eleição."
+        ]
+      },
+      {
+        tipo: "titulo",
+        texto: "Se houver segundo turno"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "A gratuidade estadual está prevista novamente das 18h de 24 de outubro até 23h59 de 25 de outubro. No Ferry-Boat, a operadora informou funcionamento do benefício até 23h30 do dia 25."
+      },
+      {
+        tipo: "nota",
+        texto: "Planeje o deslocamento com antecedência. Horários operacionais podem variar entre os sistemas, e a procura tende a aumentar no período da votação."
+      },
+      {
+        tipo: "link",
+        href: "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/09/29/transportes-da-bahia-serao-gratuitos-nas-eleicoes-2026.ghtml",
+        texto: "Fonte principal: g1 Bahia"
+      },
+      {
+        tipo: "link",
+        href: "https://www.internacionaltravessias.com.br/2026/09/30/informe-its-30-09-2026/",
+        texto: "Orientação oficial do Sistema Ferry-Boat"
+      }
+    ]
+  },
+  {
+    slug: "grande-final-copa-integracao-gamboa-2026",
+    titulo: "Grande Final da Copa Integração da Gamboa: Cava Uma Falta x Joia Juve",
+    subtitulo: "A decisão da Liga Esportiva e Distrital da Gamboa reúne as equipes da Gamboa e de Tairu.",
+    resumo: "Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu, fazem a grande final da Copa Integração. A comunidade está convidada a acompanhar a decisão.",
+    data: "2026-09-27",
+    dataTexto: "27 de setembro de 2026",
+    categoria: "Esporte",
+    categoriaSlug: "esporte",
+    tags: ["Esporte", "Gamboa", "Futebol", "Copa Integração"],
+    autor: "Equipe Conecta Vera Cruz",
+    tempoLeitura: "1 min",
+    imagem: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
+    imagemAlt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa entre Cava Uma Falta F.C. e Joia Juve",
+    destaque: false,
+    conteudo: [
+      {
+        tipo: "paragrafo",
+        texto: "A Gamboa recebe a grande final da Copa Integração de Futebol da Liga Esportiva e Distrital da Gamboa. A decisão coloca frente a frente Cava Uma Falta F.C., da Gamboa, e Joia Juve, de Tairu."
+      },
+      {
+        tipo: "titulo",
+        texto: "Futebol local e encontro entre comunidades"
+      },
+      {
+        tipo: "paragrafo",
+        texto: "A final reúne atletas, torcedores, famílias e moradores em mais um momento de valorização do esporte amador e da participação comunitária em Vera Cruz."
+      },
+      {
+        tipo: "nota",
+        texto: "As artes compartilhadas apresentam horários diferentes para a partida. Confirme o horário diretamente com a organização da competição antes de sair de casa."
+      },
+      {
+        tipo: "imagem",
+        src: "assets/img/blog/grande-final-copa-integracao-gamboa-2026.png",
+        alt: "Cartaz da grande final da Copa Integração de Futebol da Gamboa",
+        legenda: "Divulgação da grande final da Copa Integração de Futebol da Gamboa."
+      }
+    ]
+  },
+  {
     slug: "quilombo-tereré-luiz-eduardo-magalhaes",
     titulo: "Alunos da Escola Municipal Luís Eduardo Magalhães conhecem o Quilombo do Tereré",
     subtitulo: "Visita realizada em 15 de agosto de 2026.",
@@ -31,7 +154,7 @@ window.CONECTA_BLOG_POSTS = [
     tempoLeitura: "2 min",
     imagem: "assets/img/blog/quilombo-terere/quilombo-terere.jpeg",
     imagemAlt: "Card do Colégio Luiz Eduardo Magalhães mostrando a evolução do IDEB dos anos finais de 3,1 em 2023 para 5,2 em 2025",
-    destaque: true,
+    destaque: false,
     conteudo: [
       {
         tipo: "paragrafo",
@@ -131,7 +254,7 @@ window.CONECTA_BLOG_POSTS = [
     tempoLeitura: "2 min",
     imagem: "assets/img/blog/card-ideb.png",
     imagemAlt: "Card do Colégio Luiz Eduardo Magalhães mostrando a evolução do IDEB dos anos finais de 3,1 em 2023 para 5,2 em 2025",
-    destaque: true,
+    destaque: false,
     conteudo: [
       {
         tipo: "paragrafo",
