@@ -11,12 +11,12 @@
 <link href="manifest.webmanifest" rel="manifest"/>
 <link href="assets/css/global.css" rel="stylesheet"/>
 <link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20261001-2" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
+<link href="assets/css/pages/blog.css?v=20261002-2" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
 <link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
 <script defer="" src="assets/js/main.js"></script>
 <script defer="" src="assets/js/layout.js"></script>
-<script defer="" src="assets/data/blog-posts.js?v=20261001-2"></script>
+<script defer="" src="assets/data/blog-posts.js?v=20261002-2"></script>
 <script defer="" src="assets/js/blog-fliver.js?v=20261002-1"></script>
 <script defer src="assets/js/blog-fliver-social.js?v=20260902-1"></script>
 <script src="assets/js/blog-comments.js?v=20260902-4" type="module"></script>
@@ -790,6 +790,20 @@
             }
             case "nota":
               return make("aside", "blog-article__note", block.texto || "");
+            case "video": {
+              const figure = make("figure", "blog-article__video");
+              const video = document.createElement("video");
+              video.controls = true;
+              video.playsInline = true;
+              video.preload = "metadata";
+              video.src = block.src || "";
+              if (block.poster) video.poster = block.poster;
+              video.setAttribute("aria-label", block.legenda || "Vídeo informativo");
+              figure.appendChild(video);
+              if (block.legenda)
+                figure.appendChild(make("figcaption", "", block.legenda));
+              return figure;
+            }
             case "imagem": {
               const figure = make("figure", "blog-article__figure");
               const image = document.createElement("img");
