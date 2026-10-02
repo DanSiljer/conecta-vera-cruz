@@ -3429,3 +3429,71 @@ button {
     aspect-ratio: auto;
   }
 }
+
+
+/* ==========================================================
+   EM DESTAQUE · TRANSPORTE GRATUITO · ELEIÇÕES 2026
+   ========================================================== */
+.blog-compact-card--transport-election.blog-compact-card--featured {
+  min-height: 430px;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  border-color: rgba(0, 95, 121, 0.2);
+  background: linear-gradient(135deg, #ffffff 0%, #f4fbf8 100%);
+}
+
+.blog-compact-card--transport-election .blog-compact-card__media {
+  min-height: 430px;
+  background: linear-gradient(180deg, #075f79 0%, #087b58 100%);
+}
+
+.blog-compact-card--transport-election .blog-compact-card__media img {
+  object-position: center;
+}
+
+.blog-compact-card--transport-election .blog-compact-card__category {
+  color: #075f79;
+}
+
+.blog-reader-shell--transport-election .blog-reader-cover {
+  background: #e9f6f2;
+}
+
+.blog-reader-shell--transport-election .blog-reader-cover img {
+  object-position: center;
+}
+
+.blog-article__source {
+  margin: 0.8rem 0;
+}
+
+.blog-article__source a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 15px;
+  border: 1px solid #bad8ce;
+  border-radius: 999px;
+  background: #f3faf7;
+  color: #006847 !important;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.blog-article__source a:hover,
+.blog-article__source a:focus-visible {
+  border-color: #087b58;
+  background: #e4f4ed;
+  outline: none;
+}
+
+@media (max-width: 760px) {
+  .blog-compact-card--transport-election.blog-compact-card--featured {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .blog-compact-card--transport-election .blog-compact-card__media,
+  .blog-compact-card--transport-election.blog-compact-card--featured .blog-compact-card__media {
+    min-height: 280px;
+  }
+}
