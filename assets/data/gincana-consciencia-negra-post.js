@@ -7,7 +7,7 @@
     titulo:
       "Gincana Consciência Negra movimenta o Colégio Luiz Eduardo Magalhães em seu primeiro dia",
     subtitulo:
-      "Apresentações culturais, equipes e reflexões sobre história, identidade e respeito marcaram a programação de 18 de novembro, na Gamboa.",
+      "Apresentações culturais, grito de guerra e reflexões sobre história, identidade e respeito marcaram a programação de 18 de novembro, no primeiro dia de gicana.",
     resumo:
       "Estudantes participaram do primeiro dia da Gincana Consciência Negra, com apresentações culturais, equipes e valorização da história afro-brasileira. Veja as imagens.",
     data: "2026-11-18",
