@@ -64,8 +64,9 @@ window.submitEnrollment=async function(){
   const payload={
     anoLetivo:2027,escola:'Escola Municipal Luís Eduardo Magalhães',
     aluno:clean('aluno',120),nascimento:clean('nascimento',10),matricula:clean('matricula',30),
+    documentoTipo:clean('documentoTipo',10),documentoNumero:clean('documentoNumero',40),
     serie:clean('serie',30),turno:clean('turno',30),responsavel:clean('responsavel',120),
-    parentesco:clean('parentesco',65),telefone:clean('telefone',20),email:clean('email',120),
+    parentesco:clean('parentesco',65),cpfResponsavel:clean('cpfResponsavel',14),telefone:clean('telefone',20),email:clean('email',120),
     rua:clean('rua',130),numero:clean('numero',20),bairro:clean('bairro',90),
     cidade:clean('cidade',90),uf:clean('uf',10),referencia:clean('referencia',120),
     status:'pendente',criadoEm:serverTimestamp(),
@@ -73,6 +74,12 @@ window.submitEnrollment=async function(){
     agendamentoData:'',agendamentoHora:'' 
   };
   if(!payload.aluno||!payload.nascimento||!payload.responsavel||!payload.telefone||!payload.rua||!payload.numero||!payload.bairro||!payload.serie||!payload.turno||!payload.parentesco){status.textContent='Preencha todos os campos obrigatórios.';return;}
+  if(!['cpf','certidao'].includes(payload.documentoTipo) ||
+     (payload.documentoTipo==='cpf' && !/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(payload.documentoNumero)) ||
+     (payload.documentoTipo==='certidao' && (payload.documentoNumero.length<3 || payload.documentoNumero.length>40))){
+    status.textContent='Informe corretamente o CPF ou o número da certidão de nascimento do estudante.';return;
+  }
+  if(!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(payload.cpfResponsavel)){status.textContent='Informe o CPF do responsável com 11 dígitos.';return;}
   button.disabled=true;button.textContent='Enviando...';status.textContent='';
   let gravacaoConfirmada=false;
   let protocoloConfirmado='';

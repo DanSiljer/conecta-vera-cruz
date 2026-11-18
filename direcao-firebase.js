@@ -3,7 +3,7 @@ import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,sendPasswordResetEmail,signOut} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
 import {getFirestore,doc,getDoc,collection,query,orderBy,getDocs,updateDoc,setDoc,runTransaction,serverTimestamp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
 const $=id=>document.getElementById(id);let auth,db,all=[],selected=null;
-const labels={aluno:'Estudante',nascimento:'Nascimento',matricula:'Registro escolar',serie:'Série cursada',turno:'Turno',responsavel:'Responsável',parentesco:'Parentesco',telefone:'Telefone',email:'E-mail',rua:'Logradouro',numero:'Número',bairro:'Comunidade',cidade:'Município',uf:'UF',referencia:'Referência',anoLetivo:'Ano letivo',agendamentoData:'Entrega da documentação — data',agendamentoHora:'Entrega da documentação — horário',status:'Situação'};
+const labels={aluno:'Estudante',nascimento:'Nascimento',documentoTipo:'Tipo de documento',documentoNumero:'Número do documento',matricula:'Registro escolar',serie:'Série cursada',turno:'Turno',responsavel:'Responsável',cpfResponsavel:'CPF do responsável',parentesco:'Parentesco',telefone:'Telefone',email:'E-mail',rua:'Logradouro',numero:'Número',bairro:'Comunidade',cidade:'Município',uf:'UF',referencia:'Referência',anoLetivo:'Ano letivo',agendamentoData:'Entrega da documentação — data',agendamentoHora:'Entrega da documentação — horário',status:'Situação'};
 if(isConfigured){try{const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}catch(e){$('loginError').textContent='Erro na configuração do sistema.'}}else{$('loginError').textContent='Sistema ainda não configurado pela escola. O login será liberado após ativar o Firebase.';$('loginButton').disabled=true}
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function showDashboard(ok){$('dashboard').style.display=ok?'block':'none';$('login').style.display=ok?'none':'block';$('logout').classList.toggle('hide',!ok);if(!ok){all=[];selected=null;$('detail').style.display='none'}}
@@ -33,7 +33,7 @@ function openDetail(id){selected=all.find(x=>x.id===id);if(!selected)return;$('d
 $('closeDetail').onclick=()=>{$('detail').style.display='none';selected=null};
 $('printDetail').onclick=()=>{if(selected)window.print()};
 $('saveStatus').onclick=async()=>{if(!selected)return;const b=$('saveStatus');b.disabled=true;try{await updateDoc(doc(db,'rematriculas',selected.id),{status:$('detailStatus').value,atualizadoEm:serverTimestamp()});selected.status=$('detailStatus').value;$('detailFeedback').textContent='Situação atualizada.';render();openDetail(selected.id)}catch(e){console.error(e);$('detailFeedback').textContent='Erro ao salvar alteração.'}finally{b.disabled=false}};
-$('exportCsv').onclick=()=>{if(!all.length)return;const keys=['id','aluno','nascimento','matricula','serie','turno','responsavel','parentesco','telefone','email','rua','numero','bairro','cidade','uf','referencia','agendamentoData','agendamentoHora','status'];const csv=[keys.join(';'),...all.map(x=>keys.map(k=>'"'+String(x[k]??'').replaceAll('"','""')+'"').join(';'))].join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rematriculas-2027.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+$('exportCsv').onclick=()=>{if(!all.length)return;const keys=['id','aluno','nascimento','documentoTipo','documentoNumero','matricula','serie','turno','responsavel','cpfResponsavel','parentesco','telefone','email','rua','numero','bairro','cidade','uf','referencia','agendamentoData','agendamentoHora','status'];const csv=[keys.join(';'),...all.map(x=>keys.map(k=>'"'+String(x[k]??'').replaceAll('"','""')+'"').join(';'))].join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rematriculas-2027.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 
 
 // Administração da agenda; as permissões são verificadas nas regras do Firestore.
@@ -52,44 +52,12 @@ async function loadSlots(){
 }
 function renderSlots(){
  const root=$('slotRows');root.replaceChildren();
- const count=$('slotListCount');if(count)count.textContent=slots.length+' horário(s)';
  if(!slots.length){root.innerHTML='<tr><td colspan="6">Nenhum horário aberto. Cadastre o primeiro acima.</td></tr>';return;}
  for(const slot of slots){const tr=document.createElement('tr');
   makeCell(tr,formatDate(slot.data));makeCell(tr,slot.hora);makeCell(tr,slot.ocupadas);makeCell(tr,slot.vagas);
   const td=document.createElement('td');const tag=document.createElement('span');const full=slot.ocupadas>=slot.vagas;
   tag.className='agenda-badge'+(!slot.ativo?' closed':'');tag.textContent=!slot.ativo?'Fechado':full?'Esgotado':'Aberto';td.append(tag);tr.append(td);
-  const act=document.createElement('td');const actions=document.createElement('div');actions.className='schedule-slot-actions';
-  const btn=document.createElement('button');btn.type='button';btn.className='btn light';btn.textContent='Editar';btn.onclick=()=>editSlot(slot.id);actions.append(btn);
-  const remove=document.createElement('button');remove.type='button';remove.className='btn btn-delete-slot';remove.textContent='Excluir';
-  const hasBookings=Number(slot.ocupadas)!==0;
-  remove.disabled=hasBookings;
-  if(hasBookings)remove.title='Este horário já possui reservas. Feche o horário em Editar, sem apagar o agendamento.';
-  else remove.title='Excluir horário sem reservas';
-  remove.onclick=()=>deleteSlot(slot.id);actions.append(remove);act.append(actions);tr.append(act);root.append(tr);
- }
-}
-async function deleteSlot(id){
- const slot=slots.find(s=>s.id===id);
- const feedback=$('slotFeedback');
- if(!slot||!db||!auth?.currentUser)return;
- if(Number(slot.ocupadas)!==0){feedback.textContent='Este horário tem reservas e não pode ser excluído. Use Editar para fechá-lo.';return;}
- if(!window.confirm(`Excluir o horário de ${formatDate(slot.data)} às ${slot.hora}?\nEssa ação não poderá ser desfeita.`))return;
- feedback.textContent='Excluindo horário…';
- try{
-   // O servidor confere novamente o contador antes de apagar, mesmo se outro usuário acabou de reservar.
-   await runTransaction(db,async transaction=>{
-     const ref=doc(db,'agendaRematricula',id);
-     const snapshot=await transaction.get(ref);
-     if(!snapshot.exists())return;
-     if(snapshot.data().ocupadas!==0)throw new Error('horario_com_reservas');
-     transaction.delete(ref);
-   });
-   if(editingSlotId===id)resetEditor();
-   await loadSlots();
-   feedback.textContent='Horário excluído. Horários com reservas permanecem protegidos.';
- }catch(e){
-   console.error('Erro ao excluir horário:',e);
-   feedback.textContent=e?.message==='horario_com_reservas'?'O horário recebeu uma reserva e não pode mais ser excluído. Atualize a agenda.':e?.code==='permission-denied'?'Exclusão bloqueada pelo Firebase. Publique a regra de exclusão incluída no pacote.':'Não foi possível excluir o horário. Verifique a conexão e tente novamente.';
+  const act=document.createElement('td');const btn=document.createElement('button');btn.type='button';btn.className='btn light';btn.textContent='Editar';btn.onclick=()=>editSlot(slot.id);act.append(btn);tr.append(act);root.append(tr);
  }
 }
 function resetEditor(){editingSlotId=null;$('agendaForm').reset();$('slotCapacity').value=10;$('slotDate').disabled=false;$('slotTime').disabled=false;$('slotSave').textContent='Abrir horário';$('slotCancelEdit').classList.add('hide');}

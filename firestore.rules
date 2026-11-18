@@ -93,14 +93,14 @@ service cloud.firestore {
     match /rematriculas/{id} {
       allow create: if request.auth == null &&
         request.resource.data.keys().hasOnly([
-          'anoLetivo','escola','aluno','nascimento','matricula','serie','turno',
-          'responsavel','parentesco','telefone','email','rua','numero','bairro',
+          'anoLetivo','escola','aluno','nascimento','matricula','documentoTipo','documentoNumero','serie','turno',
+          'responsavel','cpfResponsavel','parentesco','telefone','email','rua','numero','bairro',
           'cidade','uf','referencia','status','criadoEm',
           'agendamentoSlotId','agendamentoData','agendamentoHora'
         ]) &&
         request.resource.data.keys().hasAll([
-          'anoLetivo','escola','aluno','nascimento','matricula','serie','turno',
-          'responsavel','parentesco','telefone','email','rua','numero','bairro',
+          'anoLetivo','escola','aluno','nascimento','matricula','documentoTipo','documentoNumero','serie','turno',
+          'responsavel','cpfResponsavel','parentesco','telefone','email','rua','numero','bairro',
           'cidade','uf','referencia','status','criadoEm',
           'agendamentoSlotId','agendamentoData','agendamentoHora'
         ]) &&
@@ -110,7 +110,12 @@ service cloud.firestore {
         request.resource.data.criadoEm == request.time &&
         request.resource.data.aluno is string && request.resource.data.aluno.size() >= 2 && request.resource.data.aluno.size() <= 120 &&
         request.resource.data.responsavel is string && request.resource.data.responsavel.size() >= 2 && request.resource.data.responsavel.size() <= 120 &&
+        request.resource.data.cpfResponsavel is string && request.resource.data.cpfResponsavel.matches('^[0-9]{3}[.][0-9]{3}[.][0-9]{3}-[0-9]{2}$') &&
         request.resource.data.nascimento is string && request.resource.data.nascimento.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') &&
+        request.resource.data.documentoTipo in ['cpf','certidao'] &&
+        request.resource.data.documentoNumero is string &&
+        ((request.resource.data.documentoTipo == 'cpf' && request.resource.data.documentoNumero.matches('^[0-9]{3}[.][0-9]{3}[.][0-9]{3}-[0-9]{2}$')) ||
+         (request.resource.data.documentoTipo == 'certidao' && request.resource.data.documentoNumero.size() >= 3 && request.resource.data.documentoNumero.size() <= 40)) &&
         request.resource.data.telefone is string && request.resource.data.telefone.size() >= 8 && request.resource.data.telefone.size() <= 20 &&
         request.resource.data.serie is string && request.resource.data.serie.size() >= 1 && request.resource.data.serie.size() <= 30 &&
         request.resource.data.turno is string && request.resource.data.turno.size() >= 1 && request.resource.data.turno.size() <= 30 &&
@@ -181,11 +186,7 @@ service cloud.firestore {
         !exists(/databases/$(database)/documents/rematriculas/$(request.resource.data.ultimaReservaId)) &&
         getAfter(/databases/$(database)/documents/rematriculas/$(request.resource.data.ultimaReservaId)).data.agendamentoSlotId == slotId &&
         getAfter(/databases/$(database)/documents/rematriculas/$(request.resource.data.ultimaReservaId)).data.criadoEm == request.time;
-      // Somente a direção pode apagar horários sem nenhuma reserva.
-      allow delete: if isDirector() &&
-        resource.data.ocupadas is int &&
-        resource.data.ocupadas == 0 &&
-        resource.data.ultimaReservaId == '';
+      allow delete: if false;
     }
 
     match /{document=**} { allow read, write: if false; }
