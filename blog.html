@@ -19,6 +19,7 @@
     <script defer="" src="assets/js/main.js"></script>
     <script defer src="assets/js/layout.js?v=20261118"></script>
     <script defer="" src="assets/data/blog-posts.js"></script>
+    <script defer src="assets/data/feira-ciencias-post.js?v=20261118"></script>
     <script type="module" src="assets/js/blog-comments.js?v=20260806-1"></script>
   </head>
   <body class="page-blog">
@@ -612,12 +613,7 @@
           return new Date(b.data).getTime() - new Date(a.data).getTime();
         });
 
-        const featuredPost =
-          sortedPosts.find(function (post) {
-            return post.destaque;
-          }) ||
-          sortedPosts[0] ||
-          null;
+        const featuredPost = sortedPosts.find(post => post.destaque) || sortedPosts[0] || null;
 
         function normalize(value) {
           return String(value || "")
