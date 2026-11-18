@@ -823,6 +823,19 @@
  .print-document-section{break-inside:avoid;page-break-inside:avoid}
  .print-field{break-inside:avoid}
 }
+
+      /* Recuperação de senha vinculada ao Firebase Authentication. */
+      .password-recovery{margin:24px 0 10px;padding:19px;border-radius:13px;background:#f2f8fa;border:1px solid #cbdfe7}
+      .password-recovery h2{font-size:19px;line-height:1.25;margin:0 0 7px;color:#123951}
+      .password-recovery p{font-size:13px;color:#526c7a;margin:0 0 12px}
+      .password-recovery label{margin-top:10px}
+      .recovery-buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+      .recovery-buttons .btn{min-height:44px}
+      .password-recovery .recovery-feedback{margin-top:12px;font-weight:650;line-height:1.5}
+      .password-recovery .recovery-feedback[data-state="success"]{color:#126b55}
+      .password-recovery .recovery-feedback[data-state="error"]{color:#a33532}
+      @media(max-width:480px){.password-recovery{padding:15px}.recovery-buttons .btn{width:100%}}
+      @media print{.password-recovery{display:none!important}}
 </style>
   </head>
   <body>
@@ -892,13 +905,27 @@
             Entrar no painel</button
           ><button
             class="btn outline"
-            id="resetPassword"
+            id="resetPassword" aria-controls="passwordRecovery"
             type="button"
             style="margin-top: 10px"
           >
             Esqueci minha senha
           </button>
         </form>
+        <section id="passwordRecovery" class="password-recovery hide" aria-labelledby="recoveryTitle">
+          <h2 id="recoveryTitle">Recuperar minha senha</h2>
+          <p>Informe o e-mail usado no acesso à direção. Você receberá, se a conta estiver cadastrada, um link para definir uma nova senha.</p>
+          <form id="recoveryForm">
+            <label for="recoveryEmail">E-mail de acesso</label>
+            <input id="recoveryEmail" type="email" autocomplete="email" inputmode="email" placeholder="seuemail@exemplo.com" required />
+            <div class="recovery-buttons">
+              <button class="btn" type="submit" id="recoverySubmit">Enviar link de recuperação</button>
+              <button class="btn outline" type="button" id="recoveryCancel">Voltar ao login</button>
+            </div>
+          </form>
+          <p id="recoveryFeedback" class="recovery-feedback" role="status" aria-live="polite"></p>
+          <p class="hint">Confira também as pastas Spam e Lixo Eletrônico. Por segurança, a confirmação não informa se um e-mail está cadastrado.</p>
+        </section>
         <p class="hint">
           O acesso precisa ser autorizado previamente pela escola. Não existe
           senha padrão.

@@ -1,248 +1,933 @@
-import {firebaseConfig,isConfigured} from './firebase-config.js';
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
-import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,sendPasswordResetEmail,signOut} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
-import {getFirestore,doc,getDoc,collection,query,orderBy,getDocs,updateDoc,setDoc,runTransaction,serverTimestamp} from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
-const $=id=>document.getElementById(id);let auth,db,all=[],selected=null;
-const labels={aluno:'Estudante',nascimento:'Nascimento',documentoTipo:'Tipo de documento',documentoNumero:'Número do documento',matricula:'Registro escolar',serie:'Série cursada',turno:'Turno',responsavel:'Responsável',cpfResponsavel:'CPF do responsável',parentesco:'Parentesco',telefone:'Telefone',email:'E-mail',rua:'Logradouro',numero:'Número',bairro:'Comunidade',cidade:'Município',uf:'UF',referencia:'Referência',anoLetivo:'Ano letivo',agendamentoData:'Entrega da documentação — data',agendamentoHora:'Entrega da documentação — horário',status:'Situação'};
-if(isConfigured){try{const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app)}catch(e){$('loginError').textContent='Erro na configuração do sistema.'}}else{$('loginError').textContent='Sistema ainda não configurado pela escola. O login será liberado após ativar o Firebase.';$('loginButton').disabled=true}
-const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function showDashboard(ok){$('dashboard').style.display=ok?'block':'none';$('login').style.display=ok?'none':'block';$('logout').classList.toggle('hide',!ok);if(!ok){all=[];selected=null;$('detail').style.display='none'}}
-async function authorized(uid){const snap=await getDoc(doc(db,'direcaoUsuarios',uid));return snap.exists()&&snap.data().ativo===true}
-if(auth)onAuthStateChanged(auth,async user=>{if(!user){showDashboard(false);return}try{if(!(await authorized(user.uid))){$('loginError').textContent='Este usuário não foi autorizado pela direção.';await signOut(auth);return}showDashboard(true);await Promise.all([load(),loadSlots(),loadAgendaConfig()])}catch(e){console.error(e);$('loginError').textContent='Falha ao verificar acesso. Consulte o administrador.';await signOut(auth)}});
-$('loginForm').addEventListener('submit',async e=>{e.preventDefault();if(!auth)return;const b=$('loginButton');b.disabled=true;$('loginError').textContent='';try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){$('loginError').textContent='Não foi possível entrar. Confira seu e-mail, senha e autorização.'}finally{b.disabled=false}});
-$('resetPassword').addEventListener('click',async()=>{
-  if(!auth){$('loginError').textContent='Configure o Firebase antes de recuperar a senha.';return;}
-  const email=$('email').value.trim();
-  if(!email){$('loginError').textContent='Informe seu e-mail institucional para receber o link de recuperação.';$('email').focus();return;}
-  try{await sendPasswordResetEmail(auth,email);$('loginError').textContent='Se o e-mail estiver cadastrado, você receberá as instruções de recuperação.';}
-  catch(e){console.error(e);$('loginError').textContent='Não foi possível solicitar a recuperação. Confira o e-mail e tente novamente.';}
+import { firebaseConfig, isConfigured } from "./firebase-config.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  query,
+  orderBy,
+  getDocs,
+  updateDoc,
+  setDoc,
+  runTransaction,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+const $ = (id) => document.getElementById(id);
+let auth,
+  db,
+  all = [],
+  selected = null;
+const labels = {
+  aluno: "Estudante",
+  nascimento: "Nascimento",
+  documentoTipo: "Tipo de documento",
+  documentoNumero: "Número do documento",
+  matricula: "Registro escolar",
+  serie: "Série cursada",
+  turno: "Turno",
+  responsavel: "Responsável",
+  cpfResponsavel: "CPF do responsável",
+  parentesco: "Parentesco",
+  telefone: "Telefone",
+  email: "E-mail",
+  rua: "Logradouro",
+  numero: "Número",
+  bairro: "Comunidade",
+  cidade: "Município",
+  uf: "UF",
+  referencia: "Referência",
+  anoLetivo: "Ano letivo",
+  agendamentoData: "Entrega da documentação — data",
+  agendamentoHora: "Entrega da documentação — horário",
+  status: "Situação",
+};
+if (isConfigured) {
+  try {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+  } catch (e) {
+    $("loginError").textContent = "Erro na configuração do sistema.";
+  }
+} else {
+  $("loginError").textContent =
+    "Sistema ainda não configurado pela escola. O login será liberado após ativar o Firebase.";
+  $("loginButton").disabled = true;
+}
+const escape = (s) =>
+  String(s ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
+function showDashboard(ok) {
+  $("dashboard").style.display = ok ? "block" : "none";
+  $("login").style.display = ok ? "none" : "block";
+  $("logout").classList.toggle("hide", !ok);
+  if (!ok) {
+    all = [];
+    selected = null;
+    $("detail").style.display = "none";
+  }
+}
+async function authorized(uid) {
+  const snap = await getDoc(doc(db, "direcaoUsuarios", uid));
+  return snap.exists() && snap.data().ativo === true;
+}
+if (auth)
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      showDashboard(false);
+      return;
+    }
+    try {
+      if (!(await authorized(user.uid))) {
+        $("loginError").textContent =
+          "Este usuário não foi autorizado pela direção.";
+        await signOut(auth);
+        return;
+      }
+      showDashboard(true);
+      await Promise.all([load(), loadSlots(), loadAgendaConfig()]);
+    } catch (e) {
+      console.error(e);
+      $("loginError").textContent =
+        "Falha ao verificar acesso. Consulte o administrador.";
+      await signOut(auth);
+    }
+  });
+$("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!auth) return;
+  const b = $("loginButton");
+  b.disabled = true;
+  $("loginError").textContent = "";
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      $("email").value.trim(),
+      $("password").value,
+    );
+  } catch (e) {
+    $("loginError").textContent =
+      "Não foi possível entrar. Confira seu e-mail, senha e autorização.";
+  } finally {
+    b.disabled = false;
+  }
 });
-$('logout').onclick=()=>auth&&signOut(auth);
-async function load(){const msg=$('loadMsg');msg.textContent='Carregando...';try{const snapshot=await getDocs(query(collection(db,'rematriculas'),orderBy('criadoEm','desc')));all=snapshot.docs.map(d=>({id:d.id,...d.data()}));render();msg.textContent=all.length+' registros recebidos'}catch(e){console.error(e);msg.textContent='Não foi possível carregar a lista. Confira as permissões.'}}
-function render(){let text=$('search').value.toLowerCase().trim(),filter=$('filter').value;const filtered=all.filter(x=>(filter==='todos'||x.status===filter)&&[x.aluno,x.responsavel,x.id,x.agendamentoData,formatDate(x.agendamentoData||''),x.agendamentoHora].join(' ').toLowerCase().includes(text));$('countAll').textContent=all.length;$('countPending').textContent=all.filter(x=>x.status==='pendente').length;$('countChecked').textContent=all.filter(x=>x.status==='conferida').length;$('countBooked').textContent=all.filter(x=>x.agendamentoSlotId).length;$('rows').replaceChildren();for(const x of filtered){const tr=document.createElement('tr');const date=x.criadoEm?.toDate?.().toLocaleDateString('pt-BR')||'—';for(const val of [date,x.aluno||'—',x.serie||'—',x.responsavel||'—']){let td=document.createElement('td');td.textContent=val;tr.appendChild(td)}
-let bookingTd=document.createElement('td');
-if(x.agendamentoData&&x.agendamentoHora){
- const day=document.createElement('span');day.className='booking-date';day.textContent=formatDate(x.agendamentoData);
- const time=document.createElement('span');time.className='booking-time';time.textContent='às '+x.agendamentoHora;
- bookingTd.append(day,time);
-}else{const none=document.createElement('span');none.className='booking-none';none.textContent='Não agendado';bookingTd.append(none)}
-tr.appendChild(bookingTd);
-let stat=document.createElement('td');stat.innerHTML='<span class="pill '+(x.status||'')+'">'+escape(({pendente:'Pendente',conferida:'Conferida',pendencia:'Com pendência'})[x.status]||'Pendente')+'</span>';tr.appendChild(stat);let last=document.createElement('td'),btn=document.createElement('button');btn.textContent='Abrir ficha';btn.onclick=()=>openDetail(x.id);last.append(btn);tr.append(last);$('rows').append(tr)}if(!filtered.length)$('rows').innerHTML='<tr><td colspan="7">Nenhum pedido encontrado.</td></tr>'}
-$('search').oninput=render;$('filter').onchange=render;
-function openDetail(id){selected=all.find(x=>x.id===id);if(!selected)return;$('detailProtocol').textContent='Protocolo: '+id.toUpperCase();$('detailStatus').value=selected.status||'pendente';$('schoolRegistration').value=String(selected.matricula??'');$('registerFeedback').textContent='';$('detailGrid').replaceChildren();for(const [key,label] of Object.entries(labels)){let cell=document.createElement('div'),small=document.createElement('small'),strong=document.createElement('strong');small.textContent=label;strong.textContent=String(selected[key]??'Não informado');cell.append(small,strong);$('detailGrid').append(cell)}$('detailFeedback').textContent='';$('detail').style.display='block';$('detail').scrollIntoView({behavior:'smooth',block:'start'})}
+// O Firebase envia a mensagem: a página não manipula senhas nem gera links manualmente.
+function toggleRecovery(show) {
+  const panel = $("passwordRecovery");
+  panel.classList.toggle("hide", !show);
+  $("resetPassword").setAttribute("aria-expanded", String(show));
+  if (show) {
+    $("recoveryEmail").value = $("email").value.trim();
+    $("recoveryEmail").focus();
+  } else {
+    $("recoveryFeedback").textContent = "";
+    $("email").focus();
+  }
+}
+$("resetPassword").setAttribute("aria-expanded", "false");
+$("resetPassword").addEventListener("click", () => toggleRecovery(true));
+$("recoveryCancel").addEventListener("click", () => toggleRecovery(false));
+$("recoveryForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const feedback = $("recoveryFeedback"),
+    button = $("recoverySubmit");
+  const email = $("recoveryEmail").value.trim();
+  feedback.textContent = "";
+  feedback.dataset.state = "";
+  if (!auth) {
+    feedback.dataset.state = "error";
+    feedback.textContent =
+      "A conexão com o Firebase não está disponível. Procure a administração.";
+    return;
+  }
+  if (!email || !$("recoveryEmail").checkValidity()) {
+    $("recoveryEmail").reportValidity();
+    return;
+  }
+  button.disabled = true;
+  button.textContent = "Solicitando...";
+  try {
+    await sendPasswordResetEmail(auth, email);
+    feedback.dataset.state = "success";
+    feedback.textContent =
+      "Se o e-mail estiver cadastrado em nossa base, enviaremos um link de recuperação para você. Verifique sua caixa de entrada e também a pasta de spam ou lixo eletrônico. Clique no link para criar uma nova senha e, em seguida, volte a esta tela para fazer seu acesso.";
+  } catch (err) {
+    console.error("Falha no pedido de recuperação:", err?.code || err);
+    feedback.dataset.state = "error";
+    feedback.textContent =
+      err?.code === "auth/too-many-requests"
+        ? "Muitas tentativas. Tente novamente mais tarde."
+        : err?.code === "auth/invalid-email"
+          ? "Informe um endereço de e-mail válido."
+          : "Não foi possível solicitar a recuperação agora. Confira a conexão e tente novamente ou procure a secretaria.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Enviar link de recuperação";
+  }
+});
+$("logout").onclick = () => auth && signOut(auth);
+async function load() {
+  const msg = $("loadMsg");
+  msg.textContent = "Carregando...";
+  try {
+    const snapshot = await getDocs(
+      query(collection(db, "rematriculas"), orderBy("criadoEm", "desc")),
+    );
+    all = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+    render();
+    msg.textContent = all.length + " registros recebidos";
+  } catch (e) {
+    console.error(e);
+    msg.textContent =
+      "Não foi possível carregar a lista. Confira as permissões.";
+  }
+}
+function render() {
+  let text = $("search").value.toLowerCase().trim(),
+    filter = $("filter").value;
+  const filtered = all.filter(
+    (x) =>
+      (filter === "todos" || x.status === filter) &&
+      [
+        x.aluno,
+        x.responsavel,
+        x.id,
+        x.agendamentoData,
+        formatDate(x.agendamentoData || ""),
+        x.agendamentoHora,
+      ]
+        .join(" ")
+        .toLowerCase()
+        .includes(text),
+  );
+  $("countAll").textContent = all.length;
+  $("countPending").textContent = all.filter(
+    (x) => x.status === "pendente",
+  ).length;
+  $("countChecked").textContent = all.filter(
+    (x) => x.status === "conferida",
+  ).length;
+  $("countBooked").textContent = all.filter((x) => x.agendamentoSlotId).length;
+  $("rows").replaceChildren();
+  for (const x of filtered) {
+    const tr = document.createElement("tr");
+    const date = x.criadoEm?.toDate?.().toLocaleDateString("pt-BR") || "—";
+    for (const val of [
+      date,
+      x.aluno || "—",
+      x.serie || "—",
+      x.responsavel || "—",
+    ]) {
+      let td = document.createElement("td");
+      td.textContent = val;
+      tr.appendChild(td);
+    }
+    let bookingTd = document.createElement("td");
+    if (x.agendamentoData && x.agendamentoHora) {
+      const day = document.createElement("span");
+      day.className = "booking-date";
+      day.textContent = formatDate(x.agendamentoData);
+      const time = document.createElement("span");
+      time.className = "booking-time";
+      time.textContent = "às " + x.agendamentoHora;
+      bookingTd.append(day, time);
+    } else {
+      const none = document.createElement("span");
+      none.className = "booking-none";
+      none.textContent = "Não agendado";
+      bookingTd.append(none);
+    }
+    tr.appendChild(bookingTd);
+    let stat = document.createElement("td");
+    stat.innerHTML =
+      '<span class="pill ' +
+      (x.status || "") +
+      '">' +
+      escape(
+        {
+          pendente: "Pendente",
+          conferida: "Conferida",
+          pendencia: "Com pendência",
+        }[x.status] || "Pendente",
+      ) +
+      "</span>";
+    tr.appendChild(stat);
+    let last = document.createElement("td"),
+      btn = document.createElement("button");
+    btn.textContent = "Abrir ficha";
+    btn.onclick = () => openDetail(x.id);
+    last.append(btn);
+    tr.append(last);
+    $("rows").append(tr);
+  }
+  if (!filtered.length)
+    $("rows").innerHTML =
+      '<tr><td colspan="7">Nenhum pedido encontrado.</td></tr>';
+}
+$("search").oninput = render;
+$("filter").onchange = render;
+function openDetail(id) {
+  selected = all.find((x) => x.id === id);
+  if (!selected) return;
+  $("detailProtocol").textContent = "Protocolo: " + id.toUpperCase();
+  $("detailStatus").value = selected.status || "pendente";
+  $("schoolRegistration").value = String(selected.matricula ?? "");
+  $("registerFeedback").textContent = "";
+  $("detailGrid").replaceChildren();
+  for (const [key, label] of Object.entries(labels)) {
+    let cell = document.createElement("div"),
+      small = document.createElement("small"),
+      strong = document.createElement("strong");
+    small.textContent = label;
+    strong.textContent = String(selected[key] ?? "Não informado");
+    cell.append(small, strong);
+    $("detailGrid").append(cell);
+  }
+  $("detailFeedback").textContent = "";
+  $("detail").style.display = "block";
+  $("detail").scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 // Alteração independente da situação da rematrícula, exclusiva para a direção.
-$('saveSchoolRegistration').addEventListener('click',async()=>{
-  if(!selected||!auth?.currentUser||!db)return;
-  const input=$('schoolRegistration'),feedback=$('registerFeedback'),button=$('saveSchoolRegistration');
-  const value=input.value.trim();
-  if(value.length>30){feedback.textContent='O registro deve ter no máximo 30 caracteres.';return;}
-  if(value && !/^[\p{L}\p{N} .\/\-_]+$/u.test(value)){
-    feedback.textContent='Use somente letras, números, espaços, ponto, barra ou hífen.';return;
+$("saveSchoolRegistration").addEventListener("click", async () => {
+  if (!selected || !auth?.currentUser || !db) return;
+  const input = $("schoolRegistration"),
+    feedback = $("registerFeedback"),
+    button = $("saveSchoolRegistration");
+  const value = input.value.trim();
+  if (value.length > 30) {
+    feedback.textContent = "O registro deve ter no máximo 30 caracteres.";
+    return;
   }
-  button.disabled=true;feedback.textContent='Salvando registro escolar…';
-  try{
-    await updateDoc(doc(db,'rematriculas',selected.id),{matricula:value,atualizadoEm:serverTimestamp()});
-    selected.matricula=value;
-    const existing=all.find(x=>x.id===selected.id);
-    if(existing)existing.matricula=value;
-    const index=Object.keys(labels).indexOf('matricula');
-    const cell=$('detailGrid')?.children[index]?.querySelector('strong');
-    if(cell)cell.textContent=value||'Não informado';
-    feedback.textContent='Registro escolar salvo com sucesso.';
-  }catch(e){console.error('Erro ao salvar registro escolar:',e);feedback.textContent=e?.code==='permission-denied'?'Acesso negado. Publique as regras de atualização do registro escolar no Firestore.':'Não foi possível salvar o registro escolar. Tente novamente.';}
-  finally{button.disabled=false;}
+  if (value && !/^[\p{L}\p{N} .\/\-_]+$/u.test(value)) {
+    feedback.textContent =
+      "Use somente letras, números, espaços, ponto, barra ou hífen.";
+    return;
+  }
+  button.disabled = true;
+  feedback.textContent = "Salvando registro escolar…";
+  try {
+    await updateDoc(doc(db, "rematriculas", selected.id), {
+      matricula: value,
+      atualizadoEm: serverTimestamp(),
+    });
+    selected.matricula = value;
+    const existing = all.find((x) => x.id === selected.id);
+    if (existing) existing.matricula = value;
+    const index = Object.keys(labels).indexOf("matricula");
+    const cell = $("detailGrid")?.children[index]?.querySelector("strong");
+    if (cell) cell.textContent = value || "Não informado";
+    feedback.textContent = "Registro escolar salvo com sucesso.";
+  } catch (e) {
+    console.error("Erro ao salvar registro escolar:", e);
+    feedback.textContent =
+      e?.code === "permission-denied"
+        ? "Acesso negado. Publique as regras de atualização do registro escolar no Firestore."
+        : "Não foi possível salvar o registro escolar. Tente novamente.";
+  } finally {
+    button.disabled = false;
+  }
 });
-$('closeDetail').onclick=()=>{$('detail').style.display='none';selected=null};
+$("closeDetail").onclick = () => {
+  $("detail").style.display = "none";
+  selected = null;
+};
 // Monta uma ficha independente do painel. Todos os valores são inseridos como texto, sem HTML do usuário.
-function fillPrintSheet(record){
- const root=$('printDocumentFields');if(!root)return false;root.replaceChildren();
- const protocol=$('printProtocol');if(protocol)protocol.textContent='Protocolo: '+record.id.toUpperCase();
- const generated=$('printGenerated');if(generated)generated.textContent='Emitido em '+new Date().toLocaleDateString('pt-BR',{timeZone:'America/Bahia'});
- const val=key=>{const raw=record[key];return raw===undefined||raw===null||String(raw).trim()===''?'Não informado':String(raw)};
- const section=(title,fields)=>{
-   const box=document.createElement('section');box.className='print-document-section';
-   const h=document.createElement('h3');h.textContent=title;box.append(h);
-   const grid=document.createElement('div');grid.className='print-fields';
-   for(const item of fields){
-     const [label,value,wide]=item;const cell=document.createElement('div');cell.className='print-field'+(wide?' wide':'');
-     const caption=document.createElement('span');caption.className='print-field-label';caption.textContent=label;
-     const strong=document.createElement('div');strong.className='print-field-value';strong.textContent=value;
-     cell.append(caption,strong);grid.append(cell);
-   }
-   box.append(grid);root.append(box);
- };
- const birth=val('nascimento');const friendlyBirth=/^\d{4}-\d{2}-\d{2}$/.test(birth)?formatDate(birth):birth;
- const docType=record.documentoTipo==='cpf'?'CPF':record.documentoTipo==='certidao'?'Certidão de nascimento':'Documento de identificação';
- const situations={pendente:'Pendente',conferida:'Conferida',pendencia:'Com pendência'};
- section('1. Identificação do estudante',[
-   ['Nome completo',val('aluno'),true],['Data de nascimento',friendlyBirth],
-   [docType,val('documentoNumero')],['Registro escolar',val('matricula')],
-   ['Ano/série cursado em 2026',val('serie')],['Turno',val('turno')]
- ]);
- section('2. Dados do responsável',[
-   ['Nome completo',val('responsavel'),true],['CPF',val('cpfResponsavel')],
-   ['Parentesco',val('parentesco')],['Telefone',val('telefone')],['E-mail',val('email')]
- ]);
- section('3. Endereço',[
-   ['Rua / logradouro',val('rua'),true],['Número',val('numero')],['Bairro / comunidade',val('bairro')],
-   ['Município',val('cidade')],['UF',val('uf')],['Ponto de referência',val('referencia'),true]
- ]);
- section('4. Atendimento e situação',[
-   ['Entrega de documentos',record.agendamentoData&&record.agendamentoHora?formatDate(record.agendamentoData)+' às '+record.agendamentoHora:'Sem agendamento'],
-   ['Situação da solicitação',situations[record.status]||val('status')]
- ]);
- return true;
+function fillPrintSheet(record) {
+  const root = $("printDocumentFields");
+  if (!root) return false;
+  root.replaceChildren();
+  const protocol = $("printProtocol");
+  if (protocol) protocol.textContent = "Protocolo: " + record.id.toUpperCase();
+  const generated = $("printGenerated");
+  if (generated)
+    generated.textContent =
+      "Emitido em " +
+      new Date().toLocaleDateString("pt-BR", { timeZone: "America/Bahia" });
+  const val = (key) => {
+    const raw = record[key];
+    return raw === undefined || raw === null || String(raw).trim() === ""
+      ? "Não informado"
+      : String(raw);
+  };
+  const section = (title, fields) => {
+    const box = document.createElement("section");
+    box.className = "print-document-section";
+    const h = document.createElement("h3");
+    h.textContent = title;
+    box.append(h);
+    const grid = document.createElement("div");
+    grid.className = "print-fields";
+    for (const item of fields) {
+      const [label, value, wide] = item;
+      const cell = document.createElement("div");
+      cell.className = "print-field" + (wide ? " wide" : "");
+      const caption = document.createElement("span");
+      caption.className = "print-field-label";
+      caption.textContent = label;
+      const strong = document.createElement("div");
+      strong.className = "print-field-value";
+      strong.textContent = value;
+      cell.append(caption, strong);
+      grid.append(cell);
+    }
+    box.append(grid);
+    root.append(box);
+  };
+  const birth = val("nascimento");
+  const friendlyBirth = /^\d{4}-\d{2}-\d{2}$/.test(birth)
+    ? formatDate(birth)
+    : birth;
+  const docType =
+    record.documentoTipo === "cpf"
+      ? "CPF"
+      : record.documentoTipo === "certidao"
+        ? "Certidão de nascimento"
+        : "Documento de identificação";
+  const situations = {
+    pendente: "Pendente",
+    conferida: "Conferida",
+    pendencia: "Com pendência",
+  };
+  section("1. Identificação do estudante", [
+    ["Nome completo", val("aluno"), true],
+    ["Data de nascimento", friendlyBirth],
+    [docType, val("documentoNumero")],
+    ["Registro escolar", val("matricula")],
+    ["Ano/série cursado em 2026", val("serie")],
+    ["Turno", val("turno")],
+  ]);
+  section("2. Dados do responsável", [
+    ["Nome completo", val("responsavel"), true],
+    ["CPF", val("cpfResponsavel")],
+    ["Parentesco", val("parentesco")],
+    ["Telefone", val("telefone")],
+    ["E-mail", val("email")],
+  ]);
+  section("3. Endereço", [
+    ["Rua / logradouro", val("rua"), true],
+    ["Número", val("numero")],
+    ["Bairro / comunidade", val("bairro")],
+    ["Município", val("cidade")],
+    ["UF", val("uf")],
+    ["Ponto de referência", val("referencia"), true],
+  ]);
+  section("4. Atendimento e situação", [
+    [
+      "Entrega de documentos",
+      record.agendamentoData && record.agendamentoHora
+        ? formatDate(record.agendamentoData) + " às " + record.agendamentoHora
+        : "Sem agendamento",
+    ],
+    ["Situação da solicitação", situations[record.status] || val("status")],
+  ]);
+  return true;
 }
-$('printDetail').onclick=()=>{if(!selected)return;if(fillPrintSheet(selected))window.print();};
-$('saveStatus').onclick=async()=>{if(!selected)return;const b=$('saveStatus');b.disabled=true;try{await updateDoc(doc(db,'rematriculas',selected.id),{status:$('detailStatus').value,atualizadoEm:serverTimestamp()});selected.status=$('detailStatus').value;$('detailFeedback').textContent='Situação atualizada.';render();openDetail(selected.id)}catch(e){console.error(e);$('detailFeedback').textContent='Erro ao salvar alteração.'}finally{b.disabled=false}};
-$('exportCsv').onclick=()=>{if(!all.length)return;const keys=['id','aluno','nascimento','documentoTipo','documentoNumero','matricula','serie','turno','responsavel','cpfResponsavel','parentesco','telefone','email','rua','numero','bairro','cidade','uf','referencia','agendamentoData','agendamentoHora','status'];const csv=[keys.join(';'),...all.map(x=>keys.map(k=>'"'+String(x[k]??'').replaceAll('"','""')+'"').join(';'))].join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rematriculas-2027.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
-
+$("printDetail").onclick = () => {
+  if (!selected) return;
+  if (fillPrintSheet(selected)) window.print();
+};
+$("saveStatus").onclick = async () => {
+  if (!selected) return;
+  const b = $("saveStatus");
+  b.disabled = true;
+  try {
+    await updateDoc(doc(db, "rematriculas", selected.id), {
+      status: $("detailStatus").value,
+      atualizadoEm: serverTimestamp(),
+    });
+    selected.status = $("detailStatus").value;
+    $("detailFeedback").textContent = "Situação atualizada.";
+    render();
+    openDetail(selected.id);
+  } catch (e) {
+    console.error(e);
+    $("detailFeedback").textContent = "Erro ao salvar alteração.";
+  } finally {
+    b.disabled = false;
+  }
+};
+$("exportCsv").onclick = () => {
+  if (!all.length) return;
+  const keys = [
+    "id",
+    "aluno",
+    "nascimento",
+    "documentoTipo",
+    "documentoNumero",
+    "matricula",
+    "serie",
+    "turno",
+    "responsavel",
+    "cpfResponsavel",
+    "parentesco",
+    "telefone",
+    "email",
+    "rua",
+    "numero",
+    "bairro",
+    "cidade",
+    "uf",
+    "referencia",
+    "agendamentoData",
+    "agendamentoHora",
+    "status",
+  ];
+  const csv = [
+    keys.join(";"),
+    ...all.map((x) =>
+      keys
+        .map((k) => '"' + String(x[k] ?? "").replaceAll('"', '""') + '"')
+        .join(";"),
+    ),
+  ].join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" }),
+    url = URL.createObjectURL(blob),
+    a = document.createElement("a");
+  a.href = url;
+  a.download = "rematriculas-2027.csv";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
 
 // Administração da agenda; as permissões são verificadas nas regras do Firestore.
-let slots=[],editingSlotId=null;
-const formatDate=s=>{const [y,m,d]=String(s).split('-');return d&&m&&y?`${d}/${m}/${y}`:s;};
-const slotKey=(date,time)=>date+'_'+time.replace(':','');
-const todayBahia=()=>{const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Bahia',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const v=k=>parts.find(x=>x.type===k)?.value;return `${v('year')}-${v('month')}-${v('day')}`;};
-$('slotDate').min=todayBahia();
-const makeCell=(row,text)=>{const td=document.createElement('td');td.textContent=String(text??'—');row.appendChild(td);return td;};
-async function loadSlots(){
-  $('slotFeedback').textContent='Carregando horários…';
-  try{const snapshot=await getDocs(query(collection(db,'agendaRematricula'),orderBy('data')));
-    slots=snapshot.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.data+' '+a.hora).localeCompare(b.data+' '+b.hora));
-    renderSlots();$('slotFeedback').textContent=slots.length+' horário(s) cadastrado(s).';
-  }catch(e){console.error('Falha ao carregar a agenda:', e);const code=e?.code||'erro-desconhecido';$('slotFeedback').textContent=code==='permission-denied'?'Acesso negado ao consultar agendaRematricula. Publique as regras de agenda no Firebase (Firestore → Regras).':code==='failed-precondition'?'Consulta da agenda requer uma configuração/índice no Firestore. Veja o erro no console do navegador.':code==='unavailable'?'Firebase indisponível ou conexão instável. Confira a internet e tente novamente.':'Não foi possível carregar a agenda ('+code+'). Confira o console do navegador e o projeto Firebase.';}
-}
-function renderSlots(){
- const root=$('slotRows');root.replaceChildren();
- if(!slots.length){root.innerHTML='<tr><td colspan="6">Nenhum horário aberto. Cadastre o primeiro acima.</td></tr>';return;}
- for(const slot of slots){const tr=document.createElement('tr');
-  makeCell(tr,formatDate(slot.data));makeCell(tr,slot.hora);makeCell(tr,slot.ocupadas);makeCell(tr,slot.vagas);
-  const td=document.createElement('td');const tag=document.createElement('span');const full=slot.ocupadas>=slot.vagas;
-  tag.className='agenda-badge'+(!slot.ativo?' closed':'');tag.textContent=!slot.ativo?'Fechado':full?'Esgotado':'Aberto';td.append(tag);tr.append(td);
-  const act=document.createElement('td');const btn=document.createElement('button');btn.type='button';btn.className='btn light';btn.textContent='Editar';btn.onclick=()=>editSlot(slot.id);act.append(btn);tr.append(act);root.append(tr);
- }
-}
-function resetEditor(){editingSlotId=null;$('agendaForm').reset();$('slotCapacity').value=10;$('slotDate').disabled=false;$('slotTime').disabled=false;$('slotSave').textContent='Abrir horário';$('slotCancelEdit').classList.add('hide');}
-function editSlot(id){const slot=slots.find(x=>x.id===id);if(!slot)return;
- editingSlotId=id;$('slotDate').value=slot.data;$('slotTime').value=slot.hora;$('slotCapacity').value=slot.vagas;$('slotActive').checked=slot.ativo;
- $('slotDate').disabled=true;$('slotTime').disabled=true;$('slotCapacity').min=String(Math.max(1,slot.ocupadas));$('slotSave').textContent='Salvar alterações';$('slotCancelEdit').classList.remove('hide');
- $('manualSchedule').open=true;$('agendaForm').scrollIntoView({behavior:'smooth',block:'center'});}
-$('slotCancelEdit').addEventListener('click',()=>{resetEditor();$('slotFeedback').textContent='Edição cancelada.'});
-$('refreshAdminAgenda').addEventListener('click',loadSlots);
-$('agendaForm').addEventListener('submit',async event=>{
- event.preventDefault();if(!db||!auth?.currentUser)return;
- const date=$('slotDate').value,time=$('slotTime').value,capacity=Number($('slotCapacity').value),active=$('slotActive').checked;
- const feedback=$('slotFeedback');
- if(!date||!time||(!editingSlotId&&date<todayBahia())||!Number.isInteger(capacity)||capacity<1||capacity>500){feedback.textContent='Informe data, horário e de 1 a 500 vagas.';return;}
- const key=slotKey(date,time),btn=$('slotSave');btn.disabled=true;feedback.textContent='Salvando horário…';
- try{
-  if(editingSlotId){const current=slots.find(x=>x.id===editingSlotId);if(capacity<current.ocupadas)throw new Error('O limite não pode ser menor que as reservas recebidas.');
-   await updateDoc(doc(db,'agendaRematricula',editingSlotId),{vagas:capacity,ativo:active});
-  }else{
-   // Não sobrescrever um horário que já exista. Só a direção altera limites.
-   if(slots.some(x=>x.id===key))throw new Error('Esse horário já existe. Utilize Editar.');
-   await setDoc(doc(db,'agendaRematricula',key),{data:date,hora:time,vagas:capacity,ocupadas:0,ativo:active,ultimaReservaId:''});
+let slots = [],
+  editingSlotId = null;
+const formatDate = (s) => {
+  const [y, m, d] = String(s).split("-");
+  return d && m && y ? `${d}/${m}/${y}` : s;
+};
+const slotKey = (date, time) => date + "_" + time.replace(":", "");
+const todayBahia = () => {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Bahia",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const v = (k) => parts.find((x) => x.type === k)?.value;
+  return `${v("year")}-${v("month")}-${v("day")}`;
+};
+$("slotDate").min = todayBahia();
+const makeCell = (row, text) => {
+  const td = document.createElement("td");
+  td.textContent = String(text ?? "—");
+  row.appendChild(td);
+  return td;
+};
+async function loadSlots() {
+  $("slotFeedback").textContent = "Carregando horários…";
+  try {
+    const snapshot = await getDocs(
+      query(collection(db, "agendaRematricula"), orderBy("data")),
+    );
+    slots = snapshot.docs
+      .map((d) => ({ id: d.id, ...d.data() }))
+      .sort((a, b) =>
+        (a.data + " " + a.hora).localeCompare(b.data + " " + b.hora),
+      );
+    renderSlots();
+    $("slotFeedback").textContent = slots.length + " horário(s) cadastrado(s).";
+  } catch (e) {
+    console.error("Falha ao carregar a agenda:", e);
+    const code = e?.code || "erro-desconhecido";
+    $("slotFeedback").textContent =
+      code === "permission-denied"
+        ? "Acesso negado ao consultar agendaRematricula. Publique as regras de agenda no Firebase (Firestore → Regras)."
+        : code === "failed-precondition"
+          ? "Consulta da agenda requer uma configuração/índice no Firestore. Veja o erro no console do navegador."
+          : code === "unavailable"
+            ? "Firebase indisponível ou conexão instável. Confira a internet e tente novamente."
+            : "Não foi possível carregar a agenda (" +
+              code +
+              "). Confira o console do navegador e o projeto Firebase.";
   }
-  resetEditor();feedback.textContent='Horário salvo. A agenda pública será atualizada.';await loadSlots();
- }catch(e){console.error(e);feedback.textContent=e.message?.includes('limite')||e.message?.includes('existe')?e.message:'Não foi possível salvar. Confira sua autorização e as regras do Firestore.';}
- finally{btn.disabled=false;}
+}
+function renderSlots() {
+  const root = $("slotRows");
+  root.replaceChildren();
+  if (!slots.length) {
+    root.innerHTML =
+      '<tr><td colspan="6">Nenhum horário aberto. Cadastre o primeiro acima.</td></tr>';
+    return;
+  }
+  for (const slot of slots) {
+    const tr = document.createElement("tr");
+    makeCell(tr, formatDate(slot.data));
+    makeCell(tr, slot.hora);
+    makeCell(tr, slot.ocupadas);
+    makeCell(tr, slot.vagas);
+    const td = document.createElement("td");
+    const tag = document.createElement("span");
+    const full = slot.ocupadas >= slot.vagas;
+    tag.className = "agenda-badge" + (!slot.ativo ? " closed" : "");
+    tag.textContent = !slot.ativo ? "Fechado" : full ? "Esgotado" : "Aberto";
+    td.append(tag);
+    tr.append(td);
+    const act = document.createElement("td");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn light";
+    btn.textContent = "Editar";
+    btn.onclick = () => editSlot(slot.id);
+    act.append(btn);
+    tr.append(act);
+    root.append(tr);
+  }
+}
+function resetEditor() {
+  editingSlotId = null;
+  $("agendaForm").reset();
+  $("slotCapacity").value = 10;
+  $("slotDate").disabled = false;
+  $("slotTime").disabled = false;
+  $("slotSave").textContent = "Abrir horário";
+  $("slotCancelEdit").classList.add("hide");
+}
+function editSlot(id) {
+  const slot = slots.find((x) => x.id === id);
+  if (!slot) return;
+  editingSlotId = id;
+  $("slotDate").value = slot.data;
+  $("slotTime").value = slot.hora;
+  $("slotCapacity").value = slot.vagas;
+  $("slotActive").checked = slot.ativo;
+  $("slotDate").disabled = true;
+  $("slotTime").disabled = true;
+  $("slotCapacity").min = String(Math.max(1, slot.ocupadas));
+  $("slotSave").textContent = "Salvar alterações";
+  $("slotCancelEdit").classList.remove("hide");
+  $("manualSchedule").open = true;
+  $("agendaForm").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+$("slotCancelEdit").addEventListener("click", () => {
+  resetEditor();
+  $("slotFeedback").textContent = "Edição cancelada.";
 });
-
-
+$("refreshAdminAgenda").addEventListener("click", loadSlots);
+$("agendaForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!db || !auth?.currentUser) return;
+  const date = $("slotDate").value,
+    time = $("slotTime").value,
+    capacity = Number($("slotCapacity").value),
+    active = $("slotActive").checked;
+  const feedback = $("slotFeedback");
+  if (
+    !date ||
+    !time ||
+    (!editingSlotId && date < todayBahia()) ||
+    !Number.isInteger(capacity) ||
+    capacity < 1 ||
+    capacity > 500
+  ) {
+    feedback.textContent = "Informe data, horário e de 1 a 500 vagas.";
+    return;
+  }
+  const key = slotKey(date, time),
+    btn = $("slotSave");
+  btn.disabled = true;
+  feedback.textContent = "Salvando horário…";
+  try {
+    if (editingSlotId) {
+      const current = slots.find((x) => x.id === editingSlotId);
+      if (capacity < current.ocupadas)
+        throw new Error(
+          "O limite não pode ser menor que as reservas recebidas.",
+        );
+      await updateDoc(doc(db, "agendaRematricula", editingSlotId), {
+        vagas: capacity,
+        ativo: active,
+      });
+    } else {
+      // Não sobrescrever um horário que já exista. Só a direção altera limites.
+      if (slots.some((x) => x.id === key))
+        throw new Error("Esse horário já existe. Utilize Editar.");
+      await setDoc(doc(db, "agendaRematricula", key), {
+        data: date,
+        hora: time,
+        vagas: capacity,
+        ocupadas: 0,
+        ativo: active,
+        ultimaReservaId: "",
+      });
+    }
+    resetEditor();
+    feedback.textContent = "Horário salvo. A agenda pública será atualizada.";
+    await loadSlots();
+  } catch (e) {
+    console.error(e);
+    feedback.textContent =
+      e.message?.includes("limite") || e.message?.includes("existe")
+        ? e.message
+        : "Não foi possível salvar. Confira sua autorização e as regras do Firestore.";
+  } finally {
+    btn.disabled = false;
+  }
+});
 
 // Agenda semanal automática: cria somente horários inexistentes.
 // Horários já reservados não são sobrescritos.
-const batchIds=['batchStart','batchEnd','batchTimeStart','batchTimeEnd','batchInterval','batchCapacity'];
-const batchForm=$('batchAgendaForm');
-$('batchStart').min=todayBahia();$('batchEnd').min=todayBahia();
-$('batchStart').addEventListener('change',()=>{$('batchEnd').min=$('batchStart').value||todayBahia();if($('batchEnd').value&&$('batchEnd').value<$('batchStart').value)$('batchEnd').value=$('batchStart').value;previewBatch();});
-function minutesFromTime(s){if(!/^\d{2}:\d{2}$/.test(s))return NaN;const [h,m]=s.split(':').map(Number);return h<24&&m<60?h*60+m:NaN;}
-function timeFromMinutes(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');}
-function generateBatchPlan(){
- const start=$('batchStart').value,end=$('batchEnd').value;
- const first=minutesFromTime($('batchTimeStart').value),last=minutesFromTime($('batchTimeEnd').value);
- const step=Number($('batchInterval').value),capacity=Number($('batchCapacity').value);
- const days=new Set([...document.querySelectorAll('input[name="batchDay"]:checked')].map(x=>Number(x.value)));
- if(!/^\d{4}-\d{2}-\d{2}$/.test(start)||!/^\d{4}-\d{2}-\d{2}$/.test(end))throw new Error('Escolha a primeira e a última data.');
- if(start<todayBahia()||end<start)throw new Error('Informe um período válido a partir de hoje.');
- if(!days.size)throw new Error('Selecione pelo menos um dia da semana.');
- if(!Number.isInteger(first)||!Number.isInteger(last)||last<=first)throw new Error('O horário final deve ser posterior ao inicial.');
- if(![15,20,30,45,60].includes(step))throw new Error('Escolha um intervalo válido.');
- if(!Number.isInteger(capacity)||capacity<1||capacity>500)throw new Error('Informe de 1 a 500 vagas por horário.');
- const toUtc=s=>new Date(s+'T12:00:00Z');
- const startDate=toUtc(start),endDate=toUtc(end);
- if(Number.isNaN(startDate.getTime())||Number.isNaN(endDate.getTime())||endDate.getTime()-startDate.getTime()>92*86400000)throw new Error('Escolha um período de até 93 dias.');
- const generated=[];
- for(let date=new Date(startDate);date<=endDate;date.setUTCDate(date.getUTCDate()+1)){
-  if(!days.has(date.getUTCDay()))continue;
-  const day=date.toISOString().slice(0,10);
-  for(let t=first;t+step<=last;t+=step){const hour=timeFromMinutes(t);generated.push({id:slotKey(day,hour),data:day,hora:hour,vagas:capacity,ocupadas:0,ativo:true,ultimaReservaId:''});}
- }
- if(!generated.length)throw new Error('Nenhum horário foi encontrado para esses dias e esse período.');
- if(generated.length>200)throw new Error('O período gera mais de 200 horários. Divida em períodos menores.');
- return generated;
-}
-function previewBatch(){
- const el=$('batchPreview');
- try{
-  const items=generateBatchPlan(),existing=new Set(slots.map(s=>s.id)),newItems=items.filter(s=>!existing.has(s.id));
-  const sample=items.slice(0,4).map(s=>formatDate(s.data)+' às '+s.hora).join(' · ');
-  el.textContent=`${items.length} horários no período · ${newItems.length} novos · ${items.length-newItems.length} já cadastrados (serão mantidos).\nExemplos: ${sample}${items.length>4?'…':''}`;
-  return items;
- }catch(e){el.textContent=e.message;return null;}
-}
-$('batchPreviewButton').addEventListener('click',previewBatch);
-for(const id of batchIds)$(id).addEventListener('change',previewBatch);
-document.querySelectorAll('input[name="batchDay"]').forEach(el=>el.addEventListener('change',previewBatch));
-batchForm.addEventListener('submit',async event=>{
- event.preventDefault();
- const items=previewBatch(),feedback=$('batchFeedback'),button=$('batchGenerate');
- if(!items)return;
- if(!auth?.currentUser||!db){feedback.textContent='Entre com a conta autorizada da direção.';return;}
- const existing=new Set(slots.map(s=>s.id)),candidates=items.filter(s=>!existing.has(s.id));
- if(!candidates.length){feedback.textContent='Todos esses horários já estão cadastrados. Nenhum foi alterado.';return;}
- const confirmed=window.confirm(`Criar até ${candidates.length} horários novos?\nOs ${items.length-candidates.length} horários já existentes serão preservados.`);
- if(!confirmed)return;
- button.disabled=true;$('batchPreviewButton').disabled=true;
- let created=0,skipped=0,failed=0;let firstError='';
- try{
-  // Poucas transações simultâneas para evitar sobrecarga e impedir sobrescrever reservas.
-  for(let i=0;i<candidates.length;i+=5){
-   const group=candidates.slice(i,i+5);
-   const results=await Promise.allSettled(group.map(slot=>runTransaction(db,async tx=>{
-    const ref=doc(db,'agendaRematricula',slot.id);
-    const old=await tx.get(ref);
-    if(old.exists())return false;
-    tx.set(ref,{data:slot.data,hora:slot.hora,vagas:slot.vagas,ocupadas:0,ativo:true,ultimaReservaId:''});
-    return true;
-   })));
-   for(const result of results){if(result.status==='fulfilled'){if(result.value)created++;else skipped++;}else{failed++;firstError||=result.reason?.code||result.reason?.message||'erro-desconhecido';console.error('Falha ao abrir horário:',result.reason);}}
-   feedback.textContent=`Salvando... ${Math.min(i+5,candidates.length)}/${candidates.length} horários processados.`;
-  }
- }finally{
-  button.disabled=false;$('batchPreviewButton').disabled=false;
-  try{await loadSlots();}catch(e){console.error(e);}
-  feedback.textContent=`${created} horário(s) criado(s); ${skipped+items.length-candidates.length} já existente(s) preservado(s); ${failed} falha(s).`+(failed?` Verifique o console (${firstError}) e tente novamente; horários já criados não serão duplicados.`:' Os responsáveis já podem escolher as vagas disponíveis.');
+const batchIds = [
+  "batchStart",
+  "batchEnd",
+  "batchTimeStart",
+  "batchTimeEnd",
+  "batchInterval",
+  "batchCapacity",
+];
+const batchForm = $("batchAgendaForm");
+$("batchStart").min = todayBahia();
+$("batchEnd").min = todayBahia();
+$("batchStart").addEventListener("change", () => {
+  $("batchEnd").min = $("batchStart").value || todayBahia();
+  if ($("batchEnd").value && $("batchEnd").value < $("batchStart").value)
+    $("batchEnd").value = $("batchStart").value;
   previewBatch();
- }
+});
+function minutesFromTime(s) {
+  if (!/^\d{2}:\d{2}$/.test(s)) return NaN;
+  const [h, m] = s.split(":").map(Number);
+  return h < 24 && m < 60 ? h * 60 + m : NaN;
+}
+function timeFromMinutes(n) {
+  return (
+    String(Math.floor(n / 60)).padStart(2, "0") +
+    ":" +
+    String(n % 60).padStart(2, "0")
+  );
+}
+function generateBatchPlan() {
+  const start = $("batchStart").value,
+    end = $("batchEnd").value;
+  const first = minutesFromTime($("batchTimeStart").value),
+    last = minutesFromTime($("batchTimeEnd").value);
+  const step = Number($("batchInterval").value),
+    capacity = Number($("batchCapacity").value);
+  const days = new Set(
+    [...document.querySelectorAll('input[name="batchDay"]:checked')].map((x) =>
+      Number(x.value),
+    ),
+  );
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(start) || !/^\d{4}-\d{2}-\d{2}$/.test(end))
+    throw new Error("Escolha a primeira e a última data.");
+  if (start < todayBahia() || end < start)
+    throw new Error("Informe um período válido a partir de hoje.");
+  if (!days.size) throw new Error("Selecione pelo menos um dia da semana.");
+  if (!Number.isInteger(first) || !Number.isInteger(last) || last <= first)
+    throw new Error("O horário final deve ser posterior ao inicial.");
+  if (![15, 20, 30, 45, 60].includes(step))
+    throw new Error("Escolha um intervalo válido.");
+  if (!Number.isInteger(capacity) || capacity < 1 || capacity > 500)
+    throw new Error("Informe de 1 a 500 vagas por horário.");
+  const toUtc = (s) => new Date(s + "T12:00:00Z");
+  const startDate = toUtc(start),
+    endDate = toUtc(end);
+  if (
+    Number.isNaN(startDate.getTime()) ||
+    Number.isNaN(endDate.getTime()) ||
+    endDate.getTime() - startDate.getTime() > 92 * 86400000
+  )
+    throw new Error("Escolha um período de até 93 dias.");
+  const generated = [];
+  for (
+    let date = new Date(startDate);
+    date <= endDate;
+    date.setUTCDate(date.getUTCDate() + 1)
+  ) {
+    if (!days.has(date.getUTCDay())) continue;
+    const day = date.toISOString().slice(0, 10);
+    for (let t = first; t + step <= last; t += step) {
+      const hour = timeFromMinutes(t);
+      generated.push({
+        id: slotKey(day, hour),
+        data: day,
+        hora: hour,
+        vagas: capacity,
+        ocupadas: 0,
+        ativo: true,
+        ultimaReservaId: "",
+      });
+    }
+  }
+  if (!generated.length)
+    throw new Error(
+      "Nenhum horário foi encontrado para esses dias e esse período.",
+    );
+  if (generated.length > 200)
+    throw new Error(
+      "O período gera mais de 200 horários. Divida em períodos menores.",
+    );
+  return generated;
+}
+function previewBatch() {
+  const el = $("batchPreview");
+  try {
+    const items = generateBatchPlan(),
+      existing = new Set(slots.map((s) => s.id)),
+      newItems = items.filter((s) => !existing.has(s.id));
+    const sample = items
+      .slice(0, 4)
+      .map((s) => formatDate(s.data) + " às " + s.hora)
+      .join(" · ");
+    el.textContent = `${items.length} horários no período · ${newItems.length} novos · ${items.length - newItems.length} já cadastrados (serão mantidos).\nExemplos: ${sample}${items.length > 4 ? "…" : ""}`;
+    return items;
+  } catch (e) {
+    el.textContent = e.message;
+    return null;
+  }
+}
+$("batchPreviewButton").addEventListener("click", previewBatch);
+for (const id of batchIds) $(id).addEventListener("change", previewBatch);
+document
+  .querySelectorAll('input[name="batchDay"]')
+  .forEach((el) => el.addEventListener("change", previewBatch));
+batchForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const items = previewBatch(),
+    feedback = $("batchFeedback"),
+    button = $("batchGenerate");
+  if (!items) return;
+  if (!auth?.currentUser || !db) {
+    feedback.textContent = "Entre com a conta autorizada da direção.";
+    return;
+  }
+  const existing = new Set(slots.map((s) => s.id)),
+    candidates = items.filter((s) => !existing.has(s.id));
+  if (!candidates.length) {
+    feedback.textContent =
+      "Todos esses horários já estão cadastrados. Nenhum foi alterado.";
+    return;
+  }
+  const confirmed = window.confirm(
+    `Criar até ${candidates.length} horários novos?\nOs ${items.length - candidates.length} horários já existentes serão preservados.`,
+  );
+  if (!confirmed) return;
+  button.disabled = true;
+  $("batchPreviewButton").disabled = true;
+  let created = 0,
+    skipped = 0,
+    failed = 0;
+  let firstError = "";
+  try {
+    // Poucas transações simultâneas para evitar sobrecarga e impedir sobrescrever reservas.
+    for (let i = 0; i < candidates.length; i += 5) {
+      const group = candidates.slice(i, i + 5);
+      const results = await Promise.allSettled(
+        group.map((slot) =>
+          runTransaction(db, async (tx) => {
+            const ref = doc(db, "agendaRematricula", slot.id);
+            const old = await tx.get(ref);
+            if (old.exists()) return false;
+            tx.set(ref, {
+              data: slot.data,
+              hora: slot.hora,
+              vagas: slot.vagas,
+              ocupadas: 0,
+              ativo: true,
+              ultimaReservaId: "",
+            });
+            return true;
+          }),
+        ),
+      );
+      for (const result of results) {
+        if (result.status === "fulfilled") {
+          if (result.value) created++;
+          else skipped++;
+        } else {
+          failed++;
+          firstError ||=
+            result.reason?.code ||
+            result.reason?.message ||
+            "erro-desconhecido";
+          console.error("Falha ao abrir horário:", result.reason);
+        }
+      }
+      feedback.textContent = `Salvando... ${Math.min(i + 5, candidates.length)}/${candidates.length} horários processados.`;
+    }
+  } finally {
+    button.disabled = false;
+    $("batchPreviewButton").disabled = false;
+    try {
+      await loadSlots();
+    } catch (e) {
+      console.error(e);
+    }
+    feedback.textContent =
+      `${created} horário(s) criado(s); ${skipped + items.length - candidates.length} já existente(s) preservado(s); ${failed} falha(s).` +
+      (failed
+        ? ` Verifique o console (${firstError}) e tente novamente; horários já criados não serão duplicados.`
+        : " Os responsáveis já podem escolher as vagas disponíveis.");
+    previewBatch();
+  }
 });
 
 // Controle geral da publicação do agendamento. Documento único e protegido por regras.
-const agendaConfigRef=()=>doc(db,'configuracoesRematricula','agenda');
-let agendaConfigLoaded=false;
-async function loadAgendaConfig(){
- const toggle=$('agendaEnabled'),msg=$('agendaToggleStatus'),btn=$('saveAgendaEnabled');
- btn.disabled=true;toggle.disabled=true;msg.textContent='Consultando configuração…';
- try{const snap=await getDoc(agendaConfigRef());toggle.checked=!snap.exists()||snap.data().ativo===true;agendaConfigLoaded=true;msg.textContent=toggle.checked?'Agenda ativada: o formulário solicita data e horário.':'Agenda desativada: o formulário não mostra o agendamento.';}
- catch(e){console.error('Configuração da agenda:',e);agendaConfigLoaded=false;msg.textContent='Não foi possível consultar a configuração ('+(e.code||'erro')+'). Confira as regras do Firestore.';}
- finally{toggle.disabled=!agendaConfigLoaded;btn.disabled=!agendaConfigLoaded;}
+const agendaConfigRef = () => doc(db, "configuracoesRematricula", "agenda");
+let agendaConfigLoaded = false;
+async function loadAgendaConfig() {
+  const toggle = $("agendaEnabled"),
+    msg = $("agendaToggleStatus"),
+    btn = $("saveAgendaEnabled");
+  btn.disabled = true;
+  toggle.disabled = true;
+  msg.textContent = "Consultando configuração…";
+  try {
+    const snap = await getDoc(agendaConfigRef());
+    toggle.checked = !snap.exists() || snap.data().ativo === true;
+    agendaConfigLoaded = true;
+    msg.textContent = toggle.checked
+      ? "Agenda ativada: o formulário solicita data e horário."
+      : "Agenda desativada: o formulário não mostra o agendamento.";
+  } catch (e) {
+    console.error("Configuração da agenda:", e);
+    agendaConfigLoaded = false;
+    msg.textContent =
+      "Não foi possível consultar a configuração (" +
+      (e.code || "erro") +
+      "). Confira as regras do Firestore.";
+  } finally {
+    toggle.disabled = !agendaConfigLoaded;
+    btn.disabled = !agendaConfigLoaded;
+  }
 }
-$('saveAgendaEnabled').addEventListener('click',async()=>{
- const toggle=$('agendaEnabled'),btn=$('saveAgendaEnabled'),msg=$('agendaToggleStatus');
- if(!agendaConfigLoaded||!auth?.currentUser)return;
- btn.disabled=true;toggle.disabled=true;msg.textContent='Salvando configuração…';
- try{await setDoc(agendaConfigRef(),{ativo:toggle.checked});msg.textContent=toggle.checked?'Agenda ativada. O agendamento aparece na rematrícula.':'Agenda desativada. A rematrícula continua disponível sem agendamento.';}
- catch(e){console.error(e);msg.textContent='Não foi possível salvar ('+(e.code||'erro')+'). Verifique as regras do Firestore.';await loadAgendaConfig();}
- finally{btn.disabled=false;toggle.disabled=false;}
+$("saveAgendaEnabled").addEventListener("click", async () => {
+  const toggle = $("agendaEnabled"),
+    btn = $("saveAgendaEnabled"),
+    msg = $("agendaToggleStatus");
+  if (!agendaConfigLoaded || !auth?.currentUser) return;
+  btn.disabled = true;
+  toggle.disabled = true;
+  msg.textContent = "Salvando configuração…";
+  try {
+    await setDoc(agendaConfigRef(), { ativo: toggle.checked });
+    msg.textContent = toggle.checked
+      ? "Agenda ativada. O agendamento aparece na rematrícula."
+      : "Agenda desativada. A rematrícula continua disponível sem agendamento.";
+  } catch (e) {
+    console.error(e);
+    msg.textContent =
+      "Não foi possível salvar (" +
+      (e.code || "erro") +
+      "). Verifique as regras do Firestore.";
+    await loadAgendaConfig();
+  } finally {
+    btn.disabled = false;
+    toggle.disabled = false;
+  }
 });
