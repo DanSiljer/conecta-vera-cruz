@@ -192,6 +192,76 @@
         }
       }
     </style>
+  
+    <style id="quiz-consciencia-negra-card-style">
+      .game-hub__grid .game-card--black-consciousness {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(145deg, #fff9ea 0%, #f7f0d8 100%);
+        border-color: #d2b15d;
+        color: #173e2a;
+        box-shadow: 0 14px 30px rgba(17, 53, 35, 0.10);
+      }
+      .game-hub__grid .game-card--black-consciousness::before {
+        content: "";
+        position: absolute;
+        right: -42px;
+        bottom: -44px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 208, 73, 0.28) 0%, rgba(255, 208, 73, 0) 72%);
+        pointer-events: none;
+      }
+      .game-hub__grid .game-card--black-consciousness > * {
+        position: relative;
+        z-index: 1;
+      }
+      .game-hub__grid .game-card--black-consciousness .game-card__top {
+        align-items: center;
+      }
+      .game-hub__grid .game-card--black-consciousness .game-card__icon {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #0d5637, #1b7b4f);
+        color: #ffdc4c;
+        font-size: 1.55rem;
+        box-shadow: 0 10px 18px rgba(13, 86, 55, 0.18);
+      }
+      .game-hub__grid .game-card--black-consciousness .game-card__type {
+        color: #17613e;
+        font-weight: 800;
+      }
+      .game-hub__grid .game-card--black-consciousness h3 {
+        color: #123f2a !important;
+      }
+      .game-hub__grid .game-card--black-consciousness p {
+        color: #55715f !important;
+      }
+      .game-hub__grid .game-card--black-consciousness .game-card__action {
+        display: inline-flex;
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 10px 14px;
+        border: 1px solid #d8c27a;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.94);
+        color: #0d5637 !important;
+        font-weight: 900;
+      }
+      .game-hub__grid .game-card--black-consciousness:hover,
+      .game-hub__grid .game-card--black-consciousness:focus-visible {
+        border-color: #b08019;
+        box-shadow: 0 18px 34px rgba(17, 53, 35, 0.14);
+      }
+      .game-hub__grid .game-card--black-consciousness:hover .game-card__action,
+      .game-hub__grid .game-card--black-consciousness:focus-visible .game-card__action {
+        background: #fff5d0;
+      }
+    </style>
   </head>
   <body class="page-missao-aprender">
     <div data-cv-header=""></div>
@@ -343,6 +413,19 @@
             </button>
           </div>
           <div class="game-hub__grid">
+            <a class="game-card game-card--black-consciousness" href="jogos/quiz/quiz_conciencianegra.html" aria-label="Abrir Quiz Interativo de Consciência Negra">
+              <span class="game-card__top"><span aria-hidden="true" class="game-card__icon">✊🏿</span><span class="game-card__type">História · Quiz interativo</span></span>
+              <h3>Quiz Interativo: Consciência Negra</h3>
+              <p>Descolonizando saberes e pluralizando conhecimentos para resistir. Conheça trajetórias, ideias e lutas negras.</p>
+              <span class="game-card__action">Iniciar quiz →</span>
+            </a>
+
+            <a class="game-card game-card--science" href="quiz_sexualidade.html" aria-label="Abrir Quiz Interativo de Sexualidade">
+              <span class="game-card__top"><span aria-hidden="true" class="game-card__icon">🔬</span><span class="game-card__type">Ciências · Quiz interativo</span></span>
+              <h3>Quiz Interativo: Sexualidade</h3>
+              <p>Participe de desafios educativos sobre puberdade, saúde, respeito e prevenção.</p>
+              <span class="game-card__action">Iniciar quiz →</span>
+            </a>
             <button
               class="game-card game-card--island"
               data-subject-target="vera-cruz"

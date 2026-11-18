@@ -12,7 +12,62 @@
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/pages/nossa-historia.css">
   <script defer src="assets/js/main.js"></script>
-  <script defer src="assets/js/layout.js?v=20261118"></script>
+  <script defer src="assets/js/layout.js"></script>
+
+<style id="cv-mobile-responsive-fix">
+/* Ajustes responsivos da página Nossa História / O projeto */
+.page-nossa-historia, .page-nossa-historia * { box-sizing: border-box; }
+.page-nossa-historia main { width: 100%; min-width: 0; overflow-x: clip; }
+.page-nossa-historia main img { max-width: 100%; }
+.page-nossa-historia .school-banner { width: 100%; height: auto; overflow: hidden; }
+.page-nossa-historia .school-banner > img { display: block; width: 100%; height: auto; object-fit: contain; }
+.page-nossa-historia .story-opening__grid,
+.page-nossa-historia .project-grid,
+.page-nossa-historia .story-final__grid { min-width: 0; }
+.page-nossa-historia .story-opening__grid > *,
+.page-nossa-historia .project-grid > *,
+.page-nossa-historia .story-final__grid > * { min-width: 0; }
+.page-nossa-historia .school-photo img,
+.page-nossa-historia .territory-card img,
+.page-nossa-historia .project-collage img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.page-nossa-historia .school-photo { min-width: 0; }
+.page-nossa-historia .school-photo img { height: auto; aspect-ratio: 1222 / 687; object-fit: cover; }
+.page-nossa-historia .story-menu { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.page-nossa-historia .story-menu a { overflow-wrap: anywhere; }
+@media (max-width: 760px) {
+  .page-nossa-historia .container { width: min(100% - 32px, 1160px); max-width: 100%; margin-inline: auto; }
+  .page-nossa-historia .school-banner > img { width: 100%; height: auto !important; aspect-ratio: 1672 / 941; object-fit: contain !important; }
+  .page-nossa-historia .story-menu-wrap { width: 100%; }
+  .page-nossa-historia .story-menu { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding-block: 12px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .page-nossa-historia .story-menu a { flex: 0 0 auto; white-space: nowrap; padding: 9px 12px; border-radius: 999px; text-decoration: none; }
+  .page-nossa-historia .story-opening__grid,
+  .page-nossa-historia .project-grid,
+  .page-nossa-historia .story-final__grid { display: grid; grid-template-columns: minmax(0, 1fr) !important; gap: 24px; }
+  .page-nossa-historia .story-numbers__grid,
+  .page-nossa-historia .timeline-grid,
+  .page-nossa-historia .territory-grid,
+  .page-nossa-historia .authors-grid { display: grid; grid-template-columns: minmax(0, 1fr) !important; gap: 16px; }
+  .page-nossa-historia .story-opening__text { order: 0; }
+  .page-nossa-historia .school-photo { order: 1; margin: 0; width: 100%; }
+  .page-nossa-historia .school-photo img { width: 100%; height: auto !important; aspect-ratio: 1222 / 687; object-fit: cover !important; }
+  .page-nossa-historia .territory-card figure { margin: 0; width: 100%; overflow: hidden; }
+  .page-nossa-historia .territory-card img { height: auto !important; aspect-ratio: 4 / 3; object-fit: cover !important; }
+  .page-nossa-historia .territory-card--faith img { aspect-ratio: 3 / 4; object-fit: contain !important; background: #edf4ef; }
+  .page-nossa-historia .project-collage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px; width: 100%; }
+  .page-nossa-historia .project-collage figure { position: relative; min-width: 0; margin: 0; overflow: hidden; }
+  .page-nossa-historia .project-collage__wide { grid-column: 1 / -1; }
+  .page-nossa-historia .project-collage img { display: block; width: 100%; height: auto !important; aspect-ratio: 4 / 3; object-fit: cover !important; }
+  .page-nossa-historia .project-collage__wide img { aspect-ratio: 16 / 10; }
+  .page-nossa-historia .project-collage figcaption { font-size: .78rem; line-height: 1.35; }
+  .page-nossa-historia h2 { font-size: clamp(1.55rem, 6vw, 2.25rem); line-height: 1.2; overflow-wrap: break-word; }
+  .page-nossa-historia h3 { overflow-wrap: break-word; }
+  .page-nossa-historia .story-final__grid > img { width: min(210px, 65%); height: auto; }
+}
+@media (max-width: 380px) {
+  .page-nossa-historia .container { width: calc(100% - 24px); }
+  .page-nossa-historia .project-collage { gap: 8px; }
+}
+</style>
 </head>
 <body class="page-nossa-historia">
   <!-- Menu padrão inserido por assets/js/layout.js -->
