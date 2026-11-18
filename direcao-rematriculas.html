@@ -785,7 +785,25 @@
       .agenda-manager .btn-delete-slot:hover:not(:disabled){background:#ffe2df}
       .agenda-manager .btn-delete-slot:disabled{opacity:.48;cursor:not-allowed}
       @media print{.schedule-list{display:none!important}}
-</style>
+
+      /* Seção principal da agenda: abrir e recolher como os demais formulários */
+      .agenda-main-details > summary {
+        cursor: pointer;
+        font-size: clamp(18px, 2.1vw, 23px);
+        font-weight: 800;
+        color: var(--navy);
+        padding: 2px 0;
+        line-height: 1.35;
+      }
+      .agenda-main-details > summary::marker { color: var(--navy); }
+      .agenda-main-details > summary:focus-visible {
+        outline: 3px solid #0e8c8a55;
+        outline-offset: 5px;
+        border-radius: 4px;
+      }
+      .agenda-main-details[open] > summary { margin-bottom: 12px; }
+
+    </style>
   </head>
   <body>
     <header class="top">
@@ -893,7 +911,8 @@
           </div>
         </div>
         <section class="card agenda-manager hide-print" id="agendaManager">
-          <h2 style="margin: 0">Agenda de entrega de documentos</h2>
+          <details class="agenda-main-details" id="agendaMainDetails">
+            <summary>Agenda de entrega de documentos</summary>
           <div class="agenda-toggle-box">
             <div>
               <strong>Disponibilizar agendamento no formulário</strong>
@@ -1155,6 +1174,7 @@
               </tbody>
             </table>
           </div>
+          </details>
           </details>
         </section>
         <section class="card hide-print" id="listCard">
