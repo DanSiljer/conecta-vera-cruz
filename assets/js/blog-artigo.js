@@ -52,6 +52,19 @@
         return figure;
       }
 
+      case "video": {
+        const figure = node("figure", "article-video");
+        const video = document.createElement("video");
+        video.controls = true;
+        video.preload = "metadata";
+        video.playsInline = true;
+        video.src = assetPath(block.src);
+        if (block.poster) video.poster = assetPath(block.poster);
+        figure.appendChild(video);
+        if (block.legenda) figure.appendChild(node("figcaption", "", block.legenda));
+        return figure;
+      }
+
       case "galeria": {
         const gallery = node("div", "article-gallery");
         (block.imagens || []).forEach((item) => {
