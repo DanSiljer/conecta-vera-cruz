@@ -830,6 +830,20 @@
                 figure.appendChild(make("figcaption", "", block.legenda));
               return figure;
             }
+            case "video": {
+              const figure = make("figure", "blog-article__figure blog-article__video");
+              const video = document.createElement("video");
+              video.controls = true;
+              video.preload = "metadata";
+              video.playsInline = true;
+              video.style.cssText = "display:block;width:100%;max-height:70vh;border-radius:14px;background:#111";
+              if (block.poster) video.poster = block.poster;
+              video.src = block.src || "";
+              video.setAttribute("aria-label", block.legenda || "Vídeo da reportagem");
+              figure.appendChild(video);
+              if (block.legenda) figure.appendChild(make("figcaption", "", block.legenda));
+              return figure;
+            }
             case "galeria": {
               const gallery = make("div", "blog-article__gallery");
               (block.imagens || []).forEach(function (item) {
