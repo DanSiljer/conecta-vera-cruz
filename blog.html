@@ -20,7 +20,18 @@
     <script defer src="assets/js/layout.js?v=20261118"></script>
     <script defer="" src="assets/data/blog-posts.js"></script>
     <script defer src="assets/data/feira-ciencias-post.js?v=20261118"></script>
+    <script defer src="assets/data/gincana-consciencia-negra-post.js?v=20261118"></script>
     <script type="module" src="assets/js/blog-comments.js?v=20260806-1"></script>
+  <style id="gincana-galeria-video-fix">
+/* Exibir imagens completas nas galerias, incluindo foto vertical dos professores. */
+.blog-article__gallery figure{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.blog-article__gallery img{width:100%!important;height:auto!important;max-height:720px!important;object-fit:contain!important;object-position:center!important;aspect-ratio:auto!important;background:#f5f7f6;border-radius:10px}
+.blog-article__gallery img[src*="gincana-02.webp"]{max-height:none!important;max-width:490px!important;align-self:center}
+.blog-article__gallery figcaption{width:100%}
+.blog-article__video{margin:24px 0;padding:0;max-width:800px}
+.blog-article__video video{display:block;width:100%;max-height:75vh;object-fit:contain;background:#101713;border-radius:14px}
+.blog-article__video figcaption{padding:9px 3px;font-size:.9rem;color:#54635d}
+</style>
   </head>
   <body class="page-blog">
     <!-- Menu padrão inserido por assets/js/menu-escolar-2027-v6.js -->
@@ -827,6 +838,19 @@
               figure.appendChild(image);
               if (block.legenda)
                 figure.appendChild(make("figcaption", "", block.legenda));
+              return figure;
+            }
+            case "video": {
+              const figure = make("figure", "blog-article__video");
+              const video = document.createElement("video");
+              video.controls = true;
+              video.preload = "none";
+              video.playsInline = true;
+              video.src = block.src || "";
+              if (block.poster) video.poster = block.poster;
+              video.setAttribute("aria-label", block.legenda || "Vídeo da gincana");
+              figure.appendChild(video);
+              if (block.legenda) figure.appendChild(make("figcaption", "", block.legenda));
               return figure;
             }
             case "galeria": {
