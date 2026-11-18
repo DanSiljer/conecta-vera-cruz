@@ -17,11 +17,13 @@
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
     if (normalizedPath.endsWith("/esportes.html")) return "esportes";
-    if (normalizedPath.endsWith("/meio-amb .html")) return "meio-amb";
+    if (normalizedPath.endsWith("/meio-amb.html") || normalizedPath.endsWith("/meio-ambiente.html")) return "meio-amb";
     if (normalizedPath.endsWith("/turismo.html")) return "turismo";
-     if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
-    if (normalizedPath.endsWith("/o-projeto.html")) return "o-projeto";
-  
+    if (normalizedPath.endsWith("/missao-aprender.html")) return "missao-aprender";
+    if (normalizedPath.endsWith("/o-projeto.html") || normalizedPath.endsWith("/nossa-historia.html")) return "o-projeto";
+    if (normalizedPath.endsWith("/rematricula-escolar.html")) return "rematricula";
+    if (normalizedPath.endsWith("/direcao-rematriculas.html")) return "direcao";
+
     return "inicio";
   })();
 
@@ -42,6 +44,51 @@
     return `<a class="cv-nav__link${active ? " is-active" : ""}"${active ? ' aria-current="page"' : ""} href="${url(href)}">${label}</a>`;
   }).join("");
 
+  const schoolLinks = `
+    <a class="cv-nav__link cv-nav__link--enroll-mobile" href="${url("rematricula-escolar.html")}">Rematrícula 2027"</a>`;
+
+  const schoolStyle = document.createElement("style");
+  schoolStyle.id = "cv-school-header-styles";
+  schoolStyle.textContent = `
+    .cv-nav__link--enroll-mobile { display:none !important; }
+    .cv-nav__link--direction { font-size:12px; white-space:nowrap; text-decoration:none; }
+    .cv-header__cta--school { white-space:nowrap; flex-shrink:0; }
+    .cv-header__inner { gap: clamp(8px, 1.2vw, 20px); }
+    .cv-nav { gap: clamp(5px, .8vw, 16px); }
+    .cv-nav__link { white-space: nowrap; }
+    @media (min-width: 1121px) and (max-width: 1450px) {
+      .cv-nav__link { font-size: clamp(11px, .86vw, 13px); }
+      .cv-header__cta--school { font-size: 12px; padding-inline: 13px; }
+      .cv-brand { flex-shrink:1; min-width: 140px; }
+    }
+    @media (max-width:1350px) {
+      .cv-header { position:relative; }
+      .cv-header__inner { position:relative; }
+      .cv-menu-toggle { display:flex !important; flex-shrink:0; order:3; }
+      .cv-nav {
+        position:absolute !important; left:12px !important; right:12px !important;
+        top:calc(100% - 1px) !important; width:auto !important;
+        max-height:min(75vh,650px); overflow-y:auto;
+        padding:14px !important; border-radius:0 0 16px 16px;
+        background:#fff !important; box-shadow:0 18px 35px #082b2b25;
+        display:none !important; flex-direction:column !important;
+        align-items:stretch !important; gap:2px !important;
+        z-index:10000 !important;
+      }
+      .cv-nav.is-open { display:flex !important; }
+      .cv-nav__link { display:flex !important; font-size:14px !important; padding:11px 14px !important; }
+      .cv-nav__link--enroll-mobile { display:flex !important; }
+      .cv-header__cta--school { margin-left:auto; order:2; }
+      .cv-brand { order:1; }
+    }
+    @media (max-width:600px) {
+      .cv-header__cta--school { display:none !important; }
+      .cv-menu-toggle { margin-left:auto; }
+      .cv-brand { max-width:65%; }
+    }
+  `;
+  if (!document.getElementById(schoolStyle.id)) document.head.appendChild(schoolStyle);
+
   const headerTarget = document.querySelector("[data-cv-header]");
   if (headerTarget) {
     headerTarget.outerHTML = `
@@ -59,9 +106,10 @@
 
           <nav class="cv-nav" id="cv-menu-principal" aria-label="Menu principal" data-cv-nav>
             ${navLinks}
+            ${schoolLinks}
           </nav>
 
-          <a class="cv-header__cta" href="${url("bairros.html")}">Visite Vera Cruz</a>
+          <a class="cv-header__cta cv-header__cta--school" href="${url("rematricula-escolar.html")}">Rematrícula 2027</a>
         </div>
       </header>`;
   }
@@ -154,6 +202,39 @@
   };
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
+
+  const ensureSchoolMenu = () => {
+    const h = document.querySelector("[data-cv-header-ready]");
+    if (!h) return;
+    const cta = h.querySelector(".cv-header__cta");
+    if (cta) {
+      cta.textContent = "Rematrícula 2027";
+      cta.href = url("rematricula-escolar.html");
+      cta.classList.add("cv-header__cta--school");
+    }
+    const menu = h.querySelector("[data-cv-nav]");
+    if (!menu) return;
+    h.querySelectorAll("a").forEach((link) => {
+      if (link.textContent.trim().replace(/\s+/g, " ").toLocaleLowerCase("pt-BR") === "visite vera cruz") {
+        link.remove();
+      }
+    });
+    const ensureLink = (href, label, className) => {
+      const target = url(href);
+      let a = [...menu.querySelectorAll("a")].find(el => el.href === target);
+      if (!a) {
+        a = document.createElement("a");
+        menu.appendChild(a);
+      }
+      a.className = className;
+      a.href = target;
+      a.textContent = label;
+    };
+    ensureLink("rematricula-escolar.html", "Rematrícula 2027", "cv-nav__link cv-nav__link--enroll-mobile");
+    
+  };
+  ensureSchoolMenu();
+  window.addEventListener("pageshow", ensureSchoolMenu);
 
   if (currentSection === "blog") {
     import(url("assets/js/blog-comments-loader.js?v=20260806-1")).catch((error) => {

@@ -1,525 +1,562 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="pt-BR">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="#007a4d" name="theme-color"/>
-<meta content="Notícias, reportagens, personalidades, cultura, educação e memória da Ilha de Itaparica e de Vera Cruz." name="description"/>
-<title>Blog | Conecta Vera Cruz</title>
-<link href="assets/img/favicon.ico" rel="icon" type="image/x-icon"/>
-<link href="manifest.webmanifest" rel="manifest"/>
-<link href="assets/css/global.css" rel="stylesheet"/>
-<link href="assets/css/layout.css" rel="stylesheet"/>
-<link href="assets/css/pages/blog.css?v=20261002-2" rel="stylesheet"/><link href="assets/css/pages/blog-gil-lima.css?v=20260902-1" rel="stylesheet"/>
-<link href="assets/css/pages/blog-fliver.css?v=20260902-7" rel="stylesheet"/>
-<link href="assets/css/pages/blog-fliver-social.css?v=20260902-3" rel="stylesheet"/>
-<script defer="" src="assets/js/main.js"></script>
-<script defer="" src="assets/js/layout.js"></script>
-<script defer="" src="assets/data/blog-posts.js?v=20261002-2"></script>
-<script defer="" src="assets/js/blog-fliver.js?v=20261002-1"></script>
-<script defer src="assets/js/blog-fliver-social.js?v=20260902-1"></script>
-<script src="assets/js/blog-comments.js?v=20260902-4" type="module"></script>
-<link rel="stylesheet" href="assets/css/pages/blog-aula-campo.css"/>
-</head>
-<body class="page-blog">
-<!-- Menu padrão inserido por assets/js/layout.js -->
-<div data-cv-header=""></div>
-<main id="conteudo">
-<section class="blog-masthead">
-<div class="container blog-masthead__top">
-<div>
-<span class="blog-eyebrow">Notícias, memória e território</span>
-<h1>Blog Conecta<br/>Vera Cruz</h1>
-</div>
-<p>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="#007a4d" name="theme-color" />
+    <meta
+      content="Notícias, reportagens, personalidades, cultura, educação e memória da Ilha de Itaparica e de Vera Cruz."
+      name="description"
+    />
+    <title>Blog | Conecta Vera Cruz</title>
+    <link href="assets/img/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link href="assets/css/global.css" rel="stylesheet" />
+    <link href="assets/css/layout.css" rel="stylesheet" />
+    <link href="assets/css/pages/blog.css?v=20260806-5" rel="stylesheet" />
+
+    <script defer="" src="assets/js/main.js"></script>
+    <script defer src="assets/js/layout.js?v=20261118"></script>
+    <script defer="" src="assets/data/blog-posts.js"></script>
+    <script type="module" src="assets/js/blog-comments.js?v=20260806-1"></script>
+  </head>
+  <body class="page-blog">
+    <!-- Menu padrão inserido por assets/js/menu-escolar-2027-v6.js -->
+    <div data-cv-header=""></div>
+    <main id="conteudo">
+      <section class="blog-masthead">
+        <div class="container blog-masthead__top">
+          <div>
+            <span class="blog-eyebrow">Notícias, memória e território</span>
+            <h1>Blog Conecta<br />Vera Cruz</h1>
+          </div>
+          <p>
             Um espaço vivo para acompanhar acontecimentos, valorizar as
             comunidades e guardar as histórias que estão sendo construídas hoje.
           </p>
-</div>
-<div aria-live="polite" class="container blog-featured-container" data-blog-featured=""></div>
-</section>
-<section aria-label="Pesquisa e atalhos do blog" class="blog-navigation blog-navigation--compact">
-<div class="container blog-navigation__inner blog-navigation__inner--compact">
-<label class="blog-search blog-search--compact">
-<svg aria-hidden="true" viewBox="0 0 24 24">
-<path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"></path>
-</svg>
-<span class="sr-only">Pesquisar no blog</span>
-<input data-blog-search="" placeholder="Pesquisar notícia, bairro ou tema..." type="search"/>
-</label>
-<nav aria-label="Acesso rápido" class="blog-quick-links">
-<a href="#personalidades">Personalidades de Vera Cruz</a>
-<a href="#ultimas-noticias">Últimas notícias</a>
-<a href="#participe">Participe</a>
-</nav>
-</div>
-</section>
-<section aria-live="polite" class="blog-reader-section" data-blog-reader="" hidden=""></section>
-<section aria-labelledby="personalidades-title" class="island-personalities" id="personalidades">
-<div class="container">
-<header class="island-personalities__heading">
-<div>
-<span class="island-personalities__kicker">Gente que ajuda a contar a ilha</span>
-<h2 id="personalidades-title">
-                Personalidades de Vera Cruz
+        </div>
+        <div
+          aria-live="polite"
+          class="container blog-featured-container"
+          data-blog-featured=""
+        ></div>
+      </section>
+      <section
+        aria-label="Pesquisa e categorias do blog"
+        class="blog-navigation"
+      >
+        <div class="container blog-navigation__inner">
+          <label class="blog-search">
+            <svg aria-hidden="true" viewbox="0 0 24 24">
+              <path
+                d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"
+              ></path>
+            </svg>
+            <span class="sr-only">Pesquisar no blog</span>
+            <input
+              data-blog-search=""
+              placeholder="Pesquisar notícia, bairro ou tema..."
+              type="search"
+            />
+          </label>
+          <div
+            aria-label="Categorias"
+            class="blog-categories"
+            data-blog-categories=""
+          ></div>
+          <a class="blog-personalities-link" href="#personalidades"
+            >Personalidades da Ilha</a
+          >
+        </div>
+      </section>
+      <section
+        aria-live="polite"
+        class="blog-reader-section"
+        data-blog-reader=""
+        hidden=""
+      ></section>
+      <section
+        aria-labelledby="personalidades-title"
+        class="island-personalities"
+        id="personalidades"
+      >
+        <div class="container">
+          <header class="island-personalities__heading">
+            <div>
+              <span class="island-personalities__kicker"
+                >Gente que ajuda a contar a ilha</span
+              >
+              <h2 id="personalidades-title">
+                Personalidades da Ilha de Itaparica
               </h2>
-</div>
-</header>
-<div class="personalities-shell">
-<article aria-labelledby="silvano-title" class="personality-row">
-<div class="personality-row__media">
-<img alt="Capa da dissertação Docência nas Águas, de Silvano Sulzart Oliveira Costa" class="personality-row__portrait" height="1272" loading="lazy" src="assets/img/blog/Silvano.png" width="900"/>
-</div>
-<div class="personality-row__body">
-<div class="personality-row__top">
-<span class="personality-row__label">Educação e pesquisa</span>
-<span class="personality-row__role">Professor · Pedagogo · Pesquisador</span>
-</div>
-<h3 id="silvano-title">
+            </div>
+          </header>
+          <div class="personalities-shell">
+            <article aria-labelledby="silvano-title" class="personality-row">
+              <div class="personality-row__media">
+                <img
+                  alt="Capa da dissertação Docência nas Águas, de Silvano Sulzart Oliveira Costa"
+                  class="personality-row__portrait"
+                  height="1272"
+                  loading="lazy"
+                  src="assets/img/blog/Silvano.png"
+                  width="900"
+                />
+              </div>
+              <div class="personality-row__body">
+                <div class="personality-row__top">
+                  <span class="personality-row__label"
+                    >Educação e pesquisa</span
+                  >
+                  <span class="personality-row__role"
+                    >Professor · Pedagogo · Pesquisador</span
+                  >
+                </div>
+                <h3 id="silvano-title">
                   Silvano Sulzart - Secretário de Educação de Vera Cruz
                 </h3>
-<p class="personality-row__summary">
+                <p class="personality-row__summary">
                   Nascido e criado em Vera Cruz, Silvano transformou a
                   experiência vivida na ilha em pesquisa sobre educação,
                   memória, maritimidade e saberes comunitários, ajudando a
                   valorizar a cultura das águas da Ilha de Itaparica.
                 </p>
-<div aria-label="Temas ligados a Silvano Sulzart" class="personality-row__tags">
-<span>Docência nas águas</span>
-<span>Maritimidade</span>
-<span>Memória</span>
-<span>Educação</span>
-</div>
-<details>
-<summary>Ler perfil</summary>
-<div class="personality-row__expanded">
-<p>
+                <div
+                  aria-label="Temas ligados a Silvano Sulzart"
+                  class="personality-row__tags"
+                >
+                  <span>Docência nas águas</span>
+                  <span>Maritimidade</span>
+                  <span>Memória</span>
+                  <span>Educação</span>
+                </div>
+                <details>
+                  <summary>Ler perfil</summary>
+                  <div class="personality-row__expanded">
+                    <p>
                       Sua trajetória reúne sala de aula, travessias, vida
                       escolar e relação com o mar. Na dissertação
                       <em>Docência nas Águas</em>, a travessia aparece como
                       experiência física e simbólica que influencia o trabalho
                       docente e a vida nas comunidades da ilha.
                     </p>
-<p>
+                    <p>
                       O estudo valoriza práticas ligadas à pesca, à mariscagem,
                       às embarcações, às festas, às religiosidades e aos
                       conhecimentos construídos no cotidiano, preservando
                       memórias que muitas vezes não aparecem nos registros
                       oficiais.
                     </p>
-<a class="personality-row__action" href="assets/docs/silvano-sulzart-docencia-nas-aguas.pdf" rel="noopener" target="_blank">
+                    <a
+                      class="personality-row__action"
+                      href="assets/docs/silvano-sulzart-docencia-nas-aguas.pdf"
+                      rel="noopener"
+                      target="_blank"
+                    >
                       Ler a dissertação
                     </a>
-</div>
-</details>
-</div>
-</article>
-<article aria-labelledby="fernando-title" class="personality-row">
-<div class="personality-row__media">
-<img alt="Fernando Bernardes Souza em uma exposição de arte" class="personality-row__portrait" height="1672" loading="lazy" src="assets/img/blog/fernando-bernardes-souza.webp" width="941"/>
-<div aria-hidden="true" class="personality-row__book">
-<img alt="" height="544" loading="lazy" src="assets/img/blog/agnaldo-manuel-dos-santos-livro.webp" width="367"/>
-</div>
-</div>
-<div class="personality-row__body">
-<div class="personality-row__top">
-<span class="personality-row__label">Literatura e artes visuais</span>
-<span class="personality-row__role">Escritor · Artista plástico</span>
-</div>
-<h3 id="fernando-title">Fernando Bernardes Souza</h3>
-<p class="personality-row__summary">
+                  </div>
+                </details>
+              </div>
+            </article>
+            <article aria-labelledby="fernando-title" class="personality-row">
+              <div class="personality-row__media">
+                <img
+                  alt="Fernando Bernardes Souza em uma exposição de arte"
+                  class="personality-row__portrait"
+                  height="1672"
+                  loading="lazy"
+                  src="assets/img/blog/fernando-bernardes-souza.webp"
+                  width="941"
+                />
+                <div aria-hidden="true" class="personality-row__book">
+                  <img
+                    alt=""
+                    height="544"
+                    loading="lazy"
+                    src="assets/img/blog/agnaldo-manuel-dos-santos-livro.webp"
+                    width="367"
+                  />
+                </div>
+              </div>
+              <div class="personality-row__body">
+                <div class="personality-row__top">
+                  <span class="personality-row__label"
+                    >Literatura e artes visuais</span
+                  >
+                  <span class="personality-row__role"
+                    >Escritor · Artista plástico</span
+                  >
+                </div>
+                <h3 id="fernando-title">Fernando Bernardes Souza</h3>
+                <p class="personality-row__summary">
                   Escritor e artista plástico, Fernando Bernardes Souza
                   contribui para valorizar a arte, a memória e as trajetórias
                   ligadas à Ilha de Itaparica por meio da pesquisa, da escrita e
                   da produção artística.
                 </p>
-<div aria-label="Temas ligados a Fernando Bernardes Souza" class="personality-row__tags">
-<span>Artes visuais</span>
-<span>Literatura</span>
-<span>Memória da ilha</span>
-<span>Pesquisa</span>
-</div>
-<details>
-<summary>Conhecer o escritor e o livro</summary>
-<div class="personality-row__expanded">
-<p>
+                <div
+                  aria-label="Temas ligados a Fernando Bernardes Souza"
+                  class="personality-row__tags"
+                >
+                  <span>Artes visuais</span>
+                  <span>Literatura</span>
+                  <span>Memória da ilha</span>
+                  <span>Pesquisa</span>
+                </div>
+                <details>
+                  <summary>Conhecer o escritor e o livro</summary>
+                  <div class="personality-row__expanded">
+                    <p>
                       Em sua atuação como escritor e artista plástico, Fernando
                       Bernardes Souza aproxima linguagem visual, pesquisa e
                       memória. Seu trabalho ajuda a colocar artistas e histórias
                       da ilha em circulação, fortalecendo o reconhecimento da
                       produção cultural ligada ao território.
                     </p>
-<div class="personality-row__work">
-<img alt="Capa do livro Agnaldo Manuel dos Santos: Uma ilha que ganhou o mundo" height="544" loading="lazy" src="assets/img/blog/agnaldo-manuel-dos-santos-livro.webp" width="367"/>
-<div>
-<strong><em>Agnaldo Manuel dos Santos: Uma ilha que ganhou o
-                            mundo</em></strong>
-<span>
+                    <div class="personality-row__work">
+                      <img
+                        alt="Capa do livro Agnaldo Manuel dos Santos: Uma ilha que ganhou o mundo"
+                        height="544"
+                        loading="lazy"
+                        src="assets/img/blog/agnaldo-manuel-dos-santos-livro.webp"
+                        width="367"
+                      />
+                      <div>
+                        <strong
+                          ><em
+                            >Agnaldo Manuel dos Santos: Uma ilha que ganhou o
+                            mundo</em
+                          ></strong
+                        >
+                        <span>
                           O livro destaca a trajetória de Agnaldo Manuel dos
                           Santos e ajuda a projetar a presença de um artista
                           ligado à ilha para além de suas fronteiras.
                         </span>
-</div>
-</div>
-<p>
+                      </div>
+                    </div>
+                    <p>
                       A publicação também funciona como ponte entre arte,
                       identidade e pertencimento, convidando o leitor a conhecer
                       uma história importante da memória cultural da Ilha de
                       Itaparica.
                     </p>
-</div>
-</details>
-</div>
-</article>
-<article aria-labelledby="guiga-title" class="personality-row personality-row--guiga">
-<div class="personality-row__media">
-<img alt="Guiga Francisco segurando um exemplar do livro Bárbara, Filha do Tempo" class="personality-row__portrait" height="595" loading="lazy" src="assets/img/blog/guiga-francisco/guiga-francisco-barbara.png" width="522"/>
-<div aria-hidden="true" class="personality-row__book">
-<img alt="" height="400" loading="lazy" src="assets/img/blog/guiga-francisco/barbara-filha-do-tempo.png" width="300"/>
-</div>
-</div>
-<div class="personality-row__body">
-<div class="personality-row__top">
-<span class="personality-row__label">Literatura, educação e cultura</span>
-<span class="personality-row__role">Educador · Artista · Escritor · Produtor cultural</span>
-</div>
-<h3 id="guiga-title">Guiga Francisco</h3>
-<p class="personality-row__summary">
-                  Morador de Vera Cruz, Guiga Francisco desenvolve uma trajetória ligada à literatura,
-                  à educação, à memória e à produção cultural da Ilha de Itaparica. Seu trabalho reúne
-                  livros, revistas, poesia, teatro e iniciativas voltadas à valorização da cultura local
-                  e à formação de jovens.
-                </p>
-<div aria-label="Temas ligados a Guiga Francisco" class="personality-row__tags">
-<span>Literatura</span>
-<span>Educação e juventude</span>
-<span>Memória da ilha</span>
-<span>Hino Cívico</span>
-<span>Produção cultural</span>
-</div>
-<details>
-<summary>Conhecer a trajetória e as obras</summary>
-<div class="personality-row__expanded">
-<p>
-                      Registros do <strong>Ilha Notícias Bahia</strong> apresentam Guiga como educador,
-                      artista e escritor dedicado à valorização da cultura local e à formação de jovens.
-                      Sua produção ajuda a guardar histórias, personagens e experiências ligadas a Vera Cruz
-                      e à Ilha de Itaparica.
-                    </p>
-<h4 class="personality-row__subtitle">Uma produção que atravessa diferentes linguagens</h4>
-<p>
-                      Entre os trabalhos atribuídos ao autor estão as edições da <em>Revista Flash da Ilha</em>,
-                      as coletâneas <em>Poemas das Águas I</em> e <em>Poemas das Águas II</em>, as obras infantis
-                      <em>O Menino da Torre</em> e <em>O Diário da Cobra Lalá</em>, além de
-                      <em>Um Olhar de Amor, Proteção e Respeito</em>. A reportagem também registra Guiga como
-                      autor da letra do <strong>Hino Cívico de Vera Cruz</strong>.
-                    </p>
-<div class="personality-row__work personality-row__work--guiga">
-<img alt="Capa do livro O Menino da Torre, de Guiga Francisco" height="400" loading="lazy" src="assets/img/blog/guiga-francisco/o-menino-da-torre.png" width="300"/>
-<div>
-<strong><em>O Menino da Torre</em></strong>
-<span>A obra trabalha de forma poética temas como tempo, imaginação, superação e a capacidade de sonhar.</span>
-</div>
-</div>
-<h4 class="personality-row__subtitle">Bárbara, Filha do Tempo</h4>
-<p>
-                      Em 2025, Guiga apresentou <em>Bárbara, Filha do Tempo</em>, ampliando sua produção literária
-                      com uma narrativa relacionada à identidade, à memória e à resistência feminina.
-                    </p>
-<div aria-label="Obras e registros de Guiga Francisco" class="personality-row__guiga-gallery">
-<figure><img alt="Capa do livro Bárbara, Filha do Tempo, de Guiga Francisco" height="400" loading="lazy" src="assets/img/blog/guiga-francisco/barbara-filha-do-tempo.png" width="300"/><figcaption><em>Bárbara, Filha do Tempo</em></figcaption></figure>
-<figure><img alt="Capa do livro O Menino da Torre, de Guiga Francisco" height="400" loading="lazy" src="assets/img/blog/guiga-francisco/o-menino-da-torre.png" width="300"/><figcaption><em>O Menino da Torre</em></figcaption></figure>
-<figure class="personality-row__guiga-gallery-wide"><img alt="Conjunto de livros, revistas e publicações de Guiga Francisco" height="1000" loading="lazy" src="assets/img/blog/guiga-francisco/obras-guiga-francisco.png" width="1000"/><figcaption>Livros, revistas e registros de uma trajetória dedicada à cultura da ilha.</figcaption></figure>
-</div>
-</div>
-</details>
-</div>
-</article><article aria-labelledby="gil-lima-title" class="personality-row personality-row--gil">
-<div class="personality-row__media">
-<img alt="Gil Lima com o livro A Caça Não é Presa durante encontro literário em Vera Cruz" class="personality-row__portrait" height="2000" loading="lazy" src="assets/img/blog/gil-lima/gil-lima.webp" width="1500"/>
-</div>
-<div class="personality-row__body">
-<div class="personality-row__top">
-<span class="personality-row__label">Comunicação, literatura e ancestralidade</span>
-<span class="personality-row__role">Jornalista · Radialista · Repórter de TV · Escritora</span>
-</div>
-<h3 id="gil-lima-title">Gil Lima</h3>
-<p class="personality-row__summary">
-      Jornalista, radialista, repórter de televisão e escritora, Gil Lima reúne comunicação,
-      memória e ancestralidade em uma trajetória que também passa por Vera Cruz. Em 2026,
-      sua autobiografia <em>A Caça Não é Presa</em> ganhou destaque ao transformar vivências
-      pessoais, profissionais e espirituais em uma narrativa sobre pertencimento, resistência
-      e representatividade.
-    </p>
-<div aria-label="Temas ligados a Gil Lima" class="personality-row__tags">
-<span>Comunicação</span>
-<span>Literatura autobiográfica</span>
-<span>Ancestralidade</span>
-<span>Representatividade</span>
-<span>Religiosidade afro-brasileira</span>
-</div>
-<details>
-<summary>Conhecer a trajetória, o livro e os vídeos</summary>
-<div class="personality-row__expanded">
-<p>
-          Gil Lima construiu sua trajetória entre o rádio, a televisão, o empreendedorismo e a
-          liderança religiosa. Também é fundadora do <strong>Ilê Axé Odé Torojy Adé Min</strong>,
-          localizado em Vera Cruz, onde sua atuação aproxima comunicação, ancestralidade e vida
-          comunitária.
-        </p>
-<h4 class="personality-row__subtitle">A Caça Não é Presa</h4>
-<p>
-          Na autobiografia, publicada em 2026 pela Autografia, Gil Lima aborda experiências
-          marcadas por identidade, espiritualidade afro-brasileira, memória, enfrentamento ao
-          preconceito e busca por pertencimento. O lançamento em Vera Cruz foi anunciado para
-          30 de agosto de 2026, com leitura performativa e roda de conversa sobre literatura,
-          comunicação, ancestralidade e representatividade.
-        </p>
-<div class="personality-row__gil-highlight">
-<strong>Uma trajetória que ocupa diferentes espaços</strong>
-<span>
-            Da comunicação de massa ao terreiro, Gil Lima transforma a própria história em
-            instrumento de diálogo social e valorização da diversidade.
-          </span>
-</div>
-<h4 class="personality-row__subtitle">Gil Lima em vídeo</h4>
-<p class="personality-row__video-intro">
-          Registros em vídeo mostram diferentes momentos de sua fala pública, trajetória e
-          participação em atividades ligadas à comunicação e à cultura.
-        </p>
-<div aria-label="Vídeos de Gil Lima" class="personality-row__video-grid">
-<video aria-label="Vídeo 1 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-01.mp4" type="video/mp4"/></video>
-<video aria-label="Vídeo 2 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-02.mp4" type="video/mp4"/></video>
-<video aria-label="Vídeo 3 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-03.mp4" type="video/mp4"/></video>
-<video aria-label="Vídeo 4 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-04.mp4" type="video/mp4"/></video>
-<video aria-label="Vídeo 5 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-05.mp4" type="video/mp4"/></video>
-<video aria-label="Vídeo 6 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-06.mp4" type="video/mp4"/></video>
-<video aria-label="Vídeo 7 de Gil Lima" controls="" playsinline="" preload="none"><source src="assets/video/gil-lima/reel-07.mp4" type="video/mp4"/></video>
-</div>
-<div aria-label="Links para saber mais sobre Gil Lima" class="personality-row__sources">
-<a class="personality-row__action" href="https://www.instagram.com/gildopovooficial/" rel="noopener noreferrer" target="_blank">Instagram Gil do Povo Oficial</a>
-</div>
-</div>
-</details>
-</div>
-</article>
-</div>
-</div>
-</section>
-<section class="blog-feed-section" id="ultimas-noticias">
-<div class="container blog-layout">
-<div class="blog-main-column">
-<header class="blog-section-title">
-<div>
-<span class="blog-eyebrow">Publicações recentes</span>
-<h2>Últimas notícias</h2>
-</div>
-<span class="blog-results" data-blog-results=""></span>
-</header>
-<div aria-live="polite" class="blog-post-grid" data-blog-grid=""></div>
-<div class="blog-empty" data-blog-empty="" hidden="">
-<strong>Nenhuma publicação encontrada.</strong>
-<span>Experimente outro termo ou selecione “Todas”.</span>
-</div>
-<div class="blog-load-wrap">
-<button class="blog-load-more" data-blog-load-more="" type="button">
+                  </div>
+                </details>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      
+      
+      
+      <section class="blog-feed-section" id="ultimas-noticias">
+        <div class="container blog-layout">
+          <div class="blog-main-column">
+            <header class="blog-section-title">
+              <div>
+                <span class="blog-eyebrow">Publicações recentes</span>
+                <h2>Últimas notícias</h2>
+              </div>
+              <span class="blog-results" data-blog-results=""></span>
+            </header>
+            <div
+              aria-live="polite"
+              class="blog-post-grid"
+              data-blog-grid=""
+            ></div>
+            <div class="blog-empty" data-blog-empty="" hidden="">
+              <strong>Nenhuma publicação encontrada.</strong>
+              <span>Experimente outro termo ou selecione “Todas”.</span>
+            </div>
+            <div class="blog-load-wrap">
+              <button
+                class="blog-load-more"
+                data-blog-load-more=""
+                type="button"
+              >
                 Mostrar mais publicações
               </button>
-</div>
-</div>
-<aside aria-label="Informações do blog" class="blog-sidebar">
-<section class="sidebar-card sidebar-card--about">
-<span class="blog-eyebrow">Sobre o blog</span>
-<h2>Vera Cruz contada por quem vive nela</h2>
-<p>
+            </div>
+          </div>
+          <aside aria-label="Informações do blog" class="blog-sidebar">
+            <section class="sidebar-card sidebar-card--about">
+              <span class="blog-eyebrow">Sobre o blog</span>
+              <h2>Vera Cruz contada por quem vive nela</h2>
+              <p>
                 As notícias aparecem em cards leves. O texto completo é aberto
                 apenas quando o leitor escolhe uma publicação.
               </p>
-<a href="nossa-historia.html">Conheça o projeto <span>→</span></a>
-</section>
-<section class="sidebar-card">
-<div class="sidebar-card__heading">
-<h2>Categorias</h2>
-<span data-category-total=""></span>
-</div>
-<div class="sidebar-category-list" data-sidebar-categories=""></div>
-</section>
-<section class="sidebar-card">
-<span class="blog-eyebrow">Arquivo</span>
-<h2>Publicações por ano</h2>
-<div class="sidebar-archive-list" data-blog-archive=""></div>
-</section>
-<section class="sidebar-card sidebar-card--personalities">
-<span class="blog-eyebrow">Personalidades da Ilha</span>
-<h2>Gente que transforma memória em legado</h2>
-<p>Conheça os perfis de Silvano Sulzart, Fernando Bernardes Souza, Guiga Francisco e Gil Lima em uma seção dedicada a trajetórias que ajudam a contar Vera Cruz.</p>
-<a href="#personalidades">Ver personalidades <span>→</span></a>
-</section>
-<section class="sidebar-card sidebar-card--contribute" id="participe">
-<span class="blog-eyebrow">Participe</span>
-<h2>Tem uma pauta ou fotografia?</h2>
-<p>
+              <a href="nossa-historia.html">Conheça o projeto <span>→</span></a>
+            </section>
+            <section class="sidebar-card">
+              <div class="sidebar-card__heading">
+                <h2>Categorias</h2>
+                <span data-category-total=""></span>
+              </div>
+              <div
+                class="sidebar-category-list"
+                data-sidebar-categories=""
+              ></div>
+            </section>
+            <section class="sidebar-card">
+              <span class="blog-eyebrow">Arquivo</span>
+              <h2>Publicações por ano</h2>
+              <div class="sidebar-archive-list" data-blog-archive=""></div>
+            </section>
+            <section class="sidebar-card sidebar-card--personalities">
+              <span class="blog-eyebrow">Personalidades da Ilha</span>
+              <h2>Gente que transforma memória em legado</h2>
+              <p>
+                Conheça os perfis de Silvano Sulzart e Fernando Bernardes Souza
+                em uma seção compacta e fácil de ampliar.
+              </p>
+              <a href="#personalidades">Ver personalidades <span>→</span></a>
+            </section>
+            <section class="sidebar-card sidebar-card--contribute">
+              <span class="blog-eyebrow">Participe</span>
+              <h2>Tem uma pauta ou fotografia?</h2>
+              <p>
                 Envie acontecimentos, memórias e sugestões para a equipe do
                 projeto.
               </p>
-<a href="mailto:contato@conectaveracruz.com.br?subject=Pauta%20para%20o%20Blog">Enviar uma pauta</a>
-</section>
-</aside>
-</div>
-</section>
-<section aria-labelledby="defeso-title" class="defeso-awareness" id="defeso-2026">
-<div class="container">
-<article class="defeso-panel">
-<header class="defeso-hero">
-<div>
-<span class="defeso-kicker">Utilidade pública · calendário 2026</span>
-<h2 id="defeso-title">Defeso: o tempo de o mar respirar</h2>
-<p>
+              <a
+                href="mailto:contato@conectaveracruz.com.br?subject=Pauta%20para%20o%20Blog"
+                >Enviar uma pauta</a
+              >
+            </section>
+          </aside>
+        </div>
+      </section>
+      <section
+        aria-labelledby="defeso-title"
+        class="defeso-awareness"
+        id="defeso-2026"
+      >
+        <div class="container">
+          <article class="defeso-panel">
+            <header class="defeso-hero">
+              <div>
+                <span class="defeso-kicker"
+                  >Utilidade pública · calendário 2026</span
+                >
+                <h2 id="defeso-title">Defeso: o tempo de o mar respirar</h2>
+                <p>
                   Respeitar o período de defeso protege a reprodução das
                   espécies, fortalece a pesca artesanal e ajuda a garantir
                   alimento e renda para as próximas gerações de Vera Cruz.
                 </p>
-</div>
-<div aria-label="Mensagem de conscientização" class="defeso-hero__seal">
-<div>
-<svg aria-hidden="true" viewbox="0 0 64 64">
-<path d="M7 33c9-13 20-19 33-17 7 1 13 5 17 10-4 5-10 9-17 10-13 2-24-4-33-17Z"></path>
-<path d="M48 18c4-5 8-8 12-9-1 5-1 10 2 15-3 4-7 7-12 9"></path>
-<circle cx="41" cy="25" fill="#ffd166" r="1.8" stroke="none"></circle>
-<path d="M18 46c8 5 18 7 29 4M15 53c7 4 15 5 24 4"></path>
-</svg>
-<strong>Não é pausa sem motivo.</strong>
-<span>É reprodução, renovação e futuro.</span>
-</div>
-</div>
-</header>
-<div class="defeso-content">
-<div class="defeso-intro-grid">
-<div class="defeso-copy">
-<h3>O que é o defeso?</h3>
-<p>
+              </div>
+              <div
+                aria-label="Mensagem de conscientização"
+                class="defeso-hero__seal"
+              >
+                <div>
+                  <svg aria-hidden="true" viewbox="0 0 64 64">
+                    <path
+                      d="M7 33c9-13 20-19 33-17 7 1 13 5 17 10-4 5-10 9-17 10-13 2-24-4-33-17Z"
+                    ></path>
+                    <path
+                      d="M48 18c4-5 8-8 12-9-1 5-1 10 2 15-3 4-7 7-12 9"
+                    ></path>
+                    <circle
+                      cx="41"
+                      cy="25"
+                      fill="#ffd166"
+                      r="1.8"
+                      stroke="none"
+                    ></circle>
+                    <path d="M18 46c8 5 18 7 29 4M15 53c7 4 15 5 24 4"></path>
+                  </svg>
+                  <strong>Não é pausa sem motivo.</strong>
+                  <span>É reprodução, renovação e futuro.</span>
+                </div>
+              </div>
+            </header>
+            <div class="defeso-content">
+              <div class="defeso-intro-grid">
+                <div class="defeso-copy">
+                  <h3>O que é o defeso?</h3>
+                  <p>
                     É o período em que a pesca ou a mariscagem de determinadas
                     espécies fica proibida ou controlada para proteger fases
                     importantes do ciclo de vida, como reprodução, crescimento e
                     recrutamento dos animais. Cada espécie possui datas e regras
                     próprias.
                   </p>
-</div>
-<ul class="defeso-rules">
-<li>
+                </div>
+                <ul class="defeso-rules">
+                  <li>
                     Não capture nem retire do ambiente as espécies protegidas.
                   </li>
-<li>
+                  <li>
                     Não compre pescado sem origem regular durante o período.
                   </li>
-<li>
+                  <li>
                     Comércio e estoque só podem ocorrer nas situações
                     autorizadas e devidamente declaradas.
                   </li>
-<li>
+                  <li>
                     Compartilhe o calendário com pescadores, marisqueiras,
                     comerciantes e consumidores.
                   </li>
-</ul>
-</div>
-<div class="defeso-calendar-heading">
-<div>
-<span class="defeso-kicker defeso-kicker--blue">Datas oficiais</span>
-<h3>Calendário do defeso em Vera Cruz</h3>
-</div>
-<p>
+                </ul>
+              </div>
+              <div class="defeso-calendar-heading">
+                <div>
+                  <span class="defeso-kicker defeso-kicker--blue"
+                    >Datas oficiais</span
+                  >
+                  <h3>Calendário do defeso em Vera Cruz</h3>
+                </div>
+                <p>
                   Os cartões são destacados automaticamente quando a data atual
                   estiver dentro de um dos períodos de 2026.
                 </p>
-</div>
-<div class="defeso-calendar-grid">
-<section class="defeso-card" data-defeso-periods="2026-04-01/2026-05-15,2026-09-15/2026-10-31">
-<span class="defeso-status" hidden="">Defeso em vigor</span>
-<strong class="defeso-card__species">Camarões</strong>
-<span class="defeso-card__detail">Rosa, sete-barbas e branco. Calendário correspondente ao
-                    trecho do litoral onde está Vera Cruz.</span>
-<div class="defeso-periods">
-<time datetime="2026-04-01/2026-05-15">1º abr a 15 mai</time>
-<time datetime="2026-09-15/2026-10-31">15 set a 31 out</time>
-</div>
-</section>
-<section class="defeso-card" data-defeso-periods="2026-01-01/2026-04-30,2026-11-01/2026-12-31">
-<span class="defeso-status" hidden="">Defeso em vigor</span>
-<strong class="defeso-card__species">Lagostas</strong>
-<span class="defeso-card__detail">Lagosta-vermelha, lagosta-verde e lagosta-pintada.</span>
-<div class="defeso-periods">
-<span>1º nov a 30 abr</span>
-</div>
-</section>
-<section class="defeso-card" data-defeso-periods="2026-05-15/2026-07-31">
-<span class="defeso-status" hidden="">Defeso em vigor</span>
-<strong class="defeso-card__species">Robalo</strong>
-<span class="defeso-card__detail">Proteção nas águas interiores e no litoral abrangido pela
-                    norma.</span>
-<div class="defeso-periods">
-<time datetime="2026-05-15/2026-07-31">15 mai a 31 jul</time>
-</div>
-</section>
-<section class="defeso-card" data-defeso-periods="2026-01-01/2026-02-28,2026-11-01/2026-12-31">
-<span class="defeso-status" hidden="">Defeso em vigor</span>
-<strong class="defeso-card__species">Garoupa-verdadeira</strong>
-<span class="defeso-card__detail">Espécie protegida em águas jurisdicionais
-                    brasileiras.</span>
-<div class="defeso-periods">
-<span>1º nov a 28 fev</span>
-</div>
-</section>
-<section class="defeso-card" data-defeso-periods="2026-08-01/2026-09-30">
-<span class="defeso-status" hidden="">Defeso em vigor</span>
-<strong class="defeso-card__species">Peixes recifais</strong>
-<span class="defeso-card__detail">Caranha, sirigado, garoupa-de-são-tomé e
-                    badejo-amarelo.</span>
-<div class="defeso-periods">
-<time datetime="2026-08-01/2026-09-30">1º ago a 30 set</time>
-</div>
-</section>
-<section class="defeso-card defeso-card--wide" data-defeso-periods="2026-01-18/2026-01-23,2026-02-01/2026-02-06,2026-02-17/2026-02-22,2026-03-03/2026-03-08,2026-03-18/2026-03-23,2026-04-17/2026-04-22">
-<span class="defeso-status" hidden="">Defeso em vigor</span>
-<strong class="defeso-card__species">Caranguejo-uçá: andadas de 2026</strong>
-<span class="defeso-card__detail">Durante as andadas reprodutivas ficam proibidos captura,
+              </div>
+              <div class="defeso-calendar-grid">
+                <section
+                  class="defeso-card"
+                  data-defeso-periods="2026-04-01/2026-05-15,2026-09-15/2026-10-31"
+                >
+                  <span class="defeso-status" hidden="">Defeso em vigor</span>
+                  <strong class="defeso-card__species">Camarões</strong>
+                  <span class="defeso-card__detail"
+                    >Rosa, sete-barbas e branco. Calendário correspondente ao
+                    trecho do litoral onde está Vera Cruz.</span
+                  >
+                  <div class="defeso-periods">
+                    <time datetime="2026-04-01/2026-05-15"
+                      >1º abr a 15 mai</time
+                    >
+                    <time datetime="2026-09-15/2026-10-31"
+                      >15 set a 31 out</time
+                    >
+                  </div>
+                </section>
+                <section
+                  class="defeso-card"
+                  data-defeso-periods="2026-01-01/2026-04-30,2026-11-01/2026-12-31"
+                >
+                  <span class="defeso-status" hidden="">Defeso em vigor</span>
+                  <strong class="defeso-card__species">Lagostas</strong>
+                  <span class="defeso-card__detail"
+                    >Lagosta-vermelha, lagosta-verde e lagosta-pintada.</span
+                  >
+                  <div class="defeso-periods">
+                    <span>1º nov a 30 abr</span>
+                  </div>
+                </section>
+                <section
+                  class="defeso-card"
+                  data-defeso-periods="2026-05-15/2026-07-31"
+                >
+                  <span class="defeso-status" hidden="">Defeso em vigor</span>
+                  <strong class="defeso-card__species">Robalo</strong>
+                  <span class="defeso-card__detail"
+                    >Proteção nas águas interiores e no litoral abrangido pela
+                    norma.</span
+                  >
+                  <div class="defeso-periods">
+                    <time datetime="2026-05-15/2026-07-31"
+                      >15 mai a 31 jul</time
+                    >
+                  </div>
+                </section>
+                <section
+                  class="defeso-card"
+                  data-defeso-periods="2026-01-01/2026-02-28,2026-11-01/2026-12-31"
+                >
+                  <span class="defeso-status" hidden="">Defeso em vigor</span>
+                  <strong class="defeso-card__species"
+                    >Garoupa-verdadeira</strong
+                  >
+                  <span class="defeso-card__detail"
+                    >Espécie protegida em águas jurisdicionais
+                    brasileiras.</span
+                  >
+                  <div class="defeso-periods">
+                    <span>1º nov a 28 fev</span>
+                  </div>
+                </section>
+                <section
+                  class="defeso-card"
+                  data-defeso-periods="2026-08-01/2026-09-30"
+                >
+                  <span class="defeso-status" hidden="">Defeso em vigor</span>
+                  <strong class="defeso-card__species">Peixes recifais</strong>
+                  <span class="defeso-card__detail"
+                    >Caranha, sirigado, garoupa-de-são-tomé e
+                    badejo-amarelo.</span
+                  >
+                  <div class="defeso-periods">
+                    <time datetime="2026-08-01/2026-09-30"
+                      >1º ago a 30 set</time
+                    >
+                  </div>
+                </section>
+                <section
+                  class="defeso-card defeso-card--wide"
+                  data-defeso-periods="2026-01-18/2026-01-23,2026-02-01/2026-02-06,2026-02-17/2026-02-22,2026-03-03/2026-03-08,2026-03-18/2026-03-23,2026-04-17/2026-04-22"
+                >
+                  <span class="defeso-status" hidden="">Defeso em vigor</span>
+                  <strong class="defeso-card__species"
+                    >Caranguejo-uçá: andadas de 2026</strong
+                  >
+                  <span class="defeso-card__detail"
+                    >Durante as andadas reprodutivas ficam proibidos captura,
                     transporte, beneficiamento, industrialização e
-                    comercialização.</span>
-<div class="defeso-periods">
-<time datetime="2026-01-18/2026-01-23">18 a 23 jan</time>
-<time datetime="2026-02-01/2026-02-06">1º a 6 fev</time>
-<time datetime="2026-02-17/2026-02-22">17 a 22 fev</time>
-<time datetime="2026-03-03/2026-03-08">3 a 8 mar</time>
-<time datetime="2026-03-18/2026-03-23">18 a 23 mar</time>
-<time datetime="2026-04-17/2026-04-22">17 a 22 abr</time>
-</div>
-</section>
-</div>
-<div class="defeso-note">
-<div>
-<strong>Consumidor também protege o mar</strong>
-<p>
+                    comercialização.</span
+                  >
+                  <div class="defeso-periods">
+                    <time datetime="2026-01-18/2026-01-23">18 a 23 jan</time>
+                    <time datetime="2026-02-01/2026-02-06">1º a 6 fev</time>
+                    <time datetime="2026-02-17/2026-02-22">17 a 22 fev</time>
+                    <time datetime="2026-03-03/2026-03-08">3 a 8 mar</time>
+                    <time datetime="2026-03-18/2026-03-23">18 a 23 mar</time>
+                    <time datetime="2026-04-17/2026-04-22">17 a 22 abr</time>
+                  </div>
+                </section>
+              </div>
+              <div class="defeso-note">
+                <div>
+                  <strong>Consumidor também protege o mar</strong>
+                  <p>
                     Antes de comprar, pergunte a origem do pescado. Durante o
                     defeso, prefira outras espécies liberadas e nunca estimule a
                     venda clandestina.
                   </p>
-</div>
-<a href="https://www.ba.gov.br/meioambiente/sites/site-sema/files/2026-05/CALENDARIO_PAREDE_DO_DEFESO_2026_Digital.pdf" rel="noopener noreferrer" target="_blank">Ver calendário oficial 2026</a>
-</div>
-<div class="defeso-alert">
-<span><strong>Encontrou pesca ou comércio irregular?</strong>
-                  Denuncie ao INEMA.</span>
-<span><a href="tel:08000711400">0800 071 1400</a> ·
-                  <a href="mailto:denuncia@inema.ba.gov.br">denuncia@inema.ba.gov.br</a></span>
-</div>
-</div>
-</article>
-</div>
-</section>
-</main>
-<!-- Rodapé padrão inserido por assets/js/layout.js -->
-<div data-cv-footer=""></div>
-<script>
+                </div>
+                <a
+                  href="https://www.ba.gov.br/meioambiente/sites/site-sema/files/2026-05/CALENDARIO_PAREDE_DO_DEFESO_2026_Digital.pdf"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  >Ver calendário oficial 2026</a
+                >
+              </div>
+              <div class="defeso-alert">
+                <span
+                  ><strong>Encontrou pesca ou comércio irregular?</strong>
+                  Denuncie ao INEMA.</span
+                >
+                <span
+                  ><a href="tel:08000711400">0800 071 1400</a> ·
+                  <a href="mailto:denuncia@inema.ba.gov.br"
+                    >denuncia@inema.ba.gov.br</a
+                  ></span
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <!-- Rodapé padrão inserido por assets/js/menu-escolar-2027-v6.js -->
+    <div data-cv-footer=""></div>
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         "use strict";
 
@@ -550,12 +587,6 @@
         const posts = Array.isArray(window.CONECTA_BLOG_POSTS)
           ? [...window.CONECTA_BLOG_POSTS]
           : [];
-
-        const fieldTripPost = {"slug": "aula-de-campo-museus-salvador-luiz-eduardo-magalhaes", "titulo": "Ciência, histórias e cabelo arrepiado: uma aula de campo para aprender e se divertir", "subtitulo": "Alunos do Colégio Municipal Luís Eduardo Magalhães visitam o Museu de Energia, a Fundação Casa de Jorge Amado e a Casa do Benin, em Salvador.", "resumo": "Experimentos, literatura e cultura africana: acompanhe os registros e os aprendizados de uma visita que conectou ciência, História e respeito à diversidade.", "categoria": "Educação e cultura", "categoriaSlug": "educacao-cultura", "data": "2026-10-02", "dataTexto": "Publicado em 2 de outubro de 2026", "autor": "Conecta Vera Cruz • Colégio Municipal Luís Eduardo Magalhães", "tempoLeitura": "15 min de leitura + galerias", "destaque": true, "imagem": "assets/img/aula-campo/registro-02.png", "imagemAlt": "Grupo em frente à Fundação Casa de Jorge Amado, no Pelourinho", "tags": ["Aula de campo", "Educação", "História", "Literatura", "Cultura africana", "Salvador"], "conteudo": [{"tipo": "paragrafo", "texto": "Teve cabelo arrepiado, encontro com livros, descobertas sobre a história africana e tempo para registrar a turma reunida. Para os alunos do Colégio Municipal Luís Eduardo Magalhães, a aula de campo em Salvador foi uma oportunidade de aprender participando — e de perceber que uma visita ao museu pode reunir conhecimento, curiosidade e diversão no mesmo passeio."}, {"tipo": "paragrafo", "texto": "O roteiro passou pelo Museu de Energia, pela Fundação Casa de Jorge Amado e pela Casa do Benin. Três espaços diferentes, unidos por uma proposta: aproximar os conteúdos da escola de experiências que os estudantes pudessem observar, experimentar e compartilhar. A cada parada, a turma encontrou um novo jeito de olhar para a ciência, a literatura e a cultura."}, {"tipo": "titulo", "texto": "Museu de Energia: compreender a eletricidade pela experiência"}, {"tipo": "imagem", "src": "assets/img/aula-campo/museu-da-energia.png", "alt": "Fachada do edifício que abriga o Museu de Energia", "legenda": "Fachada do edifício que abriga o Museu de Energia, um dos espaços visitados pela turma."}, {"tipo": "paragrafo", "texto": "No Museu de Energia, a eletricidade saiu do campo das explicações abstratas e entrou na experiência da turma. Os estudantes conheceram sua história e participaram de demonstrações que ajudaram a entender conceitos como energia e corrente elétrica. Aquilo que costuma aparecer no caderno ganhou movimento, equipamentos e a participação dos próprios alunos."}, {"tipo": "paragrafo", "texto": "A visita também trouxe o assunto para perto da vida cotidiana. Acender uma lâmpada, usar um ventilador ou carregar o celular envolve transformações de energia. Entender esses processos ajuda a enxergar a tecnologia com mais atenção: por trás de um gesto tão comum quanto ligar um aparelho, há uma história de descobertas e conhecimentos."}, {"tipo": "titulo", "texto": "Cabelo arrepiado e ciência na prática"}, {"tipo": "paragrafo", "texto": "Um dos momentos mais divertidos foi a interação com a esfera metálica. Com o acompanhamento da equipe do museu, estudantes participaram da demonstração enquanto os colegas observavam. O cabelo arrepiado tornou o fenômeno visível e deu à turma uma experiência que dificilmente passaria despercebida!"}, {"tipo": "paragrafo", "texto": "A surpresa tinha explicação: na eletrização, os fios podem adquirir cargas de mesmo sinal e se repelir, afastando-se uns dos outros. Assim, a curiosidade abriu espaço para aprender um princípio da eletrostática. A diversão fazia parte do encontro com a ciência, e o resultado ajudava a ligar a experiência ao conteúdo estudado."}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/energia-00.webp", "alt": "Participação de um estudante na demonstração com a esfera metálica.", "legenda": "Participação de um estudante na demonstração com a esfera metálica."}, {"src": "assets/img/aula-campo/energia-01.webp", "alt": "Cabelos afastados durante a demonstração: um registro que permite discutir a repulsão entre cargas elétricas.", "legenda": "Cabelos afastados durante a demonstração: um registro que permite discutir a repulsão entre cargas elétricas."}, {"src": "assets/img/aula-campo/energia-02.webp", "alt": "Outra estudante participa da experiência com a esfera.", "legenda": ""}, {"src": "assets/img/aula-campo/energia-03.webp", "alt": "A turma alterna a participação e acompanha os efeitos da demonstração.", "legenda": ""}, {"src": "assets/img/aula-campo/energia-04.webp", "alt": "Contato com a esfera metálica durante a atividade acompanhada.", "legenda": ""}, {"src": "assets/img/aula-campo/energia-05.webp", "alt": "Observação da esfera e participação na demonstração.", "legenda": ""}, {"src": "assets/img/aula-campo/energia-06.webp", "alt": "Uma acompanhante participa da experiência, aproximando a comunidade escolar da atividade.", "legenda": ""}]}, {"tipo": "video", "src": "assets/video/aula-campo/energia-15.mp4", "alt": "", "legenda": ""}, {"tipo": "video", "src": "assets/video/aula-campo/energia-16.mp4", "alt": "", "legenda": ""}, {"tipo": "video", "src": "assets/video/aula-campo/energia-17.mp4", "alt": "", "legenda": ""}, {"tipo": "titulo", "texto": "Observar, participar e entender"}, {"tipo": "paragrafo", "texto": "As atividades nas bancadas e nos equipamentos ampliaram a exploração. A turma acompanhou demonstrações, observou componentes e teve contato com situações que permitiam conversar sobre circuitos e fenômenos elétricos. Participar dessas interações deu aos estudantes um papel ativo na visita: o conhecimento estava no que viam acontecer e nas explicações que acompanhavam cada etapa."}, {"tipo": "paragrafo", "texto": "Energia e corrente elétrica, por exemplo, deixaram de ser apenas palavras parecidas. Energia está relacionada à capacidade de produzir transformações; corrente elétrica é o movimento organizado de cargas. Retomar essa diferença depois dos experimentos ajuda a organizar o aprendizado e a compreender melhor os aparelhos presentes no dia a dia."}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/energia-08.webp", "alt": "Estudantes e mediador reunidos em torno de um equipamento demonstrativo.", "legenda": ""}, {"src": "assets/img/aula-campo/energia-09.webp", "alt": "A turma acompanha uma demonstração em bancada com componentes e recipientes.", "legenda": ""}, {"src": "assets/img/aula-campo/energia-12.webp", "alt": "Explicação junto ao equipamento: a observação coletiva complementa a participação individual.", "legenda": ""}]}, {"tipo": "video", "src": "assets/video/aula-campo/energia-13.mp4", "alt": "", "legenda": ""}, {"tipo": "video", "src": "assets/video/aula-campo/energia-14.mp4", "alt": "", "legenda": ""}, {"tipo": "titulo", "texto": "Uma viagem de realidade virtual pelo caminho da energia"}, {"tipo": "imagem", "src": "assets/img/aula-campo/realidade-virtual.png", "alt": "Alunos com óculos de realidade virtual no Museu de Energia", "legenda": ""}, {"tipo": "paragrafo", "texto": "A tecnologia trouxe outra forma de explorar o assunto: a experiência imersiva com óculos de realidade virtual. Nessa viagem em 3D, a turma acompanhou o caminho da energia elétrica, da geração até a chegada às residências. Era uma oportunidade de enxergar um percurso que faz parte da vida de todos, mas que nem sempre conseguimos observar por inteiro."}, {"tipo": "paragrafo", "texto": "A experiência ajudou a conectar as etapas: a eletricidade é gerada a partir de diferentes fontes, segue pelos sistemas de transmissão, passa pela distribuição e chega às casas. Assim, ligar a luz ganhou um novo significado. Antes de iluminar um cômodo, a energia percorre uma rede que conecta produção, transporte e consumo."}, {"tipo": "paragrafo", "texto": "Os óculos acrescentaram à aula o envolvimento de uma experiência visual e imersiva. Ao acompanhar esse trajeto, os estudantes puderam relacionar as explicações do museu ao funcionamento das cidades e ao próprio cotidiano. Mais uma maneira de aprender com curiosidade e aproveitar a tecnologia como parte da descoberta."}, {"tipo": "titulo", "texto": "Fundação Casa de Jorge Amado: a Bahia também se aprende nos livros"}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-02.png", "alt": "Registro do grupo em frente à Fundação Casa de Jorge Amado, no Pelourinho, durante a aula de campo.", "legenda": "Registro da turma em frente à Fundação Casa de Jorge Amado, no Pelourinho, durante a aula de campo."}, {"tipo": "paragrafo", "texto": "Na Fundação Casa de Jorge Amado, o passeio mudou de linguagem. Depois dos experimentos, vieram as histórias de vida, os livros e a memória literária. Os alunos conheceram a biografia de Jorge Amado e se aproximaram de obras que fazem parte da literatura brasileira, descobrindo relações entre a escrita e a sociedade baiana."}, {"tipo": "paragrafo", "texto": "A mediação ajudou a ligar os diferentes momentos da trajetória do escritor. Fotografias e painéis deram contexto às explicações, permitindo que a turma acompanhasse a história para além de nomes e datas. Conhecer um autor dessa maneira abre uma porta para a leitura: seus livros passam a ter também um rosto, uma trajetória e um mundo de referências."}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-03.webp", "alt": "Mediação junto aos painéis biográficos: fotografias e textos funcionam como fontes para compreender a trajetória de Jorge Amado.", "legenda": "Mediação junto aos painéis biográficos: fotografias e textos funcionam como fontes para compreender a trajetória de Jorge Amado."}, {"tipo": "video", "src": "assets/video/aula-campo/registro-09.mp4", "alt": "", "legenda": ""}, {"tipo": "paragrafo", "texto": "Até a escadaria entrou no percurso literário. Os títulos das obras convidavam a reconhecer livros e descobrir outros, transformando a passagem pelo espaço em mais uma oportunidade de aprender. Entre capas, imagens e instalações, a turma encontrou diferentes formas de se aproximar da produção de Jorge Amado."}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-06.webp", "alt": "A escadaria com títulos de obras transforma o deslocamento pela Fundação em um encontro visual com a literatura de Jorge Amado.", "legenda": "A escadaria com títulos de obras transforma o deslocamento pela Fundação em um encontro visual com a literatura de Jorge Amado."}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/registro-00.webp", "alt": "Instalação em forma de árvore com livros e imagens", "legenda": "A composição em forma de árvore aproxima livros e imagens no espaço expositivo."}, {"src": "assets/img/aula-campo/registro-01.webp", "alt": "Painel amarelo com pássaro e capas de livros", "legenda": "Capas e elementos visuais convidam a observar a diversidade editorial das obras."}]}, {"tipo": "titulo", "texto": "Jorge, Zélia e histórias que se encontram"}, {"tipo": "paragrafo", "texto": "A visita também apresentou a história de Jorge Amado com Zélia Gattai. Escritora e fotógrafa, ela possui uma trajetória própria e uma presença importante na memória preservada pela Fundação. Esse encontro mostrou como a literatura se relaciona com experiências pessoais, afetos e registros de uma época."}, {"tipo": "paragrafo", "texto": "A religiosidade foi outro tema abordado. Ao conhecer sua presença na trajetória e na obra de Jorge Amado, os alunos ampliaram o contato com manifestações culturais da Bahia. Estudar essas relações é uma forma de compreender a sociedade e exercitar o respeito às diferentes crenças."}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-07.webp", "alt": "Espaço dedicado a Zélia Gattai, com fotografias e referências à sua trajetória. O registro destaca sua presença na memória preservada pela Fundação.", "legenda": "Espaço dedicado a Zélia Gattai, com fotografias e referências à sua trajetória. O registro destaca sua presença na memória preservada pela Fundação."}, {"tipo": "video", "src": "assets/video/aula-campo/registro-10.mp4", "alt": "", "legenda": ""}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-08.webp", "alt": "Registro do grupo na escadaria da Fundação Casa de Jorge Amado: um momento coletivo da experiência educativa.", "legenda": ""}, {"tipo": "titulo", "texto": "Casa do Benin: histórias africanas e conexões com a Bahia"}, {"tipo": "imagem", "src": "assets/img/aula-campo/casa-do-benin.png", "alt": "Fachada da Casa do Benin, em Salvador", "legenda": "Fachada da Casa do Benin, espaço visitado pela turma para conhecer histórias africanas e suas conexões com a Bahia."}, {"tipo": "paragrafo", "texto": "Na Casa do Benin, a turma encontrou mais uma parte dessa história: as conexões entre a Bahia e o continente africano. Conhecer a história do Benin e observar o acervo abriu espaço para conversar sobre cultura, memória e pertencimento. A proposta era entender o que estava diante dos olhos e aprender a respeitar os contextos de cada expressão cultural."}, {"tipo": "paragrafo", "texto": "Acompanhando a mediação, os estudantes puderam aproximar as obras e os objetos das explicações sobre o espaço. O contato com essas histórias amplia a visão sobre a África, reconhecendo sociedades diversas, produção artística, técnicas e conhecimentos. São perspectivas que enriquecem o estudo feito na escola."}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-05.webp", "alt": "Estudantes acompanham a mediação na Casa do Benin, diante dos painéis da exposição.", "legenda": "Estudantes acompanham a mediação na Casa do Benin, diante dos painéis da exposição."}, {"tipo": "imagem", "src": "assets/img/aula-campo/registro-04.webp", "alt": "Obra exposta na Casa do Benin: a observação de personagens, cores e composição permite discutir como as imagens constroem narrativas.", "legenda": "Obra exposta na Casa do Benin: a observação de personagens, cores e composição permite discutir como as imagens constroem narrativas."}, {"tipo": "imagem", "src": "assets/img/aula-campo/pintura-casa-benin.jpg", "alt": "Pintura exposta na Casa do Benin, com personagens junto à água", "legenda": "Pintura exposta na Casa do Benin: personagens e elementos simbólicos compõem uma cena junto à água."}, {"tipo": "titulo", "texto": "Cada peça, uma nova descoberta"}, {"tipo": "paragrafo", "texto": "Madeira, metal, cerâmica, instrumentos e figuras humanas e animais deram à visita muitas possibilidades de observação. A variedade do acervo convidava a reparar nos detalhes: entalhes, formas, materiais e composições. Mais do que reunir objetos diferentes, a exposição aproximava a turma de modos de criar, representar e guardar memórias."}, {"tipo": "paragrafo", "texto": "As identificações ajudaram a dar nome e contexto às descobertas. O tabuleiro circular de Ifá foi apresentado como um objeto ritual da Nigéria/Benin, da cultura iorubá. Já o trono cerimonial é uma cópia de trono utilizado por reis do Daomé (Danxomè), e a máscara Gelede está ligada ao culto à ancestralidade feminina da Nigéria/Benin. Conhecer essas informações ajuda a compreender as peças com atenção e respeito."}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/vitrine-de-artefatos-metalicos.webp", "alt": "Asin; Emblema do Rei Ganganhessou; Figuração da saída do Rei Behanzin — peças identificadas na vitrine da Casa do Benin.", "legenda": "Asin; Emblema do Rei Ganganhessou; Figuração da saída do Rei Behanzin — peças identificadas na vitrine da Casa do Benin."}, {"src": "assets/img/aula-campo/recades-makpo.png", "alt": "Récades (makpo), insígnias reais de autoridade do antigo Reino do Daomé, expostas na Casa do Benin", "legenda": "Récades (makpo) — insígnias reais de autoridade do antigo Reino do Daomé, na região do atual Benin, na África Ocidental. Acervo exposto na Casa do Benin."}]}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/galo-metalico-e-figuras-sob-guarda-sol.webp", "alt": "Escultura metálica de galo e figuras humanas com sombrinhas, no acervo da Casa do Benin. Imagem com tratamento visual.", "legenda": "Escultura metálica de galo e figuras humanas com sombrinhas, no acervo da Casa do Benin."}, {"src": "assets/img/aula-campo/esculturas-metalicas-na-vitrine.webp", "alt": "Composição metálica com figuras humanas e sombrinhas, exposta na Casa do Benin. Imagem com tratamento visual.", "legenda": "Composição metálica com figuras humanas e sombrinhas, exposta na Casa do Benin."}]}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/ceramicas-antigas-em-vitrine-de-museu.webp", "alt": "Coleção de Go Zin — recipientes rituais do Benin, expostos na Casa do Benin, conforme a identificação da vitrine.", "legenda": "Coleção de Go Zin — recipientes rituais do Benin, expostos na Casa do Benin, conforme a identificação da vitrine."}, {"src": "assets/img/aula-campo/exposicao-de-artefatos-em-madeira-e-ceramica.webp", "alt": "Cotidiano Otamari — objetos e esculturas rituais do povo Otamari (Benin), expostos na Casa do Benin, conforme a identificação do museu.", "legenda": "Cotidiano Otamari — objetos e esculturas rituais do povo Otamari (Benin), expostos na Casa do Benin, conforme a identificação do museu."}]}, {"tipo": "titulo", "texto": "Tabuleiros sagrados : detalhes e uma tradição viva"}, {"tipo": "imagem", "src": "assets/img/aula-campo/tres-tabuleiros.png", "alt": "Três tabuleiros entalhados na vitrine da Casa do Benin", "legenda": "Vista dos três tabuleiros entalhados expostos na Casa do Benin, incluindo o tabuleiro circular de Ifá."}, {"tipo": "paragrafo", "texto": "Durante a visita, a explicação sobre um “tabuleiro vivo” trouxe uma descoberta importante: segundo o relato da professora, a peça ainda está em uso em sua comunidade e foi emprestada à Casa do Benin para a exposição. Nesse sentido, “vivo” significa que o objeto continua ligado a uma prática cultural e religiosa atual. O museu apresenta uma tradição que segue sendo vivida, além de preservar sua história."}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/bandeja-antiga-com-dois-rostos-entalhados.webp", "alt": "Tabuleiro entalhado com dois rostos e borda de motivos geométricos, exposto na Casa do Benin. Imagem com tratamento visual.", "legenda": "Opon Ifá (tabuleiro sagrado de adivinhação da cultura Iorubá), e ele é considerado um \"tabuleiro vivo\" dentro da tradição religiosa por causa do papel espiritual, cosmológico e dinâmico que desempenha"}, {"src": "assets/img/aula-campo/bandeja-antiga-entalhada-com-dois-rostos.webp", "alt": "Outro tabuleiro entalhado com dois rostos, em exposição na Casa do Benin. Imagem com tratamento visual.", "legenda": "Não se trata apenas de uma peça de madeira decorativa ou estática, mas de um microcosmo ativo. O tabuleiro atua como um portal de comunicação ao vivo entre o Ayé (o mundo físico/terra) e o Òrun (o mundo espiritual)."}]}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/peca-entalhada-com-rostos-e-conchas.webp", "alt": "Tabuleiro circular de Ifá — objeto ritual da cultura iorubá, Nigéria/Benin, ornamentado com rostos e conchas.", "legenda": "Tabuleiro circular de Ifá — objeto ritual da cultura iorubá, Nigéria/Benin, ornamentado com rostos e conchas."}, {"src": "assets/img/aula-campo/trono-cerimonial.webp", "alt": "Trono cerimonial — cópia de trono utilizado pelos reis do Daomé (Danxomè). Acervo da Casa do Benin.", "legenda": "Trono cerimonial — cópia de trono utilizado pelos reis do Daomé (Danxomè). Acervo da Casa do Benin."}]}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/mascara-gelede.webp", "alt": "Máscara Gelede — ancestralidade feminina na tradição iorubá, Nigéria/Benin. Acervo da Casa do Benin.", "legenda": "Máscara Gelede — ancestralidade feminina na tradição iorubá, Nigéria/Benin. Acervo da Casa do Benin."}, {"src": "assets/img/aula-campo/peca-gravida.png", "alt": "Peça de madeira esculpida com figuras e motivos geométricos, exposta na Casa do Benin.", "legenda": "Peça de madeira esculpida com figuras e motivos geométricos, exposta na Casa do Benin."}]}, {"tipo": "titulo", "texto": "Música e arte para ampliar o olhar"}, {"tipo": "paragrafo", "texto": "A música também encontrou seu lugar no aprendizado. A identificação do conjunto de instrumentos apresenta Gangan (tambor), Osãn (xequerê) e Gan koué koué (gongo), de tradição iorubá. Nas fotografias e nas composições do acervo, gestos, adornos e instrumentos ampliaram a conversa sobre as diferentes formas de expressão cultural."}, {"tipo": "imagem", "src": "assets/img/aula-campo/tambor-e-esculturas-na-mesa-de-madeira.webp", "alt": "Conjunto de instrumentos: Gangan (tambor), Osãn (xequerê) e Gan koué koué (gongo), conforme a identificação do museu; ao centro, peça de madeira esculpida.", "legenda": "Conjunto de instrumentos: Gangan (tambor), Osãn (xequerê) e Gan koué koué (gongo), conforme a identificação do museu; ao centro, peça de madeira esculpida."}, {"tipo": "paragrafo", "texto": "Entre as obras, O navio da Liberdade, de Emo de Medeiros, datada de 2025, ofereceu outro caminho para olhar a exposição. A imagem e seu título permitem continuar em sala uma conversa sobre liberdade, memória e representação. Dessa forma, o que foi visto no museu pode seguir despertando perguntas depois da visita."}, {"tipo": "galeria", "imagens": [{"src": "assets/img/aula-campo/figura-mascarada-entre-musicos-com-tambores.webp", "alt": "Emo de Medeiros — Os tambores do tempo (Les tambours du temps), série Fatumbia. Obra exposta na Casa do Benin.", "legenda": "Emo de Medeiros — Os tambores do tempo (Les tambours du temps), série Fatumbia. Obra exposta na Casa do Benin."}, {"src": "assets/img/aula-campo/duas-pessoas-com-pintura-facial-e-bacias.webp", "alt": "Emo de Medeiros — As filhas dos Segredos (Les filles des secrets), série Fatumbia. Obra exposta na Casa do Benin.", "legenda": "Emo de Medeiros — As filhas dos Segredos (Les filles des secrets), série Fatumbia. Obra exposta na Casa do Benin."}, {"src": "assets/img/aula-campo/quadro-nautico-com-barcos-coloridos.webp", "alt": "Emo de Medeiros — Le vaisseau de la Liberté (O navio da Liberdade), 2025. Obra exposta na Casa do Benin.", "legenda": "Emo de Medeiros — Le vaisseau de la Liberté (O navio da Liberdade), 2025. Obra exposta na Casa do Benin."}, {"src": "assets/img/aula-campo/coracao-da-tempestade.png", "alt": "O coração da tempestade, de Emo de Medeiros", "legenda": "Emo de Medeiros — O coração da tempestade (Le cœur de la tempête), série Fatumbia. Registro com edição visual da obra exposta na Casa do Benin."}]}, {"tipo": "imagem", "src": "assets/img/aula-campo/espaco-casa-benin.webp", "alt": "Espaço com cobertura de palha no pátio da Casa do Benin, registrado durante a visita.", "legenda": "Tatassomba (ou Espaço Gourmet Jeje Nagô), uma réplica de habitação tradicional do Benin feita de barro com teto de palha"}, {"tipo": "titulo", "texto": "Aprender juntos também é guardar boas lembranças"}, {"tipo": "paragrafo", "texto": "A aula de campo reuniu experiências que se completam: experimentar a ciência, conhecer a literatura e ampliar o respeito às culturas. A participação nos equipamentos, a atenção às explicações e os registros coletivos mostram uma turma envolvida no percurso. Houve espaço para estudar e também para aproveitar a companhia dos colegas em um ambiente diferente da rotina escolar."}, {"tipo": "paragrafo", "texto": "É essa combinação que dá sentido à saída da escola. A diversão aproxima, a curiosidade movimenta e o conhecimento amplia o olhar. Na volta, ficam as fotografias, os assuntos para conversar e as experiências que ajudam a lembrar o que foi aprendido. Para o Conecta Vera Cruz, compartilhar esse percurso é valorizar uma escola que aprende também quando ocupa os espaços culturais da cidade."}, {"tipo": "titulo", "texto": "Sobre os registros"}, {"tipo": "paragrafo", "texto": "Matéria baseada nas atividades relatadas pela professora e nos registros enviados ao Conecta Vera Cruz. Algumas imagens receberam edição visual. As identificações das peças seguem as legendas fotografadas no museu. Confira também as informações dos espaços visitados:"}, {"tipo": "link", "texto": "Museu de Energia — Neoenergia", "href": "https://www.neoenergia.com/eficiencia-energetica/aulas-de-energia/museu-de-energia"}, {"tipo": "link", "texto": "Fundação Casa de Jorge Amado — a instituição", "href": "https://jorgeamado.org.br/a-fundacao/"}, {"tipo": "link", "texto": "Casa do Benin — cadastro no Visite Museus/Ibram", "href": "https://visite.museus.gov.br/instituicoes/casa-do-benin/"}, {"tipo": "link", "texto": "Museu da Energia: história, tecnologia e realidade virtual — A TARDE", "href": "https://atarde.com.br/cultura/conheca-museu-da-energia-em-salvador-que-une-historia-e-tecnologia-de-graca-1390180"}, {"tipo": "link", "texto": "Casa do Benin — acervo e relações culturais entre África e Bahia", "href": "https://www.salvadordabahia.com/experiencias/casa-do-benin/"}, {"tipo": "link", "texto": "Emo de Medeiros — Fatumbia: títulos e imagens das obras", "href": "https://www.emodemedeiros.com/fatumbia"}]};
-        posts.forEach(function (post) { post.destaque = false; });
-        const oldFieldTripIndex = posts.findIndex(function (post) { return post.slug === fieldTripPost.slug; });
-        if (oldFieldTripIndex >= 0) posts.splice(oldFieldTripIndex, 1);
-        posts.unshift(fieldTripPost);
 
         const elements = {
           featured: document.querySelector("[data-blog-featured]"),
@@ -729,12 +760,6 @@
               ? "blog-compact-card blog-compact-card--featured"
               : "blog-compact-card",
           );
-          if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
-            article.classList.add("blog-compact-card--sports-final");
-          }
-          if (post.slug === "transporte-gratuito-eleicoes-2026-ilha-itaparica") {
-            article.classList.add("blog-compact-card--transport-election");
-          }
 
           const content = make("div", "blog-compact-card__content");
           const top = make("div", "blog-compact-card__top");
@@ -766,8 +791,8 @@
           });
 
           const actions = make("div", "blog-card-actions");
-          if (featured) actions.appendChild(createLikeButton(post));
           actions.appendChild(button);
+          if (featured) actions.appendChild(createLikeButton(post));
 
           content.append(top, title, summary, meta, actions);
           if (featured) content.appendChild(createCommentBox(post));
@@ -797,20 +822,6 @@
             }
             case "nota":
               return make("aside", "blog-article__note", block.texto || "");
-            case "video": {
-              const figure = make("figure", "blog-article__video");
-              const video = document.createElement("video");
-              video.controls = true;
-              video.playsInline = true;
-              video.preload = "metadata";
-              video.src = block.src || "";
-              if (block.poster) video.poster = block.poster;
-              video.setAttribute("aria-label", block.legenda || "Vídeo informativo");
-              figure.appendChild(video);
-              if (block.legenda)
-                figure.appendChild(make("figcaption", "", block.legenda));
-              return figure;
-            }
             case "imagem": {
               const figure = make("figure", "blog-article__figure");
               const image = document.createElement("img");
@@ -821,16 +832,6 @@
               if (block.legenda)
                 figure.appendChild(make("figcaption", "", block.legenda));
               return figure;
-            }
-            case "link": {
-              const source = make("p", "blog-article__source");
-              const link = document.createElement("a");
-              link.href = block.href || "#";
-              link.target = "_blank";
-              link.rel = "noopener noreferrer";
-              link.textContent = block.texto || "Abrir fonte";
-              source.appendChild(link);
-              return source;
             }
             case "galeria": {
               const gallery = make("div", "blog-article__gallery");
@@ -857,13 +858,6 @@
           if (!elements.reader) return;
 
           const shell = make("article", "container blog-reader-shell");
-          if (post.slug === fieldTripPost.slug) shell.classList.add("field-trip-reader");
-          if (post.slug === "grande-final-copa-integracao-gamboa-2026") {
-            shell.classList.add("blog-reader-shell--sports-final");
-          }
-          if (post.slug === "transporte-gratuito-eleicoes-2026-ilha-itaparica") {
-            shell.classList.add("blog-reader-shell--transport-election");
-          }
           const toolbar = make("div", "blog-reader-toolbar");
           const close = make(
             "button",
@@ -991,8 +985,8 @@
 
           const label = make("div", "blog-featured-label");
           label.append(
-            make("span", "blog-eyebrow", "Em destaque"),
-            make("strong", "", featuredPost.destaqueRotulo || "Leitura recomendada"),
+            make("span", "blog-eyebrow", "Destaque do blog"),
+            make("strong", "", "Leitura recomendada"),
           );
           elements.featured.replaceChildren(
             label,
@@ -1215,5 +1209,5 @@
         }
       });
     </script>
-</body>
+  </body>
 </html>

@@ -1,0 +1,193 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isDirector() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/direcaoUsuarios/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/direcaoUsuarios/$(request.auth.uid)).data.ativo == true;
+    }
+
+    function agendaEnabled() {
+      return !exists(/databases/$(database)/documents/configuracoesRematricula/agenda) ||
+        get(/databases/$(database)/documents/configuracoesRematricula/agenda).data.ativo == true;
+    }
+
+    // Regras existentes do Conecta Vera Cruz — preservadas.
+    match /memorias/{memoriaId} {
+      allow read: if resource.data.aprovado == true;
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'site', 'localidade', 'nome', 'texto', 'aprovado', 'curtidas', 'createdAt'
+        ]) &&
+        request.resource.data.site == 'Conecta Vera Cruz' &&
+        request.resource.data.localidade is string &&
+        request.resource.data.localidade.size() >= 2 &&
+        request.resource.data.localidade.size() <= 50 &&
+        request.resource.data.nome is string &&
+        request.resource.data.nome.size() >= 2 &&
+        request.resource.data.nome.size() <= 40 &&
+        request.resource.data.texto is string &&
+        request.resource.data.texto.size() >= 10 &&
+        request.resource.data.texto.size() <= 500 &&
+        request.resource.data.aprovado == true &&
+        request.resource.data.curtidas == 0 &&
+        request.resource.data.createdAt == request.time;
+      allow update: if
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['curtidas']) &&
+        request.resource.data.curtidas is int &&
+        request.resource.data.curtidas >= 0 &&
+        (
+          request.resource.data.curtidas == resource.data.curtidas + 1 ||
+          request.resource.data.curtidas == resource.data.curtidas - 1
+        );
+      allow delete: if false;
+    }
+
+    match /blogComentarios/{comentarioId} {
+      allow read: if
+        resource.data.site == 'Conecta Vera Cruz' &&
+        resource.data.aprovado == true;
+      allow create: if
+        request.resource.data.keys().hasOnly([
+          'site', 'postSlug', 'nome', 'texto', 'parentId', 'parentName',
+          'aprovado', 'createdAt'
+        ]) &&
+        request.resource.data.site == 'Conecta Vera Cruz' &&
+        request.resource.data.postSlug is string &&
+        request.resource.data.postSlug.size() >= 3 &&
+        request.resource.data.postSlug.size() <= 100 &&
+        request.resource.data.nome is string &&
+        request.resource.data.nome.size() >= 2 &&
+        request.resource.data.nome.size() <= 50 &&
+        request.resource.data.texto is string &&
+        request.resource.data.texto.size() >= 2 &&
+        request.resource.data.texto.size() <= 220 &&
+        request.resource.data.parentId is string &&
+        request.resource.data.parentId.size() <= 100 &&
+        request.resource.data.parentName is string &&
+        request.resource.data.parentName.size() <= 50 &&
+        request.resource.data.aprovado == true &&
+        request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+
+    // Diretores cadastrados exclusivamente pelo Console/Admin SDK.
+    match /direcaoUsuarios/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+
+    // Configuração pública apenas para consulta do indicador ativo/inativo.
+    // Somente a direção pode criar ou alterar o interruptor.
+    match /configuracoesRematricula/{configId} {
+      allow get: if configId == 'agenda';
+      allow list, delete: if false;
+      allow create, update: if configId == 'agenda' && isDirector() &&
+        request.resource.data.keys().hasOnly(['ativo']) &&
+        request.resource.data.keys().hasAll(['ativo']) &&
+        request.resource.data.ativo is bool;
+    }
+
+    // Formulário público: somente cria solicitações. Direção lê e altera status.
+    match /rematriculas/{id} {
+      allow create: if request.auth == null &&
+        request.resource.data.keys().hasOnly([
+          'anoLetivo','escola','aluno','nascimento','matricula','serie','turno',
+          'responsavel','parentesco','telefone','email','rua','numero','bairro',
+          'cidade','uf','referencia','status','criadoEm',
+          'agendamentoSlotId','agendamentoData','agendamentoHora'
+        ]) &&
+        request.resource.data.keys().hasAll([
+          'anoLetivo','escola','aluno','nascimento','matricula','serie','turno',
+          'responsavel','parentesco','telefone','email','rua','numero','bairro',
+          'cidade','uf','referencia','status','criadoEm',
+          'agendamentoSlotId','agendamentoData','agendamentoHora'
+        ]) &&
+        request.resource.data.anoLetivo == 2027 &&
+        request.resource.data.escola == 'Escola Municipal Luís Eduardo Magalhães' &&
+        request.resource.data.status == 'pendente' &&
+        request.resource.data.criadoEm == request.time &&
+        request.resource.data.aluno is string && request.resource.data.aluno.size() >= 2 && request.resource.data.aluno.size() <= 120 &&
+        request.resource.data.responsavel is string && request.resource.data.responsavel.size() >= 2 && request.resource.data.responsavel.size() <= 120 &&
+        request.resource.data.nascimento is string && request.resource.data.nascimento.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') &&
+        request.resource.data.telefone is string && request.resource.data.telefone.size() >= 8 && request.resource.data.telefone.size() <= 20 &&
+        request.resource.data.serie is string && request.resource.data.serie.size() >= 1 && request.resource.data.serie.size() <= 30 &&
+        request.resource.data.turno is string && request.resource.data.turno.size() >= 1 && request.resource.data.turno.size() <= 30 &&
+        request.resource.data.matricula is string && request.resource.data.matricula.size() <= 30 &&
+        request.resource.data.parentesco is string && request.resource.data.parentesco.size() >= 1 && request.resource.data.parentesco.size() <= 65 &&
+        request.resource.data.email is string && request.resource.data.email.size() <= 120 &&
+        request.resource.data.rua is string && request.resource.data.rua.size() >= 1 && request.resource.data.rua.size() <= 130 &&
+        request.resource.data.numero is string && request.resource.data.numero.size() >= 1 && request.resource.data.numero.size() <= 20 &&
+        request.resource.data.bairro is string && request.resource.data.bairro.size() >= 1 && request.resource.data.bairro.size() <= 90 &&
+        request.resource.data.cidade is string && request.resource.data.cidade.size() >= 2 && request.resource.data.cidade.size() <= 90 &&
+        request.resource.data.uf is string && request.resource.data.uf.size() >= 2 && request.resource.data.uf.size() <= 10 &&
+        request.resource.data.referencia is string && request.resource.data.referencia.size() <= 120 &&
+        request.resource.data.agendamentoSlotId is string &&
+        request.resource.data.agendamentoData is string &&
+        request.resource.data.agendamentoHora is string &&
+        (
+          (!agendaEnabled() &&
+           request.resource.data.agendamentoSlotId == '' &&
+           request.resource.data.agendamentoData == '' &&
+           request.resource.data.agendamentoHora == '') ||
+          (agendaEnabled() &&
+           request.resource.data.agendamentoSlotId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}$') &&
+        request.resource.data.agendamentoData is string && request.resource.data.agendamentoData.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') &&
+        request.resource.data.agendamentoHora is string && request.resource.data.agendamentoHora.matches('^[0-9]{2}:[0-9]{2}$') &&
+        exists(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)) &&
+        get(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)).data.ativo == true &&
+        get(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)).data.data == request.resource.data.agendamentoData &&
+        get(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)).data.hora == request.resource.data.agendamentoHora &&
+        getAfter(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)).data.ultimaReservaId == id &&
+        getAfter(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)).data.ocupadas ==
+          get(/databases/$(database)/documents/agendaRematricula/$(request.resource.data.agendamentoSlotId)).data.ocupadas + 1)
+        );
+
+      allow get, list: if isDirector();
+      allow update: if isDirector() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','atualizadoEm']) &&
+        request.resource.data.status in ['pendente','conferida','pendencia'] &&
+        request.resource.data.atualizadoEm == request.time;
+      allow delete: if false;
+    }
+
+
+    // A agenda pública só revela datas, horários e quantidade de vagas; nunca dados de estudantes.
+    match /agendaRematricula/{slotId} {
+      allow read: if true;
+      allow create: if isDirector() &&
+        request.resource.data.keys().hasOnly(['data','hora','vagas','ocupadas','ativo','ultimaReservaId']) &&
+        request.resource.data.keys().hasAll(['data','hora','vagas','ocupadas','ativo','ultimaReservaId']) &&
+        request.resource.data.data is string && request.resource.data.data.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') &&
+        request.resource.data.hora is string && request.resource.data.hora.matches('^[0-9]{2}:[0-9]{2}$') &&
+        slotId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}$') &&
+        request.resource.data.vagas is int && request.resource.data.vagas >= 1 && request.resource.data.vagas <= 500 &&
+        request.resource.data.ocupadas == 0 &&
+        request.resource.data.ativo is bool && request.resource.data.ultimaReservaId == '';
+      // Alteração administrativa preserva o número de vagas já reservadas.
+      allow update: if isDirector() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['vagas','ativo']) &&
+        request.resource.data.vagas is int && request.resource.data.vagas >= resource.data.ocupadas && request.resource.data.vagas <= 500 &&
+        request.resource.data.ativo is bool;
+      // Reserva pública: só incrementa uma vaga, ligada a uma nova rematrícula na MESMA transação.
+      allow update: if request.auth == null && agendaEnabled() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['ocupadas','ultimaReservaId']) &&
+        resource.data.ativo == true &&
+        resource.data.ocupadas is int && resource.data.ocupadas < resource.data.vagas &&
+        request.resource.data.ocupadas == resource.data.ocupadas + 1 &&
+        request.resource.data.ultimaReservaId is string &&
+        request.resource.data.ultimaReservaId.matches('^[A-Za-z0-9]{20}$') &&
+        !exists(/databases/$(database)/documents/rematriculas/$(request.resource.data.ultimaReservaId)) &&
+        getAfter(/databases/$(database)/documents/rematriculas/$(request.resource.data.ultimaReservaId)).data.agendamentoSlotId == slotId &&
+        getAfter(/databases/$(database)/documents/rematriculas/$(request.resource.data.ultimaReservaId)).data.criadoEm == request.time;
+      // Somente a direção pode apagar horários sem nenhuma reserva.
+      allow delete: if isDirector() &&
+        resource.data.ocupadas is int &&
+        resource.data.ocupadas == 0 &&
+        resource.data.ultimaReservaId == '';
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}
