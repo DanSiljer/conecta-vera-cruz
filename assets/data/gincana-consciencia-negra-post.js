@@ -31,6 +31,17 @@
         { src: "assets/img/blog/gincana-consciencia-negra/gincana-01.webp", alt: "Participantes com figurinos, acessórios e pinturas corporais na quadra da escola", legenda: "Participantes caracterizados durante a programação da gincana." },
         { src: "assets/img/blog/gincana-consciencia-negra/gincana-02.webp", alt: "Integrantes da comunidade escolar reunidos na quadra", legenda: "Registro da comunidade escolar durante o primeiro dia de atividades." }
       ] },
+      { tipo: "titulo", texto: "Vídeos do primeiro dia" },
+      { tipo: "paragrafo", texto: "Assista aos registros das equipes e apresentações realizadas durante a programação da gincana." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-01.mp4", legenda: "Apresentação da equipe durante a abertura da gincana." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-02.mp4", legenda: "Participação de estudantes com identificação de sua equipe." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-03.mp4", legenda: "Estudante durante uma apresentação na quadra da escola." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-04.mp4", legenda: "Participante com figurino e pintura corporal durante a programação." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-05.mp4", legenda: "Apresentação cultural realizada no primeiro dia da gincana." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-06.mp4", legenda: "Participantes caracterizados diante da comunidade escolar." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-07.mp4", legenda: "Participante apresenta elementos culturais durante a gincana." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-08.mp4", legenda: "Momento de apresentação na quadra durante as atividades." },
+      { tipo: "video", src: "assets/video/blog/gincana-consciencia-negra/gincana-09.mp4", legenda: "Registro de estudante durante a programação do primeiro dia." },
       { tipo: "titulo", texto: "Consciência Negra na escola" },
       { tipo: "paragrafo", texto: "Realizada na semana do Dia da Consciência Negra, a atividade reforça a importância de reconhecer as contribuições africanas e afro-brasileiras para a sociedade e de manter o diálogo sobre igualdade racial ao longo de todo o ano letivo." },
       { tipo: "paragrafo", texto: "O primeiro dia deixou registros de participação e valorização cultural, mostrando como a escola pode ser um espaço de memória, identidade e construção coletiva do conhecimento." }
