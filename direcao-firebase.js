@@ -29,9 +29,72 @@ if(x.agendamentoData&&x.agendamentoHora){
 tr.appendChild(bookingTd);
 let stat=document.createElement('td');stat.innerHTML='<span class="pill '+(x.status||'')+'">'+escape(({pendente:'Pendente',conferida:'Conferida',pendencia:'Com pendência'})[x.status]||'Pendente')+'</span>';tr.appendChild(stat);let last=document.createElement('td'),btn=document.createElement('button');btn.textContent='Abrir ficha';btn.onclick=()=>openDetail(x.id);last.append(btn);tr.append(last);$('rows').append(tr)}if(!filtered.length)$('rows').innerHTML='<tr><td colspan="7">Nenhum pedido encontrado.</td></tr>'}
 $('search').oninput=render;$('filter').onchange=render;
-function openDetail(id){selected=all.find(x=>x.id===id);if(!selected)return;$('detailProtocol').textContent='Protocolo: '+id.toUpperCase();$('detailStatus').value=selected.status||'pendente';$('detailGrid').replaceChildren();for(const [key,label] of Object.entries(labels)){let cell=document.createElement('div'),small=document.createElement('small'),strong=document.createElement('strong');small.textContent=label;strong.textContent=String(selected[key]??'Não informado');cell.append(small,strong);$('detailGrid').append(cell)}$('detailFeedback').textContent='';$('detail').style.display='block';$('detail').scrollIntoView({behavior:'smooth',block:'start'})}
+function openDetail(id){selected=all.find(x=>x.id===id);if(!selected)return;$('detailProtocol').textContent='Protocolo: '+id.toUpperCase();$('detailStatus').value=selected.status||'pendente';$('schoolRegistration').value=String(selected.matricula??'');$('registerFeedback').textContent='';$('detailGrid').replaceChildren();for(const [key,label] of Object.entries(labels)){let cell=document.createElement('div'),small=document.createElement('small'),strong=document.createElement('strong');small.textContent=label;strong.textContent=String(selected[key]??'Não informado');cell.append(small,strong);$('detailGrid').append(cell)}$('detailFeedback').textContent='';$('detail').style.display='block';$('detail').scrollIntoView({behavior:'smooth',block:'start'})}
+
+// Alteração independente da situação da rematrícula, exclusiva para a direção.
+$('saveSchoolRegistration').addEventListener('click',async()=>{
+  if(!selected||!auth?.currentUser||!db)return;
+  const input=$('schoolRegistration'),feedback=$('registerFeedback'),button=$('saveSchoolRegistration');
+  const value=input.value.trim();
+  if(value.length>30){feedback.textContent='O registro deve ter no máximo 30 caracteres.';return;}
+  if(value && !/^[\p{L}\p{N} .\/\-_]+$/u.test(value)){
+    feedback.textContent='Use somente letras, números, espaços, ponto, barra ou hífen.';return;
+  }
+  button.disabled=true;feedback.textContent='Salvando registro escolar…';
+  try{
+    await updateDoc(doc(db,'rematriculas',selected.id),{matricula:value,atualizadoEm:serverTimestamp()});
+    selected.matricula=value;
+    const existing=all.find(x=>x.id===selected.id);
+    if(existing)existing.matricula=value;
+    const index=Object.keys(labels).indexOf('matricula');
+    const cell=$('detailGrid')?.children[index]?.querySelector('strong');
+    if(cell)cell.textContent=value||'Não informado';
+    feedback.textContent='Registro escolar salvo com sucesso.';
+  }catch(e){console.error('Erro ao salvar registro escolar:',e);feedback.textContent=e?.code==='permission-denied'?'Acesso negado. Publique as regras de atualização do registro escolar no Firestore.':'Não foi possível salvar o registro escolar. Tente novamente.';}
+  finally{button.disabled=false;}
+});
 $('closeDetail').onclick=()=>{$('detail').style.display='none';selected=null};
-$('printDetail').onclick=()=>{if(selected)window.print()};
+// Monta uma ficha independente do painel. Todos os valores são inseridos como texto, sem HTML do usuário.
+function fillPrintSheet(record){
+ const root=$('printDocumentFields');if(!root)return false;root.replaceChildren();
+ const protocol=$('printProtocol');if(protocol)protocol.textContent='Protocolo: '+record.id.toUpperCase();
+ const generated=$('printGenerated');if(generated)generated.textContent='Emitido em '+new Date().toLocaleDateString('pt-BR',{timeZone:'America/Bahia'});
+ const val=key=>{const raw=record[key];return raw===undefined||raw===null||String(raw).trim()===''?'Não informado':String(raw)};
+ const section=(title,fields)=>{
+   const box=document.createElement('section');box.className='print-document-section';
+   const h=document.createElement('h3');h.textContent=title;box.append(h);
+   const grid=document.createElement('div');grid.className='print-fields';
+   for(const item of fields){
+     const [label,value,wide]=item;const cell=document.createElement('div');cell.className='print-field'+(wide?' wide':'');
+     const caption=document.createElement('span');caption.className='print-field-label';caption.textContent=label;
+     const strong=document.createElement('div');strong.className='print-field-value';strong.textContent=value;
+     cell.append(caption,strong);grid.append(cell);
+   }
+   box.append(grid);root.append(box);
+ };
+ const birth=val('nascimento');const friendlyBirth=/^\d{4}-\d{2}-\d{2}$/.test(birth)?formatDate(birth):birth;
+ const docType=record.documentoTipo==='cpf'?'CPF':record.documentoTipo==='certidao'?'Certidão de nascimento':'Documento de identificação';
+ const situations={pendente:'Pendente',conferida:'Conferida',pendencia:'Com pendência'};
+ section('1. Identificação do estudante',[
+   ['Nome completo',val('aluno'),true],['Data de nascimento',friendlyBirth],
+   [docType,val('documentoNumero')],['Registro escolar',val('matricula')],
+   ['Ano/série cursado em 2026',val('serie')],['Turno',val('turno')]
+ ]);
+ section('2. Dados do responsável',[
+   ['Nome completo',val('responsavel'),true],['CPF',val('cpfResponsavel')],
+   ['Parentesco',val('parentesco')],['Telefone',val('telefone')],['E-mail',val('email')]
+ ]);
+ section('3. Endereço',[
+   ['Rua / logradouro',val('rua'),true],['Número',val('numero')],['Bairro / comunidade',val('bairro')],
+   ['Município',val('cidade')],['UF',val('uf')],['Ponto de referência',val('referencia'),true]
+ ]);
+ section('4. Atendimento e situação',[
+   ['Entrega de documentos',record.agendamentoData&&record.agendamentoHora?formatDate(record.agendamentoData)+' às '+record.agendamentoHora:'Sem agendamento'],
+   ['Situação da solicitação',situations[record.status]||val('status')]
+ ]);
+ return true;
+}
+$('printDetail').onclick=()=>{if(!selected)return;if(fillPrintSheet(selected))window.print();};
 $('saveStatus').onclick=async()=>{if(!selected)return;const b=$('saveStatus');b.disabled=true;try{await updateDoc(doc(db,'rematriculas',selected.id),{status:$('detailStatus').value,atualizadoEm:serverTimestamp()});selected.status=$('detailStatus').value;$('detailFeedback').textContent='Situação atualizada.';render();openDetail(selected.id)}catch(e){console.error(e);$('detailFeedback').textContent='Erro ao salvar alteração.'}finally{b.disabled=false}};
 $('exportCsv').onclick=()=>{if(!all.length)return;const keys=['id','aluno','nascimento','documentoTipo','documentoNumero','matricula','serie','turno','responsavel','cpfResponsavel','parentesco','telefone','email','rua','numero','bairro','cidade','uf','referencia','agendamentoData','agendamentoHora','status'];const csv=[keys.join(';'),...all.map(x=>keys.map(k=>'"'+String(x[k]??'').replaceAll('"','""')+'"').join(';'))].join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rematriculas-2027.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 

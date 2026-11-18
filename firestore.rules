@@ -151,8 +151,10 @@ service cloud.firestore {
 
       allow get, list: if isDirector();
       allow update: if isDirector() &&
-        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','atualizadoEm']) &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','matricula','atualizadoEm']) &&
         request.resource.data.status in ['pendente','conferida','pendencia'] &&
+        request.resource.data.matricula is string &&
+        request.resource.data.matricula.size() <= 30 &&
         request.resource.data.atualizadoEm == request.time;
       allow delete: if false;
     }
