@@ -16,10 +16,10 @@ if (isConfigured) {
     if (notice) notice.hidden = true;
   } catch (e) {
     console.error('Falha na inicialização do Firebase', e);
-    showNotice('O sistema de envio está temporariamente indisponível. Nenhum dado será enviado até a conexão ser restabelecida.');
+    showNotice('Não foi possível iniciar o formulário on-line. Tente novamente mais tarde ou entre em contato com a secretaria. Nenhuma solicitação foi enviada.');
   }
 } else {
-  showNotice('O envio on-line ainda não está disponível. A escola precisa conectar este formulário ao projeto Firebase antes de receber solicitações.');
+  showNotice('A rematrícula on-line ainda não está disponível. Procure a secretaria para receber orientações.');
 }
 // Estado global do agendamento: configuração ausente = modo anterior (ativado).
 let agendaHabilitada=null;
@@ -29,7 +29,7 @@ async function consultarConfiguracaoAgenda(){
    const snap=await getDoc(agendaConfigRef());
    agendaHabilitada=!snap.exists()||snap.data().ativo===true;
    window.definirAgendaHabilitada?.(agendaHabilitada);
- }catch(e){console.error('Não foi possível consultar a configuração do agendamento:',e);showNotice('Não foi possível verificar a configuração da rematrícula. Atualize a página ou procure a secretaria.');}
+ }catch(e){console.error('Não foi possível consultar a configuração do agendamento:',e);showNotice('Não conseguimos verificar se o agendamento está disponível. Atualize a página e tente novamente. Se o problema continuar, procure a secretaria.');}
 }
 if(db)consultarConfiguracaoAgenda();
 const agendaSelect=$('agendaSlot');
@@ -40,27 +40,27 @@ const timeNow=()=>new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Bahia',hour
 window.carregarAgenda=async function(){
   if(!agendaHabilitada||!agendaSelect||!db||agendaLoading)return;
   agendaLoading=true;const previous=agendaSelect.value;agendaSelect.disabled=true;
-  $('agendaStatus').textContent='Consultando horários disponíveis…';
+  $('agendaStatus').textContent='Buscando datas e horários…';
   try{
     const snap=await getDocs(query(collection(db,'agendaRematricula'),orderBy('data')));
     const slots=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>x.ativo===true&&x.data>=dateToday()&&(x.data!==dateToday()||x.hora>timeNow())&&Number.isInteger(x.vagas)&&Number.isInteger(x.ocupadas)&&x.ocupadas<x.vagas).sort((a,b)=>(a.data+' '+a.hora).localeCompare(b.data+' '+b.hora));
     agendaSelect.replaceChildren(new Option('Selecione data e horário',''));
     for(const slot of slots){const restante=slot.vagas-slot.ocupadas;agendaSelect.add(new Option(`${labelDate(slot.data)} às ${slot.hora} — ${restante} vaga${restante===1?'':'s'}`,slot.id));}
     if(slots.some(x=>x.id===previous))agendaSelect.value=previous;
-    $('agendaStatus').textContent=slots.length?`${slots.length} horário(s) disponível(is). A vaga só é confirmada ao enviar a solicitação.`:'A direção ainda não disponibilizou horários, ou todas as vagas foram preenchidas. Procure a secretaria.';
-  }catch(e){console.error('Agenda indisponível',e);agendaSelect.replaceChildren(new Option('Não foi possível carregar a agenda',''));const code=e?.code||'erro-desconhecido';$('agendaStatus').textContent=code==='permission-denied'?'Consulta de horários bloqueada: a escola precisa publicar as regras de agendaRematricula no Firestore.':code==='unavailable'?'Agenda temporariamente indisponível. Verifique a conexão e tente novamente.':'Não foi possível consultar os horários ('+code+'). Avise a secretaria.';}
+    $('agendaStatus').textContent=slots.length?`${slots.length} horário(s) disponível(is). A vaga só é confirmada ao enviar a solicitação.`:'Não há horários disponíveis no momento. Consulte novamente mais tarde ou procure a secretaria.';
+  }catch(e){console.error('Agenda indisponível',e);agendaSelect.replaceChildren(new Option('Não foi possível carregar a agenda',''));$('agendaStatus').textContent='Não conseguimos carregar os horários agora. Verifique sua internet, toque em “Atualizar horários” e tente novamente. Se continuar, procure a secretaria.';}
   finally{agendaLoading=false;agendaSelect.disabled=false;}
 };
 $('refreshAgenda')?.addEventListener('click',()=>window.carregarAgenda());
 const clean=(id,max=140)=>String($(id)?.value||'').trim().slice(0,max);
 window.submitEnrollment=async function(){
   const status=$('status'),button=$('next');
-  if(!db){status.textContent='O recebimento on-line ainda não foi ativado pela escola. Nenhum dado foi enviado.';return;}
-  if(agendaHabilitada===null){status.textContent='Aguarde a verificação do agendamento. Nenhum dado foi enviado.';return;}
-  if(!navigator.onLine){status.textContent='Sem conexão com a internet. Verifique a rede e tente novamente.';return;}
-  if(!$('confirm').checked){status.textContent='Confirme a declaração para enviar.';return;}
+  if(!db){status.textContent='A rematrícula on-line não está disponível neste momento. Procure a secretaria para receber orientações. Nenhuma solicitação foi enviada.';return;}
+  if(agendaHabilitada===null){status.textContent='Estamos verificando os horários. Tente novamente em instantes. Nenhuma solicitação foi enviada.';return;}
+  if(!navigator.onLine){status.textContent='Você está sem internet. Confira sua conexão e tente enviar novamente.';return;}
+  if(!$('confirm').checked){status.textContent='Marque a declaração de conferência dos dados antes de enviar.';return;}
   const slotId=agendaSelect?.value||'';
-  if(agendaHabilitada&&!slotId){status.textContent='Selecione um horário disponível para entregar os documentos.';return;}
+  if(agendaHabilitada&&!slotId){status.textContent='Escolha uma data e um horário para a entrega dos documentos.';return;}
   const payload={
     anoLetivo:2027,escola:'Escola Municipal Luís Eduardo Magalhães',
     aluno:clean('aluno',120),nascimento:clean('nascimento',10),matricula:clean('matricula',30),
@@ -73,13 +73,13 @@ window.submitEnrollment=async function(){
     agendamentoSlotId:slotId,
     agendamentoData:'',agendamentoHora:'' 
   };
-  if(!payload.aluno||!payload.nascimento||!payload.responsavel||!payload.telefone||!payload.rua||!payload.numero||!payload.bairro||!payload.serie||!payload.turno||!payload.parentesco){status.textContent='Preencha todos os campos obrigatórios.';return;}
+  if(!payload.aluno||!payload.nascimento||!payload.responsavel||!payload.telefone||!payload.rua||!payload.numero||!payload.bairro||!payload.serie||!payload.turno||!payload.parentesco){status.textContent='Algumas informações obrigatórias estão faltando. Confira os campos e tente novamente.';return;}
   if(!['cpf','certidao'].includes(payload.documentoTipo) ||
      (payload.documentoTipo==='cpf' && !/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(payload.documentoNumero)) ||
      (payload.documentoTipo==='certidao' && (payload.documentoNumero.length<3 || payload.documentoNumero.length>40))){
-    status.textContent='Informe corretamente o CPF ou o número da certidão de nascimento do estudante.';return;
+    status.textContent='Confira o documento do estudante. Informe o CPF completo ou o número da certidão de nascimento.';return;
   }
-  if(!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(payload.cpfResponsavel)){status.textContent='Informe o CPF do responsável com 11 dígitos.';return;}
+  if(!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(payload.cpfResponsavel)){status.textContent='Confira o CPF do responsável e informe os 11 números.';return;}
   button.disabled=true;button.textContent='Enviando...';status.textContent='';
   let gravacaoConfirmada=false;
   let protocoloConfirmado='';
@@ -111,16 +111,16 @@ window.submitEnrollment=async function(){
     gravacaoConfirmada=true;
     protocoloConfirmado=ref.id.toUpperCase();
   }catch(e){console.error('Falha ao gravar rematrícula/agendamento:',e);status.textContent = e?.message === 'configuracao_alterada'
-       ? 'A direção alterou a disponibilidade do agendamento. Atualize a página antes de enviar novamente.'
+       ? 'Os horários disponíveis foram atualizados. Recarregue a página, escolha um horário e tente novamente.'
        : e?.message === 'vaga_indisponivel'
-      ? 'O horário escolhido ficou sem vagas. Volte à etapa de agendamento, atualize a lista e escolha outro horário.'
+      ? 'O horário escolhido não está mais disponível. Volte à etapa de agendamento e escolha outro.'
       : e?.code === 'aborted'
-        ? 'Outra pessoa reservou o mesmo horário. Atualize a lista e tente novamente.'
+        ? 'Esse horário acabou de ser preenchido. Atualize os horários e escolha outro.'
       : e?.code === 'permission-denied'
-      ? 'O banco de dados recusou o envio. A escola deve conferir as regras de segurança do Firestore.'
+      ? 'Não conseguimos receber sua solicitação agora. Nenhuma rematrícula foi registrada. Tente mais tarde ou procure a secretaria.'
       : e?.code === 'unavailable'
-        ? 'Serviço temporariamente indisponível. Verifique a internet e tente novamente.'
-        : 'Não foi possível registrar a solicitação. Nenhum protocolo foi emitido; tente novamente ou procure a secretaria.';}
+        ? 'O serviço está temporariamente indisponível. Confira sua conexão e tente novamente. Se continuar, procure a secretaria.'
+        : 'Não conseguimos confirmar o envio. Nenhum protocolo foi gerado. Antes de tentar novamente, procure a secretaria se tiver dúvidas sobre o registro.';}
   finally{button.disabled=false;button.textContent='Enviar solicitação';}
   if(!gravacaoConfirmada)return;
   // Falhas de apresentação nunca devem sugerir que uma gravação concluída falhou.
@@ -135,15 +135,15 @@ window.submitEnrollment=async function(){
       if(agendaHabilitada){const info=document.createElement('p');info.textContent='Entrega de documentos: '+horarioConfirmado;printEl.appendChild(info);}
     }
     const warning=document.querySelector('.receipt .warn');
-    if(warning)warning.textContent='O pedido foi registrado para análise. A matrícula somente será confirmada pela escola.';
+    if(warning)warning.textContent='Sua solicitação foi recebida e será analisada pela escola. Guarde o protocolo: ele não significa que a rematrícula já foi confirmada.';
     const edit=document.querySelector('.receipt .receipt-actions #edit');
     if(edit)edit.style.display='none';
     const wizard=$('wizard'),receipt=$('receipt');
     if(wizard)wizard.style.display='none';
     if(receipt)receipt.style.display='block';
-    else status.textContent='Solicitação registrada! Protocolo: '+protocoloConfirmado+(agendaHabilitada?'. Documentos: '+horarioConfirmado:'');
+    else status.textContent='Solicitação recebida! Guarde o protocolo: '+protocoloConfirmado+(agendaHabilitada?'. Documentos: '+horarioConfirmado:'');
   }catch(e){
     console.error('A gravação foi concluída, mas houve falha ao exibir o comprovante:',e);
-    status.textContent='Solicitação registrada! Protocolo: '+protocoloConfirmado+(agendaHabilitada?'. Documentos: '+horarioConfirmado:'');
+    status.textContent='Solicitação recebida! Guarde o protocolo: '+protocoloConfirmado+(agendaHabilitada?'. Documentos: '+horarioConfirmado:'');
   }
 };

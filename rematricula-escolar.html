@@ -992,7 +992,7 @@
             role="status"
             aria-live="polite"
           >
-            Verificando a disponibilidade do envio seguro…
+            Verificando a disponibilidade da rematrícula on-line…
           </div>
         </div>
         <div id="wizard">
@@ -1258,7 +1258,7 @@
               <div class="form-step">
                 <h3 class="section-title">Confira a ficha</h3>
                 <p class="intro">
-                  Verifique os dados antes de gerar uma cópia para conferência.
+                  Confira todos os dados antes de enviar sua solicitação.
                 </p>
                 <div class="review" id="review"></div>
                 <div class="agree">
@@ -1291,8 +1291,8 @@
           <div class="big">✓</div>
           <h2>Solicitação registrada</h2>
           <p>
-            Sua solicitação foi recebida para análise pela direção. Guarde o
-            número de protocolo e acompanhe as orientações da escola.
+            Sua solicitação foi recebida para análise pela escola. Guarde o
+            número de protocolo e siga as orientações da secretaria.
           </p>
           <p class="warn">
             <strong>Importante:</strong> o envio é uma solicitação, não a
@@ -1338,7 +1338,7 @@
             <div class="icon">2</div>
             <div>
               <strong>Confira as informações</strong
-              ><small>Revise antes de preparar a impressão.</small>
+              ><small>Revise os dados antes de enviar.</small>
             </div>
           </div>
           <div class="feature">
@@ -1486,7 +1486,7 @@
             current === pages.length - 1 ? "Enviar solicitação" : "Continuar →";
           next.disabled = window.agendaHabilitada === null;
           if (window.agendaHabilitada === null)
-            status.textContent = "Verificando configuração da rematrícula…";
+            status.textContent = "Preparando o formulário…";
           else status.textContent = "";
           if (
             pages[current].id === "etapa-agendamento" &&
@@ -1504,7 +1504,7 @@
           for (const el of fields) {
             if (!el.checkValidity()) {
               status.textContent =
-                "Verifique os campos obrigatórios desta etapa.";
+                "Confira o campo destacado e preencha a informação solicitada.";
               el.reportValidity();
               el.focus();
               return false;
@@ -1514,7 +1514,7 @@
             current === 0 &&
             new Date(document.getElementById("nascimento").value) > new Date()
           ) {
-            status.textContent = "Confira a data de nascimento.";
+            status.textContent = "A data de nascimento não pode ser posterior à data de hoje.";
             return false;
           }
           return true;
@@ -1591,7 +1591,7 @@
         next.addEventListener("click", () => {
           if (window.agendaHabilitada === null) {
             status.textContent =
-              "Aguarde a verificação da configuração do sistema.";
+              "Estamos preparando o formulário. Tente continuar em instantes.";
             return;
           }
           if (!valid()) return;
@@ -1607,7 +1607,7 @@
               window.submitEnrollment();
             else
               status.textContent =
-                "Serviço de envio indisponível. Tente novamente mais tarde.";
+                "Não foi possível enviar agora. Tente novamente mais tarde ou procure a secretaria.";
           }
         });
         prev.addEventListener("click", () => {
@@ -1630,6 +1630,6 @@
         draw();
       })();
     </script>
-    <script type="module" src="rematricula-firebase.js"></script>
+    <script type="module" src="rematricula-firebase.js?v=feedback-20261118"></script>
   </body>
 </html>

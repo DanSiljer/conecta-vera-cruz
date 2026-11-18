@@ -55,11 +55,11 @@ if (isConfigured) {
     auth = getAuth(app);
     db = getFirestore(app);
   } catch (e) {
-    $("loginError").textContent = "Erro na configuração do sistema.";
+    $("loginError").textContent = "O acesso está temporariamente indisponível. Tente novamente mais tarde ou entre em contato com a secretaria.";
   }
 } else {
   $("loginError").textContent =
-    "Sistema ainda não configurado pela escola. O login será liberado após ativar o Firebase.";
+    "O acesso da direção ainda não está disponível. Entre em contato com a secretaria escolar.";
   $("loginButton").disabled = true;
 }
 const escape = (s) =>
@@ -93,7 +93,7 @@ if (auth)
     try {
       if (!(await authorized(user.uid))) {
         $("loginError").textContent =
-          "Este usuário não foi autorizado pela direção.";
+          "Esta conta não tem permissão para acessar o painel. Procure a direção da escola.";
         await signOut(auth);
         return;
       }
@@ -102,7 +102,7 @@ if (auth)
     } catch (e) {
       console.error(e);
       $("loginError").textContent =
-        "Falha ao verificar acesso. Consulte o administrador.";
+        "Não foi possível confirmar seu acesso. Tente novamente ou procure a secretaria.";
       await signOut(auth);
     }
   });
@@ -120,7 +120,7 @@ $("loginForm").addEventListener("submit", async (e) => {
     );
   } catch (e) {
     $("loginError").textContent =
-      "Não foi possível entrar. Confira seu e-mail, senha e autorização.";
+      "Não foi possível entrar. Confira o e-mail e a senha e tente novamente.";
   } finally {
     b.disabled = false;
   }
@@ -151,7 +151,7 @@ $("recoveryForm").addEventListener("submit", async (e) => {
   if (!auth) {
     feedback.dataset.state = "error";
     feedback.textContent =
-      "A conexão com o Firebase não está disponível. Procure a administração.";
+      "A recuperação de senha está temporariamente indisponível. Tente novamente mais tarde.";
     return;
   }
   if (!email || !$("recoveryEmail").checkValidity()) {
@@ -193,7 +193,7 @@ async function load() {
   } catch (e) {
     console.error(e);
     msg.textContent =
-      "Não foi possível carregar a lista. Confira as permissões.";
+      "Não foi possível carregar as solicitações. Verifique sua conexão e tente novamente.";
   }
 }
 function render() {
@@ -336,7 +336,7 @@ $("saveSchoolRegistration").addEventListener("click", async () => {
     console.error("Erro ao salvar registro escolar:", e);
     feedback.textContent =
       e?.code === "permission-denied"
-        ? "Acesso negado. Publique as regras de atualização do registro escolar no Firestore."
+        ? "Você não tem permissão para fazer esta alteração. Procure a direção."
         : "Não foi possível salvar o registro escolar. Tente novamente.";
   } finally {
     button.disabled = false;
@@ -456,7 +456,7 @@ $("saveStatus").onclick = async () => {
     openDetail(selected.id);
   } catch (e) {
     console.error(e);
-    $("detailFeedback").textContent = "Erro ao salvar alteração.";
+    $("detailFeedback").textContent = "Não foi possível atualizar a situação. Tente novamente.";
   } finally {
     b.disabled = false;
   }
@@ -544,17 +544,10 @@ async function loadSlots() {
     $("slotFeedback").textContent = slots.length + " horário(s) cadastrado(s).";
   } catch (e) {
     console.error("Falha ao carregar a agenda:", e);
-    const code = e?.code || "erro-desconhecido";
     $("slotFeedback").textContent =
-      code === "permission-denied"
-        ? "Acesso negado ao consultar agendaRematricula. Publique as regras de agenda no Firebase (Firestore → Regras)."
-        : code === "failed-precondition"
-          ? "Consulta da agenda requer uma configuração/índice no Firestore. Veja o erro no console do navegador."
-          : code === "unavailable"
-            ? "Firebase indisponível ou conexão instável. Confira a internet e tente novamente."
-            : "Não foi possível carregar a agenda (" +
-              code +
-              "). Confira o console do navegador e o projeto Firebase.";
+      e?.code === "unavailable"
+        ? "Não foi possível conectar à agenda. Verifique sua internet e tente novamente."
+        : "Não foi possível carregar os horários. Tente novamente ou procure a administração.";
   }
 }
 function renderSlots() {
@@ -674,7 +667,7 @@ $("agendaForm").addEventListener("submit", async (event) => {
     feedback.textContent =
       e.message?.includes("limite") || e.message?.includes("existe")
         ? e.message
-        : "Não foi possível salvar. Confira sua autorização e as regras do Firestore.";
+        : "Não foi possível salvar o horário. Tente novamente ou procure a administração.";
   } finally {
     btn.disabled = false;
   }
@@ -803,7 +796,7 @@ batchForm.addEventListener("submit", async (event) => {
     button = $("batchGenerate");
   if (!items) return;
   if (!auth?.currentUser || !db) {
-    feedback.textContent = "Entre com a conta autorizada da direção.";
+    feedback.textContent = "Faça login com sua conta da direção para continuar.";
     return;
   }
   const existing = new Set(slots.map((s) => s.id)),
@@ -871,8 +864,8 @@ batchForm.addEventListener("submit", async (event) => {
     feedback.textContent =
       `${created} horário(s) criado(s); ${skipped + items.length - candidates.length} já existente(s) preservado(s); ${failed} falha(s).` +
       (failed
-        ? ` Verifique o console (${firstError}) e tente novamente; horários já criados não serão duplicados.`
-        : " Os responsáveis já podem escolher as vagas disponíveis.");
+        ? " Alguns horários não puderam ser criados. Confira a lista e tente novamente. Os horários já salvos foram mantidos."
+        : " Os horários disponíveis já podem ser escolhidos pelos responsáveis.");
     previewBatch();
   }
 });
@@ -886,21 +879,18 @@ async function loadAgendaConfig() {
     btn = $("saveAgendaEnabled");
   btn.disabled = true;
   toggle.disabled = true;
-  msg.textContent = "Consultando configuração…";
+  msg.textContent = "Consultando situação do agendamento…";
   try {
     const snap = await getDoc(agendaConfigRef());
     toggle.checked = !snap.exists() || snap.data().ativo === true;
     agendaConfigLoaded = true;
     msg.textContent = toggle.checked
-      ? "Agenda ativada: o formulário solicita data e horário."
-      : "Agenda desativada: o formulário não mostra o agendamento.";
+      ? "Agendamento disponível para os responsáveis."
+      : "Agendamento desativado. O formulário de rematrícula continua disponível.";
   } catch (e) {
     console.error("Configuração da agenda:", e);
     agendaConfigLoaded = false;
-    msg.textContent =
-      "Não foi possível consultar a configuração (" +
-      (e.code || "erro") +
-      "). Confira as regras do Firestore.";
+    msg.textContent = "Não foi possível consultar o agendamento. Tente novamente mais tarde.";
   } finally {
     toggle.disabled = !agendaConfigLoaded;
     btn.disabled = !agendaConfigLoaded;
@@ -913,7 +903,7 @@ $("saveAgendaEnabled").addEventListener("click", async () => {
   if (!agendaConfigLoaded || !auth?.currentUser) return;
   btn.disabled = true;
   toggle.disabled = true;
-  msg.textContent = "Salvando configuração…";
+  msg.textContent = "Salvando alteração…";
   try {
     await setDoc(agendaConfigRef(), { ativo: toggle.checked });
     msg.textContent = toggle.checked
@@ -921,10 +911,7 @@ $("saveAgendaEnabled").addEventListener("click", async () => {
       : "Agenda desativada. A rematrícula continua disponível sem agendamento.";
   } catch (e) {
     console.error(e);
-    msg.textContent =
-      "Não foi possível salvar (" +
-      (e.code || "erro") +
-      "). Verifique as regras do Firestore.";
+    msg.textContent = "Não foi possível salvar a alteração. Tente novamente.";
     await loadAgendaConfig();
   } finally {
     btn.disabled = false;
