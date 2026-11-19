@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /direcao-rematriculas
+Disallow: /rematricula-escolar
+Disallow: /index.old.html
+Sitemap: https://conectaveracruz.com.br/sitemap.xml
