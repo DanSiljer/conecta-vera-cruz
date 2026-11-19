@@ -277,6 +277,28 @@
   <meta name="twitter:description" content="Missão Aprender: jogos educativos e experiências interativas para conhecer História, Matemática, Geografia, Português, Ciências, Vera Cruz e a Ilha de Itaparica.">
   <meta name="twitter:image" content="https://conectaveracruz.com.br/assets/img/banner-conecta-vera-cruz.png">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Missão Aprender | Conecta Vera Cruz", "description": "Missão Aprender: jogos educativos e experiências interativas para conhecer História, Matemática, Geografia, Português, Ciências, Vera Cruz e a Ilha de Itaparica.", "url": "https://conectaveracruz.com.br/missao-aprender", "inLanguage": "pt-BR", "isPartOf": {"@type": "WebSite", "name": "Conecta Vera Cruz", "url": "https://conectaveracruz.com.br/"}}</script>
+
+<style id="xadrez-card-estilo-site">
+/* Xadrez segue o visual dos demais cards da Central de Jogos. */
+.missao-aprender-app .game-hub__grid .game-card--chess {
+  background:linear-gradient(145deg,#6f43c5 0%,#5332a8 58%,#352275 100%) !important;
+  color:#fff !important;min-height:210px;padding:19px !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+}
+.missao-aprender-app .game-hub__grid .game-card--chess::after {display:block;}
+.missao-aprender-app .game-hub__grid .game-card--chess .chess-card__thumbnail {
+  display:grid;width:58px;height:58px;flex:0 0 58px;overflow:hidden;
+  border-radius:16px;border:1px solid rgba(255,255,255,.36);
+  background:rgba(255,255,255,.13);place-items:center;
+}
+.missao-aprender-app .game-hub__grid .game-card--chess .chess-card__thumbnail img {
+  display:block;width:100%;height:100%;object-fit:cover;object-position:center;
+}
+.missao-aprender-app .game-hub__grid .game-card--chess h3 {color:#fff !important;}
+.missao-aprender-app .game-hub__grid .game-card--chess p {color:rgba(255,255,255,.85) !important;}
+.missao-aprender-app .game-hub__grid .game-card--chess .game-card__type,
+.missao-aprender-app .game-hub__grid .game-card--chess .game-card__action {color:#fff !important;}
+</style>
 </head>
   <body class="page-missao-aprender">
     <div data-cv-header=""></div>
@@ -428,6 +450,12 @@
             </button>
           </div>
           <div class="game-hub__grid">
+            <a class="game-card game-card--chess" href="jogos/xadrez/index.html" aria-label="Abrir jogo de Xadrez">
+              <span class="game-card__top"><span class="chess-card__thumbnail"><img src="assets/img/xadrez-card.png" alt="Peças de xadrez em tabuleiro" loading="lazy"></span><span class="game-card__type">Estratégia</span></span>
+              <h3>Xadrez</h3>
+              <p>Aprenda as regras, desenvolva estratégias e desafie o computador.</p>
+              <span class="game-card__action">Jogar xadrez →</span>
+            </a>
             <a class="game-card game-card--black-consciousness" href="jogos/quiz/quiz_conciencianegra.html" aria-label="Abrir Quiz Interativo de Consciência Negra">
               <span class="game-card__top"><span aria-hidden="true" class="game-card__icon">✊🏿</span><span class="game-card__type">História · Quiz interativo</span></span>
               <h3>Quiz Interativo: Consciência Negra</h3>
