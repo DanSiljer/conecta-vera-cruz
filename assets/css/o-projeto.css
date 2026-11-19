@@ -869,3 +869,173 @@
     height: 44px;
   }
 }
+
+
+/* =========================================================
+   AJUSTE FINAL RESPONSIVO — O PROJETO | 19/11/2026
+   Preserva a proporção original das fotografias.
+   ========================================================= */
+.page-nossa-historia, .page-nossa-historia * { box-sizing: border-box; }
+.page-nossa-historia main { min-width: 0; overflow-x: clip; }
+.page-nossa-historia main .container { max-width: min(1160px, calc(100% - 36px)); margin-inline: auto; }
+.page-nossa-historia main img { display: block; max-width: 100%; }
+.page-nossa-historia .school-banner > img {
+  display: block; width: 100%; height: auto; max-height: none;
+  object-fit: contain;
+}
+.page-nossa-historia .story-menu-wrap { margin-top: -18px; padding: 0 12px; }
+.page-nossa-historia .story-menu {
+  display: flex; justify-content: center; align-items: center;
+  flex-wrap: wrap; gap: 9px; padding: 13px;
+  border-radius: 22px; background: #fff;
+  border: 1px solid #dbe9e1;
+  box-shadow: 0 12px 32px rgba(4,47,68,.12);
+}
+.page-nossa-historia .story-menu a {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 43px; padding: 10px 15px;
+  border: 1px solid #cceadd; border-radius: 999px;
+  background: #eaf8f0; color: #086444;
+  font-size: .86rem; font-weight: 800; line-height: 1.2;
+  white-space: nowrap; text-decoration: none;
+  transition: background .2s, color .2s, transform .2s;
+}
+.page-nossa-historia .story-menu a:is(:hover,:focus-visible) {
+  background: #08794c; color: white; border-color: #08794c;
+  outline-offset: 3px;
+}
+.page-nossa-historia .story-opening__grid > *,
+.page-nossa-historia .project-grid > *,
+.page-nossa-historia .story-final__grid > * { min-width: 0; }
+.page-nossa-historia .school-photo img {
+  width: 100%; height: auto; aspect-ratio: 1222 / 687;
+  object-fit: contain; background: #edf3ef;
+}
+.page-nossa-historia .territory-card img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.page-nossa-historia .project-collage figure { isolation: isolate; }
+.page-nossa-historia .project-collage img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+@media (max-width: 760px) {
+  .page-nossa-historia main .container { width: auto; max-width: calc(100% - 32px); }
+  .page-nossa-historia .story-menu-wrap {
+    margin: 12px 0 0; padding: 0 16px;
+  }
+  .page-nossa-historia .story-menu {
+    width: 100%; max-width: none; margin: 0;
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 9px; padding: 12px; overflow: visible;
+    border-radius: 18px;
+  }
+  .page-nossa-historia .story-menu a {
+    width: 100%; min-width: 0; min-height: 46px;
+    white-space: normal; text-align: center;
+    padding: 9px 8px; font-size: .81rem;
+  }
+  .page-nossa-historia .story-menu a:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .page-nossa-historia .story-opening {
+    padding: 36px 0 46px;
+  }
+  .page-nossa-historia .story-opening__grid,
+  .page-nossa-historia .project-grid,
+  .page-nossa-historia .story-final__grid {
+    display: grid; grid-template-columns: minmax(0,1fr); gap: 26px;
+  }
+  .page-nossa-historia .story-numbers__grid,
+  .page-nossa-historia .timeline-grid,
+  .page-nossa-historia .authors-grid {
+    grid-template-columns: minmax(0,1fr);
+  }
+  .page-nossa-historia .territory-grid {
+    display: grid; grid-template-columns: minmax(0,1fr); gap: 18px;
+  }
+  .page-nossa-historia .territory-card--faith,
+  .page-nossa-historia .territory-card--culture,
+  .page-nossa-historia .territory-card--sea { grid-column: auto; }
+  .page-nossa-historia .school-banner > img {
+    width: 100%; height: auto; min-height: 0;
+    aspect-ratio: auto; object-fit: contain;
+  }
+  .page-nossa-historia .school-photo { width: 100%; max-width: 100%; }
+  .page-nossa-historia .school-photo img {
+    height: auto; aspect-ratio: 1222 / 687;
+    object-fit: contain; border-width: 4px;
+  }
+  .page-nossa-historia .school-photo figcaption {
+    position: static; max-width: none; margin: 9px 4px 0;
+    padding: 0; color: #45645b; background: transparent;
+    font-size: .8rem; backdrop-filter: none;
+  }
+  .page-nossa-historia .school-year {
+    top: 14px; left: 14px; bottom: auto;
+    width: 84px; height: 84px; padding: 9px; border-width: 3px;
+  }
+  .page-nossa-historia .school-year strong { font-size: 1.28rem; }
+  .page-nossa-historia .school-year small { font-size: .55rem; }
+  .page-nossa-historia .story-opening h2,
+  .page-nossa-historia .story-timeline h2,
+  .page-nossa-historia .story-heading h2,
+  .page-nossa-historia .project-copy h2,
+  .page-nossa-historia .authors-section h2 {
+    font-size: clamp(1.75rem, 7vw, 2.35rem);
+    line-height: 1.14; letter-spacing: -.025em;
+    overflow-wrap: break-word;
+  }
+  .page-nossa-historia .story-tag { font-size: .66rem; line-height: 1.4; }
+  .page-nossa-historia .story-lead { font-size: 1rem; line-height: 1.65; }
+  .page-nossa-historia .story-timeline,
+  .page-nossa-historia .territory-section,
+  .page-nossa-historia .project-section,
+  .page-nossa-historia .authors-section { padding: 52px 0; }
+  .page-nossa-historia .territory-card {
+    display: flex; flex-direction: column;
+    min-height: 0; overflow: hidden;
+    background: #fff; border-radius: 20px;
+  }
+  .page-nossa-historia .territory-card figure {
+    position: relative; inset: auto; flex: none;
+    width: 100%; margin: 0; overflow: hidden;
+  }
+  .page-nossa-historia .territory-card img {
+    display: block; width: 100%; height: auto;
+    max-height: none; object-fit: contain;
+    transform: none !important;
+  }
+  .page-nossa-historia .territory-card::after { display: none; }
+  .page-nossa-historia .territory-card > div {
+    position: relative; z-index: 1; align-self: stretch;
+    padding: 20px 21px 23px; background: #06356b;
+  }
+  .page-nossa-historia .territory-card h3 { font-size: 1.42rem; line-height: 1.2; }
+  .page-nossa-historia .project-collage {
+    display: grid; grid-template-columns: minmax(0,1fr);
+    gap: 13px; width: 100%;
+  }
+  .page-nossa-historia .project-collage figure,
+  .page-nossa-historia .project-collage__wide {
+    grid-column: auto; min-height: 0 !important;
+    overflow: hidden; background: #e9f1ed;
+  }
+  .page-nossa-historia .project-collage img {
+    position: relative; inset: auto;
+    display: block; width: 100%; height: auto;
+    aspect-ratio: auto; object-fit: contain;
+  }
+  .page-nossa-historia .project-collage figcaption {
+    font-size: .82rem; line-height: 1.4;
+  }
+  .page-nossa-historia .story-final__grid > img {
+    width: min(190px, 70%); height: auto; margin-inline: auto;
+  }
+  .page-nossa-historia .project-steps article { grid-template-columns: 44px minmax(0,1fr); }
+}
+@media (max-width: 380px) {
+  .page-nossa-historia main .container { max-width: calc(100% - 24px); }
+  .page-nossa-historia .story-menu-wrap { padding-inline: 12px; }
+  .page-nossa-historia .story-menu a { font-size: .76rem; }
+}
