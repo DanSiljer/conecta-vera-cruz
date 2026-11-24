@@ -1,0 +1,286 @@
+{
+  "6": {
+    "edition": "interpretacao-2",
+    "title": "Roma Antiga",
+    "sub": "A cidade, a República e o Império",
+    "alt": "Gravura do Coliseu de Roma.",
+    "objective": [
+      {
+        "prompt": "Numa escavação às margens do Tibre, aparecem potes de um mesmo modelo em três aldeias. Lia diz que as aldeias trocavam potes. Caio acha que cada uma fazia os seus. Qual descoberta daria mais força à hipótese de Lia?",
+        "options": [
+          "Fornos da mesma época nas três aldeias, cada um com potes quebrados ao lado.",
+          "Marcas de uma oficina nos potes das três aldeias e restos dessa oficina em uma delas.",
+          "Argila própria para fazer potes nos terrenos próximos às três aldeias.",
+          "Marcas de uso no interior dos potes encontrados nas casas de cada aldeia."
+        ]
+      },
+      {
+        "prompt": "Uma moeda romana traz a imagem de uma loba com duas crianças. Ela foi produzida séculos depois da época em que, segundo a tradição, Roma teria sido fundada. Para qual pergunta a moeda oferece a evidência mais direta?",
+        "options": [
+          "Em que ano os primeiros moradores se instalaram junto ao Tibre?",
+          "Quantas aldeias participaram da formação da cidade?",
+          "De que família vieram os primeiros habitantes de Roma?",
+          "Que história sobre o passado os romanos escolheram divulgar?"
+        ]
+      },
+      {
+        "prompt": "Num jogo sobre Roma, um personagem lidera as tropas. Esse detalhe serve tanto para um rei quanto para um cônsul. Qual regra da partida indicaria que o personagem é um cônsul da República?",
+        "options": [
+          "Ele divide o cargo com um colega e deixa a função ao fim do mandato anual.",
+          "Ele consulta os homens mais velhos antes de partir com os soldados.",
+          "Ele conduz cerimônias públicas e pede proteção aos deuses da cidade.",
+          "Ele escolhe o caminho do exército e negocia com os povos vizinhos."
+        ]
+      },
+      {
+        "prompt": "Uma família plebeia enriqueceu com o comércio. No início da República, seu filho quis disputar um cargo reservado aos patrícios. Qual mudança resolveria o obstáculo enfrentado pelo rapaz?",
+        "options": [
+          "A família adquirir uma propriedade maior nos arredores de Roma.",
+          "O rapaz servir em uma campanha militar ao lado de um patrício.",
+          "Uma lei permitir candidaturas de pessoas de sua origem social.",
+          "O rapaz conseguir mais fregueses entre os moradores da cidade."
+        ]
+      },
+      {
+        "prompt": "Numa encenação da República, os plebeus ameaçam sair de Roma até que suas reivindicações sejam ouvidas. Os patrícios dispõem de terras e riquezas. Por que, mesmo assim, teriam motivos para negociar?",
+        "options": [
+          "A cidade precisava do trabalho e do serviço militar de muitos dos que sairiam.",
+          "A saída obrigaria os membros do Senado a abandonar seus cargos na mesma data.",
+          "As terras patrícias passariam por lei às famílias que saíssem da cidade.",
+          "Os plebeus levariam consigo o direito exclusivo de eleger os dois cônsules."
+        ]
+      },
+      {
+        "prompt": "Um cônsul quer prolongar uma campanha romana. Os soldados estão a postos, mas faltam provisões. Qual decisão seria uma demonstração do poder do Senado sobre essa campanha?",
+        "options": [
+          "Escolher por votação o próximo par de cônsules da cidade.",
+          "Usar o veto dos tribunos em nome dos soldados plebeus.",
+          "Comandar as manobras de cada tropa no lugar do cônsul.",
+          "Recusar o dinheiro público necessário para abastecer as tropas."
+        ]
+      },
+      {
+        "prompt": "Imagine que um credor e um devedor romanos passem a consultar a Lei das Doze Tábuas antes de ir ao juiz. Qual mudança decorre da forma como a lei passou a ser divulgada?",
+        "options": [
+          "O devedor ganha o direito de anular a dívida que contesta.",
+          "O credor pode fixar a pena que julgar adequada à dívida.",
+          "As duas partes podem apontar a regra em que apoiam sua reclamação.",
+          "O juiz passa a aplicar a mesma pena a qualquer tipo de disputa."
+        ]
+      },
+      {
+        "prompt": "Em um jogo de tabuleiro, Roma acaba de conquistar uma região distante. Há revoltas em duas cidades dessa região. A professora retira do mapa a estrada que as ligava ao acampamento romano. Qual dificuldade deveria aparecer na rodada seguinte?",
+        "options": [
+          "Cobrar passagem dos navios que chegam aos portos do litoral.",
+          "Levar reforços até as duas cidades antes que a revolta se espalhe.",
+          "Saber quais são os limites das terras de cada família romana.",
+          "Conseguir que os habitantes das cidades reconheçam moedas romanas."
+        ]
+      },
+      {
+        "prompt": "Depois de ler que o Senado se reunia no tempo de Augusto, um aluno conclui que Roma continuava a ser governada como na República. Que pergunta ajudaria mais a testar a conclusão dele?",
+        "options": [
+          "Em que parte da cidade ficava o edifício das reuniões?",
+          "Quantas famílias antigas tinham assento no Senado?",
+          "Que roupas distinguiam os senadores durante as sessões?",
+          "Quem podia manter o comando dos exércitos por vários anos?"
+        ]
+      },
+      {
+        "prompt": "Na aula, aparecem dois pares de palavras. Do latim noctem vieram noite, em português, e noche, em espanhol. De octo vieram oito e ocho. O que o segundo par acrescenta à interpretação do primeiro?",
+        "options": [
+          "Reforça a ideia de parentesco entre as línguas ao mostrar uma mudança parecida em outra palavra.",
+          "Mostra que a palavra portuguesa surgiu quando alguém traduziu a palavra espanhola.",
+          "Indica que os romanos escreviam de duas maneiras diferentes conforme o lugar onde moravam.",
+          "Permite decidir em qual das duas regiões as pessoas deixaram de falar latim primeiro."
+        ]
+      }
+    ]
+  },
+  "8": {
+    "edition": "interpretacao-2",
+    "title": "Brasil Império",
+    "sub": "Independência e Primeiro Reinado",
+    "alt": "Gravura de uma coroa imperial e de um documento.",
+    "objective": [
+      {
+        "prompt": "Numa peça passada em 1824, aparecem um edital do governo do Brasil e uma carta em que Joana pede ao senhor de seu irmão que lhe conceda alforria. Um aluno diz que colocar os dois papéis na mesma cena é um erro de época. Qual avaliação do roteiro tem fundamento?",
+        "options": [
+          "É um erro, pois a separação de Portugal deu alforria a quem já era escravizado antes de 1822.",
+          "É um erro, pois ainda cabia ao governo em Lisboa emitir os editais que circulavam no Brasil.",
+          "A cena faz sentido porque a escravidão passou a valer apenas para quem vivia fora da capital.",
+          "A cena faz sentido porque criar um Estado independente não mudou por si só a condição do irmão."
+        ]
+      },
+      {
+        "prompt": "Uma maquete mostrará a Bahia no início de 1823, entre o Sete de Setembro e o Dois de Julho. Há peças para as tropas portuguesas e para os grupos que defendiam a separação. Que montagem explica por que a luta continuou após a proclamação de 1822?",
+        "options": [
+          "Portugueses em Salvador e forças favoráveis à separação reunidas em pontos do Recôncavo.",
+          "Portugueses em retirada para Lisboa e forças favoráveis à separação já instaladas em Salvador.",
+          "Portugueses e forças favoráveis à separação lado a lado na defesa da cidade contra tropas do Rio.",
+          "Portugueses concentrados no interior e forças favoráveis à separação defendendo o porto de Salvador."
+        ]
+      },
+      {
+        "prompt": "Um deputado eleito no Primeiro Reinado planeja passar os próximos anos defendendo um projeto. Um colega avisa que pode haver nova eleição para a Câmara antes de o mandato terminar. Que recurso previsto na Constituição de 1824 tornava possível esse aviso?",
+        "options": [
+          "A escolha dos senadores pelo imperador a partir das listas apresentadas nas províncias.",
+          "A nomeação de presidentes de província para administrar os assuntos locais.",
+          "A decisão do imperador de dissolver a Câmara e convocar outra, usando o Poder Moderador.",
+          "A escolha de eleitores em etapas para indicar os representantes de cada província."
+        ]
+      },
+      {
+        "prompt": "Num panfleto fictício de Pernambuco, em 1824, alguém pergunta “Mandaram outro governante. Mudou o nome no papel. E quem nos ouviu?” Que proposta atenderia à crítica e a uma reivindicação da Confederação do Equador?",
+        "options": [
+          "Exigir que o imperador explique à população o motivo de cada substituição.",
+          "Dar à província o poder de escolher quem vai chefiar seu governo.",
+          "Exigir que o nomeado pelo imperador tenha nascido em Pernambuco.",
+          "Garantir um mandato mais longo à pessoa indicada pelo governo central."
+        ]
+      },
+      {
+        "prompt": "Uma dupla encontra uma relação de gastos com a Guerra da Cisplatina. Quer testar se o custo da guerra ajudou D. Pedro I a perder apoio. Qual documento ligaria a despesa militar à reação política que a dupla precisa demonstrar?",
+        "options": [
+          "Uma carta de um opositor que critica a dissolução da Assembleia Constituinte pelo imperador.",
+          "Uma mensagem de um ministro que estima quanto custaria prolongar a campanha por outro ano.",
+          "Um relato de viajante que registra o preço dos mantimentos enviados ao sul durante a guerra.",
+          "Uma petição contra o governo que atribui à guerra os sacrifícios cobrados dos moradores."
+        ]
+      },
+      {
+        "prompt": "Para uma peça sobre 1831, três alunos representam o pai que deixa o trono, o filho ainda criança e quem vai exercer o governo em seguida. Qual fala do terceiro personagem combina com a solução política adotada no Brasil?",
+        "options": [
+          "“Exerço o governo em nome do herdeiro enquanto ele não pode assumir essa função.”",
+          "“Exerço o governo até que os eleitores escolham quem iniciará uma nova dinastia.”",
+          "“Recebo a Coroa pelo período da infância do príncipe e depois lhe devolvo o título.”",
+          "“Recebo ordens de D. Pedro I, que continua governando até que o filho possa voltar.”"
+        ]
+      }
+    ]
+  },
+  "9": {
+    "edition": "interpretacao-2",
+    "title": "Brasil República",
+    "sub": "Da Proclamação à redemocratização",
+    "alt": "Gravura do Congresso Nacional em Brasília.",
+    "objective": [
+      {
+        "prompt": "Num município da Primeira República, um candidato venceu com grande vantagem. Um aluno atribui o resultado ao apoio espontâneo dos moradores. Outra aluna aponta o poder dos chefes locais. Que evidência permitiria distinguir melhor as duas explicações?",
+        "options": [
+          "A ata oficial com a soma dos votos que cada candidato recebeu no município.",
+          "O anúncio de um comício no qual o candidato vencedor apresentou suas propostas.",
+          "O relato de trabalhadores ameaçados de perder o sustento se votassem no adversário.",
+          "A lista dos fazendeiros que moravam no município na época em que ocorreu a eleição."
+        ]
+      },
+      {
+        "prompt": "Num exercício sobre o governo JK, o salário mensal de um operário passa de 100 para 120 unidades e a cesta de alimentos de sua família, de 50 para 70. São valores simulados. Como esse caso ajuda a avaliar a ideia de que a industrialização melhorou a vida dos trabalhadores?",
+        "options": [
+          "O caso confirma a ideia, pois o aumento do salário nominal mede diretamente a melhora da alimentação.",
+          "O caso põe a ideia à prova, pois comprar a mesma cesta passou a consumir uma parte maior do salário.",
+          "O caso confirma a ideia, pois a diferença de 50 unidades significa que o salário compra mais cestas.",
+          "O caso refuta a ideia para o país inteiro, pois a experiência dessa família representa a dos demais trabalhadores."
+        ]
+      },
+      {
+        "prompt": "Durante a ditadura, a versão impressa de um jornal deixou de fora uma reportagem que aparecia na prova de impressão. O corte pode ter sido uma escolha da redação ou uma imposição do governo. Que vestígio distinguiria melhor as duas hipóteses?",
+        "options": [
+          "Uma ordem de um órgão do governo identificando a matéria antes de ela chegar às bancas.",
+          "Um exemplar vendido nas bancas com outra matéria ocupando o espaço disponível.",
+          "Uma carta de leitor publicada dias depois, discordando da posição política do jornal.",
+          "Uma cópia da primeira versão da página com horário anterior ao fechamento da edição."
+        ]
+      },
+      {
+        "prompt": "Um cartaz das Diretas Já, guardado em 1984, promete que o próximo presidente será escolhido nas urnas pelo povo. Que legenda de museu trataria o cartaz como fonte histórica com maior precisão?",
+        "options": [
+          "Regra eleitoral já aprovada em 1984 para substituir a forma de escolha do presidente.",
+          "Proposta que entrou em vigor na eleição que levou Tancredo Neves à Presidência.",
+          "Balanço de uma eleição em que a população já havia escolhido o sucessor dos militares.",
+          "Reivindicação de uma campanha pública, distinta da regra usada na eleição de 1985."
+        ]
+      },
+      {
+        "prompt": "Numa escola pública, grupos de estudantes podem reservar uma sala para encontros voluntários fora das aulas. O conselho precisa decidir como tratar pedidos de grupos religiosos e de grupos sem religião. À luz da Constituição de 1988, qual regra concilia liberdade de crença e igualdade de acesso?",
+        "options": [
+          "Dividir os horários entre as crenças por número de adeptos, reservando aos demais as vagas que sobrarem.",
+          "Aplicar o mesmo critério de reserva a cada grupo e deixar a participação a critério de cada estudante.",
+          "Alternar as crenças responsáveis pelos encontros e tornar a presença obrigatória para garantir a convivência.",
+          "Encaminhar os grupos sem religião a outro espaço e distribuir a sala igualmente entre os grupos religiosos."
+        ]
+      },
+      {
+        "prompt": "Em um município, a ata de uma audiência registra que os moradores pediram uma ponte. Uma fotografia mostra o prefeito na inauguração meses depois. Qual evidência falta para sustentar que a participação dos moradores mudou a decisão do governo?",
+        "options": [
+          "O número de pessoas que compareceram à inauguração e o horário em que chegaram.",
+          "O valor final da construção e os nomes das empresas que forneceram o material.",
+          "A comparação entre o plano anterior à audiência e a alteração que acolheu o pedido.",
+          "A informação de que o prefeito e os moradores conheciam o problema antes da reunião."
+        ]
+      }
+    ]
+  },
+  "7": {
+    "edition": "interpretacao-2",
+    "title": "Rotas do Atlântico",
+    "sub": "Mercantilismo, África e Bahia colonial",
+    "alt": "Gravura de um navio a velas em mar aberto.",
+    "objective": [
+      {
+        "prompt": "Dois conselheiros querem cobrar uma taxa sobre o pano estrangeiro que chega ao porto. Um espera arrecadar dinheiro. O outro quer proteger as tecelagens do reino. Qual resultado indicaria que o segundo objetivo foi atingido, mesmo que o primeiro tenha fracassado?",
+        "options": [
+          "Crescem a entrada de pano estrangeiro e o valor arrecadado na alfândega.",
+          "Cai a produção das oficinas locais e cresce a arrecadação com o pano estrangeiro.",
+          "Crescem as encomendas às oficinas locais e cai a arrecadação sobre o pano importado.",
+          "Caem as compras de pano local e estrangeiro, e o tesouro arrecada menos."
+        ]
+      },
+      {
+        "prompt": "Num exercício, dois reinos começam o ano com a mesma reserva de moedas. O reino A recebe 90 por suas exportações e paga 80 por suas importações. O reino B recebe 65 e paga 40. Considerando apenas essas trocas, qual conselho combina com o objetivo mercantilista de aumentar as reservas?",
+        "options": [
+          "Seguir A, pois o valor de suas vendas ao exterior supera o das vendas de B.",
+          "Seguir B, pois ao fim das trocas sobra mais dinheiro para somar à reserva.",
+          "Seguir A, pois gastar mais com importações aumenta o dinheiro que fica no reino.",
+          "Seguir B, pois sua reserva cresce no valor total recebido por suas exportações."
+        ]
+      },
+      {
+        "prompt": "Em um jogo sobre a disputa por Salvador em 1624, uma equipe controla os engenhos e a outra ocupa o porto por onde saem os navios. O açúcar continua sendo produzido. Qual decisão permitiria à equipe do porto obter vantagem econômica sem conquistar os engenhos?",
+        "options": [
+          "Negociar o preço da cana que os produtores compram das fazendas vizinhas.",
+          "Escolher a época de moagem em cada propriedade do Recôncavo.",
+          "Definir a quantidade de cana a plantar nas terras do interior.",
+          "Cobrar pela saída das cargas destinadas aos compradores do outro lado do Atlântico."
+        ]
+      },
+      {
+        "prompt": "Imagine uma semana de mau tempo na Bahia colonial. Há farinha nos depósitos de Itaparica. Nas feiras de Salvador, a farinha encarece. Na semana seguinte voltam as viagens pelo mar e o preço na cidade recua. Qual hipótese explica as três pistas?",
+        "options": [
+          "A interrupção das travessias afastou temporariamente o estoque da ilha dos compradores da cidade.",
+          "A chegada de ferramentas mais caras fez os produtores elevarem o preço da farinha.",
+          "Um aumento duradouro da população de Salvador mudou a quantidade de farinha consumida.",
+          "Uma colheita menor na ilha reduziu a quantidade de farinha pronta para embarcar."
+        ]
+      },
+      {
+        "prompt": "Um mercador português do século XV relata que encontrou ouro ao desembarcar na costa da África ocidental. Um aluno afirma que ali começava o comércio de ouro da região. Que evidência mudaria mais diretamente essa interpretação?",
+        "options": [
+          "Uma moeda feita na Europa com ouro comprado nessa costa no século XVI.",
+          "Uma lista de mercadorias levadas pelo navio em sua viagem de volta a Portugal.",
+          "Um registro medieval de caravanas que já levavam ouro do interior através do Saara.",
+          "Um contrato assinado depois da viagem para financiar outra expedição à costa."
+        ]
+      },
+      {
+        "prompt": "Num livro de contas fictício de uma viagem do tráfico atlântico, o comerciante inclui a morte de pessoas escravizadas na coluna em que calcula o dinheiro perdido. Para qual pergunta esse lançamento oferece a evidência mais direta?",
+        "options": [
+          "Como os sobreviventes explicavam as perdas sofridas por suas famílias?",
+          "Como quem financiava a viagem atribuía valor às pessoas que transportava?",
+          "De que maneira a tripulação registrava a causa de cada morte a bordo?",
+          "Como as famílias nas regiões de origem recebiam a notícia de uma morte?"
+        ]
+      }
+    ]
+  }
+}
