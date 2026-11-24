@@ -20,7 +20,7 @@ function repository(bearer,subject){
  const cache=new Map();let active;
  async function req(path,method='GET',body){
   const r=await fetch(prefix+path,{method,headers:{Authorization:'Bearer '+bearer,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})});
-  const d=await r.json();if(!r.ok){if(r.status===404&&method==='GET')return null;const status=d.error?.status;const retry=['ABORTED','ALREADY_EXISTS','FAILED_PRECONDITION'].includes(status);throw Object.assign(new Error('Falha no banco de avaliações.'),{retry,status:retry?409:503});}return d;
+  const d=await r.json();if(!r.ok){if(r.status===404&&method==='GET')return null;const status=d.error?.status;const retry=['ABORTED','ALREADY_EXISTS','FAILED_PRECONDITION'].includes(status);throw Object.assign(new Error(retry?'A chamada ou a entrega foi atualizada. Confira os dados e tente novamente.':'As avaliações estão temporariamente indisponíveis. Tente novamente em alguns instantes.'),{retry,status:retry?409:503});}return d;
  }
  function unpack(doc){if(!doc)return null;const x=JSON.parse(doc.fields.payload.stringValue);const v={...x,version:doc.updateTime};cache.set(v.room.id,v);return v;}
  async function read(id){if(!/^[A-Za-z0-9-]{1,80}$/.test(id||''))return null;if(cache.has(id))return cache.get(id);return unpack(await req('/'+collection+'/'+id));}

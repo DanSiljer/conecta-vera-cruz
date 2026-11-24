@@ -27,7 +27,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 </head><body>
 <a class="skip" href="#main">Ir para o conteúdo</a>
 <header><div class="mast wrap"><button id="brand" class="brand" aria-label="Atlas da História, início"><span class="brand-logos" id="brand-icon"></span><span id="brand-title">Atlas da História</span></button><nav aria-label="Navegação principal"><button class="nav active" id="home-nav">Cadernos</button><button class="teacher-nav" id="teacher-nav"></button></nav></div><div class="subjectbar"><div class="wrap"><span class="subject-label">Disciplina</span><button type="button" id="subject-historia" aria-pressed="true">História</button><button type="button" id="subject-computacao" aria-pressed="false">Computação</button></div></div></header>
-<div class="wrap" style="padding-top:12px"><p id="connection-status" class="note" style="margin:0" role="status" aria-live="polite">Verificando o servidor de avaliações…</p></div>
 <main id="main" class="wrap" tabindex="-1"></main>
 <footer class="wrap"><span><b id="footer-brand">Atlas da História</b> <em>·</em> Vera Cruz, Bahia</span><span><a href="https://conectaveracruz.com.br/" style="color:inherit">Conecta Vera Cruz</a> <em>·</em> <span id="footer-subject">História</span> <em>·</em> Ano letivo 2026</span></footer>
 <dialog id="dialog"><div id="dialog-content"></div></dialog><section class="print-only" id="print-area"></section>
@@ -62,17 +61,32 @@ const gradeList=[6,7,8,9], pts=n=>(n/10).toLocaleString('pt-BR',{minimumFraction
 const imageTag=(g,cls='')=>'<img class="'+cls+'" src="'+ASSETS[g]+'" alt="'+esc(CONTENT[g].alt)+'">';
 let exam=null,panel=null,detail=null,clock=null,view=0,refreshVersion=0,opening=0;
 async function api(path,b={}){
- const auth=await identity();
+ if(location.protocol==='file:')throw Error('Abra a avaliação pelo link do Conecta Vera Cruz que a professora compartilhou.');
+ const retry=path==='submit'
+  ?'Ainda não foi possível confirmar a entrega. Mantenha esta aba aberta e tente enviar novamente.'
+  :'Não foi possível continuar agora. Confira sua internet e tente novamente.';
+ let auth;
+ try{auth=await identity();}catch{throw Error(retry);}
  if(path==='unlock'&&b.email){
   await auth.login(b.email,b.password);
   const state=await api('access');
-  if(!state.teacher){await auth.logout();throw Error('Esta conta não está autorizada como professora.');}
+  if(!state.teacher){await auth.logout();throw Error('Use a conta da professora para abrir o painel.');}
   return state;
  }
- const token=await auth.token();
- const r=await fetch('/api/avaliacoes/'+path,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({...b,subject}),cache:'no-store'});
- if(!r.headers.get('content-type')?.includes('application/json'))throw Error('O serviço de avaliações está indisponível. Tente novamente.');
- const d=await r.json();if(!r.ok)throw Error(d.error||'Não foi possível concluir.');
+ let r,d;
+ try{
+  const token=await auth.token();
+  r=await fetch('/api/avaliacoes/'+path,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({...b,subject}),cache:'no-store'});
+  d=await r.json();
+ }catch{throw Error(retry);}
+ if(!r.ok){
+  if(r.status>=500){
+   if(path==='submit')throw Error(retry);
+   if(path==='class')throw Error('Não foi possível abrir a turma agora. Tente novamente. Se o problema continuar, avise a professora.');
+   throw Error('As avaliações estão temporariamente indisponíveis. Tente novamente em alguns instantes.');
+  }
+  throw Error(d?.error||retry);
+ }
  if(path==='access'){unlocked=!!d.teacher;teacherLogin=d.teacherLogin;if(d.studentUrl&&subject==='computacao')d.studentUrl+='?disciplina=computacao';}
  if(path==='lock'){unlocked=false;await auth.logout();}
  return d;
@@ -87,7 +101,7 @@ function modalHead(title){return '<div class="spread"><h2>'+esc(title)+'</h2>'+c
 dlg.addEventListener('click',e=>{if(e.target===dlg){const p=dlg.getBoundingClientRect();if(e.clientX<p.left||e.clientX>p.right||e.clientY<p.top||e.clientY>p.bottom)dlg.close();}});
 function home(){
  move();$('#home-nav').classList.add('active');document.title=siteName()+' · Avaliações';
- main.innerHTML='<section class="hero"><img class="hero-art" src="'+ASSETS.hero+'" alt="'+(subject==='computacao'?'Ilustração de Arduino, semáforo e blocos de programação.':'Gravura de um globo terrestre antigo, livros e um mapa.')+'"><div class="hero-box"><div class="eyebrow"><span class="gold-rule"></span>III trimestre · 2026</div><h1>Avaliações de <i>'+subjectName()+'</i></h1><p>'+(subject==='computacao'?'Robótica, Arduino, circuitos elétricos e jogos no Scratch. Explore o caderno da sua turma.':'De Roma Antiga ao Brasil República, explore o caderno de avaliação da sua turma.')+'</p><div class="hero-meta"><span>'+ico('user')+'Prof.ª Danusa Jesus</span><i class="divider"></i><span>'+ico('layers')+'Ensino Fundamental II</span></div></div></section><section aria-labelledby="cadernos"><div class="sectionline"><div><h2 id="cadernos">Cadernos de avaliação</h2><p>Selecione seu ano. Em cada questão, interprete a situação e marque uma alternativa.</p></div><div class="smallline count"><span>'+ico('book')+'4 cadernos</span></div></div><div class="shelf">'+gradeList.map(g=>{const c=CONTENT[g];return '<button class="card" data-grade="'+g+'" aria-label="Abrir caderno do '+g+'º ano, '+esc(c.title)+'"><span class="cardpic">'+imageTag(g)+'<span class="grade">'+g+'º ano</span></span><span class="cardbody"><span class="cardtitle">'+esc(c.title)+'</span><span class="cardsub">'+esc(c.sub)+'</span><span class="cardfoot"><span>'+ico('book')+'Teste de '+subjectName()+'</span><span class="mark">3,0 pontos</span></span></span></button>';}).join('')+'</div></section>';
+ main.innerHTML='<section class="hero"><img class="hero-art" src="'+ASSETS.hero+'" alt="'+(subject==='computacao'?'Ilustração de Arduino, semáforo e blocos de programação.':'Gravura de um globo terrestre antigo, livros e um mapa.')+'"><div class="hero-box"><div class="eyebrow"><span class="gold-rule"></span>III trimestre · 2026</div><h1>Avaliações de <i>'+subjectName()+'</i></h1><p>'+(subject==='computacao'?'Robótica, Arduino, circuitos elétricos e jogos no Scratch. Explore o caderno da sua turma.':'De Roma Antiga ao Brasil República, explore o caderno de avaliação da sua turma.')+'</p><div class="hero-meta"><span>'+ico('user')+'Prof.ª Danusa Jesus</span><i class="divider"></i><span>'+ico('layers')+'Ensino Fundamental II</span></div></div></section><section aria-labelledby="cadernos"><div class="sectionline"><div><h2 id="cadernos">Cadernos de avaliação</h2><p>Escolha seu ano e digite o código da turma para começar.</p></div><div class="smallline count"><span>'+ico('book')+'4 cadernos</span></div></div><div class="shelf">'+gradeList.map(g=>{const c=CONTENT[g];return '<button class="card" data-grade="'+g+'" aria-label="Abrir caderno do '+g+'º ano, '+esc(c.title)+'"><span class="cardpic">'+imageTag(g)+'<span class="grade">'+g+'º ano</span></span><span class="cardbody"><span class="cardtitle">'+esc(c.title)+'</span><span class="cardsub">'+esc(c.sub)+'</span><span class="cardfoot"><span>'+ico('book')+'Teste de '+subjectName()+'</span><span class="mark">3,0 pontos</span></span></span></button>';}).join('')+'</div></section>';
  main.querySelectorAll('[data-grade]').forEach(b=>b.onclick=()=>join(Number(b.dataset.grade)));
 }
 function navigate(fn){
@@ -100,11 +114,11 @@ $('#subject-historia').onclick=()=>switchSubject('historia');$('#subject-computa
 function join(g){
  const top='<div class="dialog-top">'+imageTag(g)+closeButton+'</div><div class="pad"><span class="mode-label">'+g+'º ANO</span><h2>'+esc(CONTENT[g].title)+'</h2>';
  modal(top+'<p>Digite o código da turma informado pela professora.</p><form id="join" class="form"><label class="field">Código da turma<input name="code" autocomplete="off" spellcheck="false" autocapitalize="characters" required minlength="8" maxlength="12" placeholder="Código da turma"></label>'+errorBox+'<button type="submit" class="btn">Continuar</button></form></div>');
- formOn('#join',async b=>{const code=b.code.trim().toUpperCase();const data=await api('class',{grade:g,code});if(!data.count)throw Error('A chamada está vazia. Peça à professora para cadastrar os estudantes.');chooseMembers(g,code,data,top);});
+ formOn('#join',async b=>{const code=b.code.trim().toUpperCase();const data=await api('class',{grade:g,code});if(!data.count)throw Error('Sua turma ainda está sem chamada. Peça à professora para incluir seu nome.');chooseMembers(g,code,data,top);});
 }
 function chooseMembers(grade,code,data,top){
  const intro='<p class="muted">'+esc(data.room.label)+' · '+modeName(data.room.mode)+'</p>';
- modal(top+intro+'<form class="form" id="identify"><h3 class="member-title">Identificação</h3><p class="member-hint">Digite sua chave individual. Para responder em grupo, acrescente a chave de cada participante.</p><div id="key-fields" class="form"></div><button class="outline" type="button" id="add-key">'+ico('plus')+'Adicionar participante</button>'+errorBox+'<button class="btn" type="submit">Identificar participantes</button></form></div>');
+ modal(top+intro+'<form class="form" id="identify"><h3 class="member-title">Identificação</h3><p class="member-hint">Digite sua chave individual. Para responder em grupo, acrescente a chave de cada participante.</p><div id="key-fields" class="form"></div><button class="outline" type="button" id="add-key">'+ico('plus')+'Adicionar participante</button>'+errorBox+'<button class="btn" type="submit">Conferir nomes</button></form></div>');
  const fields=$('#key-fields');let counter=0;const limit=Math.min(data.count,10);
  function add(){const id=counter++;const row=document.createElement('div');row.className='member-key';row.innerHTML='<label class="field">Chave individual<input type="password" name="pin'+id+'" minlength="8" maxlength="12" required autocomplete="off" spellcheck="false" autocapitalize="characters" placeholder="Chave fornecida pela professora"></label>'+(id?'<button class="textbtn" type="button">Retirar participante</button>':'');fields.append(row);const remove=row.querySelector('button');if(remove)remove.onclick=()=>{row.remove();$('#add-key').disabled=fields.children.length>=limit;};$('#add-key').disabled=fields.children.length>=limit;}
  $('#add-key').onclick=add;add();
@@ -130,7 +144,7 @@ function question(){
  };
 }
 function resultPage(info,r){
- move();main.innerHTML='<section class="panel result"><div class="seal">'+ico('check')+'</div><span class="mode-label">AVALIAÇÃO ENTREGUE</span><h1 class="page-title">'+(r.score===null?'Respostas recebidas':info.count>1?'Nota do grupo':'Sua nota de '+subjectName())+'</h1><p>'+esc(info.name)+' · '+esc(info.room.label)+'</p>'+(r.score===null?'<p class="note">A professora recebeu suas respostas para correção. Entre novamente com sua chave para consultar a nota.</p>':'<div class="big-score">'+pts(r.score)+' <small>/ 3,0</small></div><p>'+esc(r.mode==='objective'?r.correct+' de '+r.total+' questões corretas.':'Correção da professora concluída.')+'</p>')+(info.count>1?'<p>Entrega registrada para os '+info.count+' participantes.</p>':'')+'<p class="muted">'+'Entrega registrada no painel da professora.'+'</p><div class="actions"><button class="btn" id="done">Voltar aos cadernos</button></div></section>';$('#done').onclick=home;
+ move();main.innerHTML='<section class="panel result"><div class="seal">'+ico('check')+'</div><span class="mode-label">AVALIAÇÃO ENTREGUE</span><h1 class="page-title">'+(r.score===null?'Respostas recebidas':info.count>1?'Nota do grupo':'Sua nota de '+subjectName())+'</h1><p>'+esc(info.name)+' · '+esc(info.room.label)+'</p>'+(r.score===null?'<p class="note">A professora recebeu suas respostas para correção. Entre novamente com sua chave para consultar a nota.</p>':'<div class="big-score">'+pts(r.score)+' <small>/ 3,0</small></div><p>'+esc(r.mode==='objective'?r.correct+' de '+r.total+' questões corretas.':'Correção da professora concluída.')+'</p>')+(info.count>1?'<p>Entrega registrada para os '+info.count+' participantes.</p>':'')+'<p class="muted">'+'A professora já pode consultar sua entrega.'+'</p><div class="actions"><button class="btn" id="done">Voltar aos cadernos</button></div></section>';$('#done').onclick=home;
 }
 async function leavePanel(){
  try{await api('lock');home();}
@@ -141,13 +155,13 @@ async function teacher(){
  try{const access=await api('access');if(view!==stamp)return;
  if(!access.teacher||access.needsSetup){
   if(access.teacherDevice===false){
-   main.innerHTML='<section class="panel loginpanel"><div class="mode-label">'+ico('lock')+' ACESSO DA PROFESSORA</div><h1 class="page-title">Abra no computador da professora</h1><p>Este é o endereço dos alunos na rede da escola. No computador em que você iniciou o Atlas, abra o endereço da professora indicado na janela do servidor.</p><button id="back-to-books" class="outline">Voltar aos cadernos</button></section>';
+   main.innerHTML='<section class="panel loginpanel"><div class="mode-label">'+ico('lock')+' ACESSO DA PROFESSORA</div><h1 class="page-title">Abra no computador da professora</h1><p>Para consultar a chamada e as notas, abra a área da professora no computador da escola.</p><button id="back-to-books" class="outline">Voltar aos cadernos</button></section>';
    $('#back-to-books').onclick=home;return;
   }
   const file=access.host==='file',first=file&&!access.configured;
   const title=first?'Criar senha da professora':'Área da professora';
   const email=access.teacherLogin==='email'&&!access.needsSetup;
-  const help=access.needsSetup?'Use a senha original do Atlas uma vez para ativar as avaliações.':email?'Entre com o e-mail e a senha cadastrados no Firebase Authentication.':'Digite a senha da professora para acessar as chamadas e as notas.';
+  const help=access.needsSetup?'No primeiro acesso, digite a senha da professora para liberar as turmas.':email?'Digite seu e-mail e sua senha para acessar as chamadas e as notas.':'Digite a senha da professora para acessar as chamadas e as notas.';
   main.innerHTML='<section class="panel loginpanel"><div class="mode-label">'+ico('lock')+' ACESSO DA PROFESSORA</div><h1 class="page-title">'+title+'</h1><p>'+help+'</p><form id="unlock" class="form">'+(email?'<label class="field">E-mail<input name="email" type="email" required autocomplete="username" placeholder="Seu e-mail"></label>':'')+'<div class="field"><label for="teacher-password">Senha</label><div class="password-row"><input id="teacher-password" type="password" name="password" minlength="6" required spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="'+(first?'new-password':'current-password')+'"><button id="show-password" type="button" class="outline" aria-controls="teacher-password">Mostrar senha</button></div></div>'+errorBox+'<button class="btn" type="submit">'+(first?'Criar senha e abrir painel':'Entrar no painel')+'</button></form></section>';
   const passwordInput=$('#teacher-password'),toggle=$('#show-password');
   toggle.onclick=()=>{
@@ -158,7 +172,7 @@ async function teacher(){
   formOn('#unlock',async b=>{await api('unlock',b);await teacher();});return;
  }
  const data=await api('t/rooms');if(view!==stamp)return;panel={rooms:data.rooms.slice().sort((a,b)=>a.grade-b.grade||a.label.localeCompare(b.label,'pt-BR')),access,current:data.rooms[0]?.id};
- main.innerHTML='<div class="pagehead"><div class="eyebrow">III trimestre · 2026</div><div class="spread"><h1 class="page-title">Painel da professora</h1><button class="outline" id="logout">Sair do painel</button></div><p>Disciplina: <b>'+subjectName()+'</b>. Organize as chamadas, distribua as chaves e acompanhe as entregas.</p></div>'+(access.host==='file'?'<p class="note">Servidor indisponível. Nenhuma nota será registrada neste dispositivo.</p>':access.studentUrl?'<div class="note spread"><span>Endereço para os alunos <b id="student-link">'+esc(access.studentUrl)+'</b></span><button type="button" class="outline" id="copy-link">Copiar endereço</button></div>':'')+'<div class="dashgrid"><aside class="panel"><h2>Turmas</h2><div class="roomlist" id="rooms"></div><div class="actions"><button class="outline" id="new-room">'+ico('plus')+'Nova turma</button></div></aside><section class="panel dashboard" id="details" aria-label="Chamada e notas"></section></div>';
+ main.innerHTML='<div class="pagehead"><div class="eyebrow">III trimestre · 2026</div><div class="spread"><h1 class="page-title">Painel da professora</h1><button class="outline" id="logout">Sair do painel</button></div><p>Disciplina: <b>'+subjectName()+'</b>. Escolha uma turma para ver a chamada, as entregas e as notas.</p></div>'+(access.host==='file'?'<p class="note">Para registrar as notas, abra a avaliação pelo link do Conecta Vera Cruz.</p>':access.studentUrl?'<div class="note spread"><span>Endereço para os alunos <b id="student-link">'+esc(access.studentUrl)+'</b></span><button type="button" class="outline" id="copy-link">Copiar endereço</button></div>':'')+'<div class="dashgrid"><aside class="panel"><h2>Turmas</h2><div class="roomlist" id="rooms"></div><div class="actions"><button class="outline" id="new-room">'+ico('plus')+'Nova turma</button></div></aside><section class="panel dashboard" id="details" aria-label="Chamada e notas"></section></div>';
  const copyLink=$('#copy-link');
  if(copyLink)copyLink.onclick=async()=>{
   try{await navigator.clipboard.writeText(access.studentUrl);copyLink.textContent='Endereço copiado';}
@@ -188,7 +202,7 @@ function addNames(){
 }
 function newRoom(){
  modal('<div class="pad">'+modalHead('Nova turma ou avaliação')+'<p>Escolha o ano e prepare a chamada. A turma receberá um código para a avaliação de múltipla escolha.</p><form class="form" id="newform"><label class="field">Ano<select name="grade" id="ng">'+gradeList.map(g=>'<option value="'+g+'">'+g+'º ano</option>').join('')+'</select></label><label class="field">Nome da turma<input required maxlength="70" name="label" placeholder="Ex.: 8º B · Vespertino"></label><label class="field">Chamada<textarea rows="5" name="names" id="nn" placeholder="Um nome por linha" required></textarea></label><button type="button" class="outline" id="reuse">'+ico('copy')+'Usar chamada do mesmo ano</button>'+errorBox+'<button type="submit" class="btn">Criar turma</button></form></div>');
- $('#reuse').onclick=async()=>{try{const r=panel.rooms.find(r=>r.grade===Number($('#ng').value)&&r.id.startsWith('matutino-'));const x=await api('t/detail',{room:r.id});if(!x.students.length)throw Error('A chamada deste ano ainda está vazia. Cole os nomes no campo acima.');$('#nn').value=sorted(x.students).map(s=>s.name).join('\n');}catch(e){err($('#newform'),e.message);}};
+ $('#reuse').onclick=async()=>{try{const r=panel.rooms.find(r=>r.grade===Number($('#ng').value)&&r.id.startsWith('matutino-'));if(!r)throw Error('Ainda não há uma chamada para este ano. Digite os nomes no campo acima.');const x=await api('t/detail',{room:r.id});if(!x.students.length)throw Error('A chamada deste ano ainda está vazia. Cole os nomes no campo acima.');$('#nn').value=sorted(x.students).map(s=>s.name).join('\n');}catch(e){err($('#newform'),e.message);}};
  formOn('#newform',async b=>{const {room}=await api('t/create',{...b,names:b.names.split(/\r?\n/)});panel.rooms.push(room);panel.rooms.sort((a,b)=>a.grade-b.grade||a.label.localeCompare(b.label,'pt-BR'));panel.current=room.id;dlg.close();renderRooms();await refreshDetail(true);});
 }
 function tickets(){
@@ -211,6 +225,5 @@ async function review(id){
  if(written)formOn('#markform',async b=>{await api('t/grade',{room:r.id,student:id,marks:qs.map((_,i)=>Math.round(Number(b['m'+i])*10))});dlg.close();await refreshDetail(true);});
  }catch(e){modal('<div class="pad">'+modalHead('Respostas')+'<p class="error">'+esc(e.message)+'</p></div>');}
 }
-async function checkConnection(){const box=$('#connection-status');try{if(location.protocol==='file:')throw Error('Abra a plataforma pelo endereço publicado do Conecta Vera Cruz. O arquivo local não recebe entregas.');const r=await fetch('/api/avaliacoes/health',{headers:{Authorization:'Bearer '+await (await identity()).token()},cache:'no-store'});if(!(r.headers.get('Content-Type')||'').includes('application/json'))throw Error('API de avaliações não publicada (HTTP '+r.status+'). Publique a pasta functions junto com o site.');const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||'O Firebase ainda não está disponível.');box.className='success';box.textContent=d.storage==='firestore'?'Conectado ao Firebase. As notas são salvas no Firestore.':'Conectado ao Firebase. As notas são salvas no Conecta Vera Cruz.';}catch(e){box.className='error';box.textContent=e.message;}}
-if(new URLSearchParams(location.search).get('professora')==='1')teacher();else home();checkConnection();
+if(new URLSearchParams(location.search).get('professora')==='1')teacher();else home();
 </script></body></html>

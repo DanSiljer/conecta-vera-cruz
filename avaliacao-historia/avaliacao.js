@@ -7,8 +7,8 @@ async function firebaseToken(){
   return await (await identity).token();
  }catch(e){
   identity=undefined;
-  if(e.code==='auth/operation-not-allowed'||e.code==='auth/admin-restricted-operation')throw Error('A escola precisa ativar o acesso anônimo no Firebase Authentication para liberar esta avaliação.');
-  throw Error('Não foi possível identificar este navegador. Confira a internet e tente novamente.');
+  if(e.code==='auth/operation-not-allowed'||e.code==='auth/admin-restricted-operation')throw Error('A avaliação ainda não está disponível. Avise a professora e tente novamente mais tarde.');
+  throw Error('Não foi possível continuar agora. Confira sua internet e tente novamente.');
  }
 }
 'use strict';
@@ -107,7 +107,7 @@ async function teacher(){
  try{const access=await api('access');if(view!==stamp)return;
  if(!access.teacher){
   if(access.teacherDevice===false){
-   main.innerHTML='<section class="panel loginpanel"><div class="mode-label">'+ico('lock')+' ACESSO DA PROFESSORA</div><h1 class="page-title">Abra no computador da professora</h1><p>Este é o endereço dos alunos na rede da escola. No computador em que você iniciou o Atlas, abra o endereço da professora indicado na janela do servidor.</p><button id="back-to-books" class="outline">Voltar aos cadernos</button></section>';
+   main.innerHTML='<section class="panel loginpanel"><div class="mode-label">'+ico('lock')+' ACESSO DA PROFESSORA</div><h1 class="page-title">Abra no computador da professora</h1><p>Para consultar a chamada e as notas, abra a área da professora no computador da escola.</p><button id="back-to-books" class="outline">Voltar aos cadernos</button></section>';
    $('#back-to-books').onclick=home;return;
   }
   const file=access.host==='file',first=file&&!access.configured;
@@ -123,7 +123,7 @@ async function teacher(){
   formOn('#unlock',async b=>{await api('unlock',b);await teacher();});return;
  }
  const data=await api('t/rooms');if(view!==stamp)return;panel={rooms:data.rooms.slice().sort((a,b)=>a.grade-b.grade||a.label.localeCompare(b.label,'pt-BR')),access,current:data.rooms[0]?.id};
- main.innerHTML='<div class="pagehead"><div class="eyebrow">III trimestre · 2026</div><div class="spread"><h1 class="page-title">Painel da professora</h1><button class="outline" id="logout">Sair do painel</button></div><p>Organize as chamadas, distribua as chaves e acompanhe as entregas.</p></div>'+(access.host==='file'?'<p class="note">Modo neste dispositivo. Os resultados ficam no navegador em que a avaliação foi feita. Para reunir as notas de outros aparelhos, use a versão com servidor.</p>':access.studentUrl?'<div class="note spread"><span>Endereço para os alunos <b id="student-link">'+esc(access.studentUrl)+'</b></span><button type="button" class="outline" id="copy-link">Copiar endereço</button></div>':'')+'<div class="dashgrid"><aside class="panel"><h2>Turmas</h2><div class="roomlist" id="rooms"></div><div class="actions"><button class="outline" id="new-room">'+ico('plus')+'Nova turma</button></div></aside><section class="panel dashboard" id="details" aria-label="Chamada e notas"></section></div>';
+ main.innerHTML='<div class="pagehead"><div class="eyebrow">III trimestre · 2026</div><div class="spread"><h1 class="page-title">Painel da professora</h1><button class="outline" id="logout">Sair do painel</button></div><p>Organize as chamadas, distribua as chaves e acompanhe as entregas.</p></div>'+(access.host==='file'?'<p class="note">Para reunir as notas da turma, compartilhe o link da avaliação no Conecta Vera Cruz.</p>':access.studentUrl?'<div class="note spread"><span>Endereço para os alunos <b id="student-link">'+esc(access.studentUrl)+'</b></span><button type="button" class="outline" id="copy-link">Copiar endereço</button></div>':'')+'<div class="dashgrid"><aside class="panel"><h2>Turmas</h2><div class="roomlist" id="rooms"></div><div class="actions"><button class="outline" id="new-room">'+ico('plus')+'Nova turma</button></div></aside><section class="panel dashboard" id="details" aria-label="Chamada e notas"></section></div>';
  const copyLink=$('#copy-link');
  if(copyLink)copyLink.onclick=async()=>{
   try{await navigator.clipboard.writeText(access.studentUrl);copyLink.textContent='Endereço copiado';}
@@ -153,7 +153,7 @@ function addNames(){
 }
 function newRoom(){
  modal('<div class="pad">'+modalHead('Nova turma ou avaliação')+'<p>Escolha o ano e prepare a chamada. A turma receberá um código para a avaliação de múltipla escolha.</p><form class="form" id="newform"><label class="field">Ano<select name="grade" id="ng">'+gradeList.map(g=>'<option value="'+g+'">'+g+'º ano</option>').join('')+'</select></label><label class="field">Nome da turma<input required maxlength="70" name="label" placeholder="Ex.: 8º B · Vespertino"></label><label class="field">Chamada<textarea rows="5" name="names" id="nn" placeholder="Um nome por linha" required></textarea></label><button type="button" class="outline" id="reuse">'+ico('copy')+'Usar chamada do mesmo ano</button>'+errorBox+'<button type="submit" class="btn">Criar turma</button></form></div>');
- $('#reuse').onclick=async()=>{try{const r=panel.rooms.find(r=>r.grade===Number($('#ng').value)&&r.id.startsWith('matutino-'));const x=await api('t/detail',{room:r.id});if(!x.students.length)throw Error('A chamada deste ano ainda está vazia. Cole os nomes no campo acima.');$('#nn').value=sorted(x.students).map(s=>s.name).join('\n');}catch(e){err($('#newform'),e.message);}};
+ $('#reuse').onclick=async()=>{try{const r=panel.rooms.find(r=>r.grade===Number($('#ng').value)&&r.id.startsWith('matutino-'));if(!r)throw Error('Ainda não há uma chamada para este ano. Digite os nomes no campo acima.');const x=await api('t/detail',{room:r.id});if(!x.students.length)throw Error('A chamada deste ano ainda está vazia. Cole os nomes no campo acima.');$('#nn').value=sorted(x.students).map(s=>s.name).join('\n');}catch(e){err($('#newform'),e.message);}};
  formOn('#newform',async b=>{const {room}=await api('t/create',{...b,names:b.names.split(/\r?\n/)});panel.rooms.push(room);panel.rooms.sort((a,b)=>a.grade-b.grade||a.label.localeCompare(b.label,'pt-BR'));panel.current=room.id;dlg.close();renderRooms();await refreshDetail(true);});
 }
 function tickets(){

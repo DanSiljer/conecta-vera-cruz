@@ -47,7 +47,7 @@ function teamNames(team,students){
   const ids=new Set(JSON.parse(team));
   return students.filter(s=>ids.has(s.id)).map(s=>s.name);
 }
-function conflict(){fail('Alguém da seleção já entregou esta avaliação em outra formação. Ajuste os nomes ou consulte a nota individualmente.',409);}
+function conflict(){fail('Um dos participantes já entregou a avaliação. Confira os nomes do grupo ou entre apenas com a sua chave para consultar sua nota.',409);}
 async function school(path,b,ctx){
   const {repo,bank}=ctx;
   if(path.startsWith('t/')){
@@ -92,9 +92,9 @@ async function school(path,b,ctx){
     }
     fail('Opção indisponível.',404);
   }
-  if(!/^(?:[0-9A-F]{8}|[0-9A-F]{12})$/.test(String(b.code)))fail('Confira o código de oito caracteres da turma.');
+  if(!/^(?:[0-9A-F]{8}|[0-9A-F]{12})$/.test(String(b.code)))fail('Confira o código da turma na ficha entregue pela professora.');
   const room=await repo.byCode(b.code);
-  if(!room||Number(b.grade)!==room.grade)fail('Código ou ano diferente do informado pela professora.',404);
+  if(!room||Number(b.grade)!==room.grade)fail('Confira se você escolheu o ano certo e digitou o código da sua turma.',404);
   const students=await repo.students(room.id);
   if(path==='class'&&ctx.portal)return {room:describeRoom(room),count:students.length};
   if(path==='class')return {room:describeRoom(room),students:students.map(s=>({id:s.id,name:s.name}))};

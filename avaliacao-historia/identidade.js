@@ -14,6 +14,12 @@ export async function token(){
 
 export async function login(email,password){
  try{await signInWithEmailAndPassword(auth,email,password);}
- catch{throw Error('Confira o e-mail e a senha cadastrados no Firebase.');}
+ catch(error){
+  if(error.code==='auth/network-request-failed')throw Error('Confira sua internet e tente entrar novamente.');
+  if(error.code==='auth/too-many-requests')throw Error('Houve várias tentativas de entrada. Aguarde alguns minutos e tente novamente.');
+  throw Error('Confira seu e-mail e sua senha e tente entrar novamente.');
+ }
 }
-export async function logout(){await signOut(auth);}
+export async function logout(){
+ try{await signOut(auth);}catch{throw Error('Não foi possível sair da conta. Tente novamente.');}
+}
