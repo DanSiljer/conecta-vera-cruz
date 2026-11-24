@@ -6,7 +6,8 @@
     "not_found_handling": "404-page",
     "binding": "ASSETS",
     "run_worker_first": [
-      "/avaliacao-historia/api/*"
+      "/avaliacao-historia/api/*",
+      "/api/avaliacoes/*"
     ]
   },
   "main": "atlas-backend/worker.js",

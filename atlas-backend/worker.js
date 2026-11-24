@@ -2,15 +2,19 @@ import { DurableObject } from 'cloudflare:workers';
 import { firebaseUser } from './firebase.js';
 import { school, atlasPassword } from './domain.js';
 import { repository } from './repositorio.js';
+import computing from './computacao.json';
+import archived from './edicoes.json';
+import {repository as firestoreRepository,token as firestoreToken} from './firestore.js';
 import envelope from './bootstrap.json';
 import cadernos from '../avaliacao-historia/cadernos.json';
 
 const prefix='/avaliacao-historia/',start=prefix+'api/';
+const portalPrefix='/api/avaliacoes/';
 const sessionName='atlas_historia';
-const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/create','t/add','t/detail','t/review']);
+const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/create','t/add','t/detail','t/review','t/grade']);
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow','X-Content-Type-Options':'nosniff',...headers}});
 const problem=(status,message)=>Object.assign(Error(message),{status});
-const cookie=(token,age)=>sessionName+'='+token+'; Path='+prefix+'api/; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
+const cookie=(token,age,path)=>sessionName+'='+token+'; Path='+path+'; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
 const randomToken=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');
 async function openSeed(password){
  if(typeof password!=='string'||password.length>160)throw problem(403,'Confira a senha da professora.');
@@ -27,9 +31,19 @@ const report=e=>reply({error:e.status?e.message:'Não foi possível concluir ago
 export default {
  async fetch(request,env){
   const url=new URL(request.url);
-  if(!url.pathname.startsWith(start))return env.ASSETS.fetch(request);
+  const portal=url.pathname.startsWith(portalPrefix);
+  if(!portal&&!url.pathname.startsWith(start))return env.ASSETS.fetch(request);
   try{
-   const action=url.pathname.slice(start.length);
+   const action=url.pathname.slice((portal?portalPrefix:start).length);
+   if(portal&&action==='health'&&request.method==='GET'){
+    if(request.headers.has('authorization'))await firebaseUser(request.headers.get('authorization'));
+    if(env.FIREBASE_SERVICE_ACCOUNT){
+     const bearer=await firestoreToken(env);
+     const probe=await fetch('https://firestore.googleapis.com/v1/projects/conecta-vera-cruz/databases/(default)/documents/atlas_avaliacoes_2026?pageSize=1&mask.fieldPaths=code',{headers:{Authorization:'Bearer '+bearer}});
+     if(!probe.ok)throw problem(503,'O servidor não conseguiu acessar o Firestore do Conecta.');
+    }
+    return reply({ok:true,storage:env.FIREBASE_SERVICE_ACCOUNT?'firestore':'cloudflare',teacherLogin:env.ATLAS_TEACHER_UID?'email':'atlas'});
+   }
    if(!actions.has(action))throw problem(404,'Opção indisponível.');
    if(request.method!=='POST'||request.headers.get('origin')!==url.origin||!request.headers.get('content-type')?.startsWith('application/json'))throw problem(403,'Pedido inválido.');
    if(Number(request.headers.get('content-length'))>50000)throw problem(413,'Pedido muito grande.');
@@ -54,11 +68,12 @@ export default {
 export class AtlasHistoria extends DurableObject{
  constructor(ctx,env){
   super(ctx,env);
-  this.storage=ctx.storage;this.sql=ctx.storage.sql;this.repo=repository(ctx.storage);
+  this.env=env;this.storage=ctx.storage;this.sql=ctx.storage.sql;this.repo=repository(ctx.storage);
   this.sql.exec(`CREATE TABLE IF NOT EXISTS rooms(id TEXT PRIMARY KEY,grade INTEGER NOT NULL,label TEXT NOT NULL,mode TEXT NOT NULL,code TEXT NOT NULL UNIQUE);
    CREATE TABLE IF NOT EXISTS students(id TEXT PRIMARY KEY,room TEXT NOT NULL REFERENCES rooms(id),name TEXT NOT NULL,pin TEXT NOT NULL,UNIQUE(room,name));
    CREATE INDEX IF NOT EXISTS students_room ON students(room);
    CREATE TABLE IF NOT EXISTS submissions(student TEXT PRIMARY KEY REFERENCES students(id),team TEXT,answers TEXT NOT NULL,marks TEXT,score INTEGER,sent TEXT NOT NULL);
+   CREATE TABLE IF NOT EXISTS submissions_computacao(student TEXT PRIMARY KEY REFERENCES students(id),team TEXT,answers TEXT NOT NULL,marks TEXT,score INTEGER,sent TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS settings(id TEXT PRIMARY KEY,value TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,uid TEXT NOT NULL,expires INTEGER NOT NULL);
    CREATE TABLE IF NOT EXISTS attempts(bucket TEXT PRIMARY KEY,n INTEGER NOT NULL,expires INTEGER NOT NULL);`);
@@ -70,21 +85,26 @@ export class AtlasHistoria extends DurableObject{
    this.sql.exec("INSERT INTO settings VALUES('keys',?)",JSON.stringify(seed.keys));
   });
  }
- bank(){
-  if(this.exams)return this.exams;
+ bank(subject){
+  this.exams??={};if(this.exams[subject])return this.exams[subject];
   const row=this.sql.exec("SELECT value FROM settings WHERE id='keys'").toArray()[0];
   if(!row)throw problem(503,'A professora precisa abrir o painel uma vez para liberar a chamada.');
-  const keys=JSON.parse(row.value);
-  this.exams=Object.fromEntries(Object.entries(cadernos).map(([g,c])=>[g,{...c,objective:c.objective.map((q,i)=>({...q,key:keys[g][i]}))}]));
-  return this.exams;
+  const keys=JSON.parse(row.value),data=subject==='computacao'?computing:cadernos;
+  const bank=Object.fromEntries(Object.entries(data).map(([g,c])=>[g,{...c,archive:{written:archived[subject][g].written,objective:archived[subject][g].objective,editions:archived[subject][g]},
+   objective:c.objective.map((q,i)=>({...q,key:keys[g][i%keys[g].length]}))}]));
+  this.exams[subject]=bank;return bank;
  }
  async fetch(req){
   try{
-   const url=new URL(req.url),path=url.pathname.slice(start.length),uid=req.headers.get('x-atlas-user'),now=Date.now();
+   const url=new URL(req.url),portal=url.pathname.startsWith(portalPrefix),base=portal?portalPrefix:start,path=url.pathname.slice(base.length),uid=req.headers.get('x-atlas-user'),now=Date.now();
    const candidate=req.headers.get('cookie')?.match(/(?:^|;\s*)atlas_historia=([a-f0-9]{64})(?:;|$)/)?.[1]||'';
-   const teacher=!!this.sql.exec('SELECT 1 FROM sessions WHERE token=? AND uid=? AND expires>?',candidate,uid,now).toArray().length;
-   if(path==='access')return reply({teacher,teacherDevice:true,host:'internet',studentUrl:teacher?url.origin+prefix:''});
-   if(path==='lock'){this.sql.exec('DELETE FROM sessions WHERE token=? AND uid=?',candidate,uid);return reply({ok:true},200,{'Set-Cookie':cookie('',0)});}
+   const atlasSession=!!this.sql.exec('SELECT 1 FROM sessions WHERE token=? AND uid=? AND expires>?',candidate,uid,now).toArray().length;
+   const emailLogin=portal&&!!this.env.ATLAS_TEACHER_UID;
+   const teacher=emailLogin?uid===this.env.ATLAS_TEACHER_UID:atlasSession;
+   if(path==='access')return reply({teacher,teacherLogin:emailLogin?'email':'atlas',teacherDevice:true,host:'internet',
+    needsSetup:teacher&&!this.sql.exec("SELECT 1 FROM settings WHERE id='keys'").toArray().length,
+    studentUrl:teacher?url.origin+(portal?'/avaliacoes-escolares.html':prefix):''});
+   if(path==='lock'){this.sql.exec('DELETE FROM sessions WHERE token=? AND uid=?',candidate,uid);return reply({ok:true},200,{'Set-Cookie':cookie('',0,base)});}
    let b;try{b=await req.json();}catch{throw problem(400,'Pedido inválido.');}
    if(!b||typeof b!=='object'||Array.isArray(b))throw problem(400,'Pedido inválido.');
    if(path.startsWith('t/')&&!teacher)throw problem(403,'Entre com a senha da professora.');
@@ -98,13 +118,32 @@ export class AtlasHistoria extends DurableObject{
    }
    const succeeded=()=>{if(limited)this.sql.exec('UPDATE attempts SET n=max(0,n-1) WHERE bucket=?',bucket);};
    if(path==='unlock'){
+    if(emailLogin&&!teacher)throw problem(403,'Entre com a conta da professora antes de ativar as turmas.');
     this.configure(await openSeed(b.password));
     this.sql.exec('DELETE FROM sessions WHERE expires<=? OR (uid=? AND token=?)',now,uid,candidate);
     const token=randomToken(),seconds=8*3600;
     this.sql.exec('INSERT INTO sessions VALUES(?,?,?)',token,uid,now+seconds*1000);succeeded();
-    return reply({ok:true},200,{'Set-Cookie':cookie(token,seconds)});
+    return reply({ok:true},200,{'Set-Cookie':cookie(token,seconds,base)});
    }
-   const result=await school(path,b,{teacher,repo:this.repo,bank:this.bank()});succeeded();return reply(result);
+   const subject=portal&&b.subject==='computacao'?'computacao':'historia';
+   const bank=this.bank(subject),firestore=portal&&!!this.env.FIREBASE_SERVICE_ACCOUNT;
+   let result;
+   for(let n=0;n<3;n++){
+    try{
+     const repo=firestore?firestoreRepository(await firestoreToken(this.env),subject):repository(this.storage,subject);
+     if(firestore&&path==='t/rooms'){
+      const current=await repo.rooms();
+      for(const r of this.repo.rooms().filter(r=>r.id.startsWith('matutino-')&&!current.some(a=>a.id===r.id))){
+       await repo.create(r,this.repo.students(r.id).map(({id,name,pin,room})=>({id,name,pin,room})));
+      }
+     }
+     result=await school(path,b,{teacher,portal,repo,bank});break;
+    }catch(e){if(!e.retry||n===2)throw e;}
+   }
+   const brief=r=>({mode:r.mode,score:r.score,sent:r.sent,correct:r.marks?.filter(x=>x>0).length??0,total:r.marks?.length??0});
+   if(portal&&path==='start'&&result.result)result.result=brief(result.result);
+   if(portal&&path==='submit')result=brief(result);
+   succeeded();return reply(result);
   }catch(e){return report(e);}
  }
 }

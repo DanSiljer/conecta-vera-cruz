@@ -30,12 +30,12 @@ function submittedExam(result,room,exam){
 function viewResult(result,mode){
   return {score:result.score,marks:result.marks?JSON.parse(result.marks):null,sent:result.sent,mode};
 }
-function identifyMembers(body,students){
+function identifyMembers(body,students,portal){
   const entries=body.members===undefined?[{id:body.student,pin:body.pin}]:body.members;
-  if(!Array.isArray(entries)||!entries.length||entries.length>students.length)fail('Marque pelo menos um nome da chamada.');
+  if(!Array.isArray(entries)||!entries.length||entries.length>(portal?Math.min(10,students.length):students.length))fail('Marque pelo menos um nome da chamada.');
   const ids=new Set();
   return entries.map(entry=>{
-    const person=students.find(s=>s.id===entry?.id);
+    const person=portal&&!entry?.id?students.find(s=>s.pin===entry?.pin):students.find(s=>s.id===entry?.id);
     if(!person||entry.pin!==person.pin)fail('Confira a chave individual de cada participante.',403);
     if(ids.has(person.id))fail('Cada nome deve aparecer uma única vez no grupo.');
     ids.add(person.id);
@@ -92,12 +92,13 @@ async function school(path,b,ctx){
     }
     fail('Opção indisponível.',404);
   }
-  if(!/^[0-9A-F]{8}$/.test(String(b.code)))fail('Confira o código de oito caracteres da turma.');
+  if(!/^(?:[0-9A-F]{8}|[0-9A-F]{12})$/.test(String(b.code)))fail('Confira o código de oito caracteres da turma.');
   const room=await repo.byCode(b.code);
   if(!room||Number(b.grade)!==room.grade)fail('Código ou ano diferente do informado pela professora.',404);
   const students=await repo.students(room.id);
+  if(path==='class'&&ctx.portal)return {room:describeRoom(room),count:students.length};
   if(path==='class')return {room:describeRoom(room),students:students.map(s=>({id:s.id,name:s.name}))};
-  const members=identifyMembers(b,students);
+  const members=identifyMembers(b,students,ctx.portal);
   const ids=members.map(s=>s.id).sort();
   const team=ids.length>1?JSON.stringify(ids):null;
   const submitted=members.filter(x=>x.sent);
@@ -107,7 +108,7 @@ async function school(path,b,ctx){
   const exam=bank[room.grade];
   const receipt=result?viewResult(result,submittedExam(result,room,exam).mode):null;
   if(path==='start'){
-    return {room:describeRoom(room),name:members.map(s=>s.name).join(' · '),count:members.length,result:receipt};
+    return {room:describeRoom(room),name:members.map(s=>s.name).join(' · '),count:members.length,...(ctx.portal?{members:members.map(s=>({id:s.id}))}:{}),result:receipt};
   }
   if(path==='submit'){
     if(result)return receipt;

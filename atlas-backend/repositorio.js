@@ -1,4 +1,5 @@
-export function repository(storage){
+export function repository(storage,subject='historia'){
+ const results=subject==='computacao'?'submissions_computacao':'submissions';
  const sql=storage.sql;
  const all=(q,...args)=>sql.exec(q,...args).toArray();
  const one=(q,...args)=>all(q,...args)[0]??null;
@@ -14,14 +15,15 @@ export function repository(storage){
   rooms:()=>all('SELECT * FROM rooms ORDER BY grade,label'),
   room:id=>one('SELECT * FROM rooms WHERE id=?',id),
   byCode:c=>one('SELECT * FROM rooms WHERE code=?',c),
-  students:id=>all('SELECT s.*,r.score,r.sent,r.team FROM students s LEFT JOIN submissions r ON r.student=s.id WHERE s.room=?',id),
+  students:id=>all(`SELECT s.*,r.score,r.sent,r.team FROM students s LEFT JOIN ${results} r ON r.student=s.id WHERE s.room=?`,id),
   create:(r,rows)=>storage.transactionSync(()=>insert(r,rows)),
   add:rows=>storage.transactionSync(()=>add(rows)),
-  result:id=>one('SELECT * FROM submissions WHERE student=?',id),
+  result:id=>one(`SELECT * FROM ${results} WHERE student=?`,id),
+  mark:(id,team,marks,score)=>sql.exec(`UPDATE ${results} SET marks=?,score=? WHERE student=? OR team=?`,JSON.stringify(marks),score,id,team||null),
   submit:(ids,team,answers,marks,score,sent)=>storage.transactionSync(()=>{
    const group=JSON.stringify(ids);
-   sql.exec(`INSERT INTO submissions(student,team,answers,marks,score,sent) SELECT value,?,?,?,?,? FROM json_each(?)
-      WHERE NOT EXISTS (SELECT 1 FROM submissions WHERE student IN (SELECT value FROM json_each(?)))`,
+   sql.exec(`INSERT INTO ${results}(student,team,answers,marks,score,sent) SELECT value,?,?,?,?,? FROM json_each(?)
+      WHERE NOT EXISTS (SELECT 1 FROM ${results} WHERE student IN (SELECT value FROM json_each(?)))`,
       team,JSON.stringify(answers),JSON.stringify(marks),score,sent,group,group);
   })
  };
