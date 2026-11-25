@@ -128,7 +128,7 @@ async function school(path,b,ctx){
   const room=await repo.byCode(b.code);
   if(!belongs(room)||Number(b.grade)!==room.grade)fail('Confira se você escolheu o ano certo e digitou o código da sua turma.',404);
   const students=await repo.students(room.id);
-  if(path==='class'&&ctx.portal)return {room:describeRoom(room),count:students.length};
+  if(path==='class'&&ctx.portal)return {room:describeRoom(room),count:students.length,students:students.map(s=>({id:s.id,name:s.name}))};
   if(path==='class')return {room:describeRoom(room),students:students.map(s=>({id:s.id,name:s.name}))};
   const members=identifyMembers(b,students,ctx.portal);
   const ids=members.map(s=>s.id).sort();
