@@ -11,7 +11,7 @@ import cadernos from '../avaliacao-historia/cadernos.json';
 const prefix='/avaliacao-historia/',start=prefix+'api/';
 const portalPrefix='/api/avaliacoes/';
 const sessionName='atlas_historia';
-const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/create','t/add','t/detail','t/review','t/grade']);
+const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/create','t/add','t/detail','t/review','t/grade']);
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow','X-Content-Type-Options':'nosniff',...headers}});
 const problem=(status,message)=>Object.assign(Error(message),{status});
 const cookie=(token,age,path)=>sessionName+'='+token+'; Path='+path+'; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
@@ -131,7 +131,7 @@ export class AtlasHistoria extends DurableObject{
    for(let n=0;n<3;n++){
     try{
      const repo=firestore?firestoreRepository(await firestoreToken(this.env),subject):repository(this.storage,subject);
-     if(firestore&&path==='t/rooms'){
+     if(firestore&&path==='t/rooms'&&subject==='historia'){
       const current=await repo.rooms();
       for(const r of this.repo.rooms().filter(r=>r.id.startsWith('matutino-')&&!current.some(a=>a.id===r.id))){
        await repo.create(r,this.repo.students(r.id).map(({id,name,pin,room})=>({id,name,pin,room})));

@@ -50,18 +50,47 @@ function teamNames(team,students){
 function conflict(){fail('Um dos participantes já entregou a avaliação. Confira os nomes do grupo ou entre apenas com a sua chave para consultar sua nota.',409);}
 async function school(path,b,ctx){
   const {repo,bank}=ctx;
+  const geralda=ctx.portal&&b.subject==='computacao';
+  const belongs=r=>!!r&&(r.id.startsWith('geralda-')===geralda);
   if(path.startsWith('t/')){
     if(!ctx.teacher)fail('Entre com o acesso da professora para abrir o painel.',403);
     if(path==='t/rooms'){
       let rooms=await repo.rooms();
-      for(const grade of [6,7,8,9]){
+      for(const grade of geralda?[]:[6,7,8,9]){
         const id='matutino-'+grade;
         if(!rooms.some(r=>r.id===id)){
           const names=namesFrom(ctx.rosters?.[grade]||[]);
           await repo.create({id,grade,label:grade+'º ano · Matutino',mode:'objective',code:rand().slice(0,8)},buildStudents(id,names,true));
         }
       }
-      return {rooms:(await repo.rooms()).map(r=>({...r,mode:'objective'}))};
+      return {rooms:(await repo.rooms()).filter(belongs).map(r=>({...r,mode:'objective'}))};
+    }
+    if(path==='t/import'){
+      if(!geralda)fail('Selecione Geralda Maria · Computação.',403);
+      const allowed={'6A':'Matutino','6B':'Matutino','7A':'Matutino','8A':'Matutino','8B':'Matutino','9A':'Vespertino'};
+      if(!Array.isArray(b.rooms)||b.rooms.length!==6)fail('O arquivo deve conter as seis turmas do Geralda Maria.');
+      const used=new Set();
+      const rows=b.rooms.map(x=>{
+        const grade=Number(x?.grade), section=String(x?.section||''), k=String(grade)+section;
+        if(!Object.hasOwn(allowed,k)||used.has(k))fail('Confira as turmas da chamada.');
+        used.add(k);const names=namesFrom(x.names);if(!names.length)fail('A chamada não pode estar vazia.');
+        return {grade,section,k,names};
+      });
+      let added=0;
+      for(const row of rows){
+        const id='geralda-'+row.k.toLowerCase(), current=await repo.room(id);
+        if(!current){
+          await repo.create({id,grade:row.grade,label:row.grade+'º '+row.section+' · '+allowed[row.k],mode:'objective',code:rand().slice(0,8)},buildStudents(id,row.names));
+          added+=row.names.length;
+        }else{
+          const list=await repo.students(id), existing=new Set(list.map(s=>s.name.normalize('NFC').toLocaleLowerCase('pt-BR')));
+          const extra=row.names.filter(n=>!existing.has(n.normalize('NFC').toLocaleLowerCase('pt-BR')));
+          if(list.length+extra.length>150)fail('A turma comporta até 150 estudantes.');
+          if(extra.length)await repo.add(buildStudents(id,extra));
+          added+=extra.length;
+        }
+      }
+      return {added};
     }
     if(path==='t/create'){
       const grade=Number(b.grade),label=String(b.label||'').trim(),mode='objective';
@@ -69,10 +98,10 @@ async function school(path,b,ctx){
       if(b.mode&&b.mode!==mode)fail('Atualize a página para abrir a avaliação de múltipla escolha.',409);
       const names=namesFrom(b.names);
       if(!names.length)fail('Inclua pelo menos um estudante.');
-      const room={id:uid(),grade,label,mode,code:rand().slice(0,8)};
+      const room={id:(geralda?'geralda-':'')+uid(),grade,label,mode,code:rand().slice(0,8)};
       await repo.create(room,buildStudents(room.id,names));return {room};
     }
-    const room=await repo.room(b.room);if(!room)fail('Turma não encontrada.',404);
+    const room=await repo.room(b.room);if(!belongs(room))fail('Turma não encontrada.',404);
     if(path==='t/add'){
       const names=namesFrom(b.names);if(!names.length)fail('Digite pelo menos um nome.');
       const list=await repo.students(room.id),existing=new Set(list.map(x=>x.name.toLocaleLowerCase('pt-BR')));
@@ -94,7 +123,7 @@ async function school(path,b,ctx){
   }
   if(!/^(?:[0-9A-F]{8}|[0-9A-F]{12})$/.test(String(b.code)))fail('Confira o código da turma na ficha entregue pela professora.');
   const room=await repo.byCode(b.code);
-  if(!room||Number(b.grade)!==room.grade)fail('Confira se você escolheu o ano certo e digitou o código da sua turma.',404);
+  if(!belongs(room)||Number(b.grade)!==room.grade)fail('Confira se você escolheu o ano certo e digitou o código da sua turma.',404);
   const students=await repo.students(room.id);
   if(path==='class'&&ctx.portal)return {room:describeRoom(room),count:students.length};
   if(path==='class')return {room:describeRoom(room),students:students.map(s=>({id:s.id,name:s.name}))};
