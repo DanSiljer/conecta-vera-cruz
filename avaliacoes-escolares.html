@@ -87,7 +87,6 @@ async function api(path,b={}){
  }catch{throw Error(retry);}
  if(!r.ok){
   if(r.status>=500){
-   if(path==='t/rooms'&&typeof d?.error==='string'&&d.error.includes('ATLAS_GERALDA_SEED_KEY_V2'))throw Error(d.error);
    if(path==='submit')throw Error(retry);
    if(path==='class')throw Error('Não foi possível abrir a turma agora. Tente novamente. Se o problema continuar, avise a professora.');
    throw Error('As avaliações estão temporariamente indisponíveis. Tente novamente em alguns instantes.');
@@ -184,14 +183,14 @@ async function teacher(){
   formOn('#unlock',async b=>{await api('unlock',b);await teacher();});return;
  }
  const data=await api('t/rooms');if(view!==stamp)return;access.studentUrl=studentLink();panel={rooms:data.rooms.slice().sort((a,b)=>a.grade-b.grade||a.label.localeCompare(b.label,'pt-BR')),access,current:data.rooms[0]?.id};
- main.innerHTML='<div class="pagehead"><div class="eyebrow">III trimestre · 2026</div><div class="spread"><h1 class="page-title">Painel da professora</h1><button class="outline" id="logout">Sair do painel</button></div><p><b>'+esc(schoolName())+'</b> · '+subjectName()+'. Escolha uma turma para ver a chamada, as entregas e as notas.</p></div>'+(access.host==='file'?'<p class="note">Para registrar as notas, abra a avaliação pelo link do Conecta Vera Cruz.</p>':access.studentUrl?'<div class="note spread"><span>Endereço para os alunos <b id="student-link">'+esc(access.studentUrl)+'</b></span><button type="button" class="outline" id="copy-link">Copiar endereço</button></div>':'')+'<div class="dashgrid"><aside class="panel"><h2>Turmas</h2><div class="roomlist" id="rooms"></div><div class="actions"><button class="outline" id="new-room">'+ico('plus')+'Nova turma</button>'+(subject==='computacao'&&selectedSchool()==='geralda'?'<button class="outline" id="import-geralda">Importar chamada do Geralda</button>':'')+'</div></aside><section class="panel dashboard" id="details" aria-label="Chamada e notas"></section></div>';
+ main.innerHTML='<div class="pagehead"><div class="eyebrow">III trimestre · 2026</div><div class="spread"><h1 class="page-title">Painel da professora</h1><button class="outline" id="logout">Sair do painel</button></div><p><b>'+esc(schoolName())+'</b> · '+subjectName()+'. Escolha uma turma para ver a chamada, as entregas e as notas.</p></div>'+(access.host==='file'?'<p class="note">Para registrar as notas, abra a avaliação pelo link do Conecta Vera Cruz.</p>':access.studentUrl?'<div class="note spread"><span>Endereço para os alunos <b id="student-link">'+esc(access.studentUrl)+'</b></span><button type="button" class="outline" id="copy-link">Copiar endereço</button></div>':'')+'<div class="dashgrid"><aside class="panel"><h2>Turmas</h2><div class="roomlist" id="rooms"></div><div class="actions"><button class="outline" id="new-room">'+ico('plus')+'Nova turma</button>'+(subject==='computacao'&&selectedSchool()==='geralda'?((data.seedStatus==='activate'?'<button class="btn" id="activate-geralda">Liberar chamada do Geralda</button>':'')+'<button class="outline" id="import-geralda">Importar chamada do Geralda</button>'):'')+'</div></aside><section class="panel dashboard" id="details" aria-label="Chamada e notas"></section></div>';
  const copyLink=$('#copy-link');
  if(copyLink)copyLink.onclick=async()=>{
   try{await navigator.clipboard.writeText(access.studentUrl);copyLink.textContent='Endereço copiado';}
   catch{const range=document.createRange();range.selectNodeContents($('#student-link'));const selection=getSelection();selection.removeAllRanges();selection.addRange(range);copyLink.textContent='Endereço selecionado para copiar';}
  };
- $('#new-room').onclick=newRoom;$('#logout').onclick=leavePanel;const importButton=$('#import-geralda');if(importButton)importButton.onclick=importGeralda;
- if(subject==='computacao'&&selectedSchool()==='geralda'&&data.seedStatus==='missing_secret'){const note=document.createElement('p');note.className='note';note.textContent='Carregamento automático: cadastre o segredo ATLAS_GERALDA_SEED_KEY_V2 no Worker de produção e publique a versão atual.';main.querySelector('.dashgrid').before(note);}renderRooms();await refreshDetail(true);if(view===stamp)clock=setInterval(()=>{if(!document.hidden&&!dlg.open)refreshDetail(false);},30000);
+ $('#new-room').onclick=newRoom;$('#logout').onclick=leavePanel;const importButton=$('#import-geralda');if(importButton)importButton.onclick=importGeralda;const activateButton=$('#activate-geralda');if(activateButton)activateButton.onclick=activateGeralda;
+ renderRooms();await refreshDetail(true);if(view===stamp)clock=setInterval(()=>{if(!document.hidden&&!dlg.open)refreshDetail(false);},30000);
  }catch(e){if(view===stamp)main.innerHTML='<div class="panel loginpanel"><p class="error">'+esc(e.message)+'</p><button class="outline" id="rt">Tentar novamente</button></div>';if($('#rt'))$('#rt').onclick=teacher;}
 }
 function renderRooms(){
@@ -211,6 +210,10 @@ async function refreshDetail(force){
 function addNames(){
  const r=detail.room;modal('<div class="pad">'+modalHead('Adicionar à chamada')+'<p>'+esc(r.label)+'</p><form class="form" id="addform"><label class="field">Nomes dos estudantes<textarea name="names" rows="7" required placeholder="Um nome por linha"></textarea></label>'+errorBox+'<button type="submit" class="btn">Salvar na chamada</button></form></div>');
  formOn('#addform',async b=>{await api('t/add',{room:r.id,names:b.names.split(/\r?\n/)});dlg.close();await refreshDetail(true);});
+}
+function activateGeralda(){
+ modal('<div class="pad">'+modalHead('Liberar chamada do Geralda Maria')+'<p>Use a senha original do Atlas, a mesma que libera a chamada do Luiz Eduardo. Esta etapa é feita uma única vez; não é necessário cadastrar uma chave no Cloudflare.</p><form class="form" id="activateform"><label class="field">Senha original do Atlas<input type="password" name="password" required maxlength="160" autocomplete="current-password"></label>'+errorBox+'<button class="btn" type="submit">Liberar chamada</button></form></div>');
+ formOn('#activateform',async b=>{await api('t/activate-geralda',{password:b.password});dlg.close();await teacher();});
 }
 function importGeralda(){
  modal('<div class="pad">'+modalHead('Importar chamada do Geralda Maria')+'<p>Selecione o arquivo JSON da chamada. A importação cria as seis turmas e acrescenta nomes que faltam, sem substituir notas, códigos ou chaves existentes.</p><form class="form" id="importform"><label class="field">Arquivo da chamada<input type="file" id="roster-file" accept=".json,application/json" required></label>'+errorBox+'<button class="btn" type="submit">Importar alunos</button></form></div>');

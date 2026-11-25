@@ -12,7 +12,7 @@ import cadernos from '../avaliacao-historia/cadernos.json';
 const prefix='/avaliacao-historia/',start=prefix+'api/';
 const portalPrefix='/api/avaliacoes/';
 const sessionName='atlas_historia';
-const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/create','t/add','t/detail','t/review','t/grade']);
+const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/activate-geralda','t/create','t/add','t/detail','t/review','t/grade']);
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow','X-Content-Type-Options':'nosniff',...headers}});
 const problem=(status,message)=>Object.assign(Error(message),{status});
 const cookie=(token,age,path)=>sessionName+'='+token+'; Path='+path+'; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
@@ -27,17 +27,18 @@ async function openSeed(password){
   return JSON.parse(new TextDecoder().decode(plain));
  }catch{throw problem(403,'Senha incorreta. Use “Mostrar senha” para conferir.');}
 }
-async function openGeraldaSeed(secret){
+async function openGeraldaSeed(password){
+ if(geraldaEnvelope.scheme!=='atlas-password-v1')throw problem(409,'Prepare a chamada protegida no computador ou use Importar chamada do Geralda.');
+ if(typeof password!=='string'||password.length>160)throw problem(403,'Confira a senha original do Atlas.');
+ const raw=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
  try{
-  const raw=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
-  const keyBytes=raw(secret.trim());
-  if(keyBytes.length!==32)throw Error('Invalid key');
-  const key=await crypto.subtle.importKey('raw',keyBytes,'AES-GCM',false,['decrypt']);
+  const material=await crypto.subtle.importKey('raw',new TextEncoder().encode(atlasPassword(password)),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt:raw(geraldaEnvelope.salt),iterations:600000},material,{name:'AES-GCM',length:256},false,['decrypt']);
   const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:raw(geraldaEnvelope.iv)},key,raw(geraldaEnvelope.data));
-  const unpacked=await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).json();
+  const unpacked=JSON.parse(new TextDecoder().decode(plain));
   if(unpacked.school!=='geralda'||!Array.isArray(unpacked.rooms)||unpacked.rooms.length!==6)throw Error('Invalid roster');
   return unpacked.rooms;
- }catch{throw problem(503,'Não foi possível carregar a chamada protegida do Geralda. Confira a chave ATLAS_GERALDA_SEED_KEY_V2.');}
+ }catch{throw problem(403,'Confira a senha original do Atlas usada para liberar a chamada do Luiz Eduardo.');}
 }
 const report=e=>reply({error:e.status?e.message:'Não foi possível concluir agora. Tente novamente.'},e.status||500);
 
@@ -121,12 +122,12 @@ export class AtlasHistoria extends DurableObject{
    let b;try{b=await req.json();}catch{throw problem(400,'Pedido inválido.');}
    if(!b||typeof b!=='object'||Array.isArray(b))throw problem(400,'Pedido inválido.');
    if(path.startsWith('t/')&&!teacher)throw problem(403,'Entre com a senha da professora.');
-   const bucket=(path==='unlock'?'teacher:':'student:')+req.headers.get('x-atlas-ip');
-   const limited=['unlock','class','start','submit'].includes(path);
+   const bucket=(['unlock','t/activate-geralda'].includes(path)?'teacher:':'student:')+req.headers.get('x-atlas-ip');
+   const limited=['unlock','t/activate-geralda','class','start','submit'].includes(path);
    if(limited){
     this.sql.exec('DELETE FROM attempts WHERE expires<=?',now);
     const hits=this.sql.exec('SELECT n FROM attempts WHERE bucket=?',bucket).toArray()[0]?.n||0;
-    if(hits>=(path==='unlock'?12:100))throw problem(429,'Muitas tentativas. Aguarde um minuto.');
+    if(hits>=(['unlock','t/activate-geralda'].includes(path)?12:100))throw problem(429,'Muitas tentativas. Aguarde um minuto.');
     this.sql.exec('INSERT INTO attempts VALUES(?,1,?) ON CONFLICT(bucket) DO UPDATE SET n=n+1',bucket,now+60000);
    }
    const succeeded=()=>{if(limited)this.sql.exec('UPDATE attempts SET n=max(0,n-1) WHERE bucket=?',bucket);};
@@ -151,16 +152,20 @@ export class AtlasHistoria extends DurableObject{
        await repo.create(r,this.repo.students(r.id).map(({id,name,pin,room})=>({id,name,pin,room})));
       }
      }
+     if(path==='t/activate-geralda'){
+      if(!portal||!teacher||subject!=='computacao'||b.school==='luiz')throw problem(403,'Selecione Computação no Geralda Maria.');
+      const rooms=await openGeraldaSeed(b.password);
+      result=await school('t/import',{subject:'computacao',school:'geralda',rooms},{teacher:true,portal:true,repo,bank});break;
+     }
      if(portal&&teacher&&path==='t/rooms'&&subject==='computacao'&&b.school!=='luiz'){
-      const marker='geralda-seed-v'+geraldaEnvelope.version+'-'+(firestore?'firestore':'cloudflare');
-      const done=this.sql.exec('SELECT 1 FROM settings WHERE id=?',marker).toArray().length;
-      if(!this.env.ATLAS_GERALDA_SEED_KEY_V2){seedStatus='missing_secret';}
-      else if(!done){
-       const rooms=await openGeraldaSeed(this.env.ATLAS_GERALDA_SEED_KEY_V2);
-       await school('t/import',{subject:'computacao',school:'geralda',rooms},{teacher:true,portal:true,repo,bank});
-       this.sql.exec('INSERT OR IGNORE INTO settings VALUES(?,?)',marker,'done');
-       seedStatus='imported';
-      }else{seedStatus='ready';}
+      const existing=await repo.rooms();
+      const ids=['6a','6b','7a','8a','8b','9a'];
+      let complete=true;
+      for(const id of ids){
+       const room=existing.find(r=>r.id==='geralda-'+id);
+       if(!room||!(await repo.students(room.id)).length){complete=false;break;}
+      }
+      seedStatus=complete?'ready':geraldaEnvelope.scheme==='atlas-password-v1'?'activate':'import';
      }
      result=await school(path,b,{teacher,portal,repo,bank});break;
     }catch(e){if(!e.retry||n===2)throw e;}

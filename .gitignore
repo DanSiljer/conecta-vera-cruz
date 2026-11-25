@@ -1,3 +1,7 @@
 .DS_Store
 Thumbs.db
 .vscode/
+/chamada-geralda*.json
+/preparar-geralda*.cjs
+/chave-geralda*.txt
+/chave-privada-geralda.txt

@@ -7,3 +7,7 @@
 assets/docs/revista-vera-cruz-37-anos.pdf
 /atlas-backend/
 /wrangler.jsonc
+/chamada-geralda*.json
+/preparar-geralda*.cjs
+/chave-geralda*.txt
+/chave-privada-geralda.txt
