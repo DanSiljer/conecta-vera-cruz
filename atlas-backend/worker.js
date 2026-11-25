@@ -37,7 +37,7 @@ async function openGeraldaSeed(secret){
   const unpacked=await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).json();
   if(unpacked.school!=='geralda'||!Array.isArray(unpacked.rooms)||unpacked.rooms.length!==6)throw Error('Invalid roster');
   return unpacked.rooms;
- }catch{throw problem(503,'Não foi possível carregar a chamada protegida do Geralda. Confira a chave ATLAS_GERALDA_SEED_KEY.');}
+ }catch{throw problem(503,'Não foi possível carregar a chamada protegida do Geralda. Confira a chave ATLAS_GERALDA_SEED_KEY_V2.');}
 }
 const report=e=>reply({error:e.status?e.message:'Não foi possível concluir agora. Tente novamente.'},e.status||500);
 
@@ -141,6 +141,7 @@ export class AtlasHistoria extends DurableObject{
    const subject=portal&&b.subject==='computacao'?'computacao':'historia';
    const bank=this.bank(subject),firestore=portal&&!!this.env.FIREBASE_SERVICE_ACCOUNT;
    let result;
+   let seedStatus=null;
    for(let n=0;n<3;n++){
     try{
      const repo=firestore?firestoreRepository(await firestoreToken(this.env),subject):repository(this.storage,subject);
@@ -150,19 +151,21 @@ export class AtlasHistoria extends DurableObject{
        await repo.create(r,this.repo.students(r.id).map(({id,name,pin,room})=>({id,name,pin,room})));
       }
      }
-     // The encrypted Geralda roster is initialized only by an authenticated teacher.
-     if(portal&&teacher&&path==='t/rooms'&&subject==='computacao'&&b.school!=='luiz'&&this.env.ATLAS_GERALDA_SEED_KEY){
+     if(portal&&teacher&&path==='t/rooms'&&subject==='computacao'&&b.school!=='luiz'){
       const marker='geralda-seed-v'+geraldaEnvelope.version+'-'+(firestore?'firestore':'cloudflare');
       const done=this.sql.exec('SELECT 1 FROM settings WHERE id=?',marker).toArray().length;
-      if(!done){
-       const rooms=await openGeraldaSeed(this.env.ATLAS_GERALDA_SEED_KEY);
+      if(!this.env.ATLAS_GERALDA_SEED_KEY_V2){seedStatus='missing_secret';}
+      else if(!done){
+       const rooms=await openGeraldaSeed(this.env.ATLAS_GERALDA_SEED_KEY_V2);
        await school('t/import',{subject:'computacao',school:'geralda',rooms},{teacher:true,portal:true,repo,bank});
        this.sql.exec('INSERT OR IGNORE INTO settings VALUES(?,?)',marker,'done');
-      }
+       seedStatus='imported';
+      }else{seedStatus='ready';}
      }
      result=await school(path,b,{teacher,portal,repo,bank});break;
     }catch(e){if(!e.retry||n===2)throw e;}
    }
+   if(seedStatus!==null)result={...result,seedStatus};
    const brief=r=>({mode:r.mode,score:r.score,sent:r.sent,correct:r.marks?.filter(x=>x>0).length??0,total:r.marks?.length??0});
    if(portal&&path==='start'&&result.result)result.result=brief(result.result);
    if(portal&&path==='submit')result=brief(result);

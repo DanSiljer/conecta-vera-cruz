@@ -87,6 +87,7 @@ async function api(path,b={}){
  }catch{throw Error(retry);}
  if(!r.ok){
   if(r.status>=500){
+   if(path==='t/rooms'&&typeof d?.error==='string'&&d.error.includes('ATLAS_GERALDA_SEED_KEY_V2'))throw Error(d.error);
    if(path==='submit')throw Error(retry);
    if(path==='class')throw Error('Não foi possível abrir a turma agora. Tente novamente. Se o problema continuar, avise a professora.');
    throw Error('As avaliações estão temporariamente indisponíveis. Tente novamente em alguns instantes.');
@@ -190,7 +191,7 @@ async function teacher(){
   catch{const range=document.createRange();range.selectNodeContents($('#student-link'));const selection=getSelection();selection.removeAllRanges();selection.addRange(range);copyLink.textContent='Endereço selecionado para copiar';}
  };
  $('#new-room').onclick=newRoom;$('#logout').onclick=leavePanel;const importButton=$('#import-geralda');if(importButton)importButton.onclick=importGeralda;
- renderRooms();await refreshDetail(true);if(view===stamp)clock=setInterval(()=>{if(!document.hidden&&!dlg.open)refreshDetail(false);},30000);
+ if(subject==='computacao'&&selectedSchool()==='geralda'&&data.seedStatus==='missing_secret'){const note=document.createElement('p');note.className='note';note.textContent='Carregamento automático: cadastre o segredo ATLAS_GERALDA_SEED_KEY_V2 no Worker de produção e publique a versão atual.';main.querySelector('.dashgrid').before(note);}renderRooms();await refreshDetail(true);if(view===stamp)clock=setInterval(()=>{if(!document.hidden&&!dlg.open)refreshDetail(false);},30000);
  }catch(e){if(view===stamp)main.innerHTML='<div class="panel loginpanel"><p class="error">'+esc(e.message)+'</p><button class="outline" id="rt">Tentar novamente</button></div>';if($('#rt'))$('#rt').onclick=teacher;}
 }
 function renderRooms(){
