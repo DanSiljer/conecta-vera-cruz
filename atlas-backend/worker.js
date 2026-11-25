@@ -131,7 +131,7 @@ export class AtlasHistoria extends DurableObject{
    for(let n=0;n<3;n++){
     try{
      const repo=firestore?firestoreRepository(await firestoreToken(this.env),subject):repository(this.storage,subject);
-     if(firestore&&path==='t/rooms'&&subject==='historia'){
+     if(firestore&&path==='t/rooms'&&(subject==='historia'||b.school==='luiz')){
       const current=await repo.rooms();
       for(const r of this.repo.rooms().filter(r=>r.id.startsWith('matutino-')&&!current.some(a=>a.id===r.id))){
        await repo.create(r,this.repo.students(r.id).map(({id,name,pin,room})=>({id,name,pin,room})));

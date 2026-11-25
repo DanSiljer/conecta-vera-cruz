@@ -50,7 +50,10 @@ function teamNames(team,students){
 function conflict(){fail('Um dos participantes já entregou a avaliação. Confira os nomes do grupo ou entre apenas com a sua chave para consultar sua nota.',409);}
 async function school(path,b,ctx){
   const {repo,bank}=ctx;
-  const geralda=ctx.portal&&b.subject==='computacao';
+  if(ctx.portal&&b.school!==undefined&&!['luiz','geralda'].includes(b.school))fail('Colégio inválido.');
+  if(ctx.portal&&b.subject!=='computacao'&&b.school==='geralda')fail('História está disponível somente para o Luiz Eduardo.',403);
+  // Links anteriores de Computação continuam apontando para o Geralda.
+  const geralda=ctx.portal&&b.subject==='computacao'&&b.school!=='luiz';
   const belongs=r=>!!r&&(r.id.startsWith('geralda-')===geralda);
   if(path.startsWith('t/')){
     if(!ctx.teacher)fail('Entre com o acesso da professora para abrir o painel.',403);
