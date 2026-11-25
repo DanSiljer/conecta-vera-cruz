@@ -126,7 +126,7 @@ async function school(path,b,ctx){
   }
   if(!/^(?:[0-9A-F]{8}|[0-9A-F]{12})$/.test(String(b.code)))fail('Confira o código da turma na ficha entregue pela professora.');
   const room=await repo.byCode(b.code);
-  if(!belongs(room)||Number(b.grade)!==room.grade)fail('Confira se você escolheu o ano certo e digitou o código da sua turma.',404);
+  if(!belongs(room)||Number(b.grade)!==room.grade)fail('Confira o colégio, o ano e o código da turma informado pela professora.',404);
   const students=await repo.students(room.id);
   if(path==='class'&&ctx.portal)return {room:describeRoom(room),count:students.length,students:students.map(s=>({id:s.id,name:s.name}))};
   if(path==='class')return {room:describeRoom(room),students:students.map(s=>({id:s.id,name:s.name}))};

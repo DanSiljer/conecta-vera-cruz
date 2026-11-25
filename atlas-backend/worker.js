@@ -40,6 +40,22 @@ async function openGeraldaSeed(password){
   return unpacked.rooms;
  }catch{throw problem(403,'Confira a senha original do Atlas usada para liberar a chamada do Luiz Eduardo.');}
 }
+function privateGeraldaRoster(env){
+ if(!env.ATLAS_GERALDA_ROSTER)return null;
+ let data;
+ try{data=JSON.parse(env.ATLAS_GERALDA_ROSTER);}catch{throw problem(503,'A chamada privada do Geralda Maria precisa ser revisada pela professora.');}
+ if(data.school!=='geralda'||!Array.isArray(data.rooms)||data.rooms.length!==6)throw problem(503,'A chamada privada do Geralda Maria está incompleta.');
+ return data.rooms;
+}
+const geraldaExpected={'6a':26,'6b':16,'7a':26,'8a':20,'8b':19,'9a':25};
+async function geraldaReady(repo){
+ const existing=await repo.rooms();
+ for(const [id,count] of Object.entries(geraldaExpected)){
+  const room=existing.find(r=>r.id==='geralda-'+id);
+  if(!room||(await repo.students(room.id)).length<count)return false;
+ }
+ return true;
+}
 const report=e=>reply({error:e.status?e.message:'Não foi possível concluir agora. Tente novamente.'},e.status||500);
 
 export default {
@@ -158,12 +174,11 @@ export class AtlasHistoria extends DurableObject{
       result=await school('t/import',{subject:'computacao',school:'geralda',rooms},{teacher:true,portal:true,repo,bank});break;
      }
      if(portal&&teacher&&path==='t/rooms'&&subject==='computacao'&&b.school!=='luiz'){
-      const existing=await repo.rooms();
-      const ids=['6a','6b','7a','8a','8b','9a'];
-      let complete=true;
-      for(const id of ids){
-       const room=existing.find(r=>r.id==='geralda-'+id);
-       if(!room||!(await repo.students(room.id)).length){complete=false;break;}
+      let complete=await geraldaReady(repo);
+      if(!complete&&this.env.ATLAS_GERALDA_ROSTER){
+       const rooms=privateGeraldaRoster(this.env);
+       await school('t/import',{subject:'computacao',school:'geralda',rooms},{teacher:true,portal:true,repo,bank});
+       complete=await geraldaReady(repo);
       }
       seedStatus=complete?'ready':geraldaEnvelope.scheme==='atlas-password-v1'?'activate':'import';
      }

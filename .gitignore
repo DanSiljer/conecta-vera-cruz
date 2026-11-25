@@ -5,3 +5,8 @@ Thumbs.db
 /preparar-geralda*.cjs
 /chave-geralda*.txt
 /chave-privada-geralda.txt
+/chave*geralda*.txt
+/.dev.vars
+/.dev.vars.*
+/.env
+/.env.*
