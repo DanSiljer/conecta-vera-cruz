@@ -1,5 +1,5 @@
 export function repository(storage,subject='historia'){
- const results=subject==='computacao'?'submissions_computacao':'submissions';
+ const results=subject==='prova'?'submissions_prova':subject==='computacao'?'submissions_computacao':'submissions';
  const sql=storage.sql;
  const all=(q,...args)=>sql.exec(q,...args).toArray();
  const one=(q,...args)=>all(q,...args)[0]??null;

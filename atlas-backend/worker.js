@@ -1,6 +1,7 @@
 import { DurableObject } from 'cloudflare:workers';
 import reviewBank from '../assets/data/revisao-historia-2026.json';
 import { reviewAction } from './revisao.js';
+import { privateExam } from './provas.js';
 import { firebaseUser } from './firebase.js';
 import { school, atlasPassword } from './domain.js';
 import { repository } from './repositorio.js';
@@ -14,7 +15,7 @@ import cadernos from '../avaliacao-historia/cadernos.json';
 const prefix='/avaliacao-historia/',start=prefix+'api/';
 const portalPrefix='/api/avaliacoes/';
 const sessionName='atlas_historia';
-const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/activate-geralda','t/create','t/add','t/detail','t/review','t/grade','revision/submit','t/revision-list']);
+const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/activate-geralda','t/create','t/add','t/detail','t/review','t/grade','revision/submit','t/revision-list','t/proof-release']);
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow','X-Content-Type-Options':'nosniff',...headers}});
 const problem=(status,message)=>Object.assign(Error(message),{status});
 const cookie=(token,age,path)=>sessionName+'='+token+'; Path='+path+'; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
@@ -106,6 +107,7 @@ export class AtlasHistoria extends DurableObject{
    CREATE INDEX IF NOT EXISTS students_room ON students(room);
    CREATE TABLE IF NOT EXISTS submissions(student TEXT PRIMARY KEY REFERENCES students(id),team TEXT,answers TEXT NOT NULL,marks TEXT,score INTEGER,sent TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS submissions_computacao(student TEXT PRIMARY KEY REFERENCES students(id),team TEXT,answers TEXT NOT NULL,marks TEXT,score INTEGER,sent TEXT NOT NULL);
+   CREATE TABLE IF NOT EXISTS submissions_prova(student TEXT PRIMARY KEY REFERENCES students(id),team TEXT,answers TEXT NOT NULL,marks TEXT,score INTEGER,sent TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS settings(id TEXT PRIMARY KEY,value TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,uid TEXT NOT NULL,expires INTEGER NOT NULL);
    CREATE TABLE IF NOT EXISTS attempts(bucket TEXT PRIMARY KEY,n INTEGER NOT NULL,expires INTEGER NOT NULL);
@@ -163,14 +165,26 @@ export class AtlasHistoria extends DurableObject{
     this.sql.exec('INSERT INTO sessions VALUES(?,?,?)',token,uid,now+seconds*1000);succeeded();
     return reply({ok:true},200,{'Set-Cookie':cookie(token,seconds,base)});
    }
-   const subject=portal&&b.subject==='computacao'?'computacao':'historia';
-   const bank=this.bank(subject),firestore=portal&&!!this.env.FIREBASE_SERVICE_ACCOUNT;
+   const proof=portal&&b.subject!=='computacao'&&b.tipo==='prova';
+   const subject=proof?'prova':portal&&b.subject==='computacao'?'computacao':'historia';
+   let bank;
+   if(proof){bank=Object.fromEntries(await Promise.all([6,7,8,9,10].map(async g=>[g,await privateExam(this.env,g,true)])));}
+   else {bank={...this.bank(subject)};if(subject==='historia')bank[10]=await privateExam(this.env,10,false);}
+   const released=g=>!!this.sql.exec('SELECT 1 FROM settings WHERE id=?','proof-release-'+g).toArray().length;
+   if(path==='t/proof-release'){
+    if(!proof||!teacher)throw problem(403,'Acesso exclusivo da professora.');
+    const g=Number(b.grade);if(!bank[g]?.available)throw problem(400,'A prova ainda não foi configurada.');
+    if(b.release===true)this.sql.exec('INSERT OR REPLACE INTO settings VALUES(?,?)','proof-release-'+g,'1');
+    else this.sql.exec('DELETE FROM settings WHERE id=?','proof-release-'+g);
+    return reply({ok:true,released:released(g)});
+   }
+   const firestore=portal&&!!this.env.FIREBASE_SERVICE_ACCOUNT;
    let result;
    let seedStatus=null;
    for(let n=0;n<3;n++){
     try{
      const repo=firestore?firestoreRepository(await firestoreToken(this.env),subject):repository(this.storage,subject);
-     if(firestore&&path==='t/rooms'&&(subject==='historia'||b.school==='luiz')){
+     if(firestore&&path==='t/rooms'&&(subject==='historia'||subject==='prova'||b.school==='luiz')){
       const current=await repo.rooms();
       for(const r of this.repo.rooms().filter(r=>r.id.startsWith('matutino-')&&!current.some(a=>a.id===r.id))){
        await repo.create(r,this.repo.students(r.id).map(({id,name,pin,room})=>({id,name,pin,room})));
@@ -190,10 +204,11 @@ export class AtlasHistoria extends DurableObject{
       }
       seedStatus=complete?'ready':geraldaEnvelope.scheme==='atlas-password-v1'?'activate':'import';
      }
-     result=await school(path,b,{teacher,portal,repo,bank});break;
+     result=await school(path,b,{teacher,portal,repo,bank,proof,released});break;
     }catch(e){if(!e.retry||n===2)throw e;}
    }
    if(seedStatus!==null)result={...result,seedStatus};
+   if(proof&&path==='t/detail')result={...result,proofConfigured:!!bank[result.room.grade]?.available,proofReleased:released(result.room.grade)};
    const brief=r=>({mode:r.mode,score:r.score,sent:r.sent,correct:r.marks?.filter(x=>x>0).length??0,total:r.marks?.length??0});
    if(portal&&path==='start'&&result.result)result.result=brief(result.result);
    if(portal&&path==='submit')result=brief(result);

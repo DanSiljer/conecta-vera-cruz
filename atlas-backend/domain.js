@@ -66,7 +66,7 @@ async function school(path,b,ctx){
           await repo.create({id,grade,label:grade+'º ano · Matutino',mode:'objective',code:rand().slice(0,8)},buildStudents(id,names,true));
         }
       }
-      return {rooms:(await repo.rooms()).filter(belongs).map(r=>({...r,mode:'objective'}))};
+      return {rooms:(await repo.rooms()).filter(r=>belongs(r)&&!!bank[r.grade]).map(r=>({...r,mode:'objective'}))};
     }
     if(path==='t/import'){
       if(!geralda)fail('Selecione Geralda Maria · Computação.',403);
@@ -138,9 +138,12 @@ async function school(path,b,ctx){
   if(submitted.length&&!exact&&!(ids.length===1&&path==='start'))conflict();
   const result=submitted.length?await repo.result(ids[0]):null;
   const exam=bank[room.grade];
+  if(!exam)fail('Caderno indisponível para esta turma.',404);
+  if(!result&&exam.available===false)fail('A professora ainda não disponibilizou este caderno.',409);
+  if(!result&&ctx.proof&&!ctx.released(room.grade))fail('A prova ainda não foi liberada pela professora.',409);
   const receipt=result?viewResult(result,submittedExam(result,room,exam).mode):null;
   if(path==='start'){
-    return {room:describeRoom(room),name:members.map(s=>s.name).join(' · '),count:members.length,...(ctx.portal?{members:members.map(s=>({id:s.id}))}:{}),result:receipt};
+    return {room:describeRoom(room),name:members.map(s=>s.name).join(' · '),count:members.length,...(ctx.portal?{members:members.map(s=>({id:s.id}))}:{}),result:receipt,...(!receipt&&exam.available===true?{questions:exam.objective.map(({prompt,options,visual})=>({prompt,options,...(visual?{visual}:{})})),edition:exam.edition}:{})};
   }
   if(path==='submit'){
     if(result)return receipt;
