@@ -651,5 +651,186 @@
         9
       ]
     ]
+  },
+  "10": {
+    "title": "Educação e Diversidade Cultural",
+    "topics": [
+      [
+        "Direitos Humanos",
+        "Direitos universais, como educação, liberdade, igualdade e dignidade. A ONU adotou a Declaração Universal em 1948."
+      ],
+      [
+        "Liberdade de expressão",
+        "Manifestar ideias e críticas é um direito, mas não autoriza ameaças, ofensas ou discriminação."
+      ],
+      [
+        "Preconceito, estereótipo e discriminação",
+        "Estereótipo generaliza; preconceito julga previamente; discriminação exclui ou trata alguém de forma desigual."
+      ],
+      [
+        "Bullying e cyberbullying",
+        "Agressões intencionais e repetidas, com dificuldade de defesa. No ambiente digital, não compartilhe humilhações e procure ajuda."
+      ],
+      [
+        "Cidadania digital e privacidade",
+        "Verifique fontes, proteja senhas e dados pessoais e respeite a privacidade dos outros."
+      ],
+      [
+        "ECA e etarismo",
+        "O ECA protege crianças e adolescentes. Etarismo é discriminação por idade."
+      ],
+      [
+        "Liberdade religiosa",
+        "O Estado laico não impõe religião oficial e respeita diferentes crenças e a ausência de religião."
+      ],
+      [
+        "Movimentos sociais e igualdade",
+        "Organizações coletivas defendem direitos. Feminismo busca igualdade de gênero e feminismo negro também considera o racismo."
+      ],
+      [
+        "Racismo e resistência negra",
+        "Quilombos e lideranças negras representam resistência. O racismo pode ser individual, estrutural, institucional ou recreativo."
+      ],
+      [
+        "Transformação social e cultura",
+        "Educação, participação política, capoeira, samba de roda e saberes afro-brasileiros contribuem para transformação social."
+      ],
+      [
+        "Intelectuais negros e epistemicídio",
+        "Carolina Maria de Jesus, Abdias do Nascimento e Lélia Gonzalez denunciaram desigualdades. Epistemicídio é o apagamento de conhecimentos."
+      ]
+    ],
+    "quiz": [
+      [
+        "Por que os direitos humanos são universais?",
+        [
+          "Dependem de riqueza",
+          "Pertencem a todas as pessoas",
+          "São apenas para adultos"
+        ],
+        1,
+        0
+      ],
+      [
+        "Como discordar respeitosamente?",
+        [
+          "Ameaçar",
+          "Impedir a fala",
+          "Argumentar sem ofender"
+        ],
+        2,
+        1
+      ],
+      [
+        "Excluir alguém por sua religião é:",
+        [
+          "Discriminação",
+          "Cooperação",
+          "Inclusão"
+        ],
+        0,
+        2
+      ],
+      [
+        "Humilhações repetidas em mensagens configuram:",
+        [
+          "Pesquisa",
+          "Cyberbullying",
+          "Debate"
+        ],
+        1,
+        3
+      ],
+      [
+        "Antes de repassar uma notícia, devemos:",
+        [
+          "Compartilhar imediatamente",
+          "Apagar autoria",
+          "Verificar fonte e data"
+        ],
+        2,
+        4
+      ],
+      [
+        "Qual direito é protegido pelo ECA?",
+        [
+          "Educação e dignidade",
+          "Exploração infantil",
+          "Exclusão escolar"
+        ],
+        0,
+        5
+      ],
+      [
+        "O que caracteriza um Estado laico?",
+        [
+          "Proíbe religião",
+          "Respeita crenças sem impor uma religião",
+          "Impõe uma crença"
+        ],
+        1,
+        6
+      ],
+      [
+        "Como movimentos sociais contribuem para a democracia?",
+        [
+          "Impedindo debates",
+          "Eliminando direitos",
+          "Reivindicando direitos"
+        ],
+        2,
+        7
+      ],
+      [
+        "Por que valorizar a memória quilombola?",
+        [
+          "Reconhecer resistência e saberes",
+          "Apagar tradições",
+          "Justificar desigualdades"
+        ],
+        0,
+        8
+      ],
+      [
+        "Qual manifestação combina luta, dança e música?",
+        [
+          "Xadrez",
+          "Capoeira",
+          "Vôlei"
+        ],
+        1,
+        9
+      ],
+      [
+        "O que é epistemicídio?",
+        [
+          "Preservar saberes",
+          "Criar escolas",
+          "Apagar ou desvalorizar conhecimentos"
+        ],
+        2,
+        10
+      ],
+      [
+        "Qual atitude promove transformação social?",
+        [
+          "Ampliar inclusão",
+          "Impedir educação",
+          "Excluir grupos"
+        ],
+        0,
+        9
+      ]
+    ],
+    "written": [
+      "Explique por que os direitos humanos são universais.",
+      "Como discordar com respeito?",
+      "Diferencie preconceito, estereótipo e discriminação.",
+      "Como agir diante do bullying?",
+      "Cite duas práticas de cidadania digital.",
+      "Por que respeitar diferentes religiões e idades?",
+      "Como movimentos sociais combatem desigualdades?",
+      "Como educação e cultura transformam a sociedade?"
+    ]
   }
 }
