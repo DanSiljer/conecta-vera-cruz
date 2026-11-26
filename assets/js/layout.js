@@ -57,17 +57,17 @@
     .cv-nav { gap: clamp(5px, .8vw, 16px); }
     .cv-nav__link { white-space: nowrap; }
     @media (min-width: 1351px) {
-      .cv-header__inner { grid-template-columns: 156px minmax(0, 1fr) auto; width: min(1480px, calc(100% - 28px)); }
-      .cv-brand { width: 150px; }
-      .cv-nav { gap: 2px; flex-wrap:wrap; }
-      .cv-nav__link { font-size: 12px; padding-inline: 7px; }
-      .cv-header__cta--school { font-size: 12px; padding-inline: 13px; }
+      .cv-header__inner { grid-template-columns: 190px minmax(0, 1fr) auto; width: min(1680px, calc(100% - 40px)); min-height: 86px; }
+      .cv-brand { width: 180px; }
+      .cv-nav { gap: clamp(3px, .45vw, 8px); flex-wrap: nowrap; }
+      .cv-header .cv-nav__link { font-size: 16px; min-height: 48px; padding: 10px clamp(9px, .8vw, 15px); justify-content: center; }
+      .cv-header .cv-header__cta--school { font-size: 16px; min-height: 48px; padding: 10px 18px; }
       .cv-brand { flex-shrink:1; min-width: 140px; }
     }
     @media (max-width:1350px) {
       .cv-header { position:relative; }
-      .cv-header__inner { position:relative; }
-      .cv-menu-toggle { display:flex !important; flex-shrink:0; order:3; }
+      .cv-header__inner { position:relative; grid-template-columns: 1fr auto auto; }
+      .cv-menu-toggle { display:block !important; flex-shrink:0; order:3; }
       .cv-nav {
         position:absolute !important; left:12px !important; right:12px !important;
         top:calc(100% - 1px) !important; width:auto !important;
@@ -79,10 +79,13 @@
         z-index:10000 !important;
       }
       .cv-nav.is-open { display:flex !important; }
-      .cv-nav__link { display:flex !important; font-size:14px !important; padding:11px 14px !important; }
+      .cv-nav__link { display:flex !important; font-size:16px !important; min-height:48px; padding:11px 14px !important; }
       .cv-nav__link--enroll-mobile { display:flex !important; }
       .cv-header__cta--school { margin-left:auto; order:2; }
       .cv-brand { order:1; }
+    }
+    @media (max-width:900px) {
+      .cv-header__inner { grid-template-columns: 1fr auto; }
     }
     @media (max-width:600px) {
       .cv-header__cta--school { display:none !important; }
