@@ -1,0 +1,655 @@
+{
+  "6": {
+    "title": "Da Antiguidade à Idade Média",
+    "topics": [
+      [
+        "Mar Mediterrâneo e trocas culturais",
+        "O Mediterrâneo conectava povos da Europa, África e Oriente Médio. Por suas águas circulavam alimentos, mercadorias, pessoas, ideias e costumes."
+      ],
+      [
+        "Crise do Império Romano do Ocidente",
+        "Dificuldades econômicas, conflitos políticos, problemas militares, administração de territórios e migrações e invasões enfraqueceram Roma. Em 476 d.C. ocorreu o fim do Império Romano do Ocidente."
+      ],
+      [
+        "Transição para a Idade Média",
+        "Em muitas regiões europeias, as cidades perderam importância, a vida rural cresceu e o poder ficou dividido entre governantes e proprietários de terras. Essas mudanças contribuíram para a formação do feudalismo ao longo de séculos."
+      ],
+      [
+        "Feudalismo",
+        "Organização política, econômica e social medieval. A terra era fonte de riqueza e poder. Os feudos eram propriedades rurais com moradias, plantações, pastagens, igrejas e, em alguns casos, castelos."
+      ],
+      [
+        "Sociedade feudal",
+        "Senhores feudais possuíam terras e recebiam tributos e serviços. O clero exercia funções religiosas, culturais e educacionais. Servos eram camponeses com obrigações e liberdade limitada."
+      ],
+      [
+        "Economia medieval",
+        "Agricultura e criação de animais eram centrais. Havia também artesanato e comércio. Os servos entregavam parte da produção ou prestavam serviços aos senhores."
+      ],
+      [
+        "Igreja e mosteiros",
+        "A Igreja Católica influenciava religião, educação, cultura e política. Monges estudavam, copiavam manuscritos e preservavam conhecimentos."
+      ]
+    ],
+    "written": [
+      "Qual era a importância do Mar Mediterrâneo na Antiguidade?",
+      "O que os povos transportavam e compartilhavam pelo Mediterrâneo?",
+      "Cite três problemas que contribuíram para a crise do Império Romano do Ocidente.",
+      "Qual acontecimento histórico ocorreu em 476 d.C.?",
+      "O que foi o feudalismo?",
+      "O que eram os feudos?",
+      "Quem eram os senhores feudais?",
+      "Quem eram os servos e quais atividades realizavam?",
+      "Quais eram as principais atividades econômicas dos feudos?",
+      "Qual era a importância da Igreja Católica na sociedade medieval?",
+      "Quais atividades eram realizadas pelos monges nos mosteiros?",
+      "Por que podemos afirmar que a sociedade feudal era desigual?"
+    ],
+    "quiz": [
+      [
+        "Qual era a importância do Mar Mediterrâneo?",
+        [
+          "Impedir viagens",
+          "Facilitar comércio e trocas culturais",
+          "Separar completamente os povos"
+        ],
+        1,
+        0
+      ],
+      [
+        "O que enfraqueceu o Império Romano do Ocidente?",
+        [
+          "Problemas econômicos, políticos e militares",
+          "A ausência de conflitos",
+          "O fim de todas as dificuldades"
+        ],
+        0,
+        1
+      ],
+      [
+        "O que aconteceu em 476 d.C.?",
+        [
+          "Início da Revolução Industrial",
+          "Formação da União Soviética",
+          "Fim do Império Romano do Ocidente"
+        ],
+        2,
+        1
+      ],
+      [
+        "Após a crise romana, o que ocorreu em muitas regiões da Europa?",
+        [
+          "Cresceu a importância da vida rural",
+          "Todos passaram a viver em grandes cidades",
+          "O poder ficou concentrado em um único governante"
+        ],
+        0,
+        2
+      ],
+      [
+        "O que era um feudo?",
+        [
+          "Uma fábrica",
+          "Uma propriedade rural",
+          "Um navio comercial"
+        ],
+        1,
+        3
+      ],
+      [
+        "Quem recebia tributos e serviços dos camponeses?",
+        [
+          "Os navegadores",
+          "Os industriais",
+          "Os senhores feudais"
+        ],
+        2,
+        4
+      ],
+      [
+        "Quem eram os servos?",
+        [
+          "Camponeses com obrigações perante os senhores",
+          "Comerciantes de outros continentes",
+          "Reis sem terras"
+        ],
+        0,
+        4
+      ],
+      [
+        "Qual atividade predominava na economia medieval?",
+        [
+          "Produção de automóveis",
+          "Agricultura",
+          "Extração de petróleo"
+        ],
+        1,
+        5
+      ],
+      [
+        "Além da religião, em que a Igreja influenciava?",
+        [
+          "Apenas nos esportes",
+          "Somente na pesca",
+          "Educação, cultura e política"
+        ],
+        2,
+        6
+      ],
+      [
+        "Como os monges ajudavam a preservar conhecimentos?",
+        [
+          "Copiando manuscritos e estudando",
+          "Destruindo todos os livros",
+          "Proibindo qualquer leitura"
+        ],
+        0,
+        6
+      ]
+    ]
+  },
+  "7": {
+    "title": "Resistências, feudalismo e capitalismo",
+    "topics": [
+      [
+        "Escravidão moderna e servidão medieval",
+        "Servos estavam vinculados à terra, com obrigações e direitos limitados. Na escravidão moderna, pessoas eram tratadas como propriedade, submetidas ao trabalho forçado, privadas de liberdade e comercializadas."
+      ],
+      [
+        "Tráfico atlântico",
+        "Transporte forçado de milhões de africanos para as Américas. Nas travessias havia fome, doenças, superlotação e violência. O comércio gerava lucros para grupos envolvidos na exploração."
+      ],
+      [
+        "Resistências negras e quilombos",
+        "Fugas, revoltas, quilombos, tradições culturais e religiosas, solidariedade e negociação foram formas de resistência. Quilombos eram comunidades de autonomia e luta pela liberdade. Zumbi e Tereza de Benguela foram lideranças; Dandara é lembrada como símbolo da resistência, embora haja poucos registros sobre sua trajetória."
+      ],
+      [
+        "Sociedades indígenas",
+        "Antes dos europeus, diversos povos habitavam as Américas, com línguas, conhecimentos agrícolas e organizações próprias. Resistiram à colonização por confrontos, alianças, deslocamentos e preservação cultural."
+      ],
+      [
+        "Feudalismo",
+        "Sistema político, social e econômico medieval europeu, com terra como fonte de riqueza, agricultura, poder dos senhores e trabalho dos servos."
+      ],
+      [
+        "Surgimento do capitalismo",
+        "O crescimento das cidades, comércio e mercados contribuiu para o capitalismo. O comercial destacava comércio e acumulação de capitais; o industrial, fábricas, máquinas e expansão do trabalho assalariado."
+      ]
+    ],
+    "written": [
+      "Explique uma diferença entre a escravidão moderna e a servidão medieval.",
+      "O que foi o tráfico atlântico de pessoas escravizadas?",
+      "Quais dificuldades os africanos escravizados enfrentavam durante as travessias oceânicas?",
+      "O que eram os quilombos e qual era sua importância?",
+      "Cite três formas de resistência negra à escravização.",
+      "Por que não podemos afirmar que todos os povos indígenas possuíam a mesma cultura?",
+      "Como os povos indígenas resistiram à colonização europeia?",
+      "Qual era uma das principais fontes de riqueza durante o Feudalismo?",
+      "Quais transformações econômicas contribuíram para o surgimento do Capitalismo?",
+      "Explique a diferença entre Capitalismo comercial e Capitalismo industrial."
+    ],
+    "quiz": [
+      [
+        "Qual era uma importante fonte de riqueza no Feudalismo?",
+        [
+          "As fábricas",
+          "A terra",
+          "Os bancos digitais"
+        ],
+        1,
+        4
+      ],
+      [
+        "Qual diferença existia entre servidão e escravidão moderna?",
+        [
+          "Não havia diferenças",
+          "Servos eram industriais",
+          "Pessoas escravizadas eram tratadas como propriedade"
+        ],
+        2,
+        0
+      ],
+      [
+        "O tráfico atlântico foi:",
+        [
+          "O transporte forçado de africanos para as Américas",
+          "Uma viagem de turismo",
+          "Uma troca voluntária de estudantes"
+        ],
+        0,
+        1
+      ],
+      [
+        "Que condições existiam nas travessias atlânticas?",
+        [
+          "Conforto e liberdade",
+          "Superlotação, doenças e violência",
+          "Salários elevados"
+        ],
+        1,
+        1
+      ],
+      [
+        "Qual era a importância dos quilombos?",
+        [
+          "Eram fábricas de máquinas",
+          "Eram mercados europeus",
+          "Eram espaços de resistência e autonomia"
+        ],
+        2,
+        2
+      ],
+      [
+        "Qual alternativa apresenta resistência negra?",
+        [
+          "Fugas, revoltas e preservação cultural",
+          "Aceitação de toda exploração",
+          "Proibição de tradições"
+        ],
+        0,
+        2
+      ],
+      [
+        "Como eram as sociedades indígenas antes da colonização?",
+        [
+          "Todas iguais",
+          "Diversas, com línguas e organizações próprias",
+          "Sem conhecimentos agrícolas"
+        ],
+        1,
+        3
+      ],
+      [
+        "Como povos indígenas resistiram à colonização?",
+        [
+          "Abandonando obrigatoriamente suas culturas",
+          "Sem qualquer reação",
+          "Por confrontos, alianças e preservação cultural"
+        ],
+        2,
+        3
+      ],
+      [
+        "O que contribuiu para o surgimento do capitalismo?",
+        [
+          "Crescimento do comércio e das cidades",
+          "Fim dos mercados",
+          "Desaparecimento das trocas"
+        ],
+        0,
+        5
+      ],
+      [
+        "O capitalismo industrial destacou:",
+        [
+          "A servidão medieval",
+          "Fábricas, máquinas e trabalho assalariado",
+          "Somente a posse de feudos"
+        ],
+        1,
+        5
+      ]
+    ]
+  },
+  "8": {
+    "title": "Brasil imperial",
+    "topics": [
+      [
+        "Período Regencial (1831–1840)",
+        "Regentes governaram porque D. Pedro II ainda era criança. O Brasil enfrentou disputas políticas, dificuldades econômicas, desigualdades e revoltas provinciais. Manter a unidade territorial era um desafio."
+      ],
+      [
+        "Revoltas Regenciais",
+        "Cabanagem: Pará (1835–1840), participação popular. Malês: Bahia (1835), resistência africana. Sabinada: Bahia (1837–1838), contestação ao governo regencial. Balaiada: Maranhão (1838–1841), desigualdades e elites locais. Farroupilha: Sul (1835–1845), economia e autonomia."
+      ],
+      [
+        "Revolta dos Malês (1835)",
+        "Em Salvador, africanos muçulmanos escravizados e libertos enfrentaram exploração, repressão religiosa e desigualdades. Apesar da repressão, tornou-se símbolo da resistência negra."
+      ],
+      [
+        "Sabinada (1837–1838)",
+        "Setores insatisfeitos com a regência proclamaram uma república baiana que deveria durar até a maioridade de D. Pedro II. O governo reprimiu o movimento."
+      ],
+      [
+        "Golpe da Maioridade (1840)",
+        "D. Pedro II foi declarado maior com 14 anos, para encerrar a regência e tentar reduzir conflitos. Iniciou o Segundo Reinado."
+      ],
+      [
+        "Segundo Reinado (1840–1889)",
+        "Governo de D. Pedro II: expansão cafeeira, ferrovias, cidades, Guerra do Paraguai e abolicionismo. Persistiram a escravidão e a concentração de riquezas."
+      ],
+      [
+        "Economia cafeeira",
+        "Café tornou-se o principal produto de exportação. A expansão favoreceu proprietários rurais, comércio, ferrovias e algumas cidades. Grande parte da produção usava trabalho escravizado; a riqueza era concentrada."
+      ],
+      [
+        "Lei de Terras (1850)",
+        "A compra tornou-se a principal forma de adquirir terras públicas, dificultando o acesso de pessoas pobres. Reforçou latifúndios, concentração de terras e desigualdades."
+      ],
+      [
+        "Guerra do Paraguai (1864–1870)",
+        "Conflito entre Paraguai e Tríplice Aliança: Brasil, Argentina e Uruguai. No Brasil aumentou despesas públicas e fortaleceu a influência política do Exército."
+      ],
+      [
+        "Resistência à escravidão",
+        "Fugas, quilombos, revoltas, tradições culturais, organização coletiva e ações judiciais pela liberdade. Pessoas escravizadas foram protagonistas da própria luta."
+      ],
+      [
+        "Abolicionismo e leis",
+        "Luiz Gama, nascido em Salvador, atuou pela imprensa e pelo direito. 1850: Eusébio de Queirós proibiu o tráfico transatlântico para o Brasil. 1871: Ventre Livre; 1885: Sexagenários, ambas sob condições. 1888: Lei Áurea aboliu legalmente a escravidão, sem garantir igualdade, emprego, moradia, educação ou terra. 1889: fim do Segundo Reinado."
+      ]
+    ],
+    "written": [
+      "O que foi o Período Regencial?",
+      "Por que D. Pedro II não assumiu imediatamente o governo brasileiro?",
+      "Quais problemas o Brasil enfrentou durante as regências?",
+      "Cite três revoltas regenciais.",
+      "Onde aconteceu a Revolta dos Malês e quem participou dela?",
+      "Por que a Revolta dos Malês é considerada um exemplo de resistência negra?",
+      "O que foi a Sabinada?",
+      "O que foi o Golpe da Maioridade?",
+      "Quem governou o Brasil durante o Segundo Reinado?",
+      "Qual foi o principal produto de exportação durante o Segundo Reinado?",
+      "Quais transformações econômicas foram provocadas pela expansão cafeeira?",
+      "Por que o crescimento econômico do Brasil não beneficiava igualmente toda a população?",
+      "O que estabeleceu a Lei de Terras de 1850?",
+      "Como a Lei de Terras dificultou a vida dos trabalhadores pobres?",
+      "Quais países formavam a Tríplice Aliança?",
+      "Qual foi a importância da Guerra do Paraguai para o fortalecimento do Exército brasileiro?",
+      "Cite quatro formas de resistência à escravidão.",
+      "Qual foi a contribuição de Luiz Gama para o movimento abolicionista?",
+      "O que estabeleceu a Lei Áurea?",
+      "Por que o fim da escravidão não garantiu igualdade social à população negra?"
+    ],
+    "quiz": [
+      [
+        "Por que o Brasil foi governado por regentes?",
+        [
+          "Porque se tornou uma República",
+          "Porque D. Pedro II ainda era criança",
+          "Porque Portugal voltou a governar o Brasil",
+          "Porque não existiam leis"
+        ],
+        1,
+        0
+      ],
+      [
+        "O que as revoltas regenciais demonstravam?",
+        [
+          "Ausência de problemas sociais",
+          "Satisfação de toda a população",
+          "Fim das desigualdades",
+          "Existência de conflitos políticos e sociais"
+        ],
+        3,
+        1
+      ],
+      [
+        "Em qual cidade aconteceu a Revolta dos Malês?",
+        [
+          "Salvador",
+          "Rio de Janeiro",
+          "São Paulo",
+          "Recife"
+        ],
+        0,
+        2
+      ],
+      [
+        "Qual era uma das principais características da Sabinada?",
+        [
+          "Defendia o retorno do domínio português",
+          "Defendia a expansão cafeeira",
+          "Contestava o governo regencial",
+          "Defendia o tráfico de africanos"
+        ],
+        2,
+        3
+      ],
+      [
+        "Qual acontecimento marcou o início do Segundo Reinado?",
+        [
+          "Lei Áurea",
+          "Guerra do Paraguai",
+          "Revolta dos Malês",
+          "Golpe da Maioridade"
+        ],
+        3,
+        4
+      ],
+      [
+        "Qual produto destacou-se na economia do Segundo Reinado?",
+        [
+          "Café",
+          "Petróleo",
+          "Borracha",
+          "Diamante"
+        ],
+        0,
+        6
+      ],
+      [
+        "Qual foi uma consequência da Lei de Terras?",
+        [
+          "Distribuição gratuita de propriedades",
+          "Dificuldade de acesso à terra para pessoas pobres",
+          "Fim dos latifúndios",
+          "Distribuição igualitária das riquezas"
+        ],
+        1,
+        7
+      ],
+      [
+        "Quais países formavam a Tríplice Aliança?",
+        [
+          "Brasil, Paraguai e Chile",
+          "Argentina, Chile e Bolívia",
+          "Brasil, Argentina e Uruguai",
+          "Brasil, Portugal e Espanha"
+        ],
+        2,
+        8
+      ],
+      [
+        "Qual alternativa apresenta formas de resistência à escravidão?",
+        [
+          "Fugas, quilombos e revoltas",
+          "Tráfico de africanos e castigos",
+          "Aumento da exploração",
+          "Proibição das manifestações culturais"
+        ],
+        0,
+        9
+      ],
+      [
+        "O que aconteceu em 13 de maio de 1888?",
+        [
+          "Começou o Segundo Reinado",
+          "Foi assinada a Lei de Terras",
+          "Começou a Guerra do Paraguai",
+          "Foi abolida legalmente a escravidão"
+        ],
+        3,
+        10
+      ]
+    ]
+  },
+  "9": {
+    "title": "O mundo contemporâneo",
+    "topics": [
+      [
+        "Guerra Fria (1947–1991)",
+        "Estados Unidos (capitalismo, mercado, propriedade privada, OTAN) e União Soviética (socialismo, economia planificada, predomínio da propriedade estatal, Pacto de Varsóvia) disputavam influência. O mundo bipolar viveu corrida espacial, armamentista, propaganda e conflitos indiretos."
+      ],
+      [
+        "Revolução Chinesa (1949)",
+        "Mao Tsé-Tung liderou o movimento comunista contra nacionalistas. A República Popular da China foi proclamada em 1949, com governo socialista. Pobreza rural, desigualdades e disputas políticas contribuíram."
+      ],
+      [
+        "Revolução Cubana (1959)",
+        "Fidel Castro e Che Guevara participaram do movimento que derrubou Fulgencio Batista. Cuba adotou o socialismo e aproximou-se da União Soviética, gerando tensões com os EUA."
+      ],
+      [
+        "Ditaduras na América Latina",
+        "Brasil, Chile, Argentina e Uruguai passaram por regimes ditatoriais, com censura, perseguição, restrições de liberdades, violações de direitos humanos e concentração de poder. Movimentos sociais lutaram pela democracia."
+      ],
+      [
+        "Descolonização da África e da Ásia",
+        "Após a Segunda Guerra, movimentos nacionalistas e o enfraquecimento europeu favoreceram independências. Dificuldades econômicas e sociais persistiram. A África é um continente de muitos países, culturas e histórias."
+      ],
+      [
+        "Fim da Guerra Fria",
+        "Crises políticas e econômicas soviéticas na década de 1980. Em 1989 caiu o Muro de Berlim; em 1991 ocorreu a dissolução da União Soviética, encerrando a ordem bipolar."
+      ],
+      [
+        "Globalização",
+        "Intensificação de relações econômicas, sociais, culturais e tecnológicas. Facilita comunicação, comércio e intercâmbio, mas traz desafios como desigualdade, exclusão digital, exploração e impactos ambientais."
+      ],
+      [
+        "Tecnologias digitais e sociedade",
+        "A internet mudou estudo, trabalho e comunicação. Notícias falsas, manipulação de imagens, cyberbullying e exposição de dados são desafios. Verifique fonte, autoria, data e veracidade."
+      ],
+      [
+        "Conflitos e migrações",
+        "Guerras, perseguições, crises e desastres podem causar deslocamentos. Migrante se desloca por diferentes motivos; refugiado necessita de proteção internacional conforme critérios legais; xenofobia é preconceito contra estrangeiros."
+      ],
+      [
+        "Diversidade e direitos humanos",
+        "Todas as pessoas possuem dignidade e direitos independentemente de origem ou identidade. Combater racismo, intolerância religiosa, xenofobia e desigualdades fortalece a democracia."
+      ]
+    ],
+    "written": [
+      "Explique o que significa uma ordem mundial bipolar durante a Guerra Fria.",
+      "Compare as transformações políticas das revoluções Chinesa e Cubana.",
+      "Cite duas características de regimes ditatoriais e explique por que prejudicam a democracia.",
+      "Por que a independência política nem sempre garante autonomia econômica imediata?",
+      "Explique a importância da queda do Muro de Berlim e da dissolução da União Soviética.",
+      "Apresente um benefício e um desafio da globalização.",
+      "Como verificar uma notícia antes de compartilhá-la?",
+      "Diferencie migrante, refugiado e xenofobia.",
+      "Como a escola pode valorizar a diversidade e combater o preconceito?"
+    ],
+    "quiz": [
+      [
+        "Durante décadas, Estados Unidos e União Soviética investiram em tecnologias espaciais para demonstrar sua superioridade. Essa disputa estava relacionada:",
+        [
+          "À expansão do feudalismo",
+          "À rivalidade política e ideológica da Guerra Fria",
+          "Ao fortalecimento das monarquias",
+          "Ao fim da industrialização",
+          "À união política das superpotências"
+        ],
+        1,
+        0
+      ],
+      [
+        "Em 1949, a vitória do movimento liderado por Mao Tsé-Tung provocou uma importante transformação na China. Essa transformação foi:",
+        [
+          "A restauração da monarquia",
+          "A colonização europeia",
+          "A implantação de um governo socialista",
+          "A criação da União Soviética",
+          "A implantação do feudalismo"
+        ],
+        2,
+        1
+      ],
+      [
+        "A Revolução Cubana provocou mudanças nas relações políticas da América Latina durante a Guerra Fria. Uma dessas mudanças foi:",
+        [
+          "A aproximação de Cuba com a União Soviética",
+          "O retorno do domínio colonial espanhol",
+          "A criação da OTAN",
+          "O fortalecimento do governo Batista",
+          "A reunificação da Alemanha"
+        ],
+        0,
+        2
+      ],
+      [
+        "Em determinado país, jornais foram censurados e cidadãos perseguidos por criticarem o governo. Essa situação caracteriza:",
+        [
+          "Liberdade de expressão",
+          "Participação democrática",
+          "Autonomia política",
+          "Um regime autoritário",
+          "Igualdade de direitos"
+        ],
+        3,
+        3
+      ],
+      [
+        "Mesmo após conquistarem a independência, diversos países africanos continuaram enfrentando dificuldades econômicas. Essa situação demonstra que:",
+        [
+          "A colonização não produziu consequências",
+          "Todos os países africanos possuem a mesma história",
+          "A independência eliminou as desigualdades",
+          "Os movimentos nacionalistas não existiram",
+          "A independência política não garante autonomia econômica imediata"
+        ],
+        4,
+        4
+      ],
+      [
+        "A queda do Muro de Berlim, em 1989, tornou-se um símbolo:",
+        [
+          "Do início da Segunda Guerra Mundial",
+          "Do enfraquecimento da divisão entre os blocos da Guerra Fria",
+          "Da expansão colonial europeia",
+          "Da Revolução Cubana",
+          "Da criação da União Soviética"
+        ],
+        1,
+        5
+      ],
+      [
+        "Um tênis vendido no Brasil possui matéria-prima africana, fabricação asiática e tecnologia europeia. Essa situação exemplifica:",
+        [
+          "Isolamento econômico",
+          "Economia feudal",
+          "Globalização",
+          "Colonização medieval",
+          "Fim do comércio internacional"
+        ],
+        2,
+        6
+      ],
+      [
+        "Um estudante recebe um vídeo nas redes sociais que apresenta informações históricas sem indicar fontes. A atitude mais adequada é:",
+        [
+          "Verificar as informações em fontes confiáveis",
+          "Compartilhar imediatamente",
+          "Acreditar porque possui muitas curtidas",
+          "Ignorar qualquer informação histórica",
+          "Modificar o vídeo e divulgá-lo"
+        ],
+        0,
+        7
+      ],
+      [
+        "Uma família abandona seu país por sofrer perseguição política e procura proteção internacional. Essa situação está relacionada:",
+        [
+          "Ao turismo internacional",
+          "Ao comércio exterior",
+          "À corrida espacial",
+          "Ao refúgio",
+          "À expansão industrial"
+        ],
+        3,
+        8
+      ],
+      [
+        "Uma escola promove atividades de valorização das culturas indígenas e afro-brasileiras. Essa iniciativa contribui para:",
+        [
+          "A eliminação das diferenças culturais",
+          "O fortalecimento da intolerância",
+          "A exclusão de grupos sociais",
+          "A restrição da cidadania",
+          "O respeito à diversidade e o combate ao preconceito"
+        ],
+        4,
+        9
+      ]
+    ]
+  }
+}

@@ -1,4 +1,6 @@
 import { DurableObject } from 'cloudflare:workers';
+import reviewBank from '../assets/data/revisao-historia-2026.json';
+import { reviewAction } from './revisao.js';
 import { firebaseUser } from './firebase.js';
 import { school, atlasPassword } from './domain.js';
 import { repository } from './repositorio.js';
@@ -12,7 +14,7 @@ import cadernos from '../avaliacao-historia/cadernos.json';
 const prefix='/avaliacao-historia/',start=prefix+'api/';
 const portalPrefix='/api/avaliacoes/';
 const sessionName='atlas_historia';
-const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/activate-geralda','t/create','t/add','t/detail','t/review','t/grade']);
+const actions=new Set(['access','lock','unlock','class','start','submit','t/rooms','t/import','t/activate-geralda','t/create','t/add','t/detail','t/review','t/grade','revision/submit','t/revision-list']);
 const reply=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow','X-Content-Type-Options':'nosniff',...headers}});
 const problem=(status,message)=>Object.assign(Error(message),{status});
 const cookie=(token,age,path)=>sessionName+'='+token+'; Path='+path+'; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
@@ -106,7 +108,9 @@ export class AtlasHistoria extends DurableObject{
    CREATE TABLE IF NOT EXISTS submissions_computacao(student TEXT PRIMARY KEY REFERENCES students(id),team TEXT,answers TEXT NOT NULL,marks TEXT,score INTEGER,sent TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS settings(id TEXT PRIMARY KEY,value TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,uid TEXT NOT NULL,expires INTEGER NOT NULL);
-   CREATE TABLE IF NOT EXISTS attempts(bucket TEXT PRIMARY KEY,n INTEGER NOT NULL,expires INTEGER NOT NULL);`);
+   CREATE TABLE IF NOT EXISTS attempts(bucket TEXT PRIMARY KEY,n INTEGER NOT NULL,expires INTEGER NOT NULL);
+   CREATE TABLE IF NOT EXISTS revision_attempts(id TEXT PRIMARY KEY,uid TEXT NOT NULL,grade INTEGER NOT NULL,name TEXT NOT NULL,class_label TEXT NOT NULL,kind TEXT NOT NULL,answers TEXT NOT NULL,correct INTEGER,total INTEGER NOT NULL,sent TEXT NOT NULL);
+   CREATE INDEX IF NOT EXISTS revision_grade_sent ON revision_attempts(grade,sent DESC,id DESC);`);
  }
  configure(seed){
   this.storage.transactionSync(()=>{
@@ -138,6 +142,10 @@ export class AtlasHistoria extends DurableObject{
    let b;try{b=await req.json();}catch{throw problem(400,'Pedido inválido.');}
    if(!b||typeof b!=='object'||Array.isArray(b))throw problem(400,'Pedido inválido.');
    if(path.startsWith('t/')&&!teacher)throw problem(403,'Entre com a senha da professora.');
+   if(path==='revision/submit'||path==='t/revision-list'){
+    if(!portal)throw problem(404,'Opção indisponível.');
+    return reply(reviewAction(path,b,{sql:this.sql,uid,teacher,now,bank:reviewBank}));
+   }
    const bucket=(['unlock','t/activate-geralda'].includes(path)?'teacher:':'student:')+req.headers.get('x-atlas-ip');
    const limited=['unlock','t/activate-geralda','class','start','submit'].includes(path);
    if(limited){
