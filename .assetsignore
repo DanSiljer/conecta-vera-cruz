@@ -16,3 +16,5 @@ assets/docs/revista-vera-cruz-37-anos.pdf
 /.dev.vars.*
 /.env
 /.env.*
+**/aprenda-ae-provas-privadas.json
+**/aprenda-ae-provas-privadas*.json

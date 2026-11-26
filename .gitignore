@@ -10,3 +10,5 @@ Thumbs.db
 /.dev.vars.*
 /.env
 /.env.*
+**/aprenda-ae-provas-privadas.json
+**/aprenda-ae-provas-privadas*.json
