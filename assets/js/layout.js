@@ -15,6 +15,7 @@
   const currentSection = (() => {
     if (normalizedPath.includes("/bairros/") || normalizedPath.endsWith("/bairros.html")) return "bairros";
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
+    if (/\/revisao-historia(?:\.html)?\/?$/.test(normalizedPath)) return "revisao-historia";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
     if (normalizedPath.endsWith("/esportes.html")) return "esportes";
     if (normalizedPath.endsWith("/meio-amb.html") || normalizedPath.endsWith("/meio-ambiente.html")) return "meio-amb";
@@ -36,6 +37,7 @@
     ["blog", "Blog", "blog.html"],
     ["turismo", "Turismo", "turismo.html"],
     ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
+    ["revisao-historia", "Revisão de História", "revisao-historia.html"],
     ["o-projeto", "O Projeto", "o-projeto.html"]
   ];
 
@@ -56,8 +58,11 @@
     .cv-header__inner { gap: clamp(8px, 1.2vw, 20px); }
     .cv-nav { gap: clamp(5px, .8vw, 16px); }
     .cv-nav__link { white-space: nowrap; }
-    @media (min-width: 1121px) and (max-width: 1450px) {
-      .cv-nav__link { font-size: clamp(11px, .86vw, 13px); }
+    @media (min-width: 1351px) {
+      .cv-header__inner { grid-template-columns: 156px minmax(0, 1fr) auto; width: min(1480px, calc(100% - 28px)); }
+      .cv-brand { width: 150px; }
+      .cv-nav { gap: 2px; flex-wrap:wrap; }
+      .cv-nav__link { font-size: 12px; padding-inline: 7px; }
       .cv-header__cta--school { font-size: 12px; padding-inline: 13px; }
       .cv-brand { flex-shrink:1; min-width: 140px; }
     }
