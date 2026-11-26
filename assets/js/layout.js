@@ -15,7 +15,6 @@
   const currentSection = (() => {
     if (normalizedPath.includes("/bairros/") || normalizedPath.endsWith("/bairros.html")) return "bairros";
     if (normalizedPath.includes("/blog/") || normalizedPath.endsWith("/blog.html")) return "blog";
-    if (/\/revisao-historia(?:\.html)?\/?$/.test(normalizedPath)) return "revisao-historia";
     if (normalizedPath.endsWith("/historia.html")) return "historia";
     if (normalizedPath.endsWith("/esportes.html")) return "esportes";
     if (normalizedPath.endsWith("/meio-amb.html") || normalizedPath.endsWith("/meio-ambiente.html")) return "meio-amb";
@@ -37,7 +36,6 @@
     ["blog", "Blog", "blog.html"],
     ["turismo", "Turismo", "turismo.html"],
     ["missao-aprender", "Missão Aprender", "missao-aprender.html"],
-    ["revisao-historia", "Revisão de História", "revisao-historia.html"],
     ["o-projeto", "O Projeto", "o-projeto.html"]
   ];
 
