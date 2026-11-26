@@ -157,6 +157,7 @@
 
           <div class="cv-footer__bottom">
             <span>© <span data-cv-year></span> Conecta Vera Cruz</span>
+            <a class="cv-footer__study" href="${url("aprenda-ae/")}">Aprenda Aê</a>
             <span>Escaneie. Conheça. Valorize. Preserve Vera Cruz.</span>
           </div>
         </div>

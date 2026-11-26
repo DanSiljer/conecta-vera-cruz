@@ -303,3 +303,8 @@
   .cv-footer__column:last-child { grid-column: auto; }
   .cv-footer__bottom { align-items: flex-start; flex-direction: column; gap: 5px; }
 }
+
+/* Acesso discreto à plataforma escolar, somente no rodapé. */
+.cv-footer__bottom .cv-footer__study{font-size:inherit;color:inherit;opacity:.85;text-decoration:underline;text-underline-offset:3px;text-decoration-color:currentColor;font-weight:400;}
+.cv-footer__bottom .cv-footer__study:hover,.cv-footer__bottom .cv-footer__study:focus-visible{opacity:1;}
+.cv-footer__bottom .cv-footer__study:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px;}
